@@ -22,6 +22,8 @@
 hs_err_pid*
 
 # intellij
+*/workspace.xml
+*/tasks.xml
 *workspace.xml
 *tasks.xml
 *.iws
