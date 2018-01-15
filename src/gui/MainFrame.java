@@ -2,6 +2,7 @@ package gui;
 
 import factories.FrameCenterFactory;
 import gui.partials.*;
+import main.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,8 +63,6 @@ public class MainFrame extends JFrame {
         //this.setJMenuBar(
         //    MenuBarFactory.createAndReturnMenuBarForMainFrame()
         //);
-
-
 
         this.getContentPane().add(
             FrameCenterFactory.createAndReturnFrameCenterComponent(this),

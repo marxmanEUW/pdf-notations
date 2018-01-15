@@ -5,8 +5,10 @@ import java.io.IOException;
 
 public class Launcher {
 
+    // @todo Look and Feel ~ Conrad
+
     // @todo testing
-    public static final String PATH_TO_PDF1 = "/home/plomann/Dokumente/OwnCloud/2018_Software_Project/PDF Files/file3.pdf";
+    public static final String PATH_TO_PDF1 = "/home/plomann/Dokumente/OwnCloud/2018_Software_Project/PDF Files/file1.pdf";
     public static final String PATH_TO_PDF2 = "";
 
 

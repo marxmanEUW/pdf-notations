@@ -1,6 +1,8 @@
 package factories;
 
 import gui.MainFrame;
+import gui.partials.PdfArea;
+import main.Launcher;
 
 import javax.swing.*;
 
@@ -47,18 +49,16 @@ public abstract class FrameCenterFactory {
     {
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-
-
-
+        //TestPdfArea testArea = new TestPdfArea();
+        //testArea.importNewPdf(Launcher.PATH_TO_PDF1);
 
         JScrollPane pdfAreaScrollPane = new JScrollPane(
             FrameCenterFactory.mainFrame.getPdfArea(),
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
         );
+
         mainSplitPane.setLeftComponent(pdfAreaScrollPane);
-        //JScrollPane pdfScrollPane = FrameCenterFactory.mainFrame.getPdfAreaScrollPane();
-        //mainSplitPane.setLeftComponent(pdfScrollPane);
 
         JSplitPane rightSplitPane = createAndReturnRightSplitPane();
         mainSplitPane.setRightComponent(rightSplitPane);
