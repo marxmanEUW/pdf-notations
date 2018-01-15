@@ -29,16 +29,21 @@ public abstract class PdfHandler {
         return pdfImage;
     }
 
-
-    public static void getPdfDocument(String sourcePath)
+    public static BufferedImage renderPdfWithZoom(String sourcePath, float zoomLevel)
     {
+        BufferedImage pdfImage = null;
+
         try {
             File pdfFile = new File(sourcePath);
             PDDocument pdfDocument = PDDocument.load(pdfFile);
+            PDFRenderer renderer = new PDFRenderer(pdfDocument);
+            pdfImage = renderer.renderImage(0, zoomLevel);
+            pdfDocument.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception exception)
-        {
-            exception.printStackTrace();
-        }
+
+        return pdfImage;
     }
 }

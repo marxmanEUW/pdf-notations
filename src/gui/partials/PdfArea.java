@@ -1,6 +1,8 @@
 package gui.partials;
 
+import controller.PdfAreaMouseListener;
 import handlers.PdfHandler;
+import main.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,7 @@ public class PdfArea extends JPanel {
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
 
-    // private PdfAreaMouseListener pdfAreaMouseListener;
+    private PdfAreaMouseListener pdfAreaMouseListener;
 
     BufferedImage pdfImage;
     // Graphics2D graphics2D;
@@ -20,9 +22,9 @@ public class PdfArea extends JPanel {
 
     public PdfArea()
     {
-        // this.pdfAreaMouseListener = new PdfAreaMouseListener(this);
-        // this.addMouseListener(this.pdfAreaMouseListener);
-        // this.addMouseWheelListener(this.pdfAreaMouseListener);
+        this.pdfAreaMouseListener = new PdfAreaMouseListener(this);
+        this.addMouseListener(this.pdfAreaMouseListener);
+        this.addMouseWheelListener(this.pdfAreaMouseListener);
 
         this.pdfImage = null;
         this.zoomLevel = 1.0;
@@ -64,6 +66,7 @@ public class PdfArea extends JPanel {
             && ((this.zoomLevel + zoomChange) < this.MAXIMUM_ZOOM_FACTOR)
             && (this.pdfImage != null)) {
 
+            /*
             double imageWidth = (double) this.pdfImage.getWidth();
             double imageHeight = (double) this.pdfImage.getHeight();
             this.zoomLevel += zoomChange;
@@ -73,7 +76,24 @@ public class PdfArea extends JPanel {
                 (int) (imageHeight * this.zoomLevel),
                 BufferedImage.TYPE_INT_ARGB  // @todo noch nach richtigem Type suchen
             );
-            // this.setIcon(new ImageIcon(this.pdfImage));
+            */
+
+            // das geht, aber nicht schnell => neues Rendering bei
+            // jedem Zoomvorgang
+            /*
+            this.zoomLevel += zoomChange;
+            this.pdfImage = PdfHandler.renderPdfWithZoom(
+                Launcher.PATH_TO_PDF1,
+                (float) this.zoomLevel
+            );
+            this.setPreferredSize(new Dimension(
+                this.pdfImage.getWidth(),
+                this.pdfImage.getHeight()
+            ));
+            */
+
+
+            this.repaint();
         }
     }
 
