@@ -1,5 +1,6 @@
 package gui;
 
+import controller.MenuBarActionListener;
 import factories.FrameCenterFactory;
 import gui.partials.*;
 import main.Launcher;
@@ -11,6 +12,7 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private JMenuBar menuBar;
+    private MenuBarActionListener mbActionListener;
 
     /*
      * Arbeitsflaechen des CENTERs
@@ -60,11 +62,10 @@ public class MainFrame extends JFrame {
      */
     private void createMainFrame()
     {
-        this.menuBar = new MainFrameMenuBar();
+        this.mbActionListener = new MenuBarActionListener();
+
+        this.menuBar = new MainFrameMenuBar(this.mbActionListener);
         this.setJMenuBar(this.menuBar);
-        //this.setJMenuBar(
-        //    MenuBarFactory.createAndReturnMenuBarForMainFrame()
-        //);
 
         this.getContentPane().add(
             FrameCenterFactory.createAndReturnFrameCenterComponent(this),
