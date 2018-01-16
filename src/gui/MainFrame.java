@@ -35,6 +35,8 @@ public class MainFrame extends JFrame {
      */
     public void initialize()
     {
+        this.setLookAndFell();
+
         this.setLayout(new BorderLayout());
         this.pdfArea = new PdfArea();
 
@@ -42,7 +44,6 @@ public class MainFrame extends JFrame {
         this.createMainFrame();
         this.setFrameProperties();
     }
-
 
     /*
      * #########################################################################
@@ -83,5 +84,21 @@ public class MainFrame extends JFrame {
 
 
         this.setVisible(true);
+    }
+
+    private void setLookAndFell()
+    {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
     }
 }
