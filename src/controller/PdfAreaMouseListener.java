@@ -11,7 +11,7 @@ public class PdfAreaMouseListener extends MouseAdapter {
     private final int TIMER_DELAY = 100;
     private Timer mouseWheelMovementTimer;
     private PdfArea pdfArea;
-    private int mouseRollCount;
+    private int mouseScrollCount;
 
 
     public PdfAreaMouseListener(PdfArea pdfArea)
@@ -63,15 +63,15 @@ public class PdfAreaMouseListener extends MouseAdapter {
         mouseWheelMovementTimer.start();
 
         // ersten Mouse-Roll nicht verpassen
-        if (this.mouseRollCount == 0) {
+        if (this.mouseScrollCount == 0) {
             this.increaseMouseRollCount(mouseWheelEvent.getWheelRotation());
         }
     }
 
 
-    public int getMouseRollCount()
+    public int getMouseScrollCount()
     {
-        return mouseRollCount;
+        return mouseScrollCount;
     }
 
     public PdfArea getPdfArea()
@@ -81,12 +81,12 @@ public class PdfAreaMouseListener extends MouseAdapter {
 
     public void resetMouseRollCount()
     {
-        this.mouseRollCount = 0;
+        this.mouseScrollCount = 0;
     }
 
     private void increaseMouseRollCount(int wheelRotation)
     {
-        this.mouseRollCount += (wheelRotation * (-1));
+        this.mouseScrollCount += (wheelRotation * (-1));
     }
 
 
@@ -94,19 +94,75 @@ public class PdfAreaMouseListener extends MouseAdapter {
     private class MouseWheelMovementTimerActionListener implements ActionListener {
 
         private PdfAreaMouseListener pdfAreaMouseListener;
+        private int mouseScrollCount;
 
         public MouseWheelMovementTimerActionListener(PdfAreaMouseListener pdfAreaMouseListener)
         {
             this.pdfAreaMouseListener = pdfAreaMouseListener;
+            this.mouseScrollCount = this.pdfAreaMouseListener.getMouseScrollCount();
         }
 
         @Override
         public void actionPerformed(ActionEvent actionEvent)
         {
-            System.out.println(Integer.toString(this.pdfAreaMouseListener.getMouseRollCount()));
-            System.out.println("----------------------------");
+            double zoomPercentage = this.getZoomLevelAsPercentage();
+            this.pdfAreaMouseListener.getPdfArea().resizePdf(zoomPercentage);
 
             this.pdfAreaMouseListener.resetMouseRollCount();
+        }
+
+        private double getZoomLevelAsPercentage()
+        {
+            double zoomLevel;
+
+            if (this.mouseScrollCount > 5) {
+                // ScrollCount groeszer 5 => positiven Zoom berechnen
+                zoomLevel = this.getPositiveZoom();
+            }
+            else if (this.mouseScrollCount < -5) {
+                // ScrollCount kleiner -5 => negativen Zoom berechnen
+                zoomLevel = this.getNegativeZoom();
+            }
+            else {
+                // ScrollCount zwischen -5 und 5  => wird ignoriert
+                zoomLevel = 0.0;
+            }
+
+            return zoomLevel;
+        }
+
+        private double getPositiveZoom()
+        {
+            double zoomLevel;
+
+            int lowestDigit = this.mouseScrollCount % 10;
+            if (lowestDigit < 5) {
+                // ist Einterstelle kleiner 5 => auf  vollen 10er abrunden
+                zoomLevel = ((double) mouseScrollCount - (double) lowestDigit) / 100.0;
+            }
+            else {
+                // ist Einterstelle groeszer 5 => auf vollen 10er aufrunden
+                zoomLevel = ((double) mouseScrollCount + 10.0 - (double) lowestDigit) / 100.0;
+            }
+
+            return zoomLevel;
+        }
+
+        private double getNegativeZoom()
+        {
+            double zoomLevel;
+
+            int lowestDigit = this.mouseScrollCount % 10;
+            if (lowestDigit > -5) {
+                // ist Einterstelle kleiner 5 => auf  vollen 10er abrunden
+                zoomLevel = ((double) mouseScrollCount - (double) lowestDigit) / 100.0;
+            }
+            else {
+                // ist Einterstelle groeszer 5 => auf vollen 10er aufrunden
+                zoomLevel = ((double) mouseScrollCount - 10.0 - (double) lowestDigit) / 100.0;
+            }
+
+            return zoomLevel;
         }
     }
 }

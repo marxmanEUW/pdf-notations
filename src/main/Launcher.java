@@ -8,8 +8,8 @@ public class Launcher {
     // @todo Look and Feel ~ Conrad
 
     // @todo testing
-    public static final String PATH_TO_PDF1 = "/home/plomann/Dokumente/OwnCloud/2018_Software_Project/PDF Files/file1.pdf";
-    public static final String PATH_TO_PDF2 = "";
+    public static final String PATH_TO_PDF1 = "files/file1.pdf";
+    public static final String PATH_TO_PDF2 = "files/file2.pdf";
 
 
     public static void main(String[] args) throws IOException

@@ -2,10 +2,11 @@ package gui.partials;
 
 import controller.PdfAreaMouseListener;
 import handlers.PdfHandler;
-import main.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 public class PdfArea extends JPanel {
@@ -15,8 +16,10 @@ public class PdfArea extends JPanel {
 
     private PdfAreaMouseListener pdfAreaMouseListener;
 
-    BufferedImage pdfImage;
-    // Graphics2D graphics2D;
+    private BufferedImage pdfImage;
+    private String pdfImagePath;
+    private int initialImageWidth;
+    private int initialImageHeight;
     private double zoomLevel;
 
 
@@ -45,11 +48,16 @@ public class PdfArea extends JPanel {
 
     public void importNewPdf(String sourcePath)
     {
-        this.pdfImage = PdfHandler.renderPdfAsImage(sourcePath);
+        this.pdfImagePath = sourcePath;
+        this.pdfImage = PdfHandler.renderPdfAsImage(this.pdfImagePath);
+        this.initialImageWidth = this.pdfImage.getWidth();
+        this.initialImageHeight = this.pdfImage.getHeight();
+
         this.setPreferredSize(new Dimension(
-            pdfImage.getWidth(),
-            pdfImage.getHeight())
+            this.pdfImage.getWidth(),
+            this.pdfImage.getHeight())
         );
+
         this.repaint();
     }
 
@@ -62,39 +70,85 @@ public class PdfArea extends JPanel {
 
     public void resizePdf(double zoomChange)
     {
+        if (this.isPdfZoomable(zoomChange)) {
+
+            // Zoomlevel speichern
+            this.zoomLevel += zoomChange;
+
+            this.zoomPdf(zoomChange);
+        }
+    }
+
+    private void zoomPdf(double zoomChange)
+    {
+        double scaledImageWidth =
+            ((double) this.pdfImage.getWidth() + ((double) this.initialImageWidth * zoomChange));
+        double scaledImageHeight =
+            ((double) this.pdfImage.getHeight() + ((double) this.initialImageHeight * zoomChange));
+        BufferedImage scaledPdfImage = new BufferedImage(
+            (int) scaledImageWidth,
+            (int) scaledImageHeight,
+            BufferedImage.TYPE_INT_ARGB
+        );
+
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.scale(
+            (scaledImageWidth / (double) this.pdfImage.getWidth()),
+            (scaledImageHeight / (double) this.pdfImage.getHeight())
+        );
+        AffineTransformOp transformOp = new AffineTransformOp(
+            affineTransform,
+            AffineTransformOp.TYPE_BILINEAR
+        );
+        scaledPdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
+
+        this.pdfImage = scaledPdfImage;
+        /*
+         * @todo !Prüfen: Ist die Größe des skalierten Images genau so
+         * @todo          groß wie Größe des Elementes?
+         * @todo Lösung => JScrollPane rezisen
+         */
+        this.setPreferredSize(new Dimension(
+            this.pdfImage.getWidth(),
+            this.pdfImage.getHeight()
+        ));
+
+        this.repaint();
+    }
+
+    /*
+     * @todo Exception werfen
+     */
+    private void rerenderPdf()
+    {
+        // das geht, aber nicht schnell => neues Rendering bei
+        // jedem Zoomvorgang
+        this.pdfImage = PdfHandler.renderPdfWithZoom(
+            this.pdfImagePath,
+            (float) this.zoomLevel
+        );
+
+        this.setPreferredSize(new Dimension(
+            this.pdfImage.getWidth(),
+            this.pdfImage.getHeight()
+        ));
+
+        this.repaint();
+    }
+
+
+    private boolean isPdfZoomable(double zoomChange)
+    {
+        boolean isPdfZoomable = false;
+
         if (((this.zoomLevel + zoomChange) > this.MINIMUM_ZOOM_FACTOR)
             && ((this.zoomLevel + zoomChange) < this.MAXIMUM_ZOOM_FACTOR)
             && (this.pdfImage != null)) {
 
-            /*
-            double imageWidth = (double) this.pdfImage.getWidth();
-            double imageHeight = (double) this.pdfImage.getHeight();
-            this.zoomLevel += zoomChange;
-
-            this.pdfImage = new BufferedImage(
-                (int) (imageWidth * this.zoomLevel),
-                (int) (imageHeight * this.zoomLevel),
-                BufferedImage.TYPE_INT_ARGB  // @todo noch nach richtigem Type suchen
-            );
-            */
-
-            // das geht, aber nicht schnell => neues Rendering bei
-            // jedem Zoomvorgang
-            /*
-            this.zoomLevel += zoomChange;
-            this.pdfImage = PdfHandler.renderPdfWithZoom(
-                Launcher.PATH_TO_PDF1,
-                (float) this.zoomLevel
-            );
-            this.setPreferredSize(new Dimension(
-                this.pdfImage.getWidth(),
-                this.pdfImage.getHeight()
-            ));
-            */
-
-
-            this.repaint();
+            isPdfZoomable = true;
         }
+
+        return isPdfZoomable;
     }
 
 
