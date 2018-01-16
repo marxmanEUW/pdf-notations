@@ -3,6 +3,7 @@ package gui.partials;
 import controller.PdfAreaMouseListener;
 import handlers.PdfHandler;
 import main.Launcher;
+import model.Project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,15 +15,18 @@ public class PdfArea extends JPanel {
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
 
     private PdfAreaMouseListener pdfAreaMouseListener;
+    private Project project;
 
     BufferedImage pdfImage;
     // Graphics2D graphics2D;
     private double zoomLevel;
 
 
-    public PdfArea()
+    public PdfArea(Project project)
     {
-        this.pdfAreaMouseListener = new PdfAreaMouseListener(this);
+        this.project = project;
+
+        this.pdfAreaMouseListener = new PdfAreaMouseListener(this, this.project);
         this.addMouseListener(this.pdfAreaMouseListener);
         this.addMouseWheelListener(this.pdfAreaMouseListener);
 
@@ -58,6 +62,18 @@ public class PdfArea extends JPanel {
     {
         super.paintComponent(g);
         g.drawImage(this.pdfImage, 0, 0, this);
+
+        if(this.project.getListOfPoints() != null)
+        {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(Color.red);
+            for (Point point : this.project.getListOfPoints()) {
+                g2.fillOval(point.x, point.y, 20, 20);
+            }
+            this.repaint();
+        }
+
     }
 
     public void resizePdf(double zoomChange)

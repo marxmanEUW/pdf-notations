@@ -3,6 +3,7 @@ package gui;
 import factories.FrameCenterFactory;
 import gui.partials.*;
 import main.Launcher;
+import model.Project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,12 +34,12 @@ public class MainFrame extends JFrame {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-    public void initialize()
+    public void initialize(Project project)
     {
         this.setLookAndFell();
 
         this.setLayout(new BorderLayout());
-        this.pdfArea = new PdfArea();
+        this.pdfArea = new PdfArea(project);
 
 
         this.createMainFrame();

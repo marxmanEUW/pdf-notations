@@ -1,6 +1,8 @@
 package main;
 
 import gui.MainFrame;
+import model.Project;
+
 import java.io.IOException;
 
 public class Launcher {
@@ -15,8 +17,9 @@ public class Launcher {
     public static void main(String[] args) throws IOException
     {
         MainFrame mainFrame = new MainFrame();
+        Project project = new Project();
 
-        mainFrame.initialize();
+        mainFrame.initialize(project);
 
         mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF1);
         //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF2);

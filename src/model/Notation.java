@@ -25,11 +25,11 @@ public class Notation {
 
     /// Constructor
 
-    public Notation(Integer id, String name, Point coordinates)
+    public Notation(Integer id, String name, int x, int y)
     {
         this.id = id;
         this.name = name;
-        this.coordinates = coordinates;
+        this.coordinates = new Point(x, y);
     }
 
 }
