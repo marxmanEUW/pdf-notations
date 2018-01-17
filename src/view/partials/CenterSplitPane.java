@@ -1,41 +1,59 @@
-package factories;
+package view.partials;
 
 import view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
 
-public abstract class FrameCenterFactory {
+public class CenterSplitPane extends JSplitPane {
+
 
     /*
      * @note "final" could be removed to impelement a feature which can memorize
      *       the position of the dividers even after a restart
      */
-    private static final int MAIN_SPLITPANE_DEVIDER_POSITION = 1200;
-    private static final int RIGHT_SPLITPANE_DEVIDER_POSITION = 300;
+    private final int MAIN_SPLITPANE_DEVIDER_POSITION = 1200;
+    private final int RIGHT_SPLITPANE_DEVIDER_POSITION = 300;
 
     private static MainFrame mainFrame;
 
     // @todo testing
-    private static JButton testButtonCenterLeft
+    private JButton testButtonCenterLeft
         = new JButton("Test Button Center Left");
-    private static JButton testButtonCenterRightUpper
+    private JButton testButtonCenterRightUpper
         = new JButton("Test Button Center Right Upper");
-    private static JButton testButtonCenterRightLower
+    private JButton testButtonCenterRightLower
         = new JButton("Test Button Center Right Lower");
+
+
+    public CenterSplitPane()
+    {
+        this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+
+        this.setLeftComponent(this.testButtonCenterLeft);
+        this.setRightComponent(this.testButtonCenterRightLower);
+
+        this.setDividerLocation(0.3);
+        this.setOneTouchExpandable(true);
+        this.setContinuousLayout(true);
+
+        this.repaint();
+    }
+
+
 
     /*
      * #########################################################################
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
-    public static JSplitPane createAndReturnFrameCenterComponent(
-        MainFrame mainFrame)
+
+    @Override
+    public void paintComponent(Graphics graphics)
     {
-        FrameCenterFactory.mainFrame = mainFrame;
-
-
-        return createAndReturnMainSplitPane();
+        super.paintComponent(graphics);
     }
+
 
 
     /*
@@ -43,32 +61,19 @@ public abstract class FrameCenterFactory {
      * #                    private Hilfsmethoden                              #
      * #########################################################################
      */
-    private static JSplitPane createAndReturnMainSplitPane()
+    private JSplitPane createMainSplitPane()
     {
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-        //TestPdfArea testArea = new TestPdfArea();
-        //testArea.importNewPdf(Launcher.PATH_TO_PDF1);
+        mainSplitPane.setLeftComponent(this.testButtonCenterLeft);
 
-        JScrollPane pdfAreaScrollPane = new JScrollPane(
-            FrameCenterFactory.mainFrame.getPdfArea(),
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
-        );
-
-        mainSplitPane.setLeftComponent(pdfAreaScrollPane);
-
-        JSplitPane rightSplitPane = createAndReturnRightSplitPane();
+        JSplitPane rightSplitPane = this.createRightSplitPane();
         mainSplitPane.setRightComponent(rightSplitPane);
-
-        mainSplitPane.setDividerLocation(MAIN_SPLITPANE_DEVIDER_POSITION);
-        mainSplitPane.setOneTouchExpandable(true);
-        mainSplitPane.setContinuousLayout(true);
 
         return mainSplitPane;
     }
 
-    private static JSplitPane createAndReturnRightSplitPane()
+    private JSplitPane createRightSplitPane()
     {
         JSplitPane rightSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 

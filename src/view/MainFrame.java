@@ -1,10 +1,11 @@
-package gui;
+package view;
 
 import controller.MenuBarActionListener;
-import factories.FrameCenterFactory;
-import gui.partials.*;
-import main.Launcher;
-import model.Project;
+import gui.Constants;
+import model.ProjectCon;
+import view.partials.CenterSplitPane;
+import view.partials.MainFrameMenuBar;
+import view.partials.partials.PdfArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-    public void initialize(Project project)
+    public void initialize(ProjectCon projectCon)
     {
         // commented out for better performance
         //this.setLookAndFell();
@@ -44,9 +45,9 @@ public class MainFrame extends JFrame {
         this.mbActionListener = new MenuBarActionListener();
 
         this.setLayout(new BorderLayout());
-        this.pdfArea = new PdfArea(project);
+        this.pdfArea = new PdfArea(projectCon);
 
-        this.mbActionListener.initialize(project,pdfArea);
+        this.mbActionListener.initialize(projectCon,pdfArea);
 
         this.createMainFrame();
         this.setFrameProperties();
@@ -69,10 +70,15 @@ public class MainFrame extends JFrame {
         this.menuBar = new MainFrameMenuBar(this.mbActionListener);
         this.setJMenuBar(this.menuBar);
 
+        CenterSplitPane centerSplitPane = new CenterSplitPane();
+        this.getContentPane().add(centerSplitPane, BorderLayout.CENTER);
+
+        /*
         this.getContentPane().add(
             FrameCenterFactory.createAndReturnFrameCenterComponent(this),
             BorderLayout.CENTER
         );
+        */
 
     }
 

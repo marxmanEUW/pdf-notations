@@ -5,17 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.Constants;
-import gui.partials.PdfArea;
-import model.Project;
+import model.ProjectCon;
+import view.partials.partials.PdfArea;
 
 public class MenuBarActionListener implements ActionListener {
 
-    private Project project;
+    private ProjectCon projectCon;
     private PdfArea pdfArea;
 
-    public void initialize(Project project, PdfArea pdfArea)
+    public void initialize(ProjectCon projectCon, PdfArea pdfArea)
     {
-        this.project = project;
+        this.projectCon = projectCon;
         this.pdfArea = pdfArea;
     }
 
@@ -39,7 +39,7 @@ public class MenuBarActionListener implements ActionListener {
                 System.out.println("Ich  speichere unter das Projekt.");
                 break;
             case Constants.MENUITEM_CLOSE_PROJECT_NAME:
-                // @todo Close Project
+                // @todo Close ProjectCon
                 System.out.println("Ich schließe das Projekt.");
                 break;
             case Constants.MENUITEM_CLOSE_NAME:
@@ -55,9 +55,9 @@ public class MenuBarActionListener implements ActionListener {
                 System.out.println("Ich zeige die Liste der Notationen.");
                 break;
             case Constants.MENUITEM_ADD_NOTATION_NAME:
-                // @todo Add Notation
-                System.out.println("Ich bin ein neue Notation.");
-                this.project.addNotation();
+                // @todo Add NotationCon
+                System.out.println("Ich bin ein neue NotationCon.");
+                this.projectCon.addNotation();
                 this.pdfArea.setCursor(Cursor.CROSSHAIR_CURSOR);
 
                 break;

@@ -1,8 +1,8 @@
-package gui.partials;
+package view.partials.partials;
 
-import listeners.PdfAreaMouseListener;
+import listeners.PdfAreaMouseAdapter;
 import handlers.PdfHandler;
-import model.Project;
+import model.ProjectCon;
 import listeners.PdfResizeTimerActionListener;
 
 import javax.swing.*;
@@ -18,9 +18,9 @@ public class PdfArea extends JPanel {
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
 
-    private PdfAreaMouseListener pdfAreaMouseListener;
+    private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
-    private Project project;
+    private ProjectCon projectCon;
 
     private BufferedImage pdfImage;
     private String pdfImagePath;
@@ -34,13 +34,13 @@ public class PdfArea extends JPanel {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public PdfArea(Project project)
+    public PdfArea(ProjectCon projectCon)
     {
-        this.project = project;
+        this.projectCon = projectCon;
 
-        this.pdfAreaMouseListener = new PdfAreaMouseListener(this, this.project);
-        this.addMouseListener(this.pdfAreaMouseListener);
-        this.addMouseWheelListener(this.pdfAreaMouseListener);
+        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter(this, this.projectCon);
+        this.addMouseListener(this.pdfAreaMouseAdapter);
+        this.addMouseWheelListener(this.pdfAreaMouseAdapter);
 
         this.pdfImage = null;
         this.zoomLevel = 1.0;
@@ -81,14 +81,14 @@ public class PdfArea extends JPanel {
         super.paintComponent(graphics);
         graphics.drawImage(this.pdfImage, 0, 0, this);
 
-        if(this.project.getListOfPoints() != null)
+        if(this.projectCon.getListOfPoints() != null)
         {
             Graphics2D g2 = (Graphics2D) graphics;
             g2.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(Color.red);
-            for (Point point : this.project.getListOfPoints()) {
+            for (Point point : this.projectCon.getListOfPoints()) {
                 g2.fillOval(
                     point.x - NOTATION_RADIUS,
                     point.y - NOTATION_RADIUS,
@@ -165,7 +165,7 @@ public class PdfArea extends JPanel {
      */
     public void rerenderPdf()
     {
-        this.pdfAreaMouseListener.disableZoom();
+        this.pdfAreaMouseAdapter.disableZoom();
         System.out.println("Zoom aus");
 
         // das geht, aber nicht schnell => neues Rendering bei
@@ -183,7 +183,7 @@ public class PdfArea extends JPanel {
         this.repaint();
 
 
-        this.pdfAreaMouseListener.enableZoom();
+        this.pdfAreaMouseAdapter.enableZoom();
         System.out.println("Zoom an");
     }
 
