@@ -2,7 +2,6 @@ package gui.partials;
 
 import listeners.PdfAreaMouseListener;
 import handlers.PdfHandler;
-import main.Launcher;
 import model.Project;
 import listeners.PdfResizeTimerActionListener;
 
@@ -81,18 +80,21 @@ public class PdfArea extends JPanel {
     {
         super.paintComponent(graphics);
         graphics.drawImage(this.pdfImage, 0, 0, this);
-        super.paintComponent(graphics);
-        graphics.drawImage(this.pdfImage, 0, 0, this);
 
         if(this.project.getListOfPoints() != null)
         {
             Graphics2D g2 = (Graphics2D) graphics;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(Color.red);
             for (Point point : this.project.getListOfPoints()) {
-                g2.fillOval(point.x - NOTATION_RADIUS, point.y - NOTATION_RADIUS, NOTATION_RADIUS * 2, NOTATION_RADIUS * 2);
+                g2.fillOval(
+                    point.x - NOTATION_RADIUS,
+                    point.y - NOTATION_RADIUS,
+                    NOTATION_RADIUS * 2,
+                    NOTATION_RADIUS * 2);
             }
-            this.repaint();
         }
 
     }
@@ -140,7 +142,7 @@ public class PdfArea extends JPanel {
         );
         AffineTransformOp transformOp = new AffineTransformOp(
             affineTransform,
-            AffineTransformOp.TYPE_BILINEAR
+            AffineTransformOp.TYPE_BILINEAR //@todo noch gucken
         );
         scaledPdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
 
@@ -180,8 +182,9 @@ public class PdfArea extends JPanel {
 
         this.repaint();
 
-        System.out.println("Zoom aus");
+
         this.pdfAreaMouseListener.enableZoom();
+        System.out.println("Zoom an");
     }
 
 

@@ -38,7 +38,8 @@ public class MainFrame extends JFrame {
      */
     public void initialize(Project project)
     {
-        this.setLookAndFell();
+        // commented out for better performance
+        //this.setLookAndFell();
 
         this.mbActionListener = new MenuBarActionListener();
 

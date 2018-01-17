@@ -95,6 +95,7 @@ public class PdfAreaMouseListener extends MouseAdapter {
         System.out.println("--------------------------");
 
         this.project.addNotationAtXY(x, y);
+        this.pdfArea.repaint();
     }
 
     @Override
