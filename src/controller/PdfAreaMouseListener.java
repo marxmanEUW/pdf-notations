@@ -1,6 +1,7 @@
 package controller;
 
 import gui.partials.PdfArea;
+import model.Project;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -11,13 +12,14 @@ public class PdfAreaMouseListener extends MouseAdapter {
     private final int TIMER_DELAY = 100;
     private Timer mouseWheelMovementTimer;
     private PdfArea pdfArea;
+    private Project project;
     private int mouseScrollCount;
 
-
-    public PdfAreaMouseListener(PdfArea pdfArea)
+    public PdfAreaMouseListener(PdfArea pdfArea, Project project)
     {
         this.pdfArea = pdfArea;
         this.resetMouseRollCount();
+        this.project = project; //oder lieber this.pdfArea.project ??????
     }
 
 
@@ -32,6 +34,8 @@ public class PdfAreaMouseListener extends MouseAdapter {
         System.out.println("x: " + Integer.toString(x));
         System.out.println("y: " + Integer.toString(y));
         System.out.println("--------------------------");
+
+        this.project.addNotationAtXY(x, y);
     }
 
     @Override
