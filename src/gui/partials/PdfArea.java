@@ -13,6 +13,7 @@ public class PdfArea extends JPanel {
 
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
+    private final int NOTATION_RADIUS = 10;
 
     private PdfAreaMouseListener pdfAreaMouseListener;
     private Project project;
@@ -69,7 +70,7 @@ public class PdfArea extends JPanel {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(Color.red);
             for (Point point : this.project.getListOfPoints()) {
-                g2.fillOval(point.x, point.y, 20, 20);
+                g2.fillOval(point.x - NOTATION_RADIUS, point.y - NOTATION_RADIUS, NOTATION_RADIUS * 2, NOTATION_RADIUS * 2);
             }
             this.repaint();
         }
@@ -113,6 +114,8 @@ public class PdfArea extends JPanel {
         }
     }
 
-
+    public void setCursor(int cursorStyle){
+        this.setCursor(new Cursor(cursorStyle));
+    }
 }
 

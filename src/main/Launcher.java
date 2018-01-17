@@ -18,6 +18,7 @@ public class Launcher {
     {
         MainFrame mainFrame = new MainFrame();
         Project project = new Project();
+        // @todo MVC welche Teil muss welchen Teil kennen
 
         mainFrame.initialize(project);
 

@@ -40,9 +40,12 @@ public class MainFrame extends JFrame {
     {
         this.setLookAndFell();
 
+        this.mbActionListener = new MenuBarActionListener();
+
         this.setLayout(new BorderLayout());
         this.pdfArea = new PdfArea(project);
 
+        this.mbActionListener.initialize(project,pdfArea);
 
         this.createMainFrame();
         this.setFrameProperties();
@@ -62,8 +65,6 @@ public class MainFrame extends JFrame {
      */
     private void createMainFrame()
     {
-        this.mbActionListener = new MenuBarActionListener();
-
         this.menuBar = new MainFrameMenuBar(this.mbActionListener);
         this.setJMenuBar(this.menuBar);
 

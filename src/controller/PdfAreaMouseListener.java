@@ -35,7 +35,7 @@ public class PdfAreaMouseListener extends MouseAdapter {
         System.out.println("y: " + Integer.toString(y));
         System.out.println("--------------------------");
 
-        this.project.addNotation(x, y);
+        this.project.addNotationAtXY(x, y);
     }
 
     @Override

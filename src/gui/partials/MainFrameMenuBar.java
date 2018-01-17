@@ -119,6 +119,9 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuNotation.setText(Constants.MENU_NOTATION_NAME);
         this.menuItemAddNotation.setText(Constants.MENUITEM_ADD_NOTATION_NAME);
 
+        // ActionListener
+        this.menuItemAddNotation.addActionListener(this.mbActionListener);
+
         // Menuepunkte zum Menue hinzufuegen
         this.menuNotation.add(this.menuItemAddNotation);
 
@@ -135,6 +138,9 @@ public class MainFrameMenuBar extends JMenuBar {
         // Text des Menues und der Menuepunkte
         this.menuHelp.setText(Constants.MENU_HELP_NAME);
         this.menuItemAbout.setText(Constants.MENUITEM_ABOUT_NAME);
+
+        // ActionListener
+        this.menuItemAbout.addActionListener(this.mbActionListener);
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuHelp.add(this.menuItemAbout);

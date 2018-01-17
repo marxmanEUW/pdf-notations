@@ -1,7 +1,7 @@
 package model;
 
-import java.awt.*;
-import java.lang.reflect.Array;
+
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Project {
@@ -34,7 +34,12 @@ public class Project {
 
     /// public methods
 
-    public void addNotation(int x, int y)
+    public void addNotation()
+    {
+
+    }
+
+    public void addNotationAtXY(int x, int y)
     {
         Notation newNotation = new Notation(1,"Punkt", x, y);
         this.listOfNotations.add(newNotation);
