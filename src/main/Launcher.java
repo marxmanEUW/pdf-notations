@@ -1,6 +1,8 @@
 package main;
 
 import gui.MainFrame;
+import model.Project;
+
 import java.io.IOException;
 
 public class Launcher {
@@ -9,14 +11,16 @@ public class Launcher {
 
     // @todo testing
     public static final String PATH_TO_PDF1 = "files/file1.pdf";
-    public static final String PATH_TO_PDF2 = "files/file2.pdf";
+    public static final String PATH_TO_PDF2 = "";
 
 
     public static void main(String[] args) throws IOException
     {
         MainFrame mainFrame = new MainFrame();
+        Project project = new Project();
+        // @todo MVC welche Teil muss welchen Teil kennen
 
-        mainFrame.initialize();
+        mainFrame.initialize(project);
 
         mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF1);
         //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF2);

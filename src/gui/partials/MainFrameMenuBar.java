@@ -1,5 +1,6 @@
 package gui.partials;
 
+import controller.MenuBarActionListener;
 import gui.Constants;
 
 import javax.swing.*;
@@ -25,9 +26,13 @@ public class MainFrameMenuBar extends JMenuBar {
     private JMenu menuHelp;
     private JMenuItem menuItemAbout;
 
+    private MenuBarActionListener mbActionListener;
 
-    public MainFrameMenuBar()
+
+    public MainFrameMenuBar(MenuBarActionListener mbActionListener)
     {
+        this.mbActionListener = mbActionListener;
+
         this.setupMenuFile();
         this.setupMenuProject();
         this.setupMenuNotation();
@@ -59,6 +64,14 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemCloseProject.setText(Constants.MENUITEM_CLOSE_PROJECT_NAME);
         this.menuItemClose.setText(Constants.MENUITEM_CLOSE_NAME);
 
+        // ActionListener
+        this.menuItemNewProject.addActionListener(this.mbActionListener);
+        this.menuItemOpenProject.addActionListener(this.mbActionListener);
+        this.menuItemSaveProject.addActionListener(this.mbActionListener);
+        this.menuItemSaveAsProject.addActionListener(this.mbActionListener);
+        this.menuItemCloseProject.addActionListener(this.mbActionListener);
+        this.menuItemClose.addActionListener(this.mbActionListener);
+
         // Menuepunkte zum Menue hinzufuegen
         this.menuFile.add(this.menuItemNewProject);
         this.menuFile.add(this.menuItemOpenProject);
@@ -84,6 +97,10 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemImportPDF.setText(Constants.MENUITEM_IMPORT_PDF_NAME);
         this.menuItemShowList.setText(Constants.MENUITEM_SHOW_LIST_NAME);
 
+        // ActionListener
+        this.menuItemImportPDF.addActionListener(this.mbActionListener);
+        this.menuItemShowList.addActionListener(this.mbActionListener);
+
         // Menuepunkte zum Menue hinzufuegen
         this.menuProject.add(this.menuItemImportPDF);
         this.menuProject.add(this.menuItemShowList);
@@ -102,6 +119,9 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuNotation.setText(Constants.MENU_NOTATION_NAME);
         this.menuItemAddNotation.setText(Constants.MENUITEM_ADD_NOTATION_NAME);
 
+        // ActionListener
+        this.menuItemAddNotation.addActionListener(this.mbActionListener);
+
         // Menuepunkte zum Menue hinzufuegen
         this.menuNotation.add(this.menuItemAddNotation);
 
@@ -118,6 +138,9 @@ public class MainFrameMenuBar extends JMenuBar {
         // Text des Menues und der Menuepunkte
         this.menuHelp.setText(Constants.MENU_HELP_NAME);
         this.menuItemAbout.setText(Constants.MENUITEM_ABOUT_NAME);
+
+        // ActionListener
+        this.menuItemAbout.addActionListener(this.mbActionListener);
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuHelp.add(this.menuItemAbout);
