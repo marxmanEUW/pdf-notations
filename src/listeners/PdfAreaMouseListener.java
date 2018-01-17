@@ -1,6 +1,7 @@
 package listeners;
 
 import gui.partials.PdfArea;
+import model.Project;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -16,17 +17,21 @@ public class PdfAreaMouseListener extends MouseAdapter {
     private Timer mouseWheelMovementTimer;
     private int mouseScrollCount;
 
+    private Project project;
+
 
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public PdfAreaMouseListener(PdfArea pdfArea)
+    public PdfAreaMouseListener(PdfArea pdfArea, Project project)
     {
         this.pdfArea = pdfArea;
         this.resetMouseRollCount();
         this.enableZoom();
+
+        this.project = project; //oder lieber this.pdfArea.project ??????
     }
 
 
@@ -88,6 +93,8 @@ public class PdfAreaMouseListener extends MouseAdapter {
         System.out.println("x: " + Integer.toString(x));
         System.out.println("y: " + Integer.toString(y));
         System.out.println("--------------------------");
+
+        this.project.addNotationAtXY(x, y);
     }
 
     @Override

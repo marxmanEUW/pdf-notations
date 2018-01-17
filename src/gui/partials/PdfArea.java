@@ -81,12 +81,12 @@ public class PdfArea extends JPanel {
     {
         super.paintComponent(graphics);
         graphics.drawImage(this.pdfImage, 0, 0, this);
-        super.paintComponent(g);
-        g.drawImage(this.pdfImage, 0, 0, this);
+        super.paintComponent(graphics);
+        graphics.drawImage(this.pdfImage, 0, 0, this);
 
         if(this.project.getListOfPoints() != null)
         {
-            Graphics2D g2 = (Graphics2D) g;
+            Graphics2D g2 = (Graphics2D) graphics;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(Color.red);
             for (Point point : this.project.getListOfPoints()) {
