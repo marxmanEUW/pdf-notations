@@ -22,13 +22,9 @@ public class Launcher {
 
         mainFrame.initialize(projectCon);
 
-        mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF1);
+        mainFrame.centerSplitPane.pdfScrollPane.importNewPdf(PATH_TO_PDF1);
+
+        //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF1);
         //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF2);
-    }
-
-
-    public static void skdjfskjdkj()
-    {
-
     }
 }

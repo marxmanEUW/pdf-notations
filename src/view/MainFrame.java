@@ -15,6 +15,8 @@ public class MainFrame extends JFrame {
     private JMenuBar menuBar;
     private MenuBarActionListener mbActionListener;
 
+    public CenterSplitPane centerSplitPane;
+
     /*
      * Arbeitsflaechen des CENTERs
      */
@@ -70,15 +72,8 @@ public class MainFrame extends JFrame {
         this.menuBar = new MainFrameMenuBar(this.mbActionListener);
         this.setJMenuBar(this.menuBar);
 
-        CenterSplitPane centerSplitPane = new CenterSplitPane();
-        this.getContentPane().add(centerSplitPane, BorderLayout.CENTER);
-
-        /*
-        this.getContentPane().add(
-            FrameCenterFactory.createAndReturnFrameCenterComponent(this),
-            BorderLayout.CENTER
-        );
-        */
+        this.centerSplitPane = new CenterSplitPane();
+        this.getContentPane().add(this.centerSplitPane, BorderLayout.CENTER);
 
     }
 
