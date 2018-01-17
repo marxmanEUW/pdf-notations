@@ -1,7 +1,8 @@
 package gui.partials;
 
-import controller.PdfAreaMouseListener;
+import listeners.PdfAreaMouseListener;
 import handlers.PdfHandler;
+import listeners.PdfResizeTimerActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +14,10 @@ public class PdfArea extends JPanel {
 
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
+    private final int PDF_RESIZED_TIMER_DELAY = 3000;
 
     private PdfAreaMouseListener pdfAreaMouseListener;
+    private Timer pdfResizedTimer;
 
     private BufferedImage pdfImage;
     private String pdfImagePath;
@@ -23,6 +26,11 @@ public class PdfArea extends JPanel {
     private double zoomLevel;
 
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
     public PdfArea()
     {
         this.pdfAreaMouseListener = new PdfAreaMouseListener(this);
@@ -45,10 +53,10 @@ public class PdfArea extends JPanel {
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
-
     public void importNewPdf(String sourcePath)
     {
         this.pdfImagePath = sourcePath;
+
         this.pdfImage = PdfHandler.renderPdfAsImage(this.pdfImagePath);
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
@@ -62,10 +70,10 @@ public class PdfArea extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g)
+    protected void paintComponent(Graphics graphics)
     {
-        super.paintComponent(g);
-        g.drawImage(this.pdfImage, 0, 0, this);
+        super.paintComponent(graphics);
+        graphics.drawImage(this.pdfImage, 0, 0, this);
     }
 
     public void resizePdf(double zoomChange)
@@ -76,15 +84,28 @@ public class PdfArea extends JPanel {
             this.zoomLevel += zoomChange;
 
             this.zoomPdf(zoomChange);
+
+
+            if (this.pdfResizedTimer != null && this.pdfResizedTimer.isRunning())
+            {
+                this.pdfResizedTimer.stop();
+            }
+
+            this.pdfResizedTimer = new Timer(
+                this.PDF_RESIZED_TIMER_DELAY,
+                new PdfResizeTimerActionListener(this)
+            );
+            this.pdfResizedTimer.setRepeats(false);
+            this.pdfResizedTimer.start();
         }
     }
 
     private void zoomPdf(double zoomChange)
     {
-        double scaledImageWidth =
-            ((double) this.pdfImage.getWidth() + ((double) this.initialImageWidth * zoomChange));
-        double scaledImageHeight =
-            ((double) this.pdfImage.getHeight() + ((double) this.initialImageHeight * zoomChange));
+        double scaledImageWidth = ((double) this.pdfImage.getWidth()
+            + ((double) this.initialImageWidth * zoomChange));
+        double scaledImageHeight = ((double) this.pdfImage.getHeight()
+            + ((double) this.initialImageHeight * zoomChange));
         BufferedImage scaledPdfImage = new BufferedImage(
             (int) scaledImageWidth,
             (int) scaledImageHeight,
@@ -119,8 +140,11 @@ public class PdfArea extends JPanel {
     /*
      * @todo Exception werfen
      */
-    private void rerenderPdf()
+    public void rerenderPdf()
     {
+        this.pdfAreaMouseListener.disableZoom();
+        System.out.println("Zoom aus");
+
         // das geht, aber nicht schnell => neues Rendering bei
         // jedem Zoomvorgang
         this.pdfImage = PdfHandler.renderPdfWithZoom(
@@ -134,6 +158,9 @@ public class PdfArea extends JPanel {
         ));
 
         this.repaint();
+
+        System.out.println("Zoom aus");
+        this.pdfAreaMouseListener.enableZoom();
     }
 
 

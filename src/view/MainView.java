@@ -1,6 +1,6 @@
 package view;
 
-import controller.PdfAreaMouseListener;
+import listeners.PdfAreaMouseListener;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
