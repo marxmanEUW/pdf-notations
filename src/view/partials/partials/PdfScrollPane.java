@@ -1,13 +1,10 @@
 package view.partials.partials;
 
-import handlers.PdfHandler;
-import listeners.PdfAreaMouseAdapter;
 import main.Launcher;
 import model.ProjectCon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class PdfScrollPane extends JScrollPane {
 
@@ -23,40 +20,23 @@ public class PdfScrollPane extends JScrollPane {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        //this.projectCon = projectCon;
-
-        //this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter(this.pdfArea, this.projectCon);
-        //this.addMouseListener(this.pdfAreaMouseAdapter);
-        //this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-
         this.pdfArea = new PdfArea(new ProjectCon());
-        this.add(this.pdfArea);
 
-        //this.repaint();
+        this.getViewport().add(this.pdfArea);
     }
+
 
     @Override
     public void paintComponent(Graphics graphics)
     {
-        this.setPreferredSize(new Dimension(
-            this.pdfArea.getWidth(),
-            this.pdfArea.getHeight()
-        ));
-
         super.paintComponent(graphics);
     }
 
 
-    /*
-     * #########################################################################
-     * #                    oeffentliche Methoden                              #
-     * #########################################################################
-     */
-
     public void importNewPdf(String sourcePath)
     {
         this.pdfArea.importNewPdf(sourcePath);
-        this.repaint();
+        this.getViewport().revalidate();
     }
 }
 

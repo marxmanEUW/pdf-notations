@@ -1,11 +1,13 @@
 package view;
 
 import controller.MenuBarActionListener;
+import factories.FrameCenterFactory;
 import gui.Constants;
 import model.ProjectCon;
 import view.partials.CenterSplitPane;
 import view.partials.MainFrameMenuBar;
 import view.partials.partials.PdfArea;
+import view.partials.partials.PdfAreaReal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +23,7 @@ public class MainFrame extends JFrame {
      * Arbeitsflaechen des CENTERs
      */
     private PdfArea pdfArea;
+    public PdfAreaReal pdfAreaReal;
 
 
     /*
@@ -49,6 +52,8 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.pdfArea = new PdfArea(projectCon);
 
+        this.pdfAreaReal = new PdfAreaReal();
+
         this.mbActionListener.initialize(projectCon,pdfArea);
 
         this.createMainFrame();
@@ -74,6 +79,13 @@ public class MainFrame extends JFrame {
 
         this.centerSplitPane = new CenterSplitPane();
         this.getContentPane().add(this.centerSplitPane, BorderLayout.CENTER);
+
+        /*
+        this.getContentPane().add(
+            FrameCenterFactory.createAndReturnFrameCenterComponent(this),
+            BorderLayout.CENTER
+        );
+        */
 
     }
 
