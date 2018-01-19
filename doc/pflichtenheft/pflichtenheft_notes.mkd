@@ -87,3 +87,8 @@
 
     - Zuweisung von nötigen Testszenarien zu den Funktionen aus Punkt 4
 
+#### Links/Source
+
+- https://wiki.induux.de/Pflichtenheft
+- https://www.tu-ilmenau.de/sse/lehre-archiv/winter-201314/softwareprojekt/das-pflichtenheft/
+- http://www.infrasoft.at/downloads/Anleitung_zum_Pflichtenheft.pdf
