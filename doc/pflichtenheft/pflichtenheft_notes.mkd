@@ -1,0 +1,94 @@
+### Pflichtenheft - Notizen zur Erstellung
+
+#### 1. Allgemein
+- das Pflichtenheft ist eine detaillierte Beschreibung der Lösungsansätze für die im Lastenheft vermerkten Anforderungen
+- ist also das "wie und womit"
+- eigentliche Projektumsetzung beginnt erst mit Abnahme des Pflichtenheftes
+- Inhalt ist rechtlich bindend
+- Anwendung des "Ausschlussprinzips" -> konkrete Fälle werden entweder ein oder ausgeschlossen
+- schriftliche Dokumentation von (Problem-)Analysen
+- Verdeutlichung von Prinzipien durch Ist-Zustand
+- klare Abgrenzung von Konzept und Analysen
+- Ziel: relevante, programminterne Verfahren nahe bringen
+
+#### 2. Inhalt
+- Dokumentation der Ausgangslage und Definition der Ziele
+- Beschreiben der Prozessabläufe, sowie deren Stärken und Schwächen
+- Herstellung eines Soll-Konzepts, das die Anforderungen des Auftraggebers beschreibt
+- Beschreibung beginnend mit der technische Struktur
+- Erstellung einer tabellarischen Übersicht über die wichtigsten Daten, Notizen und Anmerkungen
+- Hinzufügen von Belegen, Ablaufplänen, und Checklisten an den Anhang des Pflichtenheftes
+
+#### 3. Gliederung
+1. Zielbestimmungen
+
+    - Einleitung, die die Ziele beschreibt, welche mit dem Programm erfüllt werden sollen  
+
+    - Musskriterien (Core - Funktionen, unerlässlich für Funktionsweise)
+    - Wunschkriterien (entbehrliche Funktionen, müssen dennoch implementiert werden)
+    - Abgrenzungskriterien (diese Funktionen soll das Programm nicht beinhalten)
+
+2. Einsatz
+    - Analyse des späteren Einsatzumfeldes
+    
+    - Anwendungsbereiche (Zweck des Systems)
+    - Zielgruppe (Beschreibung der späteren Anwender inklusive Qualifikation)
+    - Betriebsbedinungen (physikalische Umgebung, Betriebszeit)
+
+3. Produktübersicht/-umgebung
+    
+    - Software (OS, Datenbanken, ...)
+    - Hardware (Clientrechner, Server, ...)
+    - Schnittstellen (bestehende oder geplante Produktfamilien)
+
+4. Funktionen
+    
+    - Auflistung der Funktionen aus Benutzersicht
+    - Beschreibung unabhängig von der Nutzeroberfläche
+    - wie läuft die Funktion ab, welche Bedingungen sind an die Funktion geknüpft
+    - Gliederung stellt Anzahl der Funktionen dar (4.X Funktion X)
+
+5. Produktdaten
+
+    - Beschreibung der zu erfassenden Daten
+
+6. Leistungen
+
+    - beschreibt Anforderungen an eine bestimmte Funktion (Ausführungszeit, Genaugigkeit einer Berechnung, Datentransfervolumen, Dauer, ...)
+
+7. Qualitätsanforderungen
+
+    - tabellarische Auflistung von Funktionen und deren Qualitätsstufe
+    - zB Ladezeit = sehr wichtig
+
+8. Benutzeroberfläche
+
+    - Anforderungen an das UI
+    - Bildschirmlayout, Dialoglayout, Tastaturbelegung, Maskenlayout, ....
+
+9. Sonstige Anforderungen
+    
+    - Dokumentation, Sicherheitsanforderungen, ....
+
+10. Technisches Umfeld (Entwicklungsumgebung)
+
+    - Software, Hardware, Orgware, ....
+
+12. Gliederung
+
+    - wenn vorhanden, Unterprogramme/Module etc - nur bei großen Projekten
+
+12. Ergänzungen
+
+    - rechtliche Aspekte wie Lizenzen/Patente
+    - spezielle Anforderungen, die bisher keinen Platz gefunden haben
+
+13. Tests
+
+    - Zuweisung von nötigen Testszenarien zu den Funktionen aus Punkt 4
+
+#### Links/Source
+
+- https://wiki.induux.de/Pflichtenheft
+- https://www.tu-ilmenau.de/sse/lehre-archiv/winter-201314/softwareprojekt/das-pflichtenheft/
+- http://www.infrasoft.at/downloads/Anleitung_zum_Pflichtenheft.pdf
