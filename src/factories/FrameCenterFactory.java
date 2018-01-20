@@ -48,7 +48,7 @@ public abstract class FrameCenterFactory {
         JSplitPane mainSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
         JScrollPane pdfAreaScrollPane = new JScrollPane(
-            FrameCenterFactory.mainFrame.pdfAreaReal,
+            FrameCenterFactory.mainFrame.getPdfArea(),
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
         );

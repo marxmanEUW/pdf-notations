@@ -16,6 +16,7 @@ public class PdfArea extends JPanel {
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
+
     private final int NOTATION_RADIUS = 10;
 
     private PdfAreaMouseAdapter pdfAreaMouseAdapter;
@@ -47,6 +48,14 @@ public class PdfArea extends JPanel {
     }
 
 
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
     public double getZoomLevel()
     {
         return zoomLevel;
@@ -55,10 +64,38 @@ public class PdfArea extends JPanel {
 
     /*
      * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    public void setCursor(int cursorStyle)
+    {
+        this.setCursor(new Cursor(cursorStyle));
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    @Override
+    protected void paintComponent(Graphics graphics)
+    {
+        super.paintComponent(graphics);
+
+        this.repaintPdfGraphics(graphics);
+        this.repaintNotationPoints(graphics);
+    }
+
+
+    /*
+     * #########################################################################
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
-
+    /*
+     * @author  yxyxD
+     */
     public void importNewPdf(String sourcePath)
     {
         this.pdfImagePath = sourcePath;
@@ -67,101 +104,27 @@ public class PdfArea extends JPanel {
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
-        this.setPreferredSize(new Dimension(
-            this.pdfImage.getWidth(),
-            this.pdfImage.getHeight())
-        );
-
-        this.repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics graphics)
-    {
-        super.paintComponent(graphics);
-        graphics.drawImage(this.pdfImage, 0, 0, this);
-
-        if(this.projectCon.getListOfPoints() != null)
-        {
-            Graphics2D g2 = (Graphics2D) graphics;
-            g2.setRenderingHint(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(Color.red);
-            for (Point point : this.projectCon.getListOfPoints()) {
-                g2.fillOval(
-                    point.x - NOTATION_RADIUS,
-                    point.y - NOTATION_RADIUS,
-                    NOTATION_RADIUS * 2,
-                    NOTATION_RADIUS * 2);
-            }
-        }
-
-    }
-
-    public void resizePdf(double zoomChange)
-    {
-        if (this.isPdfZoomable(zoomChange)) {
-
-            // Zoomlevel speichern
-            this.zoomLevel += zoomChange;
-
-            this.zoomPdf(zoomChange);
-
-
-            if (this.pdfResizedTimer != null && this.pdfResizedTimer.isRunning())
-            {
-                this.pdfResizedTimer.stop();
-            }
-
-            this.pdfResizedTimer = new Timer(
-                this.PDF_RESIZED_TIMER_DELAY,
-                new PdfResizeTimerActionListener(this)
-            );
-            this.pdfResizedTimer.setRepeats(false);
-            this.pdfResizedTimer.start();
-        }
-    }
-
-    private void zoomPdf(double zoomChange)
-    {
-        double scaledImageWidth = ((double) this.pdfImage.getWidth()
-            + ((double) this.initialImageWidth * zoomChange));
-        double scaledImageHeight = ((double) this.pdfImage.getHeight()
-            + ((double) this.initialImageHeight * zoomChange));
-        BufferedImage scaledPdfImage = new BufferedImage(
-            (int) scaledImageWidth,
-            (int) scaledImageHeight,
-            BufferedImage.TYPE_INT_ARGB
-        );
-
-        AffineTransform affineTransform = new AffineTransform();
-        affineTransform.scale(
-            (scaledImageWidth / (double) this.pdfImage.getWidth()),
-            (scaledImageHeight / (double) this.pdfImage.getHeight())
-        );
-        AffineTransformOp transformOp = new AffineTransformOp(
-            affineTransform,
-            AffineTransformOp.TYPE_BILINEAR //@todo noch gucken
-        );
-        scaledPdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
-
-        this.pdfImage = scaledPdfImage;
-        /*
-         * @todo !Prüfen: Ist die Größe des skalierten Images genau so
-         * @todo          groß wie Größe des Elementes?
-         * @todo Lösung => JScrollPane rezisen
-         */
-        this.setPreferredSize(new Dimension(
-            this.pdfImage.getWidth(),
-            this.pdfImage.getHeight()
-        ));
-
         this.repaint();
     }
 
     /*
+     * @author  yxyxD
+     */
+    public void resizePdf(double zoomChange)
+    {
+        if (this.isPdfZoomable(zoomChange))
+        {
+            this.zoomLevel += zoomChange;
+
+            this.zoomPdf(zoomChange);
+            this.refreshTimerOnRerenderingPdf();
+        }
+    }
+
+    /*
      * @todo Exception werfen
+     * @todo refactoring needed
+     * @author  yxyxD
      */
     public void rerenderPdf()
     {
@@ -175,11 +138,6 @@ public class PdfArea extends JPanel {
             (float) this.zoomLevel
         );
 
-        this.setPreferredSize(new Dimension(
-            this.pdfImage.getWidth(),
-            this.pdfImage.getHeight()
-        ));
-
         this.repaint();
 
 
@@ -188,6 +146,92 @@ public class PdfArea extends JPanel {
     }
 
 
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethoden                              #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    private void zoomPdf(double zoomChange)
+    {
+        double scaledImageWidth = (double) this.pdfImage.getWidth()
+            + ((double) this.initialImageWidth * zoomChange);
+        double scaledImageHeight = (double) this.pdfImage.getHeight()
+            + ((double) this.initialImageHeight * zoomChange);
+
+        BufferedImage scaledPdfImage = this.getScaledPdfImage(
+            scaledImageWidth,
+            scaledImageHeight
+        );
+
+        AffineTransformOp transformOp = this.getAffineTransformOp(
+            scaledImageWidth,
+            scaledImageHeight
+        );
+
+        this.pdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
+
+        this.repaint();
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    private BufferedImage getScaledPdfImage(
+        double scaledImageWidth,
+        double scaledImageHeight
+    )
+    {
+        return new BufferedImage(
+            (int) scaledImageWidth,
+            (int) scaledImageHeight,
+            BufferedImage.TYPE_INT_ARGB
+        );
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    private AffineTransformOp getAffineTransformOp(
+        double scaledImageWidth,
+        double scaledImageHeight
+    )
+    {
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.scale(
+            (scaledImageWidth / (double) this.pdfImage.getWidth()),
+            (scaledImageHeight / (double) this.pdfImage.getHeight())
+        );
+
+        return new AffineTransformOp(
+            affineTransform,
+            AffineTransformOp.TYPE_BILINEAR //@todo noch gucken
+        );
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    private void refreshTimerOnRerenderingPdf()
+    {
+        if (this.pdfResizedTimer != null && this.pdfResizedTimer.isRunning())
+        {
+            this.pdfResizedTimer.stop();
+        }
+
+        this.pdfResizedTimer = new Timer(
+            this.PDF_RESIZED_TIMER_DELAY,
+            new PdfResizeTimerActionListener(this)
+        );
+        this.pdfResizedTimer.setRepeats(false);
+        this.pdfResizedTimer.start();
+    }
+
+    /*
+     * @author  yxyxD
+     */
     private boolean isPdfZoomable(double zoomChange)
     {
         boolean isPdfZoomable = false;
@@ -202,8 +246,58 @@ public class PdfArea extends JPanel {
         return isPdfZoomable;
     }
 
-    public void setCursor(int cursorStyle){
-        this.setCursor(new Cursor(cursorStyle));
+
+
+    /*
+     * @author  yxyxD
+     */
+    private void repaintPdfGraphics(Graphics graphics)
+    {
+        if (this.pdfImage == null)
+        {
+            return;
+        }
+
+        this.setPreferredSize(new Dimension(
+            this.pdfImage.getWidth(),
+            this.pdfImage.getHeight())
+        );
+
+        graphics.drawImage(this.pdfImage, 0, 0, this);
     }
+
+    /*
+     * @author  yxyxD
+     */
+    private void repaintNotationPoints(Graphics graphics)
+    {
+        if (this.projectCon.getListOfPoints() == null)
+        {
+            return;
+        }
+
+        graphics.setColor(Color.red);
+        for (Point point : this.projectCon.getListOfPoints())
+        {
+            //@todo name refactoring
+            int upperLeftX = (int) (((double) point.x * this.zoomLevel)
+                - ((double) this.NOTATION_RADIUS * this.zoomLevel));
+            int upperLeftY = (int) (((double) point.y * this.zoomLevel)
+                - ((double) this.NOTATION_RADIUS * this.zoomLevel));
+            int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
+                * this.zoomLevel);
+            int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)
+                * this.zoomLevel);
+
+            graphics.fillOval(
+                upperLeftX,
+                upperLeftY,
+                ovalWidth,
+                ovalHeight
+            );
+        }
+    }
+
+
 }
 

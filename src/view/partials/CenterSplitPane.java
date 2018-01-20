@@ -1,7 +1,5 @@
 package view.partials;
 
-import main.Launcher;
-import view.MainFrame;
 import view.partials.partials.NotationSplitPane;
 import view.partials.partials.PdfScrollPane;
 
@@ -48,7 +46,6 @@ public class CenterSplitPane extends JSplitPane {
      * #                    Overrides                                          #
      * #########################################################################
      */
-
     @Override
     public void paintComponent(Graphics graphics)
     {

@@ -1,6 +1,5 @@
 package view.partials.partials;
 
-import main.Launcher;
 import model.ProjectCon;
 
 import javax.swing.*;
@@ -10,10 +9,14 @@ public class PdfScrollPane extends JScrollPane {
 
     private PdfArea pdfArea;
 
+
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
+     */
+    /*
+     * @author  yxyxD
      */
     public PdfScrollPane()
     {
@@ -21,18 +24,44 @@ public class PdfScrollPane extends JScrollPane {
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.pdfArea = new PdfArea(new ProjectCon());
-
         this.getViewport().add(this.pdfArea);
     }
 
 
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    public PdfArea getPdfArea()
+    {
+        return pdfArea;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
     @Override
-    public void paintComponent(Graphics graphics)
+    protected void paintComponent(Graphics graphics)
     {
         super.paintComponent(graphics);
     }
 
 
+    /*
+     * #########################################################################
+     * #                    oeffentliche Methoden                              #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
     public void importNewPdf(String sourcePath)
     {
         this.pdfArea.importNewPdf(sourcePath);
