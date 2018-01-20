@@ -87,8 +87,8 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
     {
         //super.mouseClicked(mouseEvent);
 
-        int x = mouseEvent.getX();
-        int y = mouseEvent.getY();
+        int x = (int) ((double) mouseEvent.getX() / this.pdfArea.getZoomLevel());
+        int y = (int) ((double) mouseEvent.getY() / this.pdfArea.getZoomLevel());
 
         System.out.println("x: " + Integer.toString(x));
         System.out.println("y: " + Integer.toString(y));

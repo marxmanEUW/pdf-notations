@@ -280,10 +280,8 @@ public class PdfArea extends JPanel {
         for (Point point : this.projectCon.getListOfPoints())
         {
             //@todo name refactoring
-            int upperLeftX = (int) (((double) point.x * this.zoomLevel)
-                - ((double) this.NOTATION_RADIUS * this.zoomLevel));
-            int upperLeftY = (int) (((double) point.y * this.zoomLevel)
-                - ((double) this.NOTATION_RADIUS * this.zoomLevel));
+            int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS) * this.zoomLevel);
+            int upperLeftY = (int) ((double) (point.y - this.NOTATION_RADIUS) * this.zoomLevel);
             int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
                 * this.zoomLevel);
             int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)
