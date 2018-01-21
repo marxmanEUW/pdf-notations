@@ -10,6 +10,7 @@ import java.awt.*;
 public class CenterSplitPane extends JSplitPane {
 
     public PdfScrollPane pdfScrollPane;
+    private NotationSplitPane notationSplitPane;
 
     private ProjectCon projectCon;
 
@@ -33,11 +34,11 @@ public class CenterSplitPane extends JSplitPane {
 
         this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 
-        this.pdfScrollPane = new PdfScrollPane();
-        NotationSplitPane notationSplitPane = new NotationSplitPane(this.projectCon);
+        this.pdfScrollPane = new PdfScrollPane(this.projectCon);
+        this.notationSplitPane = new NotationSplitPane(this.projectCon);
 
         this.setLeftComponent(this.pdfScrollPane);
-        this.setRightComponent(notationSplitPane);
+        this.setRightComponent(this.notationSplitPane);
 
         this.setDividerLocation(this.DEVIDER_LOCATION);
         this.setOneTouchExpandable(true);
@@ -45,6 +46,15 @@ public class CenterSplitPane extends JSplitPane {
     }
 
 
+    public void updateNotationList()
+    {
+        this.notationSplitPane.updateNotationList();
+    }
+
+    public void updateNotationEntityTable()
+    {
+        this.notationSplitPane.updateNotationEntityTable();
+    }
 
     /*
      * #########################################################################
@@ -56,4 +66,6 @@ public class CenterSplitPane extends JSplitPane {
     {
         super.paintComponent(graphics);
     }
+
+
 }

@@ -9,7 +9,7 @@ public class NotationCon {
 
     public static final int INFORMATION_COUNT = 2;
 
-    private Integer id;
+    private int id;
     private String name;
     private Point coordinates;
     // @todo timestamp
@@ -27,7 +27,7 @@ public class NotationCon {
         return this.coordinates.y;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

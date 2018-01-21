@@ -1,6 +1,6 @@
 package view.partials;
 
-import controller.MenuBarActionListener;
+import listeners.MenuBarActionListener;
 import gui.Constants;
 
 import javax.swing.*;

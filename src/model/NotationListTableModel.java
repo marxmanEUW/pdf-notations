@@ -34,6 +34,7 @@ public class NotationListTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
 
         // @todo Rückgabe dynamisch machen
+        // @todo Strings in Konstanten auslagern
         switch (column){
             case 0: return "Id";
             case 1: return "Name";

@@ -1,5 +1,6 @@
 package view.partials.partials;
 
+import listeners.NotationListSelectionListener;
 import model.NotationListTableModel;
 import model.ProjectCon;
 
@@ -8,15 +9,19 @@ import java.awt.*;
 
 public class NotationListScrollPane extends JScrollPane {
 
-    /* @todo TableModel??
-     *       RowSorter
-     *       tablemodel
-     */
-
     private ProjectCon projectCon;
     private NotationListTableModel notationListTableModel;
+    private ListSelectionModel listSelectionModel;
+    private NotationListSelectionListener notationListSelectionListener;
 
-    private JTable table;
+    private JTable notationListTable;
+
+
+    /*
+     * #########################################################################
+     * #                    Konstruktor                                        #
+     * #########################################################################
+     */
 
     public NotationListScrollPane(ProjectCon projectCon) {
 
@@ -26,13 +31,29 @@ public class NotationListScrollPane extends JScrollPane {
         this.projectCon = projectCon;
         this.notationListTableModel = new NotationListTableModel(this.projectCon);
 
-        this.table = new JTable(this.notationListTableModel);
+        this.notationListTable = new JTable(this.notationListTableModel);
 
-        this.table.setAutoCreateRowSorter(true);
+        this.notationListTable.setAutoCreateRowSorter(true);
 
-        this.getViewport().add(table);
+        this.notationListSelectionListener = new NotationListSelectionListener(this.projectCon);
+        this.listSelectionModel = this.notationListTable.getSelectionModel();
+        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
+        this.notationListTable.setSelectionModel(this.listSelectionModel);
+
+        this.getViewport().add(notationListTable);
     }
 
+
+    /*
+     * #########################################################################
+     * #                    öffentliche Methoden                               #
+     * #########################################################################
+     */
+
+    public void updateTable(){
+
+        this.notationListTableModel.fireTableDataChanged();
+    }
 
     /*
      * #########################################################################

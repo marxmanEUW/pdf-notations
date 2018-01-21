@@ -17,7 +17,7 @@ public class Launcher {
     public static void main(String[] args) throws IOException
     {
         MainFrame mainFrame = new MainFrame();
-        ProjectCon projectCon = new ProjectCon();
+        ProjectCon projectCon = new ProjectCon(mainFrame);
         // @todo MVC welche Teil muss welchen Teil kennen
 
         mainFrame.initialize(projectCon);

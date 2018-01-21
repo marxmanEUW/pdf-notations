@@ -1,4 +1,4 @@
-package controller;
+package listeners;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -58,7 +58,6 @@ public class MenuBarActionListener implements ActionListener {
                 // @todo Add NotationCon
                 System.out.println("Ich bin ein neue NotationCon.");
                 this.projectCon.addNotation();
-                this.pdfArea.setCursor(Cursor.CROSSHAIR_CURSOR);
 
                 break;
             case Constants.MENUITEM_ABOUT_NAME:

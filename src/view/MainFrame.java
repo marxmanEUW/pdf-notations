@@ -1,7 +1,6 @@
 package view;
 
-import controller.MenuBarActionListener;
-import factories.FrameCenterFactory;
+import listeners.MenuBarActionListener;
 import gui.Constants;
 import model.ProjectCon;
 import view.partials.CenterSplitPane;
@@ -64,6 +63,14 @@ public class MainFrame extends JFrame {
      * #########################################################################
      */
 
+    public void updateNotationList(){
+        this.centerSplitPane.updateNotationList();
+    }
+
+    public void updateNotationEntityTable()
+    {
+        this.centerSplitPane.updateNotationEntityTable();
+    }
 
     /*
      * #########################################################################

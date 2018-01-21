@@ -8,7 +8,7 @@ import java.awt.*;
 public class PdfScrollPane extends JScrollPane {
 
     private PdfArea pdfArea;
-
+    private ProjectCon projectCon;
 
     /*
      * #########################################################################
@@ -18,12 +18,14 @@ public class PdfScrollPane extends JScrollPane {
     /*
      * @author  yxyxD
      */
-    public PdfScrollPane()
+    public PdfScrollPane(ProjectCon projectCon)
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.pdfArea = new PdfArea(new ProjectCon());
+        this.projectCon = projectCon;
+
+        this.pdfArea = new PdfArea(this.projectCon);
         this.getViewport().add(this.pdfArea);
     }
 

@@ -1,6 +1,8 @@
 package model;
 
 
+import view.MainFrame;
+
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -12,9 +14,29 @@ public class ProjectCon {
     // @todo private String pdfFilePath
     private String name;
     private ArrayList<NotationCon> listOfNotationCons;
+    private MainFrame mainFrame;
+    private int selectedNotationIndex;
 
 
-    /// Getter
+    /*
+     * #########################################################################
+     * #                    Konstruktor                                        #
+     * #########################################################################
+     */
+
+    public ProjectCon(MainFrame mainFrame)
+    {
+        this.listOfNotationCons = new ArrayList<>();
+        this.mainFrame = mainFrame;
+        this.selectedNotationIndex = -1;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
 
     public ArrayList<Point> getListOfPoints()
     {
@@ -34,24 +56,45 @@ public class ProjectCon {
         return this.listOfNotationCons.size();
     }
 
-    /// Constructor
-
-    public ProjectCon()
-    {
-        this.listOfNotationCons = new ArrayList<>();
+    public NotationCon getSelectedNotation() {
+        return this.listOfNotationCons.get(selectedNotationIndex);
     }
 
+    public int getSelectedNotationIndex() {
+        return selectedNotationIndex;
+    }
 
-    /// public methods
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
 
+    public void setSelectedNotationIndex(int selectedNotationIndex) {
+        this.selectedNotationIndex = selectedNotationIndex;
+    }
+
+    /*
+     * #########################################################################
+     * #                    öffentliche Methoden                               #
+     * #########################################################################
+     */
+
+    // wird aufgerufen, wenn in MenuBar der Button "Notation hinzufügen" gedrückt wird
     public void addNotation()
     {
-
+        // @todo implementieren
     }
 
     public void addNotationAtXY(int x, int y)
     {
         NotationCon newNotationCon = new NotationCon(1,"Punkt", x, y);
         this.listOfNotationCons.add(newNotationCon);
+        this.mainFrame.updateNotationList();
+    }
+
+    public void updateNotationEntityTable()
+    {
+        this.mainFrame.updateNotationEntityTable();
     }
 }
