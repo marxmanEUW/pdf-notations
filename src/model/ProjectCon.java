@@ -19,13 +19,20 @@ public class ProjectCon {
     public ArrayList<Point> getListOfPoints()
     {
         ArrayList<Point> listOfPoints = new ArrayList<>();
-        for (NotationCon notationCon : listOfNotationCons)
+        for (NotationCon notationCon : this.listOfNotationCons)
         {
             listOfPoints.add(new Point(notationCon.getX(), notationCon.getY()));
         }
         return listOfPoints;
     }
 
+    public ArrayList<NotationCon> getListOfNotationCons() {
+        return this.listOfNotationCons;
+    }
+
+    public int getListOfNotationConsSize(){
+        return this.listOfNotationCons.size();
+    }
 
     /// Constructor
 

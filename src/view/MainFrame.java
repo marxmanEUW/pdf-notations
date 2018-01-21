@@ -18,6 +18,7 @@ public class MainFrame extends JFrame {
 
     public CenterSplitPane centerSplitPane;
 
+    private ProjectCon projectCon;
     /*
      * Arbeitsflaechen des CENTERs
      */
@@ -42,15 +43,16 @@ public class MainFrame extends JFrame {
      */
     public void initialize(ProjectCon projectCon)
     {
+        this.projectCon = projectCon;
         // commented out for better performance
         //this.setLookAndFell();
 
         this.mbActionListener = new MenuBarActionListener();
 
         this.setLayout(new BorderLayout());
-        this.pdfArea = new PdfArea(projectCon);
+        this.pdfArea = new PdfArea(this.projectCon);
 
-        this.mbActionListener.initialize(projectCon,pdfArea);
+        this.mbActionListener.initialize(this.projectCon,pdfArea);
 
         this.createMainFrame();
         this.setFrameProperties();
@@ -73,7 +75,7 @@ public class MainFrame extends JFrame {
         this.menuBar = new MainFrameMenuBar(this.mbActionListener);
         this.setJMenuBar(this.menuBar);
 
-        this.centerSplitPane = new CenterSplitPane();
+        this.centerSplitPane = new CenterSplitPane(this.projectCon);
         this.getContentPane().add(this.centerSplitPane, BorderLayout.CENTER);
 
         /*

@@ -7,6 +7,8 @@ import java.awt.*;
  */
 public class NotationCon {
 
+    public static final int INFORMATION_COUNT = 2;
+
     private Integer id;
     private String name;
     private Point coordinates;
@@ -25,8 +27,14 @@ public class NotationCon {
         return this.coordinates.y;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
-    /// Constructor
+    public String getName() {
+        return name;
+    }
+/// Constructor
 
     public NotationCon(Integer id, String name, int x, int y)
     {

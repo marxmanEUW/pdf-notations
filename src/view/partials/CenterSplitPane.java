@@ -1,5 +1,6 @@
 package view.partials;
 
+import model.ProjectCon;
 import view.partials.partials.NotationSplitPane;
 import view.partials.partials.PdfScrollPane;
 
@@ -9,6 +10,8 @@ import java.awt.*;
 public class CenterSplitPane extends JSplitPane {
 
     public PdfScrollPane pdfScrollPane;
+
+    private ProjectCon projectCon;
 
     /*
      * @note "final" could be removed to impelement a feature which can memorize
@@ -24,12 +27,14 @@ public class CenterSplitPane extends JSplitPane {
 
 
 
-    public CenterSplitPane()
+    public CenterSplitPane(ProjectCon projectCon)
     {
+        this.projectCon = projectCon;
+
         this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 
         this.pdfScrollPane = new PdfScrollPane();
-        NotationSplitPane notationSplitPane = new NotationSplitPane();
+        NotationSplitPane notationSplitPane = new NotationSplitPane(this.projectCon);
 
         this.setLeftComponent(this.pdfScrollPane);
         this.setRightComponent(notationSplitPane);

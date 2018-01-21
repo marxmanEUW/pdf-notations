@@ -1,0 +1,50 @@
+package model;
+
+import javax.swing.table.AbstractTableModel;
+
+public class NotationListTableModel extends AbstractTableModel {
+
+    private ProjectCon projectCon;
+
+    public NotationListTableModel(ProjectCon projectCon) {
+
+        this.projectCon = projectCon;
+    }
+
+    @Override
+    public int getRowCount() {
+        return this.projectCon.getListOfNotationConsSize();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return NotationCon.INFORMATION_COUNT;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+
+        switch (columnIndex){
+            case 0: return this.projectCon.getListOfNotationCons().get(rowIndex).getId();
+            case 1: return this.projectCon.getListOfNotationCons().get(rowIndex).getName();
+            default: return null;
+        }
+    }
+
+    public String getColumnName(int column) {
+
+        // @todo Rückgabe dynamisch machen
+        switch (column){
+            case 0: return "Id";
+            case 1: return "Name";
+            default: return null;
+        }
+    }
+
+    public Class getColumnClass(int columnIndex) {
+
+        // @todo Rückgabe dynamisch machen
+        return String.class;
+    }
+
+}
