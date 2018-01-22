@@ -32,6 +32,11 @@ public class CenterSplitPane extends JSplitPane {
     {
         this.pdfScrollPane = new PdfScrollPane();
         this.notationSplitPane = new NotationSplitPane();
+
+        this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+        this.setDividerLocation(this.DEVIDER_LOCATION);
+        this.setOneTouchExpandable(true);
+        this.setContinuousLayout(true);
     }
 
     public void initialize(ProjectCon projectCon)
@@ -41,21 +46,22 @@ public class CenterSplitPane extends JSplitPane {
         this.pdfScrollPane.initialize(this.projectCon);
         this.notationSplitPane.initialize(this.projectCon);
 
-        this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-        this.setDividerLocation(this.DEVIDER_LOCATION);
-        this.setOneTouchExpandable(true);
-        this.setContinuousLayout(true);
-
         this.setLeftComponent(this.pdfScrollPane);
         this.setRightComponent(this.notationSplitPane);
     }
 
 
+    /*
+     * @todo marxmanEUW
+     */
     public void updateNotationList()
     {
         this.notationSplitPane.updateNotationList();
     }
 
+    /*
+     * @todo marxmanEUW
+     */
     public void updateNotationEntityTable()
     {
         this.notationSplitPane.updateNotationEntityTable();

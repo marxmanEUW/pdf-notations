@@ -39,16 +39,21 @@ public class PdfArea extends JPanel {
     /*
      * @todo saubere Trennung zwischen Constructor und initialize-Methode fehlt
      */
-    public PdfArea(ProjectCon projectCon)
+    public PdfArea()
     {
-        this.projectCon = projectCon;
-
-        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter(this, this.projectCon);
+        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
         this.addMouseListener(this.pdfAreaMouseAdapter);
         this.addMouseWheelListener(this.pdfAreaMouseAdapter);
 
         this.pdfImage = null;
         this.zoomLevel = 1.0;
+    }
+
+    public void initialize(ProjectCon projectCon)
+    {
+        this.projectCon = projectCon;
+
+        this.pdfAreaMouseAdapter.initialize(this, this.projectCon);
     }
 
 

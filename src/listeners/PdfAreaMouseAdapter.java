@@ -25,13 +25,16 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public PdfAreaMouseAdapter(PdfArea pdfArea, ProjectCon projectCon)
+    public PdfAreaMouseAdapter()
     {
-        this.pdfArea = pdfArea;
         this.resetMouseRollCount();
         this.enableZoom();
+    }
 
-        this.projectCon = projectCon; //oder lieber this.pdfArea.projectCon ??????
+    public void initialize(PdfArea pdfArea, ProjectCon projectCon)
+    {
+        this.pdfArea = pdfArea;
+        this.projectCon = projectCon;
     }
 
 

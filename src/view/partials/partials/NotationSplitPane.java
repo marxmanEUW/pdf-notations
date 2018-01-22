@@ -18,17 +18,15 @@ public class NotationSplitPane extends JSplitPane {
 
     public NotationSplitPane()
     {
-        //this.repaint();
+        this.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        this.setDividerLocation(this.DEVIDER_LOCATION);
+        this.setOneTouchExpandable(true);
+        this.setContinuousLayout(true);
     }
 
     public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
-
-        this.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        this.setDividerLocation(this.DEVIDER_LOCATION);
-        this.setOneTouchExpandable(true);
-        this.setContinuousLayout(true);
 
         this.notationListScrollPane = new NotationListScrollPane(this.projectCon);
         this.notationEntityScrollPane = new NotationEntityScrollPane(this.projectCon);

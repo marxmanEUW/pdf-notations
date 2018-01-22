@@ -23,7 +23,12 @@ public class MainFrame extends JFrame {
         this.menuBar = new MainFrameMenuBar();
         this.mbActionListener = new MenuBarActionListener();
         this.centerSplitPane = new CenterSplitPane();
+
+        this.setLayout(new BorderLayout());
+        this.setTitle(Constants.FRAME_TITLE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 
     /*
      * #########################################################################
@@ -40,6 +45,7 @@ public class MainFrame extends JFrame {
         return this.centerSplitPane;
     }
 
+
     /*
      * #########################################################################
      * #                    Initialisierung                                    #
@@ -49,11 +55,9 @@ public class MainFrame extends JFrame {
     {
         this.projectCon = projectCon;
 
-        this.setLayout(new BorderLayout());
-
         this.menuBar.initialize(this.mbActionListener);
         this.centerSplitPane.initialize(this.projectCon);
-        //this.mbActionListener.initialize(this.projectCon,pdfArea);
+        this.mbActionListener.initialize(this.projectCon);
 
         this.setJMenuBar(this.menuBar);
         this.getContentPane().add(
@@ -64,9 +68,6 @@ public class MainFrame extends JFrame {
 
         this.setLookAndFell();
 
-
-        this.setTitle(Constants.FRAME_TITLE);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
         this.setPreferredSize(new Dimension(1200, 600));
@@ -82,11 +83,17 @@ public class MainFrame extends JFrame {
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
+    /*
+     * @todo marxmanEUW
+     */
     public void updateNotationList()
     {
         this.centerSplitPane.updateNotationList();
     }
 
+    /*
+     * @todo marxmanEUW
+     */
     public void updateNotationEntityTable()
     {
         this.centerSplitPane.updateNotationEntityTable();

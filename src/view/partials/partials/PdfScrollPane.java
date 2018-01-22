@@ -20,15 +20,17 @@ public class PdfScrollPane extends JScrollPane {
      */
     public PdfScrollPane()
     {
-        this.pdfArea = new PdfArea(this.projectCon);
+        this.pdfArea = new PdfArea();
+
+        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     }
 
     public void initialize(ProjectCon projectCon)
     {
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
         this.projectCon = projectCon;
+
+        this.pdfArea.initialize(this.projectCon);
 
         this.getViewport().add(this.pdfArea);
     }

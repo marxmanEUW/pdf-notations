@@ -11,12 +11,10 @@ import view.partials.partials.PdfArea;
 public class MenuBarActionListener implements ActionListener {
 
     private ProjectCon projectCon;
-    private PdfArea pdfArea;
 
-    public void initialize(ProjectCon projectCon, PdfArea pdfArea)
+    public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
-        this.pdfArea = pdfArea;
     }
 
     @Override

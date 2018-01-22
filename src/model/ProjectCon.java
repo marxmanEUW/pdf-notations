@@ -14,7 +14,6 @@ public class ProjectCon {
     // @todo private String pdfFilePath
     private String name;
     private ArrayList<NotationCon> listOfNotationCons;
-    private MainFrame mainFrame;
     private int selectedNotationIndex;
 
 
@@ -24,10 +23,9 @@ public class ProjectCon {
      * #########################################################################
      */
 
-    public ProjectCon(MainFrame mainFrame)
+    public ProjectCon()
     {
         this.listOfNotationCons = new ArrayList<>();
-        this.mainFrame = mainFrame;
         this.selectedNotationIndex = -1;
     }
 
@@ -90,11 +88,18 @@ public class ProjectCon {
     {
         NotationCon newNotationCon = new NotationCon(1,"Punkt", x, y);
         this.listOfNotationCons.add(newNotationCon);
-        this.mainFrame.updateNotationList();
+
+        /*
+         * @todo marxmanEUW
+         */
+        //this.mainFrame.updateNotationList();
     }
 
+    /*
+     * @todo marxmanEUW
+     */
     public void updateNotationEntityTable()
     {
-        this.mainFrame.updateNotationEntityTable();
+        //this.mainFrame.updateNotationEntityTable();
     }
 }
