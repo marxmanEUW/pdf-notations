@@ -1,4 +1,7 @@
-package model;
+package view.partials.partials.partials.partials;
+
+import model.NotationCon;
+import model.ProjectCon;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -9,14 +12,15 @@ public class NotationEntityTableModel extends AbstractTableModel {
 
     /*
      * #########################################################################
-     * #                    Konstruktor                                        #
+     * #                    Initialisierung                                    #
      * #########################################################################
      */
 
-    public NotationEntityTableModel(ProjectCon projectCon) {
-
+    public void initialize(ProjectCon projectCon)
+    {
         this.projectCon = projectCon;
     }
+
 
     /*
      * #########################################################################
@@ -25,12 +29,14 @@ public class NotationEntityTableModel extends AbstractTableModel {
      */
 
     @Override
-    public int getRowCount() {
+    public int getRowCount()
+    {
         return NotationCon.INFORMATION_COUNT + 2;
     }
 
     @Override
-    public int getColumnCount() {
+    public int getColumnCount()
+    {
         return 2;
     }
 
@@ -71,10 +77,9 @@ public class NotationEntityTableModel extends AbstractTableModel {
         }
     }
 
-    public Class getColumnClass(int columnIndex) {
-
+    public Class getColumnClass(int columnIndex)
+    {
         // @todo Rückgabe dynamisch machen
         return String.class;
     }
-
 }

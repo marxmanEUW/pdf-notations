@@ -1,4 +1,7 @@
-package model;
+package view.partials.partials.partials.partials;
+
+import model.NotationCon;
+import model.ProjectCon;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -6,24 +9,40 @@ public class NotationListTableModel extends AbstractTableModel {
 
     private ProjectCon projectCon;
 
-    public NotationListTableModel(ProjectCon projectCon) {
 
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+
+    public void initialize(ProjectCon projectCon)
+    {
         this.projectCon = projectCon;
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+
     @Override
-    public int getRowCount() {
+    public int getRowCount()
+    {
         return this.projectCon.getListOfNotationConsSize();
     }
 
     @Override
-    public int getColumnCount() {
+    public int getColumnCount()
+    {
         return NotationCon.INFORMATION_COUNT;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
         switch (columnIndex){
             case 0: return this.projectCon.getListOfNotationCons().get(rowIndex).getId();
             case 1: return this.projectCon.getListOfNotationCons().get(rowIndex).getName();
@@ -31,8 +50,8 @@ public class NotationListTableModel extends AbstractTableModel {
         }
     }
 
-    public String getColumnName(int column) {
-
+    public String getColumnName(int column)
+    {
         // @todo Rückgabe dynamisch machen
         // @todo Strings in Konstanten auslagern
         switch (column){
@@ -42,10 +61,9 @@ public class NotationListTableModel extends AbstractTableModel {
         }
     }
 
-    public Class getColumnClass(int columnIndex) {
-
+    public Class getColumnClass(int columnIndex)
+    {
         // @todo Rückgabe dynamisch machen
         return String.class;
     }
-
 }

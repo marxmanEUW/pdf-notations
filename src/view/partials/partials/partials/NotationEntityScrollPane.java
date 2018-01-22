@@ -1,6 +1,6 @@
 package view.partials.partials.partials;
 
-import model.NotationEntityTableModel;
+import view.partials.partials.partials.partials.NotationEntityTableModel;
 import model.ProjectCon;
 
 import javax.swing.*;
@@ -18,24 +18,34 @@ public class NotationEntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Konstruktor                                        #
+     * #                    Constructor                                        #
      * #########################################################################
      */
-    public NotationEntityScrollPane(ProjectCon projectCon) {
-
+    public NotationEntityScrollPane()
+    {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.projectCon = projectCon;
-        this.notationEntityTableModel = new NotationEntityTableModel(this.projectCon);
-
-        this.notationEntityTable = new JTable(this.notationEntityTableModel);
-
-        this.notationEntityTable.setAutoCreateRowSorter(true);
-
-        this.getViewport().add(notationEntityTable);
+        this.notationEntityTableModel = new NotationEntityTableModel();
+        this.notationEntityTable = new JTable();
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+
+    public void initialize(ProjectCon projectCon)
+    {
+        this.projectCon = projectCon;
+        this.notationEntityTableModel.initialize(this.projectCon);
+
+        this.notationEntityTable.setModel(this.notationEntityTableModel);
+        this.notationEntityTable.setAutoCreateRowSorter(true);
+        this.getViewport().add(notationEntityTable);
+    }
 
     /*
      * #########################################################################
@@ -43,8 +53,8 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void updateTable(){
-
+    public void updateTable()
+    {
         this.notationEntityTableModel.fireTableDataChanged();
     }
 
@@ -55,7 +65,8 @@ public class NotationEntityScrollPane extends JScrollPane {
      */
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g)
+    {
         super.paintComponent(g);
     }
 }

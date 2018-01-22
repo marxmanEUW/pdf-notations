@@ -1,7 +1,7 @@
 package view.partials.partials.partials;
 
 import listeners.NotationListSelectionListener;
-import model.NotationListTableModel;
+import view.partials.partials.partials.partials.NotationListTableModel;
 import model.ProjectCon;
 
 import javax.swing.*;
@@ -19,26 +19,41 @@ public class NotationListScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Konstruktor                                        #
+     * #                    Constructor                                        #
      * #########################################################################
      */
 
-    public NotationListScrollPane(ProjectCon projectCon) {
-
+    public NotationListScrollPane()
+    {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.projectCon = projectCon;
-        this.notationListTableModel = new NotationListTableModel(this.projectCon);
+        this.notationListTableModel = new NotationListTableModel();
 
-        this.notationListTable = new JTable(this.notationListTableModel);
+        this.notationListTable = new JTable();
 
-        this.notationListTable.setAutoCreateRowSorter(true);
-
-        this.notationListSelectionListener = new NotationListSelectionListener(this.projectCon);
+        this.notationListSelectionListener = new NotationListSelectionListener();
         this.listSelectionModel = this.notationListTable.getSelectionModel();
         this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
         this.notationListTable.setSelectionModel(this.listSelectionModel);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+
+    public void initialize(ProjectCon projectCon)
+    {
+        this.projectCon = projectCon;
+        this.notationListTableModel.initialize(this.projectCon);
+
+        this.notationListTable.setModel(this.notationListTableModel);
+        this.notationListTable.setAutoCreateRowSorter(true);
+
+        this.notationListSelectionListener.initialize(this.projectCon);
 
         this.getViewport().add(notationListTable);
     }
@@ -50,10 +65,11 @@ public class NotationListScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void updateTable(){
-
+    public void updateTable()
+    {
         this.notationListTableModel.fireTableDataChanged();
     }
+
 
     /*
      * #########################################################################
@@ -62,7 +78,8 @@ public class NotationListScrollPane extends JScrollPane {
      */
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g)
+    {
         super.paintComponent(g);
     }
 }

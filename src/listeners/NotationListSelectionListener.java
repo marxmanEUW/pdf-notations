@@ -11,11 +11,24 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     private ProjectCon projectCon;
 
-    public NotationListSelectionListener(ProjectCon projectCon)
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+
+    public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                         #
+     * #########################################################################
+     */
 
     @Override
     public void valueChanged(ListSelectionEvent e)

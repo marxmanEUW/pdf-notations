@@ -18,20 +18,36 @@ public class NotationSplitPane extends JSplitPane {
     private NotationEntityScrollPane notationEntityScrollPane;
 
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+
     public NotationSplitPane()
     {
         this.setOrientation(JSplitPane.VERTICAL_SPLIT);
         this.setDividerLocation(this.DEVIDER_LOCATION);
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
+
+        this.notationEntityScrollPane = new NotationEntityScrollPane();
+        this.notationListScrollPane = new NotationListScrollPane();
     }
+
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
 
     public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
 
-        this.notationListScrollPane = new NotationListScrollPane(this.projectCon);
-        this.notationEntityScrollPane = new NotationEntityScrollPane(this.projectCon);
+        this.notationListScrollPane.initialize(this.projectCon);
+        this.notationEntityScrollPane.initialize(this.projectCon);
 
         this.setTopComponent(this.notationListScrollPane);
         this.setBottomComponent(this.notationEntityScrollPane);
@@ -46,6 +62,13 @@ public class NotationSplitPane extends JSplitPane {
     {
         this.notationEntityScrollPane.updateTable();
     }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
 
     @Override
     public void paintComponent(Graphics graphics)
