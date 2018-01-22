@@ -1,12 +1,10 @@
 package listeners;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.Constants;
 import model.ProjectCon;
-import view.partials.partials.PdfArea;
 
 public class MenuBarActionListener implements ActionListener {
 

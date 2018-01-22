@@ -1,4 +1,4 @@
-package view.partials.partials;
+package view.partials.partials.partials;
 
 import listeners.PdfAreaMouseAdapter;
 import factories.PdfFactory;

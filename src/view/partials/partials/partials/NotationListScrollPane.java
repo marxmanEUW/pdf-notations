@@ -1,19 +1,20 @@
-package view.partials.partials;
+package view.partials.partials.partials;
 
-import model.NotationEntityTableModel;
+import listeners.NotationListSelectionListener;
+import model.NotationListTableModel;
 import model.ProjectCon;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class NotationEntityScrollPane extends JScrollPane {
-
-    // @todo make editable
+public class NotationListScrollPane extends JScrollPane {
 
     private ProjectCon projectCon;
-    private NotationEntityTableModel notationEntityTableModel;
+    private NotationListTableModel notationListTableModel;
+    private ListSelectionModel listSelectionModel;
+    private NotationListSelectionListener notationListSelectionListener;
 
-    private JTable notationEntityTable;
+    private JTable notationListTable;
 
 
     /*
@@ -21,19 +22,25 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #                    Konstruktor                                        #
      * #########################################################################
      */
-    public NotationEntityScrollPane(ProjectCon projectCon) {
+
+    public NotationListScrollPane(ProjectCon projectCon) {
 
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.projectCon = projectCon;
-        this.notationEntityTableModel = new NotationEntityTableModel(this.projectCon);
+        this.notationListTableModel = new NotationListTableModel(this.projectCon);
 
-        this.notationEntityTable = new JTable(this.notationEntityTableModel);
+        this.notationListTable = new JTable(this.notationListTableModel);
 
-        this.notationEntityTable.setAutoCreateRowSorter(true);
+        this.notationListTable.setAutoCreateRowSorter(true);
 
-        this.getViewport().add(notationEntityTable);
+        this.notationListSelectionListener = new NotationListSelectionListener(this.projectCon);
+        this.listSelectionModel = this.notationListTable.getSelectionModel();
+        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
+        this.notationListTable.setSelectionModel(this.listSelectionModel);
+
+        this.getViewport().add(notationListTable);
     }
 
 
@@ -45,7 +52,7 @@ public class NotationEntityScrollPane extends JScrollPane {
 
     public void updateTable(){
 
-        this.notationEntityTableModel.fireTableDataChanged();
+        this.notationListTableModel.fireTableDataChanged();
     }
 
     /*

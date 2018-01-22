@@ -1,7 +1,7 @@
 package listeners;
 
 import model.ProjectCon;
-import view.partials.partials.PdfArea;
+import view.partials.partials.partials.PdfArea;
 
 import javax.swing.*;
 import java.awt.event.*;

@@ -1,6 +1,7 @@
 package view.partials.partials;
 
 import model.ProjectCon;
+import view.partials.partials.partials.PdfArea;
 
 import javax.swing.*;
 import java.awt.*;

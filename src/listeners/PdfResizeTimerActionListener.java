@@ -1,6 +1,6 @@
 package listeners;
 
-import view.partials.partials.PdfArea;
+import view.partials.partials.partials.PdfArea;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
