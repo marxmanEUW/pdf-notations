@@ -18,6 +18,12 @@ public class MainFrame extends JFrame {
     private ProjectCon projectCon;
 
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+
     public MainFrame()
     {
         this.menuBar = new MainFrameMenuBar();
@@ -32,25 +38,10 @@ public class MainFrame extends JFrame {
 
     /*
      * #########################################################################
-     * #                    Getter                                             #
-     * #########################################################################
-     */
-    public MainFrameMenuBar getJMenuBar()
-    {
-        return this.menuBar;
-    }
-
-    public CenterSplitPane getCenterSplitPane()
-    {
-        return this.centerSplitPane;
-    }
-
-
-    /*
-     * #########################################################################
      * #                    Initialisierung                                    #
      * #########################################################################
      */
+
     public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
@@ -78,26 +69,31 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+
+    public MainFrameMenuBar getJMenuBar()
+    {
+        return this.menuBar;
+    }
+
+    public CenterSplitPane getCenterSplitPane()
+    {
+        return this.centerSplitPane;
+    }
+
+
     /*
      * #########################################################################
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
-    /*
-     * @todo marxmanEUW
-     */
-    public void updateNotationList()
-    {
-        this.centerSplitPane.updateNotationList();
-    }
 
-    /*
-     * @todo marxmanEUW
-     */
-    public void updateNotationEntityTable()
-    {
-        this.centerSplitPane.updateNotationEntityTable();
-    }
+
 
     /*
      * #########################################################################

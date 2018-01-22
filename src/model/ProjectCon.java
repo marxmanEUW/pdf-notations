@@ -17,6 +17,10 @@ public class ProjectCon {
     private int selectedNotationIndex;
 
 
+    // @todo testing
+    private int counter;
+
+
     /*
      * #########################################################################
      * #                    Konstruktor                                        #
@@ -27,6 +31,7 @@ public class ProjectCon {
     {
         this.listOfNotationCons = new ArrayList<>();
         this.selectedNotationIndex = -1;
+        this.counter = 0;
     }
 
 
@@ -46,19 +51,23 @@ public class ProjectCon {
         return listOfPoints;
     }
 
-    public ArrayList<NotationCon> getListOfNotationCons() {
+    public ArrayList<NotationCon> getListOfNotationCons()
+    {
         return this.listOfNotationCons;
     }
 
-    public int getListOfNotationConsSize(){
+    public int getListOfNotationConsSize()
+    {
         return this.listOfNotationCons.size();
     }
 
-    public NotationCon getSelectedNotation() {
+    public NotationCon getSelectedNotation()
+    {
         return this.listOfNotationCons.get(selectedNotationIndex);
     }
 
-    public int getSelectedNotationIndex() {
+    public int getSelectedNotationIndex()
+    {
         return selectedNotationIndex;
     }
 
@@ -68,7 +77,8 @@ public class ProjectCon {
      * #########################################################################
      */
 
-    public void setSelectedNotationIndex(int selectedNotationIndex) {
+    public void setSelectedNotationIndex(int selectedNotationIndex)
+    {
         this.selectedNotationIndex = selectedNotationIndex;
     }
 
@@ -86,20 +96,7 @@ public class ProjectCon {
 
     public void addNotationAtXY(int x, int y)
     {
-        NotationCon newNotationCon = new NotationCon(1,"Punkt", x, y);
+        NotationCon newNotationCon = new NotationCon(counter++,"Punkt", x, y);
         this.listOfNotationCons.add(newNotationCon);
-
-        /*
-         * @todo marxmanEUW
-         */
-        //this.mainFrame.updateNotationList();
-    }
-
-    /*
-     * @todo marxmanEUW
-     */
-    public void updateNotationEntityTable()
-    {
-        //this.mainFrame.updateNotationEntityTable();
     }
 }

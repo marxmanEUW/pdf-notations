@@ -41,9 +41,7 @@ public class PdfArea extends JPanel {
      */
     public PdfArea()
     {
-        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
-        this.addMouseListener(this.pdfAreaMouseAdapter);
-        this.addMouseWheelListener(this.pdfAreaMouseAdapter);
+
 
         this.pdfImage = null;
         this.zoomLevel = 1.0;
@@ -52,7 +50,9 @@ public class PdfArea extends JPanel {
     public void initialize(ProjectCon projectCon)
     {
         this.projectCon = projectCon;
-
+        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
+        this.addMouseListener(this.pdfAreaMouseAdapter);
+        this.addMouseWheelListener(this.pdfAreaMouseAdapter);
         this.pdfAreaMouseAdapter.initialize(this, this.projectCon);
     }
 

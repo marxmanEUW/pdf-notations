@@ -1,5 +1,6 @@
 package view.partials.partials;
 
+import listeners.NotationListSelectionListener;
 import model.ProjectCon;
 import view.partials.partials.partials.NotationEntityScrollPane;
 import view.partials.partials.partials.NotationListScrollPane;
@@ -17,6 +18,7 @@ public class NotationSplitPane extends JSplitPane {
     private NotationListScrollPane notationListScrollPane;
     private NotationEntityScrollPane notationEntityScrollPane;
 
+    private NotationListSelectionListener notationListSelectionListener;
 
     /*
      * #########################################################################
@@ -33,6 +35,8 @@ public class NotationSplitPane extends JSplitPane {
 
         this.notationEntityScrollPane = new NotationEntityScrollPane();
         this.notationListScrollPane = new NotationListScrollPane();
+
+        this.notationListSelectionListener = new NotationListSelectionListener();
     }
 
 
@@ -46,14 +50,23 @@ public class NotationSplitPane extends JSplitPane {
     {
         this.projectCon = projectCon;
 
-        this.notationListScrollPane.initialize(this.projectCon);
+        this.notationListSelectionListener.initialize(this, this.projectCon);
+
+        this.notationListScrollPane.initialize(this.projectCon, this.notationListSelectionListener);
         this.notationEntityScrollPane.initialize(this.projectCon);
 
         this.setTopComponent(this.notationListScrollPane);
         this.setBottomComponent(this.notationEntityScrollPane);
     }
 
-    public void updateNotationList()
+
+    /*
+     * #########################################################################
+     * #                    öffentliche Methoden                               #
+     * #########################################################################
+     */
+
+    public void updateNotationListTable()
     {
         this.notationListScrollPane.updateTable();
     }

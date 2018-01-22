@@ -31,6 +31,13 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
         this.enableZoom();
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+
     public void initialize(PdfArea pdfArea, ProjectCon projectCon)
     {
         this.pdfArea = pdfArea;

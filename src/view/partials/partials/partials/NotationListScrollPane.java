@@ -9,6 +9,10 @@ import java.awt.*;
 
 public class NotationListScrollPane extends JScrollPane {
 
+    /*
+     * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
+     */
+
     private ProjectCon projectCon;
     private NotationListTableModel notationListTableModel;
     private ListSelectionModel listSelectionModel;
@@ -32,10 +36,7 @@ public class NotationListScrollPane extends JScrollPane {
 
         this.notationListTable = new JTable();
 
-        this.notationListSelectionListener = new NotationListSelectionListener();
         this.listSelectionModel = this.notationListTable.getSelectionModel();
-        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
-        this.notationListTable.setSelectionModel(this.listSelectionModel);
     }
 
 
@@ -45,15 +46,16 @@ public class NotationListScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(ProjectCon projectCon, NotationListSelectionListener notationListSelectionListener)
     {
         this.projectCon = projectCon;
         this.notationListTableModel.initialize(this.projectCon);
 
         this.notationListTable.setModel(this.notationListTableModel);
-        this.notationListTable.setAutoCreateRowSorter(true);
 
-        this.notationListSelectionListener.initialize(this.projectCon);
+        this.notationListSelectionListener = notationListSelectionListener;
+        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
+        this.notationListTable.setSelectionModel(this.listSelectionModel);
 
         this.getViewport().add(notationListTable);
     }

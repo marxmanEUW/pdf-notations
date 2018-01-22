@@ -8,7 +8,10 @@ import java.awt.*;
 
 public class NotationEntityScrollPane extends JScrollPane {
 
-    // @todo make editable
+    /*
+     * @todo make editable
+     * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
+     */
 
     private ProjectCon projectCon;
     private NotationEntityTableModel notationEntityTableModel;
@@ -21,6 +24,7 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
+
     public NotationEntityScrollPane()
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -43,7 +47,6 @@ public class NotationEntityScrollPane extends JScrollPane {
         this.notationEntityTableModel.initialize(this.projectCon);
 
         this.notationEntityTable.setModel(this.notationEntityTableModel);
-        this.notationEntityTable.setAutoCreateRowSorter(true);
         this.getViewport().add(notationEntityTable);
     }
 

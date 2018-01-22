@@ -27,6 +27,11 @@ public class CenterSplitPane extends JSplitPane {
         = new JButton("Test Button Center Left");
 
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
 
     public CenterSplitPane()
     {
@@ -38,6 +43,13 @@ public class CenterSplitPane extends JSplitPane {
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
     }
+
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
 
     public void initialize(ProjectCon projectCon)
     {
@@ -52,26 +64,11 @@ public class CenterSplitPane extends JSplitPane {
 
 
     /*
-     * @todo marxmanEUW
-     */
-    public void updateNotationList()
-    {
-        this.notationSplitPane.updateNotationList();
-    }
-
-    /*
-     * @todo marxmanEUW
-     */
-    public void updateNotationEntityTable()
-    {
-        this.notationSplitPane.updateNotationEntityTable();
-    }
-
-    /*
      * #########################################################################
      * #                    Overrides                                          #
      * #########################################################################
      */
+
     @Override
     public void paintComponent(Graphics graphics)
     {
