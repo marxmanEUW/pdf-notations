@@ -1,7 +1,7 @@
 package view.partials.partials;
 
 import listeners.PdfAreaMouseAdapter;
-import handlers.PdfHandler;
+import factories.PdfFactory;
 import model.ProjectCon;
 import listeners.PdfResizeTimerActionListener;
 
@@ -21,6 +21,7 @@ public class PdfArea extends JPanel {
 
     private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
+
     private ProjectCon projectCon;
 
     private BufferedImage pdfImage;
@@ -34,6 +35,9 @@ public class PdfArea extends JPanel {
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
+     */
+    /*
+     * @todo saubere Trennung zwischen Constructor und initialize-Methode fehlt
      */
     public PdfArea(ProjectCon projectCon)
     {
@@ -89,7 +93,7 @@ public class PdfArea extends JPanel {
     {
         this.pdfImagePath = sourcePath;
 
-        this.pdfImage = PdfHandler.renderPdfAsImage(this.pdfImagePath);
+        this.pdfImage = PdfFactory.renderPdfAsImage(this.pdfImagePath);
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
@@ -122,7 +126,7 @@ public class PdfArea extends JPanel {
 
         // das geht, aber nicht schnell => neues Rendering bei
         // jedem Zoomvorgang
-        this.pdfImage = PdfHandler.renderPdfWithZoom(
+        this.pdfImage = PdfFactory.renderPdfWithZoom(
             this.pdfImagePath,
             (float) this.zoomLevel
         );
@@ -260,10 +264,8 @@ public class PdfArea extends JPanel {
      */
     private void repaintNotationPoints(Graphics graphics)
     {
-        if (this.projectCon.getListOfPoints() == null)
-        {
-            return;
-        }
+        if (this.projectCon == null) { return; }
+        if (this.projectCon.getListOfPoints() == null) { return; }
 
         graphics.setColor(Color.red);
         for (Point point : this.projectCon.getListOfPoints())

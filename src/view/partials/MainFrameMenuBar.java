@@ -29,7 +29,32 @@ public class MainFrameMenuBar extends JMenuBar {
     private MenuBarActionListener mbActionListener;
 
 
-    public MainFrameMenuBar(MenuBarActionListener mbActionListener)
+    public MainFrameMenuBar()
+    {
+        this.menuFile = new JMenu();
+        this.menuItemNewProject = new JMenuItem();
+        this.menuItemOpenProject = new JMenuItem();
+        this.menuItemSaveProject = new JMenuItem();
+        this.menuItemSaveAsProject = new JMenuItem();
+        this.menuItemCloseProject = new JMenuItem();
+        this.menuItemClose = new JMenuItem();
+        this.jSeparator1 = new JSeparator();
+
+        this.menuProject = new JMenu();
+        this.menuItemImportPDF = new JMenuItem();
+        this.menuItemShowList = new JMenuItem();
+
+        this.menuNotation = new JMenu();
+        this.menuItemAddNotation = new JMenuItem();
+
+        this.menuHelp = new JMenu();
+        this.menuItemAbout = new JMenuItem();
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void initialize(MenuBarActionListener mbActionListener)
     {
         this.mbActionListener = mbActionListener;
 
@@ -40,21 +65,16 @@ public class MainFrameMenuBar extends JMenuBar {
     }
 
 
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethoden                              #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
     private void setupMenuFile()
     {
-        this.menuFile = new JMenu();
-
-        // Menuepunkte
-        this.menuItemNewProject = new JMenuItem();
-        this.menuItemOpenProject = new JMenuItem();
-        this.menuItemSaveProject = new JMenuItem();
-        this.menuItemSaveAsProject = new JMenuItem();
-        this.menuItemCloseProject = new JMenuItem();
-        this.menuItemClose = new JMenuItem();
-
-        // Trennstriche
-        this.jSeparator1 = new JSeparator();
-
         // Text des Menues und der Menuepunkte
         this.menuFile.setText(Constants.MENU_FILE_NAME);
         this.menuItemNewProject.setText(Constants.MENUITEM_NEW_PROJECT_NAME);
@@ -84,14 +104,11 @@ public class MainFrameMenuBar extends JMenuBar {
         this.add(this.menuFile);
     }
 
+    /*
+     * @author  yxyxD
+     */
     private void setupMenuProject()
     {
-        this.menuProject = new JMenu();
-
-        // Menuepunkte
-        this.menuItemImportPDF = new JMenuItem();
-        this.menuItemShowList = new JMenuItem();
-
         // Text des Menues und der Menuepunkte
         this.menuProject.setText(Constants.MENU_PROJECT_NAME);
         this.menuItemImportPDF.setText(Constants.MENUITEM_IMPORT_PDF_NAME);
@@ -108,13 +125,11 @@ public class MainFrameMenuBar extends JMenuBar {
         this.add(this.menuProject);
     }
 
+    /*
+     * @author  yxyxD
+     */
     private void setupMenuNotation()
     {
-        this.menuNotation = new JMenu();
-
-        // Menuepunkte
-        this.menuItemAddNotation = new JMenuItem();
-
         // Text des Menues und der Menuepunkte
         this.menuNotation.setText(Constants.MENU_NOTATION_NAME);
         this.menuItemAddNotation.setText(Constants.MENUITEM_ADD_NOTATION_NAME);
@@ -128,13 +143,11 @@ public class MainFrameMenuBar extends JMenuBar {
         this.add(this.menuNotation);
     }
 
+    /*
+     * @author  yxyxD
+     */
     private void setupMenuHelp()
     {
-        this.menuHelp = new JMenu();
-
-        // Menuepunkte
-        this.menuItemAbout = new JMenuItem();
-
         // Text des Menues und der Menuepunkte
         this.menuHelp.setText(Constants.MENU_HELP_NAME);
         this.menuItemAbout.setText(Constants.MENUITEM_ABOUT_NAME);

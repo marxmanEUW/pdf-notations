@@ -1,4 +1,4 @@
-package handlers;
+package factories;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -6,7 +6,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public abstract class PdfHandler {
+public abstract class PdfFactory {
 
     /*
      * @todo try-catch entfernen und stattdessen Exception werfen

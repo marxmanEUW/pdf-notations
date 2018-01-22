@@ -18,14 +18,18 @@ public class PdfScrollPane extends JScrollPane {
     /*
      * @author  yxyxD
      */
-    public PdfScrollPane(ProjectCon projectCon)
+    public PdfScrollPane()
+    {
+        this.pdfArea = new PdfArea(this.projectCon);
+    }
+
+    public void initialize(ProjectCon projectCon)
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.projectCon = projectCon;
 
-        this.pdfArea = new PdfArea(this.projectCon);
         this.getViewport().add(this.pdfArea);
     }
 

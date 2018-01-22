@@ -21,7 +21,6 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #                    Konstruktor                                        #
      * #########################################################################
      */
-
     public NotationEntityScrollPane(ProjectCon projectCon) {
 
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
