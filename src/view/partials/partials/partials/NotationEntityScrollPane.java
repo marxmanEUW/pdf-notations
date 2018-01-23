@@ -2,6 +2,7 @@ package view.partials.partials.partials;
 
 import model.PdfObject;
 import view.partials.partials.partials.partials.NotationEntityTableModel;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class NotationEntityScrollPane extends JScrollPane {
      * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
      */
 
+    private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
     private NotationEntityTableModel notationEntityTableModel;
 
@@ -30,7 +32,7 @@ public class NotationEntityScrollPane extends JScrollPane {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.notationEntityTableModel = new NotationEntityTableModel();
+        //this.notationEntityTableModel = new NotationEntityTableModel();
         this.notationEntityTable = new JTable();
     }
 
@@ -41,10 +43,14 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void initialize(PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
-        this.notationEntityTableModel.initialize(this.pdfObject);
+        this.pdfObjectView = pdfObjectView;
+
+        this.pdfObject = this.pdfObjectView.getPdfObject();
+        this.notationEntityTableModel = this.pdfObjectView.getNotationEntityTableModel();
+
+        //this.notationEntityTableModel.initialize(this.pdfObject);
 
         this.notationEntityTable.setModel(this.notationEntityTableModel);
         this.getViewport().add(notationEntityTable);

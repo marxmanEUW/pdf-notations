@@ -2,10 +2,16 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
+import listeners.NotationListSelectionListener;
 import model.PdfObject;
 import model.Project;
 import view.partials.CenterSplitPane;
 import view.partials.MainFrameMenuBar;
+import view.partials.partials.partials.NotationEntityScrollPane;
+import view.partials.partials.partials.NotationListScrollPane;
+import view.partials.partials.partials.partials.NotationEntityTableModel;
+import view.partials.partials.partials.partials.NotationListTableModel;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,19 +20,36 @@ public class MainFrame extends JFrame {
 
     private MainFrameMenuBar menuBar;
     private MenuBarActionListener mbActionListener;
-    public CenterSplitPane centerSplitPane;
 
+    private CenterSplitPane centerSplitPane;
     private Project project;
 
+
+    public PdfObjectView pdfObjectView;
 
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
      */
-
     public MainFrame()
     {
+        this.setLayout(new BorderLayout());
+        this.setTitle(Constants.FRAME_TITLE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        this.menuBar = new MainFrameMenuBar();
+        this.mbActionListener = new MenuBarActionListener();
+
+        this.centerSplitPane = new CenterSplitPane();
+        this.project = new Project();
+
+
+        this.pdfObjectView = new PdfObjectView();
+
+
+        /*
         this.menuBar = new MainFrameMenuBar();
         this.mbActionListener = new MenuBarActionListener();
         this.centerSplitPane = new CenterSplitPane();
@@ -34,6 +57,7 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setTitle(Constants.FRAME_TITLE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        */
     }
 
 
@@ -42,7 +66,6 @@ public class MainFrame extends JFrame {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
     public void initialize(Project project)
     {
         this.project = project;
@@ -52,8 +75,16 @@ public class MainFrame extends JFrame {
         this.mbActionListener.initialize(this.project);
 
         this.setJMenuBar(this.menuBar);
+
+        /*
         this.getContentPane().add(
             this.centerSplitPane,
+            BorderLayout.CENTER
+        );
+        */
+        this.pdfObjectView.initialize(this.project.getPdfObject());
+        this.getContentPane().add(
+            this.pdfObjectView,
             BorderLayout.CENTER
         );
 

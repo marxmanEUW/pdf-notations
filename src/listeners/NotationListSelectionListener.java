@@ -2,6 +2,7 @@ package listeners;
 
 import model.PdfObject;
 import view.partials.partials.NotationSplitPane;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -11,6 +12,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
 
+    private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
     private NotationSplitPane notationSplitPane;
 
@@ -21,10 +23,12 @@ public class NotationListSelectionListener implements ListSelectionListener {
      * #########################################################################
      */
 
-    public void initialize(NotationSplitPane notationSplitPane, PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
-        this.notationSplitPane = notationSplitPane;
+        this.pdfObjectView = pdfObjectView;
+
+        this.pdfObject = this.pdfObjectView.getPdfObject();
+        this.notationSplitPane = this.pdfObjectView.getNotationSplitPane();
     }
 
 

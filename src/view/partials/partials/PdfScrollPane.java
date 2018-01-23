@@ -2,11 +2,15 @@ package view.partials.partials;
 
 import model.PdfObject;
 import view.partials.partials.partials.PdfArea;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PdfScrollPane extends JScrollPane {
+
+
+    private PdfObjectView pdfObjectView;
 
     private PdfArea pdfArea;
     private PdfObject pdfObject;
@@ -21,17 +25,21 @@ public class PdfScrollPane extends JScrollPane {
      */
     public PdfScrollPane()
     {
-        this.pdfArea = new PdfArea();
-
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        //this.pdfArea = new PdfArea();
     }
 
-    public void initialize(PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
+        this.pdfObjectView = pdfObjectView;
 
-        this.pdfArea.initialize(this.pdfObject);
+        this.pdfObject = this.pdfObjectView.getPdfObject();
+        this.pdfArea = this.pdfObjectView.getPdfArea();
+
+
+        //this.pdfArea.initialize(this.pdfObject);
 
         this.getViewport().add(this.pdfArea);
     }

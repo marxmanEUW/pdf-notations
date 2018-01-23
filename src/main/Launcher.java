@@ -26,9 +26,8 @@ public class Launcher {
 
         mainFrame.initialize(project);
 
-        mainFrame.centerSplitPane.pdfScrollPane.importNewPdf(PATH_TO_PDF1);
+        mainFrame.pdfObjectView.getPdfArea().importNewPdf(PATH_TO_PDF1);
 
-        //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF1);
-        //mainFrame.getPdfArea().importNewPdf(PATH_TO_PDF2);
+        //mainFrame.centerSplitPane.pdfScrollPane.importNewPdf(PATH_TO_PDF1);
     }
 }

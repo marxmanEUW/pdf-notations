@@ -55,8 +55,8 @@ public class CenterSplitPane extends JSplitPane {
     {
         this.pdfObject = pdfObject;
 
-        this.pdfScrollPane.initialize(this.pdfObject);
-        this.notationSplitPane.initialize(this.pdfObject);
+        //this.pdfScrollPane.initialize(this.pdfObject);
+        //this.notationSplitPane.initialize(this.pdfObject);
 
         this.setLeftComponent(this.pdfScrollPane);
         this.setRightComponent(this.notationSplitPane);

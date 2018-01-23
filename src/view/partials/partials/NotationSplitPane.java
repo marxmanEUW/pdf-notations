@@ -4,6 +4,7 @@ import listeners.NotationListSelectionListener;
 import model.PdfObject;
 import view.partials.partials.partials.NotationEntityScrollPane;
 import view.partials.partials.partials.NotationListScrollPane;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ public class NotationSplitPane extends JSplitPane {
     private final int DEVIDER_LOCATION
         = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.4);
 
+    private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
     private NotationListScrollPane notationListScrollPane;
@@ -33,10 +35,10 @@ public class NotationSplitPane extends JSplitPane {
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
 
-        this.notationEntityScrollPane = new NotationEntityScrollPane();
-        this.notationListScrollPane = new NotationListScrollPane();
+        //this.notationEntityScrollPane = new NotationEntityScrollPane();
+        //this.notationListScrollPane = new NotationListScrollPane();
 
-        this.notationListSelectionListener = new NotationListSelectionListener();
+        //this.notationListSelectionListener = new NotationListSelectionListener();
     }
 
 
@@ -46,14 +48,19 @@ public class NotationSplitPane extends JSplitPane {
      * #########################################################################
      */
 
-    public void initialize(PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
+        this.pdfObjectView = pdfObjectView;
 
-        this.notationListSelectionListener.initialize(this, this.pdfObject);
+        this.pdfObject = this.pdfObjectView.getPdfObject();
+        this.notationListScrollPane = this.pdfObjectView.getNotationListScrollPane();
+        this.notationEntityScrollPane = this.pdfObjectView.getNotationEntityScrollPane();
+        this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
 
-        this.notationListScrollPane.initialize(this.pdfObject, this.notationListSelectionListener);
-        this.notationEntityScrollPane.initialize(this.pdfObject);
+        //this.notationListSelectionListener.initialize(this, this.pdfObject);
+
+        //this.notationListScrollPane.initialize(this.pdfObject, this.notationListSelectionListener);
+        //this.notationEntityScrollPane.initialize(this.pdfObject);
 
         this.setTopComponent(this.notationListScrollPane);
         this.setBottomComponent(this.notationEntityScrollPane);

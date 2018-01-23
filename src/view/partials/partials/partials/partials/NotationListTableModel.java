@@ -2,11 +2,13 @@ package view.partials.partials.partials.partials;
 
 import model.Notation;
 import model.PdfObject;
+import view.test.PdfObjectView;
 
 import javax.swing.table.AbstractTableModel;
 
 public class NotationListTableModel extends AbstractTableModel {
 
+    private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
 
@@ -16,9 +18,11 @@ public class NotationListTableModel extends AbstractTableModel {
      * #########################################################################
      */
 
-    public void initialize(PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
+        this.pdfObjectView = pdfObjectView;
+
+        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 

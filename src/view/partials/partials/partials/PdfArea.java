@@ -4,6 +4,7 @@ import listeners.PdfAreaMouseAdapter;
 import factories.PdfFactory;
 import model.PdfObject;
 import listeners.PdfResizeTimerActionListener;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,7 @@ public class PdfArea extends JPanel {
     private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
 
+    private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
     private BufferedImage pdfImage;
@@ -41,19 +43,25 @@ public class PdfArea extends JPanel {
      */
     public PdfArea()
     {
-
-
         this.pdfImage = null;
         this.zoomLevel = 1.0;
     }
 
-    public void initialize(PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObject = pdfObject;
-        this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
+        this.pdfObjectView = pdfObjectView;
+
+        this.pdfAreaMouseAdapter = this.pdfObjectView.getPdfAreaMouseAdapter();
+        this.pdfObject = this.pdfObjectView.getPdfObject();
+
         this.addMouseListener(this.pdfAreaMouseAdapter);
         this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-        this.pdfAreaMouseAdapter.initialize(this, this.pdfObject);
+
+
+        //this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
+        //this.addMouseListener(this.pdfAreaMouseAdapter);
+        //this.addMouseWheelListener(this.pdfAreaMouseAdapter);
+        //this.pdfAreaMouseAdapter.initialize(this, this.pdfObject);
     }
 
 

@@ -2,6 +2,7 @@ package listeners;
 
 import model.PdfObject;
 import view.partials.partials.partials.PdfArea;
+import view.test.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,6 +14,7 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
 
     private boolean isZoomEnabled;
 
+    private PdfObjectView pdfObjectView;
     private PdfArea pdfArea;
     private Timer mouseWheelMovementTimer;
     private int mouseScrollCount;
@@ -38,10 +40,12 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
      * #########################################################################
      */
 
-    public void initialize(PdfArea pdfArea, PdfObject pdfObject)
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfArea = pdfArea;
-        this.pdfObject = pdfObject;
+        this.pdfObjectView = pdfObjectView;
+
+        this.pdfArea = this.pdfObjectView.getPdfArea();
+        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 
@@ -95,8 +99,6 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent mouseEvent)
     {
-        //super.mouseClicked(mouseEvent);
-
         int x = (int) ((double) mouseEvent.getX() / this.pdfArea.getZoomLevel());
         int y = (int) ((double) mouseEvent.getY() / this.pdfArea.getZoomLevel());
 
@@ -111,10 +113,12 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
+        /*
         if (!this.isZoomEnabled())
         {
             return;
         }
+        */
 
         System.out.println("rolled");
 
