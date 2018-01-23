@@ -7,6 +7,8 @@ import gui.Constants;
 import model.PdfObject;
 import model.Project;
 
+import javax.swing.*;
+
 public class MenuBarActionListener implements ActionListener {
 
     private Project project;
