@@ -1,6 +1,6 @@
 package view.partials.partials;
 
-import model.ProjectCon;
+import model.PdfObject;
 import view.partials.partials.partials.PdfArea;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.*;
 public class PdfScrollPane extends JScrollPane {
 
     private PdfArea pdfArea;
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
     /*
      * #########################################################################
@@ -27,11 +27,11 @@ public class PdfScrollPane extends JScrollPane {
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     }
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
 
-        this.pdfArea.initialize(this.projectCon);
+        this.pdfArea.initialize(this.pdfObject);
 
         this.getViewport().add(this.pdfArea);
     }

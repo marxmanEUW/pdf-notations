@@ -2,7 +2,7 @@ package view.partials.partials.partials;
 
 import listeners.PdfAreaMouseAdapter;
 import factories.PdfFactory;
-import model.ProjectCon;
+import model.PdfObject;
 import listeners.PdfResizeTimerActionListener;
 
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class PdfArea extends JPanel {
     private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
     private BufferedImage pdfImage;
     private String pdfImagePath;
@@ -47,13 +47,13 @@ public class PdfArea extends JPanel {
         this.zoomLevel = 1.0;
     }
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
         this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
         this.addMouseListener(this.pdfAreaMouseAdapter);
         this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-        this.pdfAreaMouseAdapter.initialize(this, this.projectCon);
+        this.pdfAreaMouseAdapter.initialize(this, this.pdfObject);
     }
 
 
@@ -269,11 +269,11 @@ public class PdfArea extends JPanel {
      */
     private void repaintNotationPoints(Graphics graphics)
     {
-        if (this.projectCon == null) { return; }
-        if (this.projectCon.getListOfPoints() == null) { return; }
+        if (this.pdfObject == null) { return; }
+        if (this.pdfObject.getListOfPoints() == null) { return; }
 
         graphics.setColor(Color.red);
-        for (Point point : this.projectCon.getListOfPoints())
+        for (Point point : this.pdfObject.getListOfPoints())
         {
             //@todo name refactoring
             int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS) * this.zoomLevel);

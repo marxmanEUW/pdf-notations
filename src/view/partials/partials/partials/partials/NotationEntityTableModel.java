@@ -1,13 +1,13 @@
 package view.partials.partials.partials.partials;
 
-import model.NotationCon;
-import model.ProjectCon;
+import model.Notation;
+import model.PdfObject;
 
 import javax.swing.table.AbstractTableModel;
 
 public class NotationEntityTableModel extends AbstractTableModel {
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
 
     /*
@@ -16,9 +16,9 @@ public class NotationEntityTableModel extends AbstractTableModel {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
     }
 
 
@@ -31,7 +31,7 @@ public class NotationEntityTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return NotationCon.INFORMATION_COUNT + 2;
+        return Notation.INFORMATION_COUNT + 2;
     }
 
     @Override
@@ -43,16 +43,16 @@ public class NotationEntityTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        if (this.projectCon.getSelectedNotationIndex() == -1){
+        if (this.pdfObject.getSelectedNotationIndex() == -1){
             return null;
         }
 
         if (columnIndex == 1){
             switch (rowIndex){
-                case 0: return this.projectCon.getSelectedNotation().getId();
-                case 1: return this.projectCon.getSelectedNotation().getName();
-                case 2: return this.projectCon.getSelectedNotation().getX();
-                case 3: return this.projectCon.getSelectedNotation().getY();
+                case 0: return this.pdfObject.getSelectedNotation().getId();
+                case 1: return this.pdfObject.getSelectedNotation().getName();
+                case 2: return this.pdfObject.getSelectedNotation().getX();
+                case 3: return this.pdfObject.getSelectedNotation().getY();
                 default: return null;
             }
         } else {

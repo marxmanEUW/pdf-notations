@@ -1,7 +1,8 @@
 package main;
 
+import model.Project;
 import view.MainFrame;
-import model.ProjectCon;
+import model.PdfObject;
 
 import java.io.IOException;
 
@@ -12,15 +13,18 @@ public class Launcher {
     // @todo testing
     public static final String PATH_TO_PDF1 = "files/file1.pdf";
     public static final String PATH_TO_PDF2 = "files/file2.pdf";
+    public static final String PROJECT_NAME = "Project-Name";
 
 
     public static void main(String[] args) throws IOException
     {
         MainFrame mainFrame = new MainFrame();
-        ProjectCon projectCon = new ProjectCon();
+        Project project = new Project();
+        project.initialize(PROJECT_NAME);
+        //PdfObject pdfObject = new PdfObject();
         // @todo MVC welche Teil muss welchen Teil kennen
 
-        mainFrame.initialize(projectCon);
+        mainFrame.initialize(project);
 
         mainFrame.centerSplitPane.pdfScrollPane.importNewPdf(PATH_TO_PDF1);
 

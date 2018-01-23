@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.Constants;
-import model.ProjectCon;
+import model.PdfObject;
+import model.Project;
 
 public class MenuBarActionListener implements ActionListener {
 
-    private ProjectCon projectCon;
+    private Project project;
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(Project project)
     {
-        this.projectCon = projectCon;
+        this.project = project;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class MenuBarActionListener implements ActionListener {
                 System.out.println("Ich  speichere unter das Projekt.");
                 break;
             case Constants.MENUITEM_CLOSE_PROJECT_NAME:
-                // @todo Close ProjectCon
+                // @todo Close PdfObject
                 System.out.println("Ich schließe das Projekt.");
                 break;
             case Constants.MENUITEM_CLOSE_NAME:
@@ -51,9 +52,9 @@ public class MenuBarActionListener implements ActionListener {
                 System.out.println("Ich zeige die Liste der Notationen.");
                 break;
             case Constants.MENUITEM_ADD_NOTATION_NAME:
-                // @todo Add NotationCon
-                System.out.println("Ich bin ein neue NotationCon.");
-                this.projectCon.addNotation();
+                // @todo Add Notation
+                System.out.println("Ich bin ein neue Notation.");
+                this.project.getPdfObject().addNotation();
 
                 break;
             case Constants.MENUITEM_ABOUT_NAME:

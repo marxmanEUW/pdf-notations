@@ -1,7 +1,7 @@
 package view.partials.partials.partials;
 
+import model.PdfObject;
 import view.partials.partials.partials.partials.NotationEntityTableModel;
-import model.ProjectCon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class NotationEntityScrollPane extends JScrollPane {
      * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
      */
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
     private NotationEntityTableModel notationEntityTableModel;
 
     private JTable notationEntityTable;
@@ -41,10 +41,10 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
-        this.notationEntityTableModel.initialize(this.projectCon);
+        this.pdfObject = pdfObject;
+        this.notationEntityTableModel.initialize(this.pdfObject);
 
         this.notationEntityTable.setModel(this.notationEntityTableModel);
         this.getViewport().add(notationEntityTable);

@@ -1,6 +1,6 @@
 package view.partials;
 
-import model.ProjectCon;
+import model.PdfObject;
 import view.partials.partials.NotationSplitPane;
 import view.partials.partials.PdfScrollPane;
 
@@ -12,7 +12,7 @@ public class CenterSplitPane extends JSplitPane {
     public PdfScrollPane pdfScrollPane;
     private NotationSplitPane notationSplitPane;
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
     /*
      * @note "final" could be removed to impelement a feature which can memorize
@@ -51,12 +51,12 @@ public class CenterSplitPane extends JSplitPane {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
 
-        this.pdfScrollPane.initialize(this.projectCon);
-        this.notationSplitPane.initialize(this.projectCon);
+        this.pdfScrollPane.initialize(this.pdfObject);
+        this.notationSplitPane.initialize(this.pdfObject);
 
         this.setLeftComponent(this.pdfScrollPane);
         this.setRightComponent(this.notationSplitPane);

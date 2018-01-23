@@ -1,8 +1,8 @@
 package view.partials.partials.partials;
 
 import listeners.NotationListSelectionListener;
+import model.PdfObject;
 import view.partials.partials.partials.partials.NotationListTableModel;
-import model.ProjectCon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class NotationListScrollPane extends JScrollPane {
      * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
      */
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
     private NotationListTableModel notationListTableModel;
     private ListSelectionModel listSelectionModel;
     private NotationListSelectionListener notationListSelectionListener;
@@ -46,10 +46,10 @@ public class NotationListScrollPane extends JScrollPane {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon, NotationListSelectionListener notationListSelectionListener)
+    public void initialize(PdfObject pdfObject, NotationListSelectionListener notationListSelectionListener)
     {
-        this.projectCon = projectCon;
-        this.notationListTableModel.initialize(this.projectCon);
+        this.pdfObject = pdfObject;
+        this.notationListTableModel.initialize(this.pdfObject);
 
         this.notationListTable.setModel(this.notationListTableModel);
 

@@ -1,6 +1,6 @@
 package listeners;
 
-import model.ProjectCon;
+import model.PdfObject;
 import view.partials.partials.NotationSplitPane;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
     private NotationSplitPane notationSplitPane;
 
 
@@ -21,9 +21,9 @@ public class NotationListSelectionListener implements ListSelectionListener {
      * #########################################################################
      */
 
-    public void initialize(NotationSplitPane notationSplitPane, ProjectCon projectCon)
+    public void initialize(NotationSplitPane notationSplitPane, PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
         this.notationSplitPane = notationSplitPane;
     }
 
@@ -38,7 +38,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e)
     {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-        this.projectCon.setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+        this.pdfObject.setSelectedNotationIndex(lsm.getLeadSelectionIndex());
         this.notationSplitPane.updateNotationEntityTable();
     }
 }

@@ -40,9 +40,9 @@ public class Constants {
 
 
     /*
-     * Menuereiter "NotationCon"
+     * Menuereiter "Notation"
      */
-    public static final String MENU_NOTATION_NAME = "NotationCon";
+    public static final String MENU_NOTATION_NAME = "Notation";
 
         public static final String
             MENUITEM_ADD_NOTATION_NAME = "Hinzufügen";

@@ -1,7 +1,7 @@
 package view.partials.partials;
 
 import listeners.NotationListSelectionListener;
-import model.ProjectCon;
+import model.PdfObject;
 import view.partials.partials.partials.NotationEntityScrollPane;
 import view.partials.partials.partials.NotationListScrollPane;
 
@@ -13,7 +13,7 @@ public class NotationSplitPane extends JSplitPane {
     private final int DEVIDER_LOCATION
         = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.4);
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
     private NotationListScrollPane notationListScrollPane;
     private NotationEntityScrollPane notationEntityScrollPane;
@@ -46,14 +46,14 @@ public class NotationSplitPane extends JSplitPane {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
 
-        this.notationListSelectionListener.initialize(this, this.projectCon);
+        this.notationListSelectionListener.initialize(this, this.pdfObject);
 
-        this.notationListScrollPane.initialize(this.projectCon, this.notationListSelectionListener);
-        this.notationEntityScrollPane.initialize(this.projectCon);
+        this.notationListScrollPane.initialize(this.pdfObject, this.notationListSelectionListener);
+        this.notationEntityScrollPane.initialize(this.pdfObject);
 
         this.setTopComponent(this.notationListScrollPane);
         this.setBottomComponent(this.notationEntityScrollPane);

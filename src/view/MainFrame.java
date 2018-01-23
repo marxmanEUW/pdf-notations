@@ -2,7 +2,8 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
-import model.ProjectCon;
+import model.PdfObject;
+import model.Project;
 import view.partials.CenterSplitPane;
 import view.partials.MainFrameMenuBar;
 
@@ -15,7 +16,7 @@ public class MainFrame extends JFrame {
     private MenuBarActionListener mbActionListener;
     public CenterSplitPane centerSplitPane;
 
-    private ProjectCon projectCon;
+    private Project project;
 
 
     /*
@@ -42,13 +43,13 @@ public class MainFrame extends JFrame {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(Project project)
     {
-        this.projectCon = projectCon;
+        this.project = project;
 
         this.menuBar.initialize(this.mbActionListener);
-        this.centerSplitPane.initialize(this.projectCon);
-        this.mbActionListener.initialize(this.projectCon);
+        this.centerSplitPane.initialize(this.project.getPdfObject());
+        this.mbActionListener.initialize(this.project);
 
         this.setJMenuBar(this.menuBar);
         this.getContentPane().add(

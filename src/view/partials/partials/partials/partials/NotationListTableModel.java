@@ -1,13 +1,13 @@
 package view.partials.partials.partials.partials;
 
-import model.NotationCon;
-import model.ProjectCon;
+import model.Notation;
+import model.PdfObject;
 
 import javax.swing.table.AbstractTableModel;
 
 public class NotationListTableModel extends AbstractTableModel {
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
 
     /*
@@ -16,9 +16,9 @@ public class NotationListTableModel extends AbstractTableModel {
      * #########################################################################
      */
 
-    public void initialize(ProjectCon projectCon)
+    public void initialize(PdfObject pdfObject)
     {
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
     }
 
 
@@ -31,21 +31,21 @@ public class NotationListTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return this.projectCon.getListOfNotationConsSize();
+        return this.pdfObject.getListOfNotationConsSize();
     }
 
     @Override
     public int getColumnCount()
     {
-        return NotationCon.INFORMATION_COUNT;
+        return Notation.INFORMATION_COUNT;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         switch (columnIndex){
-            case 0: return this.projectCon.getListOfNotationCons().get(rowIndex).getId();
-            case 1: return this.projectCon.getListOfNotationCons().get(rowIndex).getName();
+            case 0: return this.pdfObject.getListOfNotations().get(rowIndex).getId();
+            case 1: return this.pdfObject.getListOfNotations().get(rowIndex).getName();
             default: return null;
         }
     }

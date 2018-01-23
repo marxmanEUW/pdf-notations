@@ -1,6 +1,6 @@
 package listeners;
 
-import model.ProjectCon;
+import model.PdfObject;
 import view.partials.partials.partials.PdfArea;
 
 import javax.swing.*;
@@ -17,7 +17,7 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
     private Timer mouseWheelMovementTimer;
     private int mouseScrollCount;
 
-    private ProjectCon projectCon;
+    private PdfObject pdfObject;
 
 
     /*
@@ -38,10 +38,10 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
      * #########################################################################
      */
 
-    public void initialize(PdfArea pdfArea, ProjectCon projectCon)
+    public void initialize(PdfArea pdfArea, PdfObject pdfObject)
     {
         this.pdfArea = pdfArea;
-        this.projectCon = projectCon;
+        this.pdfObject = pdfObject;
     }
 
 
@@ -104,7 +104,7 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
         System.out.println("y: " + Integer.toString(y));
         System.out.println("--------------------------");
 
-        this.projectCon.addNotationAtXY(x, y);
+        this.pdfObject.addNotationAtXY(x, y);
         this.pdfArea.repaint();
     }
 
