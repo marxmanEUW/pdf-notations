@@ -10,4 +10,4 @@ https://javabeginners.de/Frameworks/Json/index.php
 
 ### Icons
 
-https://icomoon.io/#icons GPL3
+https://icomoon.io/#icons-icomoon GPL3

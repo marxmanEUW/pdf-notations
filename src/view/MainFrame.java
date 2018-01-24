@@ -2,8 +2,10 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
+import listeners.ToolBarActionListener;
 import model.PdfObject;
 import view.bar.MainFrameMenuBar;
+import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
@@ -13,6 +15,9 @@ public class MainFrame extends JFrame {
 
     private MainFrameMenuBar menuBar;
     private MenuBarActionListener mbActionListener;
+
+    private MainFrameToolBar toolBar;
+    private ToolBarActionListener tbActionListener;
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
@@ -41,6 +46,9 @@ public class MainFrame extends JFrame {
         this.menuBar = new MainFrameMenuBar();
         this.mbActionListener = new MenuBarActionListener();
 
+        this.toolBar = new MainFrameToolBar();
+        this.tbActionListener = new ToolBarActionListener();
+
         this.pdfObjectView = new PdfObjectView();
         this.pdfObject = new PdfObject();
 
@@ -58,6 +66,7 @@ public class MainFrame extends JFrame {
         //this.project = project;
 
         this.menuBar.initialize(this.mbActionListener);
+        this.toolBar.initialize(this.tbActionListener);
         /*
          * @todo -> marxmanEUW: we decided not to use the Project-model at all
          */
@@ -67,6 +76,10 @@ public class MainFrame extends JFrame {
 
 
         this.setJMenuBar(this.menuBar);
+        this.getContentPane().add(
+            this.toolBar,
+            BorderLayout.NORTH
+        );
         this.getContentPane().add(
             this.pdfObjectView,
             BorderLayout.CENTER

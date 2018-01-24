@@ -29,6 +29,11 @@ public class MainFrameMenuBar extends JMenuBar {
     private MenuBarActionListener mbActionListener;
 
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
     public MainFrameMenuBar()
     {
         this.menuFile = new JMenu();
@@ -51,6 +56,12 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemAbout = new JMenuItem();
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
     /*
      * @author  yxyxD
      */
