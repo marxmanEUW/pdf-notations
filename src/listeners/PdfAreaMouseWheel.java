@@ -5,10 +5,10 @@ import view.project_view.pdfobject_view.PdfObjectView;
 import view.project_view.pdfobject_view.partials.PdfArea;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 
-public class PdfAreaMouseWheel implements MouseWheelListener {
+public class PdfAreaMouseWheel extends MouseAdapter {
 
     private final int TIMER_DELAY = 100;
 
@@ -77,7 +77,7 @@ public class PdfAreaMouseWheel implements MouseWheelListener {
         //
         this.mouseWheelMovementTimer = new Timer(
             this.TIMER_DELAY,
-            new MouseWheelMovementTimerActionListener(this)
+            new MouseWheelMovementTimer(this)
         );
         this.mouseWheelMovementTimer.setRepeats(false);
         this.mouseWheelMovementTimer.start();

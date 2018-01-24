@@ -2,6 +2,7 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
+import main.Launcher;
 import model.PdfObject;
 import model.Project;
 import view.bar.MainFrameMenuBar;
@@ -16,8 +17,9 @@ public class MainFrame extends JFrame {
     private MenuBarActionListener mbActionListener;
 
     private PdfObjectView pdfObjectView;
+    private PdfObject pdfObject;
 
-    private Project project;
+    //private Project project;
 
 
     /*
@@ -42,8 +44,9 @@ public class MainFrame extends JFrame {
         this.mbActionListener = new MenuBarActionListener();
 
         this.pdfObjectView = new PdfObjectView();
+        this.pdfObject = new PdfObject();
 
-        this.project = new Project();
+        //this.project = new Project();
     }
 
 
@@ -52,18 +55,20 @@ public class MainFrame extends JFrame {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-    public void initialize(Project project)
+    public void initialize(/*Project project*/)
     {
-        this.project = project;
+        //this.project = project;
 
         this.menuBar.initialize(this.mbActionListener);
-        this.mbActionListener.initialize(this.project);
-        this.pdfObjectView.initialize(this.project.getPdfObject());
+        /*
+         * @todo -> marxmanEUW: we decided not to use the Project-model at all
+         */
+        //this.mbActionListener.initialize(this.project);
+        //this.pdfObject.setSourePath(Launcher.PATH_TO_PDF1);
+        this.pdfObjectView.initialize(this.pdfObject);
 
 
         this.setJMenuBar(this.menuBar);
-
-        this.getContentPane().removeAll();
         this.getContentPane().add(
             this.pdfObjectView,
             BorderLayout.CENTER
@@ -101,15 +106,17 @@ public class MainFrame extends JFrame {
      */
     public void importNewPdf(String sourcePath)
     {
-        PdfObject pdfObject = new PdfObject();
-        pdfObject.setSourePath(sourcePath);
-        this.project.setPdfObject(pdfObject);
+        this.pdfObject = new PdfObject();
 
 
         //this.pdfObjectView.initialize(this.project.getPdfObject());
         //this.pdfObjectView.updateView();
 
-        this.initialize(this.project);
+        this.getContentPane().remove(this.pdfObjectView);
+        this.pdfObjectView = new PdfObjectView();
+        this.pdfObject.setSourePath(sourcePath);
+
+        this.initialize();
     }
 
 
