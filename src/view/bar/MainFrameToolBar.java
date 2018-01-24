@@ -1,4 +1,4 @@
-package view.partials.partials;
+package view.bar;
 
 import javax.swing.*;
 

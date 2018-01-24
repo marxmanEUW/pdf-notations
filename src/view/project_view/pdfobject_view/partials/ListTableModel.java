@@ -1,12 +1,12 @@
-package view.partials.partials.partials.partials;
+package view.project_view.pdfobject_view.partials;
 
 import model.Notation;
 import model.PdfObject;
-import view.test.PdfObjectView;
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.table.AbstractTableModel;
 
-public class NotationListTableModel extends AbstractTableModel {
+public class ListTableModel extends AbstractTableModel {
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;

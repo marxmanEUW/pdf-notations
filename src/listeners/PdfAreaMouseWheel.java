@@ -1,45 +1,30 @@
 package listeners;
 
 import model.PdfObject;
-import view.project_view.pdfobject_view.partials.PdfArea;
 import view.project_view.pdfobject_view.PdfObjectView;
+import view.project_view.pdfobject_view.partials.PdfArea;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-
-public class PdfAreaMouseAdapter extends MouseAdapter {
+public class PdfAreaMouseWheel implements MouseWheelListener {
 
     private final int TIMER_DELAY = 100;
-
-    //private boolean isZoomEnabled;
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
     private PdfArea pdfArea;
 
-
     private Timer mouseWheelMovementTimer;
     private int mouseScrollCount;
 
 
-    /*
-     * #########################################################################
-     * #                    Constructor                                        #
-     * #########################################################################
-     */
-    public PdfAreaMouseAdapter()
+    public PdfAreaMouseWheel()
     {
-        this.resetMouseRollCount();
-        //this.enableZoom();
+
     }
 
-
-    /*
-     * #########################################################################
-     * #                    Initialisierung                                    #
-     * #########################################################################
-     */
 
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -65,60 +50,11 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
         return pdfArea;
     }
 
-    /*
-    public boolean isZoomEnabled()
-    {
-        return this.isZoomEnabled;
-    }
-    */
-
-
-    /*
-     * #########################################################################
-     * #                    oeffentliche Methoden                              #
-     * #########################################################################
-     */
-    /*
-    public void enableZoom()
-    {
-        this.isZoomEnabled = true;
-    }
-
-    public void disableZoom()
-    {
-        this.isZoomEnabled = false;
-    }
-    */
-
-    public void resetMouseRollCount()
-    {
-        this.mouseScrollCount = 0;
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    Overrides                                          #
-     * #########################################################################
-     */
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent)
-    {
-        int x = (int) ((double) mouseEvent.getX() / this.pdfArea.getZoomLevel());
-        int y = (int) ((double) mouseEvent.getY() / this.pdfArea.getZoomLevel());
-
-        System.out.println("x: " + Integer.toString(x));
-        System.out.println("y: " + Integer.toString(y));
-        System.out.println("--------------------------");
-
-        this.pdfObject.addNotationAtXY(x, y);
-        this.pdfArea.repaint();
-    }
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-        /*
+                /*
         if (!this.isZoomEnabled())
         {
             return;
@@ -141,8 +77,7 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
         //
         this.mouseWheelMovementTimer = new Timer(
             this.TIMER_DELAY,
-            //new MouseWheelMovementTimerActionListener(this),
-            new MouseWheelMovementTimerActionListener(new PdfAreaMouseWheel())
+            new MouseWheelMovementTimerActionListener(this)
         );
         this.mouseWheelMovementTimer.setRepeats(false);
         this.mouseWheelMovementTimer.start();
@@ -157,6 +92,17 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
 
     /*
      * #########################################################################
+     * #                    oeffentliche Methoden                              #
+     * #########################################################################
+     */
+    public void resetMouseRollCount()
+    {
+        this.mouseScrollCount = 0;
+    }
+
+
+    /*
+     * #########################################################################
      * #                    private Hilfsmethoden                              #
      * #########################################################################
      */
@@ -165,5 +111,3 @@ public class PdfAreaMouseAdapter extends MouseAdapter {
         this.mouseScrollCount += (wheelRotation * (-1));
     }
 }
-
-

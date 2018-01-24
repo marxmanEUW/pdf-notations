@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class PdfObject {
 
+    private String sourePath;
 
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
@@ -19,7 +20,6 @@ public class PdfObject {
      * #                    Konstruktor                                        #
      * #########################################################################
      */
-
     public PdfObject()
     {
         this.listOfNotations = new ArrayList<>();
@@ -65,6 +65,14 @@ public class PdfObject {
     }
 
     /*
+     * @author  yxyxD
+     */
+    public String getSourePath()
+    {
+        return this.sourePath;
+    }
+
+    /*
      * #########################################################################
      * #                    Setter                                             #
      * #########################################################################
@@ -73,6 +81,14 @@ public class PdfObject {
     public void setSelectedNotationIndex(int selectedNotationIndex)
     {
         this.selectedNotationIndex = selectedNotationIndex;
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setSourePath(String sourePath)
+    {
+        this.sourePath = sourePath;
     }
 
     /*

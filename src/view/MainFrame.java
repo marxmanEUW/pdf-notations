@@ -2,16 +2,10 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
-import listeners.NotationListSelectionListener;
 import model.PdfObject;
 import model.Project;
-import view.partials.CenterSplitPane;
-import view.partials.MainFrameMenuBar;
-import view.partials.partials.partials.NotationEntityScrollPane;
-import view.partials.partials.partials.NotationListScrollPane;
-import view.partials.partials.partials.partials.NotationEntityTableModel;
-import view.partials.partials.partials.partials.NotationListTableModel;
-import view.test.PdfObjectView;
+import view.bar.MainFrameMenuBar;
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,11 +15,10 @@ public class MainFrame extends JFrame {
     private MainFrameMenuBar menuBar;
     private MenuBarActionListener mbActionListener;
 
-    private CenterSplitPane centerSplitPane;
+    private PdfObjectView pdfObjectView;
+
     private Project project;
 
-
-    public PdfObjectView pdfObjectView;
 
     /*
      * #########################################################################
@@ -38,26 +31,19 @@ public class MainFrame extends JFrame {
         this.setTitle(Constants.FRAME_TITLE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
+        this.setPreferredSize(new Dimension(1200, 600));
+        this.pack();
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+
 
         this.menuBar = new MainFrameMenuBar();
         this.mbActionListener = new MenuBarActionListener();
-
-        this.centerSplitPane = new CenterSplitPane();
-        this.project = new Project();
-
 
         this.pdfObjectView = new PdfObjectView();
 
-
-        /*
-        this.menuBar = new MainFrameMenuBar();
-        this.mbActionListener = new MenuBarActionListener();
-        this.centerSplitPane = new CenterSplitPane();
-
-        this.setLayout(new BorderLayout());
-        this.setTitle(Constants.FRAME_TITLE);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        */
+        this.project = new Project();
     }
 
 
@@ -71,18 +57,13 @@ public class MainFrame extends JFrame {
         this.project = project;
 
         this.menuBar.initialize(this.mbActionListener);
-        this.centerSplitPane.initialize(this.project.getPdfObject());
         this.mbActionListener.initialize(this.project);
+        this.pdfObjectView.initialize(this.project.getPdfObject());
+
 
         this.setJMenuBar(this.menuBar);
 
-        /*
-        this.getContentPane().add(
-            this.centerSplitPane,
-            BorderLayout.CENTER
-        );
-        */
-        this.pdfObjectView.initialize(this.project.getPdfObject());
+        this.getContentPane().removeAll();
         this.getContentPane().add(
             this.pdfObjectView,
             BorderLayout.CENTER
@@ -90,13 +71,6 @@ public class MainFrame extends JFrame {
 
 
         this.setLookAndFell();
-
-
-        // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
-        this.setPreferredSize(new Dimension(1200, 600));
-        this.pack();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
 
         this.setVisible(true);
     }
@@ -107,23 +81,36 @@ public class MainFrame extends JFrame {
      * #                    Getter                                             #
      * #########################################################################
      */
-
     public MainFrameMenuBar getJMenuBar()
     {
         return this.menuBar;
     }
 
-    public CenterSplitPane getCenterSplitPane()
+    public PdfObjectView getPdfObjectView()
     {
-        return this.centerSplitPane;
+        return this.pdfObjectView;
     }
-
 
     /*
      * #########################################################################
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
+    public void importNewPdf(String sourcePath)
+    {
+        PdfObject pdfObject = new PdfObject();
+        pdfObject.setSourePath(sourcePath);
+        this.project.setPdfObject(pdfObject);
+
+
+        //this.pdfObjectView.initialize(this.project.getPdfObject());
+        //this.pdfObjectView.updateView();
+
+        this.initialize(this.project);
+    }
 
 
 

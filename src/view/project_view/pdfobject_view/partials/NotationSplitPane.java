@@ -1,10 +1,7 @@
-package view.partials.partials;
+package view.project_view.pdfobject_view.partials;
 
-import listeners.NotationListSelectionListener;
 import model.PdfObject;
-import view.partials.partials.partials.NotationEntityScrollPane;
-import view.partials.partials.partials.NotationListScrollPane;
-import view.test.PdfObjectView;
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,10 +14,10 @@ public class NotationSplitPane extends JSplitPane {
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
-    private NotationListScrollPane notationListScrollPane;
-    private NotationEntityScrollPane notationEntityScrollPane;
+    private ListScrollPane notationListScrollPane;
+    private EntityScrollPane entityScrollPane;
 
-    private NotationListSelectionListener notationListSelectionListener;
+    //private NotationListSelectionListener notationListSelectionListener;
 
     /*
      * #########################################################################
@@ -34,11 +31,6 @@ public class NotationSplitPane extends JSplitPane {
         this.setDividerLocation(this.DEVIDER_LOCATION);
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
-
-        //this.notationEntityScrollPane = new NotationEntityScrollPane();
-        //this.notationListScrollPane = new NotationListScrollPane();
-
-        //this.notationListSelectionListener = new NotationListSelectionListener();
     }
 
 
@@ -54,16 +46,11 @@ public class NotationSplitPane extends JSplitPane {
 
         this.pdfObject = this.pdfObjectView.getPdfObject();
         this.notationListScrollPane = this.pdfObjectView.getNotationListScrollPane();
-        this.notationEntityScrollPane = this.pdfObjectView.getNotationEntityScrollPane();
-        this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
-
-        //this.notationListSelectionListener.initialize(this, this.pdfObject);
-
-        //this.notationListScrollPane.initialize(this.pdfObject, this.notationListSelectionListener);
-        //this.notationEntityScrollPane.initialize(this.pdfObject);
+        this.entityScrollPane = this.pdfObjectView.getEntityScrollPane();
+        //this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
 
         this.setTopComponent(this.notationListScrollPane);
-        this.setBottomComponent(this.notationEntityScrollPane);
+        this.setBottomComponent(this.entityScrollPane);
     }
 
 
@@ -80,7 +67,7 @@ public class NotationSplitPane extends JSplitPane {
 
     public void updateNotationEntityTable()
     {
-        this.notationEntityScrollPane.updateTable();
+        this.entityScrollPane.updateTable();
     }
 
 
@@ -89,7 +76,6 @@ public class NotationSplitPane extends JSplitPane {
      * #                    Overrides                                          #
      * #########################################################################
      */
-
     @Override
     public void paintComponent(Graphics graphics)
     {

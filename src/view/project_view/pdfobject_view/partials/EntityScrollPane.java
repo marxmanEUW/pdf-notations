@@ -1,13 +1,12 @@
-package view.partials.partials.partials;
+package view.project_view.pdfobject_view.partials;
 
 import model.PdfObject;
-import view.partials.partials.partials.partials.NotationEntityTableModel;
-import view.test.PdfObjectView;
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class NotationEntityScrollPane extends JScrollPane {
+public class EntityScrollPane extends JScrollPane {
 
     /*
      * @todo make editable
@@ -16,7 +15,8 @@ public class NotationEntityScrollPane extends JScrollPane {
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
-    private NotationEntityTableModel notationEntityTableModel;
+
+    private EntityTableModel entityTableModel;
 
     private JTable notationEntityTable;
 
@@ -26,13 +26,11 @@ public class NotationEntityScrollPane extends JScrollPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
-
-    public NotationEntityScrollPane()
+    public EntityScrollPane()
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        //this.notationEntityTableModel = new NotationEntityTableModel();
         this.notationEntityTable = new JTable();
     }
 
@@ -48,11 +46,9 @@ public class NotationEntityScrollPane extends JScrollPane {
         this.pdfObjectView = pdfObjectView;
 
         this.pdfObject = this.pdfObjectView.getPdfObject();
-        this.notationEntityTableModel = this.pdfObjectView.getNotationEntityTableModel();
+        this.entityTableModel = this.pdfObjectView.getEntityTableModel();
 
-        //this.notationEntityTableModel.initialize(this.pdfObject);
-
-        this.notationEntityTable.setModel(this.notationEntityTableModel);
+        this.notationEntityTable.setModel(this.entityTableModel);
         this.getViewport().add(notationEntityTable);
     }
 
@@ -64,7 +60,7 @@ public class NotationEntityScrollPane extends JScrollPane {
 
     public void updateTable()
     {
-        this.notationEntityTableModel.fireTableDataChanged();
+        this.entityTableModel.fireTableDataChanged();
     }
 
     /*

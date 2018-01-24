@@ -1,10 +1,14 @@
-package view.partials.partials.partials;
+package view.project_view.pdfobject_view.partials;
+
+
+import factories.PdfFactory;
+
+import model.PdfObject;
 
 import listeners.PdfAreaMouseAdapter;
-import factories.PdfFactory;
-import model.PdfObject;
 import listeners.PdfResizeTimerActionListener;
-import view.test.PdfObjectView;
+
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,22 +16,21 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+
 public class PdfArea extends JPanel {
 
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
-
     private final int NOTATION_RADIUS = 10;
 
-    private PdfAreaMouseAdapter pdfAreaMouseAdapter;
+    //private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
     private BufferedImage pdfImage;
-    private String pdfImagePath;
     private int initialImageWidth;
     private int initialImageHeight;
     private double zoomLevel;
@@ -39,7 +42,7 @@ public class PdfArea extends JPanel {
      * #########################################################################
      */
     /*
-     * @todo saubere Trennung zwischen Constructor und initialize-Methode fehlt
+     * @author  yxyxD
      */
     public PdfArea()
     {
@@ -47,21 +50,23 @@ public class PdfArea extends JPanel {
         this.zoomLevel = 1.0;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfAreaMouseAdapter = this.pdfObjectView.getPdfAreaMouseAdapter();
+        //this.pdfAreaMouseAdapter = this.pdfObjectView.getPdfAreaMouseAdapter();
         this.pdfObject = this.pdfObjectView.getPdfObject();
 
-        this.addMouseListener(this.pdfAreaMouseAdapter);
-        this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-
-
-        //this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
         //this.addMouseListener(this.pdfAreaMouseAdapter);
         //this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-        //this.pdfAreaMouseAdapter.initialize(this, this.pdfObject);
+        this.addMouseListener(this.pdfObjectView.getPdfAreaMouseClick());
+        this.addMouseWheelListener(this.pdfObjectView.getPdfAreaMouseWheel());
+
+
+        this.importNewPdf();
     }
 
 
@@ -102,11 +107,11 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
-    public void importNewPdf(String sourcePath)
+    public void importNewPdf()
     {
-        this.pdfImagePath = sourcePath;
+        if (this.pdfObject.getSourePath() == null) { return; }
 
-        this.pdfImage = PdfFactory.renderPdfAsImage(this.pdfImagePath);
+        this.pdfImage = PdfFactory.renderPdfAsImage(this.pdfObject.getSourePath());
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
@@ -134,20 +139,20 @@ public class PdfArea extends JPanel {
      */
     public void rerenderPdf()
     {
-        this.pdfAreaMouseAdapter.disableZoom();
+        //this.pdfAreaMouseAdapter.disableZoom();
         System.out.println("Zoom aus");
 
         // das geht, aber nicht schnell => neues Rendering bei
         // jedem Zoomvorgang
         this.pdfImage = PdfFactory.renderPdfWithZoom(
-            this.pdfImagePath,
+            this.pdfObject.getSourePath(),
             (float) this.zoomLevel
         );
 
         this.repaint();
 
 
-        this.pdfAreaMouseAdapter.enableZoom();
+        //this.pdfAreaMouseAdapter.enableZoom();
         System.out.println("Zoom an");
     }
 
@@ -259,10 +264,7 @@ public class PdfArea extends JPanel {
      */
     private void repaintPdfGraphics(Graphics graphics)
     {
-        if (this.pdfImage == null)
-        {
-            return;
-        }
+        if (this.pdfImage == null) { return; }
 
         this.setPreferredSize(new Dimension(
             this.pdfImage.getWidth(),

@@ -14,7 +14,10 @@ public class MouseWheelMovementTimerActionListener implements ActionListener {
         = (int) Math.ceil((double) this.ZOOM_STEP_PERCENTAGE / 2.0);
 
 
-    private PdfAreaMouseAdapter pdfAreaMouseAdapter;
+    private PdfAreaMouseWheel pdfAreaMouseWheel;
+
+    //private PdfAreaMouseAdapter pdfAreaMouseAdapter;
+
     private int mouseScrollCount;
 
 
@@ -23,10 +26,10 @@ public class MouseWheelMovementTimerActionListener implements ActionListener {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public MouseWheelMovementTimerActionListener(PdfAreaMouseAdapter pdfAreaMouseAdapter)
+    public MouseWheelMovementTimerActionListener(PdfAreaMouseWheel pdfAreaMouseWheel)
     {
-        this.pdfAreaMouseAdapter = pdfAreaMouseAdapter;
-        this.mouseScrollCount = this.pdfAreaMouseAdapter.getMouseScrollCount();
+        this.pdfAreaMouseWheel = pdfAreaMouseWheel;
+        this.mouseScrollCount = this.pdfAreaMouseWheel.getMouseScrollCount();
     }
 
 
@@ -39,9 +42,9 @@ public class MouseWheelMovementTimerActionListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent)
     {
         double zoomPercentage = this.getZoomLevelAsPercentage();
-        this.pdfAreaMouseAdapter.getPdfArea().resizePdf(zoomPercentage);
+        this.pdfAreaMouseWheel.getPdfArea().resizePdf(zoomPercentage);
 
-        this.pdfAreaMouseAdapter.resetMouseRollCount();
+        this.pdfAreaMouseWheel.resetMouseRollCount();
     }
 
 

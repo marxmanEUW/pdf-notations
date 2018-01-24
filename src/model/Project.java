@@ -12,7 +12,6 @@ public class Project {
      * #                    Constructor                                        #
      * #########################################################################
      */
-
     public Project()
     {
         this.pdfObject = new PdfObject();
@@ -24,7 +23,6 @@ public class Project {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
     public void initialize(String name)
     {
         this.name = name;
@@ -36,9 +34,19 @@ public class Project {
      * #                    Getter                                             #
      * #########################################################################
      */
-
     public PdfObject getPdfObject()
     {
         return pdfObject;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    public void setPdfObject(PdfObject pdfObject)
+    {
+        this.pdfObject = pdfObject;
     }
 }

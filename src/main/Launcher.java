@@ -24,10 +24,8 @@ public class Launcher {
         //PdfObject pdfObject = new PdfObject();
         // @todo MVC welche Teil muss welchen Teil kennen
 
-        mainFrame.initialize(project);
+        //mainFrame.initialize(project);
 
-        mainFrame.pdfObjectView.getPdfArea().importNewPdf(PATH_TO_PDF1);
-
-        //mainFrame.centerSplitPane.pdfScrollPane.importNewPdf(PATH_TO_PDF1);
+        mainFrame.importNewPdf(PATH_TO_PDF1);
     }
 }

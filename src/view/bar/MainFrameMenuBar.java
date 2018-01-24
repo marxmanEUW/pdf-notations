@@ -1,4 +1,4 @@
-package view.partials;
+package view.bar;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;

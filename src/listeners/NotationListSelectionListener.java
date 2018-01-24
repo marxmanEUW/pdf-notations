@@ -1,8 +1,8 @@
 package listeners;
 
 import model.PdfObject;
-import view.partials.partials.NotationSplitPane;
-import view.test.PdfObjectView;
+import view.project_view.pdfobject_view.partials.NotationSplitPane;
+import view.project_view.pdfobject_view.PdfObjectView;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
