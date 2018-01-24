@@ -1,4 +1,4 @@
-package view.project_view.pdfobject_view.partials;
+package view.projectView.pdfObjectView.partials;
 
 
 import factories.PdfFactory;
@@ -7,9 +7,9 @@ import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
 import model.PdfObject;
 
-import listeners.PdfRenderingTimer;
+import timer.PdfRenderingTimer;
 
-import view.project_view.pdfobject_view.PdfObjectView;
+import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;

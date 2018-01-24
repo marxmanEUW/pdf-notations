@@ -1,16 +1,16 @@
-package view.project_view.pdfobject_view;
+package view.projectView.pdfObjectView;
 
 import listeners.NotationListSelectionListener;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
 import model.PdfObject;
-import view.project_view.pdfobject_view.partials.NotationSplitPane;
-import view.project_view.pdfobject_view.partials.PdfScrollPane;
-import view.project_view.pdfobject_view.partials.EntityScrollPane;
-import view.project_view.pdfobject_view.partials.ListScrollPane;
-import view.project_view.pdfobject_view.partials.PdfArea;
-import view.project_view.pdfobject_view.partials.EntityTableModel;
-import view.project_view.pdfobject_view.partials.ListTableModel;
+import view.projectView.pdfObjectView.partials.NotationSplitPane;
+import view.projectView.pdfObjectView.partials.PdfScrollPane;
+import view.projectView.pdfObjectView.partials.EntityScrollPane;
+import view.projectView.pdfObjectView.partials.ListScrollPane;
+import view.projectView.pdfObjectView.partials.PdfArea;
+import view.projectView.pdfObjectView.partials.EntityTableModel;
+import view.projectView.pdfObjectView.partials.ListTableModel;
 
 import javax.swing.*;
 import java.awt.*;

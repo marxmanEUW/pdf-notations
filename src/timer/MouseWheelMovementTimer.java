@@ -1,4 +1,6 @@
-package listeners;
+package timer;
+
+import listeners.PdfAreaMouseWheel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +15,7 @@ public class MouseWheelMovementTimer implements ActionListener {
     private final int RESIDUAL_VALUE_ROUNDING_BORDER
         = (int) Math.ceil((double) this.ZOOM_STEP_PERCENTAGE / 2.0);
 
-
     private PdfAreaMouseWheel pdfAreaMouseWheel;
-
-    //private PdfAreaMouseAdapter pdfAreaMouseAdapter;
 
     private int mouseScrollCount;
 

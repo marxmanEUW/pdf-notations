@@ -1,24 +1,26 @@
-package view.project_view.pdfobject_view.partials;
+package view.projectView.pdfObjectView.partials;
 
+import listeners.NotationListSelectionListener;
 import model.PdfObject;
-import view.project_view.pdfobject_view.PdfObjectView;
+import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EntityScrollPane extends JScrollPane {
+public class ListScrollPane extends JScrollPane {
 
     /*
-     * @todo make editable
      * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
      */
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
-    private EntityTableModel entityTableModel;
+    private ListTableModel listTableModel;
+    private ListSelectionModel listSelectionModel;
+    private NotationListSelectionListener notationListSelectionListener;
 
-    private JTable notationEntityTable;
+    private JTable notationListTable;
 
 
     /*
@@ -26,12 +28,15 @@ public class EntityScrollPane extends JScrollPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public EntityScrollPane()
+
+    public ListScrollPane()
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.notationEntityTable = new JTable();
+        this.notationListTable = new JTable();
+
+        this.listSelectionModel = this.notationListTable.getSelectionModel();
     }
 
 
@@ -46,11 +51,20 @@ public class EntityScrollPane extends JScrollPane {
         this.pdfObjectView = pdfObjectView;
 
         this.pdfObject = this.pdfObjectView.getPdfObject();
-        this.entityTableModel = this.pdfObjectView.getEntityTableModel();
 
-        this.notationEntityTable.setModel(this.entityTableModel);
-        this.getViewport().add(notationEntityTable);
+        this.listTableModel = this.pdfObjectView.getListTableModel();
+        this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
+
+
+
+        this.notationListTable.setModel(this.listTableModel);
+
+        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
+        this.notationListTable.setSelectionModel(this.listSelectionModel);
+
+        this.getViewport().add(notationListTable);
     }
+
 
     /*
      * #########################################################################
@@ -60,8 +74,9 @@ public class EntityScrollPane extends JScrollPane {
 
     public void updateTable()
     {
-        this.entityTableModel.fireTableDataChanged();
+        this.listTableModel.fireTableDataChanged();
     }
+
 
     /*
      * #########################################################################

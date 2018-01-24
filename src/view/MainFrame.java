@@ -2,11 +2,9 @@ package view;
 
 import listeners.MenuBarActionListener;
 import gui.Constants;
-import main.Launcher;
 import model.PdfObject;
-import model.Project;
 import view.bar.MainFrameMenuBar;
-import view.project_view.pdfobject_view.PdfObjectView;
+import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;

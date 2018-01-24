@@ -1,6 +1,6 @@
-package listeners;
+package timer;
 
-import view.project_view.pdfobject_view.partials.PdfArea;
+import view.projectView.pdfObjectView.partials.PdfArea;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

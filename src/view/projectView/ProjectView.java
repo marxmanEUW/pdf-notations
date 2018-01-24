@@ -1,4 +1,4 @@
-package view.project_view;
+package view.projectView;
 
 
 /*

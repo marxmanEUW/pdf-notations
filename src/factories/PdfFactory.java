@@ -6,6 +6,10 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/*
+ * @todo diese Klasse zur PdfObjectFactory machen
+ * @todo Rendering-Vorgang in einem eigenen Thread (parallel)
+ */
 public abstract class PdfFactory {
 
     /*

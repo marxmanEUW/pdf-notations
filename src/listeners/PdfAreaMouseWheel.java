@@ -1,8 +1,9 @@
 package listeners;
 
 import model.PdfObject;
-import view.project_view.pdfobject_view.PdfObjectView;
-import view.project_view.pdfobject_view.partials.PdfArea;
+import timer.MouseWheelMovementTimer;
+import view.projectView.pdfObjectView.PdfObjectView;
+import view.projectView.pdfObjectView.partials.PdfArea;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

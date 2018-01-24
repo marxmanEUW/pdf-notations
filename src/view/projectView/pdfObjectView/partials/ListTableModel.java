@@ -1,8 +1,8 @@
-package view.project_view.pdfobject_view.partials;
+package view.projectView.pdfObjectView.partials;
 
 import model.Notation;
 import model.PdfObject;
-import view.project_view.pdfobject_view.PdfObjectView;
+import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.table.AbstractTableModel;
 
