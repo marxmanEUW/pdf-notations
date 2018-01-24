@@ -5,7 +5,7 @@ import view.project_view.pdfobject_view.partials.PdfArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PdfResizeTimerActionListener implements ActionListener {
+public class PdfRenderingTimer implements ActionListener {
 
     private PdfArea pdfArea;
 
@@ -14,7 +14,7 @@ public class PdfResizeTimerActionListener implements ActionListener {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public PdfResizeTimerActionListener(PdfArea pdfArea)
+    public PdfRenderingTimer(PdfArea pdfArea)
     {
         this.pdfArea = pdfArea;
     }

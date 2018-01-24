@@ -3,10 +3,11 @@ package view.project_view.pdfobject_view.partials;
 
 import factories.PdfFactory;
 
+import listeners.PdfAreaMouseClick;
+import listeners.PdfAreaMouseWheel;
 import model.PdfObject;
 
-import listeners.PdfAreaMouseAdapter;
-import listeners.PdfResizeTimerActionListener;
+import listeners.PdfRenderingTimer;
 
 import view.project_view.pdfobject_view.PdfObjectView;
 
@@ -24,11 +25,13 @@ public class PdfArea extends JPanel {
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
 
-    //private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private Timer pdfResizedTimer;
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
+
+    private PdfAreaMouseClick pdfAreaMouseClick;
+    private PdfAreaMouseWheel pdfAreaMouseWheel;
 
     private BufferedImage pdfImage;
     private int initialImageWidth;
@@ -56,14 +59,14 @@ public class PdfArea extends JPanel {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        //this.pdfAreaMouseAdapter = this.pdfObjectView.getPdfAreaMouseAdapter();
         this.pdfObject = this.pdfObjectView.getPdfObject();
 
-        //this.addMouseListener(this.pdfAreaMouseAdapter);
-        //this.addMouseWheelListener(this.pdfAreaMouseAdapter);
-        this.addMouseListener(this.pdfObjectView.getPdfAreaMouseClick());
-        this.addMouseWheelListener(this.pdfObjectView.getPdfAreaMouseWheel());
+        this.pdfAreaMouseClick = this.pdfObjectView.getPdfAreaMouseClick();
+        this.pdfAreaMouseWheel = this.pdfObjectView.getPdfAreaMouseWheel();
+
+
+        this.addMouseListener(this.pdfAreaMouseClick);
+        this.addMouseWheelListener(this.pdfAreaMouseWheel);
 
 
         this.importNewPdf();
@@ -128,7 +131,7 @@ public class PdfArea extends JPanel {
             this.zoomLevel += zoomChange;
 
             this.zoomPdf(zoomChange);
-            this.refreshTimerOnRerenderingPdf();
+            this.refreshTimerOnRenderingPdf();
         }
     }
 
@@ -225,7 +228,7 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
-    private void refreshTimerOnRerenderingPdf()
+    private void refreshTimerOnRenderingPdf()
     {
         if (this.pdfResizedTimer != null && this.pdfResizedTimer.isRunning())
         {
@@ -234,7 +237,7 @@ public class PdfArea extends JPanel {
 
         this.pdfResizedTimer = new Timer(
             this.PDF_RESIZED_TIMER_DELAY,
-            new PdfResizeTimerActionListener(this)
+            new PdfRenderingTimer(this)
         );
         this.pdfResizedTimer.setRepeats(false);
         this.pdfResizedTimer.start();
@@ -256,8 +259,6 @@ public class PdfArea extends JPanel {
 
         return isPdfZoomable;
     }
-
-
 
     /*
      * @author  yxyxD
@@ -286,8 +287,10 @@ public class PdfArea extends JPanel {
         for (Point point : this.pdfObject.getListOfPoints())
         {
             //@todo name refactoring
-            int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS) * this.zoomLevel);
-            int upperLeftY = (int) ((double) (point.y - this.NOTATION_RADIUS) * this.zoomLevel);
+            int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS)
+                * this.zoomLevel);
+            int upperLeftY = (int) ((double) (point.y - this.NOTATION_RADIUS)
+                * this.zoomLevel);
             int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
                 * this.zoomLevel);
             int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)

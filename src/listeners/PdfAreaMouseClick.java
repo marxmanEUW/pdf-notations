@@ -4,17 +4,16 @@ import model.PdfObject;
 import view.project_view.pdfobject_view.PdfObjectView;
 import view.project_view.pdfobject_view.partials.PdfArea;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class PdfAreaMouseClick implements MouseListener {
+public class PdfAreaMouseClick extends MouseAdapter {
 
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
     private PdfArea pdfArea;
-
 
     public PdfAreaMouseClick()
     {
@@ -53,24 +52,24 @@ public class PdfAreaMouseClick implements MouseListener {
     @Override
     public void mousePressed(MouseEvent mouseEvent)
     {
-        System.out.println("");
+        System.out.println("Mouse pressed");
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        System.out.println("");
+        System.out.println("Mouse released");
     }
 
     @Override
     public void mouseEntered(MouseEvent mouseEvent)
     {
-        System.out.println("");
+        System.out.println("Mouse entered");
     }
 
     @Override
     public void mouseExited(MouseEvent mouseEvent)
     {
-        System.out.println("");
+        System.out.println("Mouse exited");
     }
 }

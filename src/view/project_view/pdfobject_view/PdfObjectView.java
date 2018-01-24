@@ -1,7 +1,6 @@
 package view.project_view.pdfobject_view;
 
 import listeners.NotationListSelectionListener;
-import listeners.PdfAreaMouseAdapter;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
 import model.PdfObject;
@@ -31,7 +30,6 @@ public class PdfObjectView extends JSplitPane {
 
 
     private NotationListSelectionListener notationListSelectionListener;
-    //private PdfAreaMouseAdapter pdfAreaMouseAdapter;
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
 
@@ -60,7 +58,6 @@ public class PdfObjectView extends JSplitPane {
 
         // listeners
         this.notationListSelectionListener = new NotationListSelectionListener();
-        //this.pdfAreaMouseAdapter = new PdfAreaMouseAdapter();
         this.pdfAreaMouseClick = new PdfAreaMouseClick();
         this.pdfAreaMouseWheel = new PdfAreaMouseWheel();
 
@@ -154,12 +151,6 @@ public class PdfObjectView extends JSplitPane {
         return this.notationListSelectionListener;
     }
 
-    /*
-    public PdfAreaMouseAdapter getPdfAreaMouseAdapter()
-    {
-        return this.pdfAreaMouseAdapter;
-    }
-    */
 
     public PdfAreaMouseClick getPdfAreaMouseClick()
     {

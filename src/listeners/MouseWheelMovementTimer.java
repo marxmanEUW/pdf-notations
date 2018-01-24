@@ -3,7 +3,7 @@ package listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MouseWheelMovementTimerActionListener implements ActionListener {
+public class MouseWheelMovementTimer implements ActionListener {
 
     private final double TOTAL_PERCENTAGE = 100.0;
 
@@ -26,7 +26,7 @@ public class MouseWheelMovementTimerActionListener implements ActionListener {
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public MouseWheelMovementTimerActionListener(PdfAreaMouseWheel pdfAreaMouseWheel)
+    public MouseWheelMovementTimer(PdfAreaMouseWheel pdfAreaMouseWheel)
     {
         this.pdfAreaMouseWheel = pdfAreaMouseWheel;
         this.mouseScrollCount = this.pdfAreaMouseWheel.getMouseScrollCount();
