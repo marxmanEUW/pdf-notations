@@ -41,7 +41,6 @@ public class ToolBarActionListener implements ActionListener {
         switch (e.getActionCommand()) {
             case Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME:
                 System.out.println("Ich erstelle ein neues Projekt.");
-                System.out.println(((JButton) e.getSource()).getActionListeners().length);
                 break;
             case Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME:
                 // @todo OpenFileDialog

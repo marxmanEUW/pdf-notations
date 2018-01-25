@@ -22,9 +22,6 @@ public class MainFrame extends JFrame {
     private PdfObjectView pdfObjectView;
     private PdfObject pdfObject;
 
-    //private Project project;
-
-
     /*
      * #########################################################################
      * #                    Constructor                                        #

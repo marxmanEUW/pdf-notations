@@ -2,10 +2,12 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Cursor;
 
 import gui.Constants;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
+import view.projectView.pdfObjectView.partials.PdfArea;
 
 
 public class MenuBarActionListener implements ActionListener {
@@ -73,8 +75,8 @@ public class MenuBarActionListener implements ActionListener {
             case Constants.MENUITEM_ADD_NOTATION_NAME:
                 // @todo Add Notation
                 System.out.println("Ich bin ein neue Notation.");
-                this.getPdfObject().addNotation();
-
+                this.getPdfArea().setAddingNotation(true);
+                this.getPdfArea().setCursorTypeToCrosshair();
                 break;
             case Constants.MENUITEM_ABOUT_NAME:
                 // @todo Show About Information
@@ -94,5 +96,13 @@ public class MenuBarActionListener implements ActionListener {
     private PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfArea getPdfArea()
+    {
+        return this.pdfObjectView.getPdfArea();
     }
 }

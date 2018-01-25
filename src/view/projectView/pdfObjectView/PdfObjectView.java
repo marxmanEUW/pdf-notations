@@ -95,7 +95,6 @@ public class PdfObjectView extends JSplitPane {
         this.pdfAreaMouseClick.initialize(this);
         this.pdfAreaMouseWheel.initialize(this);
 
-
         this.setLeftComponent(this.pdfScrollPane);
         this.setRightComponent(this.notationSplitPane);
     }
@@ -161,6 +160,12 @@ public class PdfObjectView extends JSplitPane {
     {
         return this.pdfAreaMouseWheel;
     }
+
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
 
     public void setPdfObject(PdfObject pdfObject)
     {

@@ -37,6 +37,7 @@ public class PdfArea extends JPanel {
     private int initialImageHeight;
     private double zoomLevel;
 
+    private boolean addingNotation;
 
     /*
      * #########################################################################
@@ -50,6 +51,7 @@ public class PdfArea extends JPanel {
     {
         this.pdfImage = null;
         this.zoomLevel = 1.0;
+        this.addingNotation = false;
     }
 
     /*
@@ -66,8 +68,8 @@ public class PdfArea extends JPanel {
         this.addMouseListener(this.pdfAreaMouseClick);
         this.addMouseWheelListener(this.pdfAreaMouseWheel);
 
-
         this.importNewPdf();
+        this.setFocusable(true);
     }
 
 
@@ -84,7 +86,49 @@ public class PdfArea extends JPanel {
         return zoomLevel;
     }
 
+    public boolean getAddingNotation()
+    {
+        return addingNotation;
+    }
 
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
+    }
+
+
+
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public void setAddingNotation(boolean addingNotation)
+    {
+        this.addingNotation = addingNotation;
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    public void setCursorTypeToCrosshair()
+    {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    public void setCursorTypeToDeafault()
+    {
+        this.setCursor(Cursor.getDefaultCursor());
+    }
     /*
      * #########################################################################
      * #                    Overrides                                          #
@@ -301,14 +345,6 @@ public class PdfArea extends JPanel {
                 ovalHeight
             );
         }
-    }
-
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.pdfObjectView.getPdfObject();
     }
 }
 
