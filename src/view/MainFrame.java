@@ -122,9 +122,6 @@ public class MainFrame extends JFrame {
 
         this.pdfObjectView.setPdfObject(this.pdfObject);
         this.pdfObjectView.updateView();
-
-
-        this.revalidate();
     }
 
 
