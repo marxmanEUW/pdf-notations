@@ -73,7 +73,7 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setActionCommand(Constants.TOOLBAR_BUTTON_ADD_NOTATION_NAME);
 
         // Tooltip Text
-        //this.buttonNewProject.setToolTipText(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
+        this.buttonNewProject.setToolTipText(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
         this.buttonOpenProject.setToolTipText(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME);
         this.buttonSaveProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME);
         this.buttonSaveAsProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME);
@@ -97,10 +97,7 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
 
         // Action Listener
-        System.out.println((this.buttonNewProject.getActionListeners().toString()));
-        System.out.println(this.toolBarActionListener.toString());
         this.buttonNewProject.addActionListener(this.toolBarActionListener);
-        System.out.println((this.buttonNewProject.getActionListeners().length));
         this.buttonOpenProject.addActionListener(this.toolBarActionListener);
         this.buttonSaveProject.addActionListener(this.toolBarActionListener);
         this.buttonSaveAsProject.addActionListener(this.toolBarActionListener);

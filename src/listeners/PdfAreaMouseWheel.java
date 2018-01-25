@@ -14,7 +14,6 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     private final int TIMER_DELAY = 100;
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
     private PdfArea pdfArea;
 
     private Timer mouseWheelMovementTimer;
@@ -32,7 +31,6 @@ public class PdfAreaMouseWheel extends MouseAdapter {
         this.pdfObjectView = pdfObjectView;
 
         this.pdfArea = this.pdfObjectView.getPdfArea();
-        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 
@@ -110,5 +108,13 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     private void increaseMouseRollCount(int wheelRotation)
     {
         this.mouseScrollCount += (wheelRotation * (-1));
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

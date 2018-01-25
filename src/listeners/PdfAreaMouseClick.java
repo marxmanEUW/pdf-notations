@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 public class PdfAreaMouseClick extends MouseAdapter {
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private PdfArea pdfArea;
 
@@ -24,7 +23,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
         this.pdfObjectView = pdfObjectView;
 
         this.pdfArea = this.pdfObjectView.getPdfArea();
-        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 
@@ -43,7 +41,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
         System.out.println("y: " + Integer.toString(y));
         System.out.println("--------------------------");
 
-        this.pdfObject.addNotationAtXY(x, y);
+        this.getPdfObject().addNotationAtXY(x, y);
         this.pdfArea.repaint();
     }
 
@@ -70,5 +68,19 @@ public class PdfAreaMouseClick extends MouseAdapter {
     public void mouseExited(MouseEvent mouseEvent)
     {
         System.out.println("Mouse exited");
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

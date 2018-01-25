@@ -11,7 +11,6 @@ import javax.swing.*;
 public class PdfScrollPane extends JScrollPane {
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private PdfArea pdfArea;
 
@@ -43,10 +42,23 @@ public class PdfScrollPane extends JScrollPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfObject = this.pdfObjectView.getPdfObject();
         this.pdfArea = this.pdfObjectView.getPdfArea();
 
         this.getViewport().add(this.pdfArea);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }
 

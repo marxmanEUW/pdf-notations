@@ -9,7 +9,6 @@ import javax.swing.table.AbstractTableModel;
 public class ListTableModel extends AbstractTableModel {
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
 
     /*
@@ -21,8 +20,6 @@ public class ListTableModel extends AbstractTableModel {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 
@@ -35,7 +32,7 @@ public class ListTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return this.pdfObject.getListOfNotationConsSize();
+        return this.getPdfObject().getListOfNotationConsSize();
     }
 
     @Override
@@ -48,8 +45,8 @@ public class ListTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         switch (columnIndex){
-            case 0: return this.pdfObject.getListOfNotations().get(rowIndex).getId();
-            case 1: return this.pdfObject.getListOfNotations().get(rowIndex).getName();
+            case 0: return this.getPdfObject().getListOfNotations().get(rowIndex).getId();
+            case 1: return this.getPdfObject().getListOfNotations().get(rowIndex).getName();
             default: return null;
         }
     }
@@ -69,5 +66,18 @@ public class ListTableModel extends AbstractTableModel {
     {
         // @todo Rückgabe dynamisch machen
         return String.class;
+    }
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

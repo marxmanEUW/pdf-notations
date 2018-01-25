@@ -118,16 +118,13 @@ public class MainFrame extends JFrame {
     public void importNewPdf(String sourcePath)
     {
         this.pdfObject = new PdfObject();
-
-
-        //this.pdfObjectView.initialize(this.project.getPdfObject());
-        //this.pdfObjectView.updateView();
-
-        this.getContentPane().remove(this.pdfObjectView);
-        this.pdfObjectView = new PdfObjectView();
         this.pdfObject.setSourePath(sourcePath);
 
-        this.initialize();
+        this.pdfObjectView.setPdfObject(this.pdfObject);
+        this.pdfObjectView.updateView();
+
+
+        this.revalidate();
     }
 
 

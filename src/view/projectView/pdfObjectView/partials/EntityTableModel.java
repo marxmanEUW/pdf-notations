@@ -9,7 +9,6 @@ import javax.swing.table.AbstractTableModel;
 public class EntityTableModel extends AbstractTableModel {
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
 
     /*
@@ -20,8 +19,6 @@ public class EntityTableModel extends AbstractTableModel {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        this.pdfObject = this.pdfObjectView.getPdfObject();
     }
 
 
@@ -46,16 +43,16 @@ public class EntityTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        if (this.pdfObject.getSelectedNotationIndex() == -1){
+        if (this.getPdfObject().getSelectedNotationIndex() == -1){
             return null;
         }
 
         if (columnIndex == 1){
             switch (rowIndex){
-                case 0: return this.pdfObject.getSelectedNotation().getId();
-                case 1: return this.pdfObject.getSelectedNotation().getName();
-                case 2: return this.pdfObject.getSelectedNotation().getX();
-                case 3: return this.pdfObject.getSelectedNotation().getY();
+                case 0: return this.getPdfObject().getSelectedNotation().getId();
+                case 1: return this.getPdfObject().getSelectedNotation().getName();
+                case 2: return this.getPdfObject().getSelectedNotation().getX();
+                case 3: return this.getPdfObject().getSelectedNotation().getY();
                 default: return null;
             }
         } else {
@@ -84,5 +81,19 @@ public class EntityTableModel extends AbstractTableModel {
     {
         // @todo Rückgabe dynamisch machen
         return String.class;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

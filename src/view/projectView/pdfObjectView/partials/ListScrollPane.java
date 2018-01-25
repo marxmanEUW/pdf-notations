@@ -14,7 +14,6 @@ public class ListScrollPane extends JScrollPane {
      */
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private ListTableModel listTableModel;
     private ListSelectionModel listSelectionModel;
@@ -49,8 +48,6 @@ public class ListScrollPane extends JScrollPane {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        this.pdfObject = this.pdfObjectView.getPdfObject();
 
         this.listTableModel = this.pdfObjectView.getListTableModel();
         this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
@@ -88,5 +85,19 @@ public class ListScrollPane extends JScrollPane {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

@@ -12,7 +12,6 @@ public class NotationSplitPane extends JSplitPane {
         = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.4);
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private ListScrollPane notationListScrollPane;
     private EntityScrollPane entityScrollPane;
@@ -44,7 +43,6 @@ public class NotationSplitPane extends JSplitPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfObject = this.pdfObjectView.getPdfObject();
         this.notationListScrollPane = this.pdfObjectView.getNotationListScrollPane();
         this.entityScrollPane = this.pdfObjectView.getEntityScrollPane();
         //this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
@@ -83,4 +81,16 @@ public class NotationSplitPane extends JSplitPane {
     }
 
 
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
+    }
 }

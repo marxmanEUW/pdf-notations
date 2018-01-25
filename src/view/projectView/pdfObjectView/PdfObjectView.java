@@ -162,11 +162,17 @@ public class PdfObjectView extends JSplitPane {
         return this.pdfAreaMouseWheel;
     }
 
+    public void setPdfObject(PdfObject pdfObject)
+    {
+        this.pdfObject = pdfObject;
+    }
+
     /*
      * @author  yxyxD
      */
     public void updateView()
     {
+        // @todo update Notationlist and NotationEntity
         this.pdfArea.importNewPdf();
     }
 }

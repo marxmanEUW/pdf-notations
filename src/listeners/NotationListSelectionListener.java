@@ -13,7 +13,6 @@ public class NotationListSelectionListener implements ListSelectionListener {
     // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
     private NotationSplitPane notationSplitPane;
 
 
@@ -27,7 +26,6 @@ public class NotationListSelectionListener implements ListSelectionListener {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfObject = this.pdfObjectView.getPdfObject();
         this.notationSplitPane = this.pdfObjectView.getNotationSplitPane();
     }
 
@@ -42,7 +40,20 @@ public class NotationListSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e)
     {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-        this.pdfObject.setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+        this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
         this.notationSplitPane.updateNotationEntityTable();
+    }
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

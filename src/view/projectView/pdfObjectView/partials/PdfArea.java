@@ -28,7 +28,6 @@ public class PdfArea extends JPanel {
     private Timer pdfResizedTimer;
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
@@ -59,7 +58,6 @@ public class PdfArea extends JPanel {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-        this.pdfObject = this.pdfObjectView.getPdfObject();
 
         this.pdfAreaMouseClick = this.pdfObjectView.getPdfAreaMouseClick();
         this.pdfAreaMouseWheel = this.pdfObjectView.getPdfAreaMouseWheel();
@@ -112,9 +110,9 @@ public class PdfArea extends JPanel {
      */
     public void importNewPdf()
     {
-        if (this.pdfObject.getSourePath() == null) { return; }
+        if (this.getPdfObject().getSourePath() == null) { return; }
 
-        this.pdfImage = PdfFactory.renderPdfAsImage(this.pdfObject.getSourePath());
+        this.pdfImage = PdfFactory.renderPdfAsImage(this.getPdfObject().getSourePath());
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
@@ -148,7 +146,7 @@ public class PdfArea extends JPanel {
         // das geht, aber nicht schnell => neues Rendering bei
         // jedem Zoomvorgang
         this.pdfImage = PdfFactory.renderPdfWithZoom(
-            this.pdfObject.getSourePath(),
+            this.getPdfObject().getSourePath(),
             (float) this.zoomLevel
         );
 
@@ -280,11 +278,11 @@ public class PdfArea extends JPanel {
      */
     private void repaintNotationPoints(Graphics graphics)
     {
-        if (this.pdfObject == null) { return; }
-        if (this.pdfObject.getListOfPoints() == null) { return; }
+        if (this.getPdfObject() == null) { return; }
+        if (this.getPdfObject().getListOfPoints() == null) { return; }
 
         graphics.setColor(Color.red);
-        for (Point point : this.pdfObject.getListOfPoints())
+        for (Point point : this.getPdfObject().getListOfPoints())
         {
             //@todo name refactoring
             int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS)
@@ -305,6 +303,12 @@ public class PdfArea extends JPanel {
         }
     }
 
-
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
+    }
 }
 

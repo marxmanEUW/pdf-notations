@@ -14,7 +14,6 @@ public class EntityScrollPane extends JScrollPane {
      */
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
 
     private EntityTableModel entityTableModel;
 
@@ -45,12 +44,12 @@ public class EntityScrollPane extends JScrollPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfObject = this.pdfObjectView.getPdfObject();
         this.entityTableModel = this.pdfObjectView.getEntityTableModel();
 
         this.notationEntityTable.setModel(this.entityTableModel);
         this.getViewport().add(notationEntityTable);
     }
+
 
     /*
      * #########################################################################
@@ -63,6 +62,7 @@ public class EntityScrollPane extends JScrollPane {
         this.entityTableModel.fireTableDataChanged();
     }
 
+
     /*
      * #########################################################################
      * #                    Overrides                                          #
@@ -73,5 +73,19 @@ public class EntityScrollPane extends JScrollPane {
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }
