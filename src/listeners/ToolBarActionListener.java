@@ -1,6 +1,8 @@
 package listeners;
 
 import gui.Constants;
+import model.PdfObject;
+import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +10,31 @@ import java.awt.event.ActionListener;
 
 public class ToolBarActionListener implements ActionListener {
 
-    // @todo actions are fired two times, why are there two ACtionListeners added to every Button????
+    private PdfObjectView pdfObjectView;
 
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public void initialize(PdfObjectView pdfObjectView)
+    {
+        this.pdfObjectView = pdfObjectView;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -48,5 +73,19 @@ public class ToolBarActionListener implements ActionListener {
                 break;
 
         }
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
     }
 }

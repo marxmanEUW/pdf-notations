@@ -51,8 +51,6 @@ public class MainFrame extends JFrame {
 
         this.pdfObjectView = new PdfObjectView();
         this.pdfObject = new PdfObject();
-
-        //this.project = new Project();
     }
 
 
@@ -61,16 +59,14 @@ public class MainFrame extends JFrame {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-    public void initialize(/*Project project*/)
+    public void initialize()
     {
-        //this.project = project;
+        this.mbActionListener.initialize(this.pdfObjectView);
 
         this.menuBar.initialize(this.mbActionListener);
         this.toolBar.initialize(this.tbActionListener);
-        /*
-         * @todo -> marxmanEUW: we decided not to use the Project-model at all
-         */
-        //this.mbActionListener.initialize(this.project);
+
+
         //this.pdfObject.setSourePath(Launcher.PATH_TO_PDF1);
         this.pdfObjectView.initialize(this.pdfObject);
 
@@ -105,6 +101,11 @@ public class MainFrame extends JFrame {
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
+    }
+
+    public PdfObject getPdfObject()
+    {
+        return pdfObject;
     }
 
     /*

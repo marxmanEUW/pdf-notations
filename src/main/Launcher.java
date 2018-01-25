@@ -19,8 +19,8 @@ public class Launcher {
     public static void main(String[] args) throws IOException
     {
         MainFrame mainFrame = new MainFrame();
-        Project project = new Project();
-        project.initialize(PROJECT_NAME);
+        //Project project = new Project();
+        //project.initialize(PROJECT_NAME);
         //PdfObject pdfObject = new PdfObject();
         // @todo MVC welche Teil muss welchen Teil kennen
 
