@@ -412,6 +412,11 @@ public class PdfArea extends JPanel {
 
     public Notation getClickedNotation(Point point)
     {
+        if (this.getPdfObject() == null)
+        {
+            return null;
+        }
+
         Notation clickedNotation = null;
 
         // get coordinates of actual point (without zoom factor)

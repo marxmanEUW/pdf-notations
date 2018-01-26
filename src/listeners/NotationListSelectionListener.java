@@ -39,9 +39,12 @@ public class NotationListSelectionListener implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e)
     {
-        ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-        this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
-        this.notationSplitPane.updateNotationEntityTable();
+        if(this.getPdfObject() != null)
+        {
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+            this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+            this.pdfObjectView.getEntityScrollPane().updateTable();
+        }
     }
 
     /*

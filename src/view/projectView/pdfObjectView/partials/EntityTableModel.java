@@ -31,7 +31,13 @@ public class EntityTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return Notation.INFORMATION_COUNT + 2;
+        if (this.getPdfObject() == null)
+        {
+            return 0;
+        } else
+        {
+            return Notation.INFORMATION_COUNT + 2;
+        }
     }
 
     @Override
@@ -43,6 +49,11 @@ public class EntityTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
+        if (this.getPdfObject() == null)
+        {
+            return null;
+        }
+
         if (this.getPdfObject().getSelectedNotationIndex() == -1){
             return null;
         }

@@ -76,7 +76,7 @@ public class PdfObject {
         return listOfPoints;
     }
 
-    public int getListOfNotationConsSize()
+    public int getListOfNotationsSize()
     {
         return this.listOfNotations.size();
     }
@@ -91,26 +91,6 @@ public class PdfObject {
         return selectedNotationIndex;
     }
 
-
-
-    /*
-     * @author  marxmanEUW
-     * @todo calculate scaled x and y when zoomed in
-     */
-    public ArrayList<Notation> isNotationNear(int x, int y, int radius)
-    {
-        ArrayList<Notation> returnArrayList = new ArrayList<>();
-        double distance;
-
-        for (Notation notation : this.getListOfNotations()) {
-            distance = Math.sqrt((notation.getX() - x)^2 + (notation.getY() - y)^2);
-            if(distance <= radius){
-                returnArrayList.add(notation);
-            }
-        }
-
-        return returnArrayList;
-    }
 
     /*
      * #########################################################################

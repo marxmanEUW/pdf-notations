@@ -45,6 +45,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
             this.getPdfArea().repaint();
             this.getPdfArea().setCursorTypeToDefault();
             this.getPdfArea().setAddingNotation(false);
+            this.pdfObjectView.getNotationListScrollPane().updateTable();
         }
 
 

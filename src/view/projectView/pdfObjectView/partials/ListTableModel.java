@@ -32,7 +32,13 @@ public class ListTableModel extends AbstractTableModel {
     @Override
     public int getRowCount()
     {
-        return this.getPdfObject().getListOfNotationConsSize();
+        if (this.getPdfObject() == null)
+        {
+            return 0;
+        } else
+        {
+            return this.getPdfObject().getListOfNotationsSize();
+        }
     }
 
     @Override
@@ -44,6 +50,11 @@ public class ListTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
+        if (this.getPdfObject() == null)
+        {
+            return null;
+        }
+
         switch (columnIndex){
             case 0: return this.getPdfObject().getListOfNotations().get(rowIndex).getId();
             case 1: return this.getPdfObject().getListOfNotations().get(rowIndex).getName();
