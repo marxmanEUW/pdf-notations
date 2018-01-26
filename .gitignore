@@ -14,6 +14,7 @@
 *.jar
 !libs/*.jar
 !libs/pdfbox/*.jar
+!libs/gson/*.jar
 *.war
 *.ear
 *.zip
