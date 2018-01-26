@@ -1,7 +1,6 @@
 package view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
-import listeners.MainFrameKeyListener;
 import listeners.NotationListSelectionListener;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;

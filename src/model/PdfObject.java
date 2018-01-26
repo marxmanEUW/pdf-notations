@@ -73,6 +73,26 @@ public class PdfObject {
         return this.sourcePath;
     }
 
+
+    /*
+     * @author  marxmanEUW
+     * @todo calculate scaled x and y when zoomed in
+     */
+    public ArrayList<Notation> isNotationNear(int x, int y, int radius)
+    {
+        ArrayList<Notation> returnArrayList = new ArrayList<>();
+        double distance;
+
+        for (Notation notation : this.getListOfNotations()) {
+            distance = Math.sqrt((notation.getX() - x)^2 + (notation.getY() - y)^2);
+            if(distance <= radius){
+                returnArrayList.add(notation);
+            }
+        }
+        
+        return returnArrayList;
+    }
+
     /*
      * #########################################################################
      * #                    Setter                                             #
@@ -89,12 +109,6 @@ public class PdfObject {
      * #                    öffentliche Methoden                               #
      * #########################################################################
      */
-
-    // wird aufgerufen, wenn in MenuBar der Button "Notation hinzufügen" gedrückt wird
-    public void addNotation()
-    {
-        // @todo implementieren
-    }
 
     public void addNotationAtXY(int x, int y)
     {

@@ -32,9 +32,6 @@ public class MainFrameKeyListener implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e)
     {
-        System.out.println( "typed " + e.getKeyChar() + " " + e.getSource());
-        System.out.println( "typed " + e.getKeyCode() + " " + e.getSource());
-
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
         {
             System.out.println("Escape released");
