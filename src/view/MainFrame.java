@@ -1,5 +1,7 @@
 package view;
 
+import factories.PdfObjectFactory;
+import listeners.MainFrameKeyListener;
 import listeners.MenuBarActionListener;
 import gui.Constants;
 import listeners.ToolBarActionListener;
@@ -21,6 +23,8 @@ public class MainFrame extends JFrame {
     private PdfObjectView pdfObjectView;
     //private PdfObject pdfObject;
 
+    private MainFrameKeyListener mainFrameKeyListener;
+
     /*
      * #########################################################################
      * #                    Constructor                                        #
@@ -28,6 +32,8 @@ public class MainFrame extends JFrame {
      */
     public MainFrame()
     {
+        this.setLookAndFell();
+
         this.setLayout(new BorderLayout());
         this.setTitle(Constants.FRAME_TITLE);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +43,7 @@ public class MainFrame extends JFrame {
         this.pack();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-
+        this.mainFrameKeyListener = new MainFrameKeyListener();
 
         this.menuBar = new MainFrameMenuBar();
         this.mbActionListener = new MenuBarActionListener();
@@ -59,6 +65,10 @@ public class MainFrame extends JFrame {
      */
     public void initialize()
     {
+        this.mainFrameKeyListener.initialize(this);
+        this.addKeyListener(this.mainFrameKeyListener);
+        this.setFocusable(true);
+
         this.mbActionListener.initialize(this.pdfObjectView);
 
         this.menuBar.initialize(this.mbActionListener);
@@ -127,6 +137,5 @@ public class MainFrame extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
     }
 }
