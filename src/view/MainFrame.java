@@ -1,5 +1,6 @@
 package view;
 
+import factories.PdfObjectFactory;
 import listeners.MenuBarActionListener;
 import gui.Constants;
 import listeners.ToolBarActionListener;
@@ -20,7 +21,7 @@ public class MainFrame extends JFrame {
     private ToolBarActionListener tbActionListener;
 
     private PdfObjectView pdfObjectView;
-    private PdfObject pdfObject;
+    //private PdfObject pdfObject;
 
     //private Project project;
 
@@ -50,7 +51,7 @@ public class MainFrame extends JFrame {
         this.tbActionListener = new ToolBarActionListener();
 
         this.pdfObjectView = new PdfObjectView();
-        this.pdfObject = new PdfObject();
+        //this.pdfObject = new PdfObject();
 
         //this.project = new Project();
     }
@@ -72,7 +73,7 @@ public class MainFrame extends JFrame {
          */
         //this.mbActionListener.initialize(this.project);
         //this.pdfObject.setSourePath(Launcher.PATH_TO_PDF1);
-        this.pdfObjectView.initialize(this.pdfObject);
+        this.pdfObjectView.initialize();
 
 
         this.setJMenuBar(this.menuBar);
@@ -112,17 +113,6 @@ public class MainFrame extends JFrame {
      * #                    oeffentliche Methoden                              #
      * #########################################################################
      */
-    /*
-     * @author  yxyxD
-     */
-    public void importNewPdf(String sourcePath)
-    {
-        this.pdfObject = new PdfObject();
-        this.pdfObject.setSourePath(sourcePath);
-
-        this.pdfObjectView.setPdfObject(this.pdfObject);
-        this.pdfObjectView.updateView();
-    }
 
 
 

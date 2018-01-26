@@ -1,8 +1,7 @@
 package view.projectView.pdfObjectView.partials;
 
 
-import factories.PdfFactory;
-
+import factories.PdfObjectFactory;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
 import model.PdfObject;
@@ -110,9 +109,10 @@ public class PdfArea extends JPanel {
      */
     public void importNewPdf()
     {
-        if (this.getPdfObject().getSourePath() == null) { return; }
+        if (this.getPdfObject() == null) { return; }
+        if (this.getPdfObject().getSourcePath() == null) { return; }
 
-        this.pdfImage = PdfFactory.renderPdfAsImage(this.getPdfObject().getSourePath());
+        this.pdfImage = PdfObjectFactory.renderPdfFromPdfObject(this.getPdfObject());
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
@@ -145,8 +145,8 @@ public class PdfArea extends JPanel {
 
         // das geht, aber nicht schnell => neues Rendering bei
         // jedem Zoomvorgang
-        this.pdfImage = PdfFactory.renderPdfWithZoom(
-            this.getPdfObject().getSourePath(),
+        this.pdfImage = PdfObjectFactory.renderPdfFromPdfObject(
+            this.getPdfObject(),
             (float) this.zoomLevel
         );
 

@@ -1,8 +1,10 @@
 package view.projectView.pdfObjectView;
 
+import factories.PdfObjectFactory;
 import listeners.NotationListSelectionListener;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
+import main.Launcher;
 import model.PdfObject;
 import view.projectView.pdfObjectView.partials.NotationSplitPane;
 import view.projectView.pdfObjectView.partials.PdfScrollPane;
@@ -55,7 +57,6 @@ public class PdfObjectView extends JSplitPane {
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
 
-
         // listeners
         this.notationListSelectionListener = new NotationListSelectionListener();
         this.pdfAreaMouseClick = new PdfAreaMouseClick();
@@ -77,9 +78,13 @@ public class PdfObjectView extends JSplitPane {
      * #                    Initializing                                       #
      * #########################################################################
      */
-    public void initialize(PdfObject pdfObject)
+    public void initialize()
     {
-        this.pdfObject = pdfObject;
+        /*
+         * @todo Diesen Eintrag löschen => es wird NullPointerExceptions geben,
+         * @todo die noch abgefangen werden müssen
+         */
+        this.pdfObject = PdfObjectFactory.createAndReturnPdfObject(Launcher.PATH_TO_PDF1);
 
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
@@ -91,7 +96,6 @@ public class PdfObjectView extends JSplitPane {
         this.entityTableModel.initialize(this);
 
         this.notationListSelectionListener.initialize(this);
-        //this.pdfAreaMouseAdapter.initialize(this);
         this.pdfAreaMouseClick.initialize(this);
         this.pdfAreaMouseWheel.initialize(this);
 
@@ -162,15 +166,27 @@ public class PdfObjectView extends JSplitPane {
         return this.pdfAreaMouseWheel;
     }
 
+    /*
     public void setPdfObject(PdfObject pdfObject)
     {
         this.pdfObject = pdfObject;
+    }
+    */
+
+
+    /*
+     * @author  yxyxD
+     */
+    public void importNewPdf(String sourcePath)
+    {
+        this.pdfObject = PdfObjectFactory.createAndReturnPdfObject(sourcePath);
+        this.updateViews();
     }
 
     /*
      * @author  yxyxD
      */
-    public void updateView()
+    public void updateViews()
     {
         // @todo update Notationlist and NotationEntity
         this.pdfArea.importNewPdf();

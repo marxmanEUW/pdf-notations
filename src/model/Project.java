@@ -14,7 +14,7 @@ public class Project {
      */
     public Project()
     {
-        this.pdfObject = new PdfObject();
+        //this.pdfObject = new PdfObject();
     }
 
 
