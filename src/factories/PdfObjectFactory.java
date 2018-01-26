@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class PdfObjectFactory {
+public abstract class PdfObjectFactory {
 
     /*
      * @todo Unterscheidung machen
@@ -55,7 +55,8 @@ public class PdfObjectFactory {
     {
         try
         {
-            FileWriter fileWriter = new FileWriter(pdfObject.getJsonAbsolutePath());
+            File jsonFile = new File(pdfObject.getJsonAbsolutePath());
+            FileWriter fileWriter = new FileWriter(jsonFile);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(pdfObject, fileWriter);
             fileWriter.close();
@@ -71,11 +72,11 @@ public class PdfObjectFactory {
     private static String getAbsolutePathToJsonFile(File pdfFile)
     {
         String pdfAbsolutePath = pdfFile.getAbsolutePath();
-        return pdfAbsolutePath.replaceAll(".pdf", ".pdfnot.json");
+        return pdfAbsolutePath + "not.json";
     }
 
     public static String getAbsolutePathToJsonFile(String pdfAbsolutePath)
     {
-        return pdfAbsolutePath.replaceAll(".pdf", ".pdfnot.json");
+        return pdfAbsolutePath + "not.json";
     }
 }
