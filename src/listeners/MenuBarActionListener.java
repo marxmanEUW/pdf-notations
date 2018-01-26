@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Cursor;
 
+import factories.PdfObjectFactory;
 import gui.Constants;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -51,6 +52,12 @@ public class MenuBarActionListener implements ActionListener {
             case Constants.MENUITEM_SAVE_PROJECT_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich speichere das Projekt.");
+
+                /*
+                 * @todo feature from yxyxD
+                 */
+                PdfObjectFactory.savePdfObjectForPdfFile(this.pdfObjectView.getPdfObject());
+
                 break;
             case Constants.MENUITEM_SAVE_AS_PROJECT_NAME:
                 // @todo SaveFileDialog
