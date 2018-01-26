@@ -1,6 +1,7 @@
 package view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
+import listeners.MainFrameKeyListener;
 import listeners.NotationListSelectionListener;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
@@ -165,6 +166,7 @@ public class PdfObjectView extends JSplitPane {
     {
         return this.pdfAreaMouseWheel;
     }
+
 
     /*
     public void setPdfObject(PdfObject pdfObject)
