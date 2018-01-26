@@ -5,7 +5,6 @@ import listeners.MainFrameKeyListener;
 import listeners.MenuBarActionListener;
 import gui.Constants;
 import listeners.ToolBarActionListener;
-import model.PdfObject;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -91,7 +90,7 @@ public class MainFrame extends JFrame {
         );
 
 
-
+        this.setLookAndFell();
 
         this.setVisible(true);
     }
