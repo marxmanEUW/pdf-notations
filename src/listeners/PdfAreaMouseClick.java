@@ -11,8 +11,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
     private PdfObjectView pdfObjectView;
 
-    private PdfArea pdfArea;
-
     public PdfAreaMouseClick()
     {
 
@@ -21,8 +19,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        this.pdfArea = this.pdfObjectView.getPdfArea();
     }
 
 
@@ -34,15 +30,19 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent mouseEvent)
     {
-        int x = (int) ((double) mouseEvent.getX() / this.pdfArea.getZoomLevel());
-        int y = (int) ((double) mouseEvent.getY() / this.pdfArea.getZoomLevel());
+        int x = (int) ((double) mouseEvent.getX() / this.getPdfArea().getZoomLevel());
+        int y = (int) ((double) mouseEvent.getY() / this.getPdfArea().getZoomLevel());
 
-        System.out.println("x: " + Integer.toString(x));
-        System.out.println("y: " + Integer.toString(y));
-        System.out.println("--------------------------");
+        if(this.getPdfArea().getAddingNotation()){
+            System.out.println("x: " + Integer.toString(x));
+            System.out.println("y: " + Integer.toString(y));
+            System.out.println("--------------------------");
 
-        this.getPdfObject().addNotationAtXY(x, y);
-        this.pdfArea.repaint();
+            this.getPdfObject().addNotationAtXY(x, y);
+            this.getPdfArea().repaint();
+            this.getPdfArea().setCursorTypeToDeafault();
+            this.getPdfArea().setAddingNotation(false);
+        }
     }
 
 
@@ -82,5 +82,13 @@ public class PdfAreaMouseClick extends MouseAdapter {
     private PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfArea getPdfArea()
+    {
+        return this.pdfObjectView.getPdfArea();
     }
 }

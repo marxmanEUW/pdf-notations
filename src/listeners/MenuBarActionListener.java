@@ -2,22 +2,41 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Cursor;
 
 import gui.Constants;
 import model.PdfObject;
-import model.Project;
+import view.projectView.pdfObjectView.PdfObjectView;
+import view.projectView.pdfObjectView.partials.PdfArea;
 
-import javax.swing.*;
 
 public class MenuBarActionListener implements ActionListener {
 
-    private Project project;
+    private PdfObjectView pdfObjectView;
 
-    public void initialize(Project project)
+
+    /*
+     * #########################################################################
+     * #                    Initialisierung                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public void initialize(PdfObjectView pdfObjectView)
     {
-        this.project = project;
+        this.pdfObjectView = pdfObjectView;
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -56,13 +75,34 @@ public class MenuBarActionListener implements ActionListener {
             case Constants.MENUITEM_ADD_NOTATION_NAME:
                 // @todo Add Notation
                 System.out.println("Ich bin ein neue Notation.");
-                this.project.getPdfObject().addNotation();
-
+                this.getPdfArea().setAddingNotation(true);
+                this.getPdfArea().setCursorTypeToCrosshair();
                 break;
             case Constants.MENUITEM_ABOUT_NAME:
                 // @todo Show About Information
                 System.out.println("Ich zeige die About Informationen.");
                 break;
         }
+    }
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethode                               #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    private PdfArea getPdfArea()
+    {
+        return this.pdfObjectView.getPdfArea();
     }
 }

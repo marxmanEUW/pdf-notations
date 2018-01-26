@@ -2,6 +2,7 @@ package model;
 
 public class Project {
 
+    /*
     // @todo private String pdfFilePath
     private String name;
     private PdfObject pdfObject;
@@ -11,7 +12,7 @@ public class Project {
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
-     */
+     *
     public Project()
     {
         //this.pdfObject = new PdfObject();
@@ -22,7 +23,7 @@ public class Project {
      * #########################################################################
      * #                    Initialisierung                                    #
      * #########################################################################
-     */
+     *
     public void initialize(String name)
     {
         this.name = name;
@@ -33,7 +34,7 @@ public class Project {
      * #########################################################################
      * #                    Getter                                             #
      * #########################################################################
-     */
+     *
     public PdfObject getPdfObject()
     {
         return pdfObject;
@@ -44,9 +45,10 @@ public class Project {
      * #########################################################################
      * #                    Setter                                             #
      * #########################################################################
-     */
+     *
     public void setPdfObject(PdfObject pdfObject)
     {
         this.pdfObject = pdfObject;
     }
+    */
 }
