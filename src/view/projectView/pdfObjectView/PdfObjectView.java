@@ -2,10 +2,7 @@ package view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
 import factories.PdfRenderFactory;
-import listeners.MainFrameKeyListener;
-import listeners.NotationListSelectionListener;
-import listeners.PdfAreaMouseClick;
-import listeners.PdfAreaMouseWheel;
+import listeners.*;
 import main.Launcher;
 import model.PdfObject;
 import view.projectView.pdfObjectView.partials.NotationSplitPane;
@@ -63,7 +60,7 @@ public class PdfObjectView extends JSplitPane {
         // listeners
         this.notationListSelectionListener = new NotationListSelectionListener();
         this.pdfAreaMouseClick = new PdfAreaMouseClick();
-        this.pdfAreaMouseWheel = new PdfAreaMouseWheel();
+        this.pdfAreaMouseWheel = new PdfAreaMouseWheel();;
 
         // GUI elements
         this.pdfScrollPane = new PdfScrollPane();
@@ -168,14 +165,6 @@ public class PdfObjectView extends JSplitPane {
     {
         return this.pdfAreaMouseWheel;
     }
-
-
-    /*
-    public void setPdfObject(PdfObject pdfObject)
-    {
-        this.pdfObject = pdfObject;
-    }
-    */
 
 
     /*

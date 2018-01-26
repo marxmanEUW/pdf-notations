@@ -19,18 +19,23 @@ import java.awt.image.BufferedImage;
 
 public class PdfArea extends JPanel {
 
+    // constants
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
 
-    private Timer pdfResizedTimer;
-
+    // Pdf object view
     private PdfObjectView pdfObjectView;
 
+    // Timer
+    private Timer pdfResizedTimer;
+
+    // listeners and adapters
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
 
+    // local variables
     private BufferedImage pdfImage;
     private int initialImageWidth;
     private int initialImageHeight;
@@ -62,7 +67,6 @@ public class PdfArea extends JPanel {
 
         this.pdfAreaMouseClick = this.pdfObjectView.getPdfAreaMouseClick();
         this.pdfAreaMouseWheel = this.pdfObjectView.getPdfAreaMouseWheel();
-
 
         this.addMouseListener(this.pdfAreaMouseClick);
         this.addMouseWheelListener(this.pdfAreaMouseWheel);
@@ -124,7 +128,7 @@ public class PdfArea extends JPanel {
     /*
      * @author  marxmanEUW
      */
-    public void setCursorTypeToDeafault()
+    public void setCursorTypeToDefault()
     {
         this.setCursor(Cursor.getDefaultCursor());
     }
@@ -140,6 +144,8 @@ public class PdfArea extends JPanel {
 
         this.repaintPdfGraphics(graphics);
         this.repaintNotationPoints(graphics);
+
+        this.pdfObjectView.getPdfScrollPane().getViewport().revalidate();
     }
 
 

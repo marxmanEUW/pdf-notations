@@ -40,7 +40,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
             this.getPdfObject().addNotationAtXY(x, y);
             this.getPdfArea().repaint();
-            this.getPdfArea().setCursorTypeToDeafault();
+            this.getPdfArea().setCursorTypeToDefault();
             this.getPdfArea().setAddingNotation(false);
         }
     }

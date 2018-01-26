@@ -36,7 +36,7 @@ public class MainFrameKeyListener implements KeyListener {
         {
             System.out.println("Escape released");
             this.mainFrame.getPdfObjectView().getPdfArea().setAddingNotation(false);
-            this.mainFrame.getPdfObjectView().getPdfArea().setCursorTypeToDeafault();
+            this.mainFrame.getPdfObjectView().getPdfArea().setCursorTypeToDefault();
         }
     }
 

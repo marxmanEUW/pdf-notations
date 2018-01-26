@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.PdfObject;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 public abstract class PdfObjectFactory {
+
+    private static final String NOTATION_FILE_EXTENTION = "not.json";
 
     /*
      * @todo Unterscheidung machen
@@ -17,32 +17,34 @@ public abstract class PdfObjectFactory {
      */
     /*
      * @todo Exception zu try-catch mit alert bei Fehler
+     * @author  yxyxD
      */
     public static PdfObject loadPdfObjectForPdfFile(File pdfFile)
     {
-        PdfObject pdfObject;
+        PdfObject pdfObject = null;
 
         try
         {
-            File jsonFile = new File(getAbsolutePathToJsonFile(pdfFile));
+            // file with saved notations
+            // does only exist, if the pdf file has been edited before
+            File jsonFile = new File(
+                pdfFile.getAbsolutePath() + NOTATION_FILE_EXTENTION
+            );
+
             if (jsonFile.exists())
             {
-                // Json-Datei direkt importieren
-                FileReader fileReader = new FileReader(jsonFile);
-                Gson gson = new GsonBuilder().create();
-                pdfObject = gson.fromJson(fileReader, PdfObject.class);
-                fileReader.close();
+                // if the file exists => load saved status
+                pdfObject = loadPdfObjectFromSavedFile(jsonFile);
             }
             else
             {
-                // neues Pdf-Objekt für Pdf erstellen
+                // if the file does not exists => create new pdf object for pdf
                 pdfObject = new PdfObject(pdfFile.getAbsolutePath());
             }
         }
         catch (Exception exception)
         {
             System.out.println(exception.getMessage());
-            pdfObject = new PdfObject("");
         }
 
         return pdfObject;
@@ -50,6 +52,7 @@ public abstract class PdfObjectFactory {
 
     /*
      * @todo Exception zu try-catch mit alert bei Fehler
+     * @author  yxyxD
      */
     public static void savePdfObjectForPdfFile(PdfObject pdfObject)
     {
@@ -67,16 +70,34 @@ public abstract class PdfObjectFactory {
         }
     }
 
-
-
-    private static String getAbsolutePathToJsonFile(File pdfFile)
-    {
-        String pdfAbsolutePath = pdfFile.getAbsolutePath();
-        return pdfAbsolutePath + "not.json";
-    }
-
+    /*
+     * @author  yxyxD
+     */
     public static String getAbsolutePathToJsonFile(String pdfAbsolutePath)
     {
-        return pdfAbsolutePath + "not.json";
+        return pdfAbsolutePath + NOTATION_FILE_EXTENTION;
     }
+
+
+
+
+    /*
+     * @author  yxyxD
+     */
+    private static PdfObject loadPdfObjectFromSavedFile(File jsonFile)
+        throws IOException
+    {
+        PdfObject pdfObject;
+
+        FileReader fileReader = new FileReader(jsonFile);
+        Gson gson = new GsonBuilder().create();
+
+        pdfObject = gson.fromJson(fileReader, PdfObject.class);
+
+        fileReader.close();
+        return pdfObject;
+    }
+
+
+
 }
