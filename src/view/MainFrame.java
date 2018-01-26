@@ -1,10 +1,8 @@
 package view;
 
-import factories.PdfObjectFactory;
 import listeners.MenuBarActionListener;
 import gui.Constants;
 import listeners.ToolBarActionListener;
-import model.PdfObject;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;

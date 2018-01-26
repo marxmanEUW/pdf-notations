@@ -1,6 +1,7 @@
 package view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
+import factories.PdfRenderFactory;
 import listeners.NotationListSelectionListener;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
@@ -16,6 +17,7 @@ import view.projectView.pdfObjectView.partials.ListTableModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class PdfObjectView extends JSplitPane {
 
@@ -84,7 +86,7 @@ public class PdfObjectView extends JSplitPane {
          * @todo Diesen Eintrag löschen => es wird NullPointerExceptions geben,
          * @todo die noch abgefangen werden müssen
          */
-        this.pdfObject = PdfObjectFactory.createAndReturnPdfObject(Launcher.PATH_TO_PDF1);
+        this.pdfObject = PdfObjectFactory.loadPdfObjectForPdfFile(Launcher.FILE1);
 
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
@@ -177,9 +179,9 @@ public class PdfObjectView extends JSplitPane {
     /*
      * @author  yxyxD
      */
-    public void importNewPdf(String sourcePath)
+    public void importNewPdf(File file)
     {
-        this.pdfObject = PdfObjectFactory.createAndReturnPdfObject(sourcePath);
+        this.pdfObject = PdfObjectFactory.loadPdfObjectForPdfFile(file);
         this.updateViews();
     }
 

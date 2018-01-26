@@ -1,11 +1,14 @@
 package model;
 
+import factories.PdfObjectFactory;
+
 import java.awt.Point;
 import java.util.ArrayList;
 
 public class PdfObject {
 
-    private String sourcePath;
+    private String pdfAbsolutePath;
+    private String jsonAbsolutePath;
 
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
@@ -20,9 +23,11 @@ public class PdfObject {
      * #                    Konstruktor                                        #
      * #########################################################################
      */
-    public PdfObject(String sourcePath)
+    public PdfObject(String pdfAbsolutePath)
     {
-        this.sourcePath = sourcePath;
+        this.pdfAbsolutePath = pdfAbsolutePath;
+        this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
+
         this.listOfNotations = new ArrayList<>();
         this.selectedNotationIndex = -1;
         this.counter = 0;
@@ -34,6 +39,32 @@ public class PdfObject {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
+    public String getPdfAbsolutePath()
+    {
+        return this.pdfAbsolutePath;
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public String getJsonAbsolutePath()
+    {
+        return jsonAbsolutePath;
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    public ArrayList<Notation> getListOfNotations()
+    {
+        return this.listOfNotations;
+    }
+
+
+
 
     public ArrayList<Point> getListOfPoints()
     {
@@ -43,11 +74,6 @@ public class PdfObject {
             listOfPoints.add(new Point(notation.getX(), notation.getY()));
         }
         return listOfPoints;
-    }
-
-    public ArrayList<Notation> getListOfNotations()
-    {
-        return this.listOfNotations;
     }
 
     public int getListOfNotationConsSize()
@@ -65,31 +91,31 @@ public class PdfObject {
         return selectedNotationIndex;
     }
 
-    /*
-     * @author  yxyxD
-     */
-    public String getSourcePath()
-    {
-        return this.sourcePath;
-    }
 
     /*
      * #########################################################################
      * #                    Setter                                             #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
+    public void setJsonAbsolutePath(String jsonAbsolutePath)
+    {
+        this.jsonAbsolutePath = jsonAbsolutePath;
+    }
 
     public void setSelectedNotationIndex(int selectedNotationIndex)
     {
         this.selectedNotationIndex = selectedNotationIndex;
     }
 
+
     /*
      * #########################################################################
-     * #                    öffentliche Methoden                               #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
-
     // wird aufgerufen, wenn in MenuBar der Button "Notation hinzufügen" gedrückt wird
     public void addNotation()
     {
