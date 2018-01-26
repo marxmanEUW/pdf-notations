@@ -42,6 +42,11 @@ public class Notation {
         return this.coordinates.y;
     }
 
+    public Point getCoordinates()
+    {
+        return this.coordinates;
+    }
+
     public int getId() {
         return id;
     }

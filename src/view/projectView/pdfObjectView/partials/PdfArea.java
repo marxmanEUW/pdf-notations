@@ -4,6 +4,7 @@ package view.projectView.pdfObjectView.partials;
 import factories.PdfRenderFactory;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
+import model.Notation;
 import model.PdfObject;
 
 import timer.PdfRenderingTimer;
@@ -332,6 +333,28 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
         graphics.setColor(Color.red);
+
+        for (Notation notation : this.getPdfObject().getListOfNotations())
+        {
+            //@todo name refactoring
+            int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
+                * this.zoomLevel);
+            int upperLeftY = (int) ((double) (notation.getY() - this.NOTATION_RADIUS)
+                * this.zoomLevel);
+            int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
+                * this.zoomLevel);
+            int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)
+                * this.zoomLevel);
+
+            graphics.fillOval(
+                upperLeftX,
+                upperLeftY,
+                ovalWidth,
+                ovalHeight
+            );
+        }
+
+        /*
         for (Point point : this.getPdfObject().getListOfPoints())
         {
             //@todo name refactoring
@@ -351,6 +374,65 @@ public class PdfArea extends JPanel {
                 ovalHeight
             );
         }
+        */
+    }
+
+    /*
+     * @todo Wahrheitsfunktion, damit punkte nicht überlappend gezeichnet werden
+     * @todo können
+     */
+    public boolean isNotationInRange(Point point)
+    {
+        boolean isPointInRange = false;
+
+        // get coordinates of actual point (without zoom factor)
+        Point actualPoint = new Point(
+            (int) (point.getX() / this.zoomLevel),
+            (int) (point.getY() / this.zoomLevel)
+        );
+
+        // minimal required distance for no overlapping is two time the radius
+        double minimalRange = (double) NOTATION_RADIUS * 2.0;
+
+        for (Notation notation : this.getPdfObject().getListOfNotations())
+        {
+            Point notationPoint = notation.getCoordinates();
+
+            double distance = actualPoint.distance(notationPoint);
+            if (distance <= minimalRange)
+            {
+                isPointInRange = true;
+                break;
+            }
+        }
+
+        return isPointInRange;
+    }
+
+
+    public Notation getClickedNotation(Point point)
+    {
+        Notation clickedNotation = null;
+
+        // get coordinates of actual point (without zoom factor)
+        Point actualPoint = new Point(
+            (int) (point.getX() / this.zoomLevel),
+            (int) (point.getY() / this.zoomLevel)
+        );
+
+        for (Notation notation : this.getPdfObject().getListOfNotations())
+        {
+            Point notationPoint = notation.getCoordinates();
+            double distance = actualPoint.distance(notationPoint);
+
+            if (distance <= (double) NOTATION_RADIUS)
+            {
+                clickedNotation = notation;
+                break;
+            }
+        }
+
+        return clickedNotation;
     }
 }
 
