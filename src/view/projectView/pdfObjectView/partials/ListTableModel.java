@@ -1,5 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
+import gui.Constants;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -67,8 +68,8 @@ public class ListTableModel extends AbstractTableModel {
         // @todo Rückgabe dynamisch machen
         // @todo Strings in Konstanten auslagern
         switch (column){
-            case 0: return "Id";
-            case 1: return "Name";
+            case 0: return Constants.LIST_TABLE_MODEL_COLUMN_1_NAME;
+            case 1: return Constants.LIST_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }

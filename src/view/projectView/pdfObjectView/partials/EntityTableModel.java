@@ -1,5 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
+import gui.Constants;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -82,8 +83,8 @@ public class EntityTableModel extends AbstractTableModel {
         // @todo Rückgabe dynamisch machen
         // @todo Strings in Konstanten auslagern
         switch (column){
-            case 0: return "Name";
-            case 1: return "Wert";
+            case 0: return Constants.ENTITY_TABLE_MODEL_COLUMN_1_NAME;
+            case 1: return Constants.ENTITY_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }

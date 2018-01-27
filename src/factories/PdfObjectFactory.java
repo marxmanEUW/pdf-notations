@@ -8,7 +8,7 @@ import java.io.*;
 
 public abstract class PdfObjectFactory {
 
-    private static final String NOTATION_FILE_EXTENTION = "not.json";
+    private static final String NOTATION_FILE_EXTENSION = "not.json";
 
     /*
      * @todo Unterscheidung machen
@@ -28,7 +28,7 @@ public abstract class PdfObjectFactory {
             // file with saved notations
             // does only exist, if the pdf file has been edited before
             File jsonFile = new File(
-                pdfFile.getAbsolutePath() + NOTATION_FILE_EXTENTION
+                pdfFile.getAbsolutePath() + NOTATION_FILE_EXTENSION
             );
 
             if (jsonFile.exists())
@@ -75,7 +75,7 @@ public abstract class PdfObjectFactory {
      */
     public static String getAbsolutePathToJsonFile(String pdfAbsolutePath)
     {
-        return pdfAbsolutePath + NOTATION_FILE_EXTENTION;
+        return pdfAbsolutePath + NOTATION_FILE_EXTENSION;
     }
 
 

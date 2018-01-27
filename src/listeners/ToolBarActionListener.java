@@ -39,22 +39,22 @@ public class ToolBarActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()) {
-            case Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME:
+            case Constants.TOOLBAR_BUTTON_NEW_DATAFILE_NAME:
                 System.out.println("Ich erstelle ein neues Projekt.");
                 break;
-            case Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME:
+            case Constants.TOOLBAR_BUTTON_OPEN_DATAFILE_NAME:
                 // @todo OpenFileDialog
                 System.out.println("Ich öffne das Projekt.");
                 break;
-            case Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME:
+            case Constants.TOOLBAR_BUTTON_SAVE_DATAFILE_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich speichere das Projekt.");
                 break;
-            case Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME:
+            case Constants.TOOLBAR_BUTTON_SAVE_AS_DATAFILE_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich  speichere unter das Projekt.");
                 break;
-            case Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_NAME:
+            case Constants.TOOLBAR_BUTTON_CLOSE_DATAFILE_NAME:
                 // @todo Close PdfObject
                 System.out.println("Ich schließe das Projekt.");
                 break;
