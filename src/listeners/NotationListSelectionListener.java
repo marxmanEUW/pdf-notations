@@ -42,7 +42,15 @@ public class NotationListSelectionListener implements ListSelectionListener {
         if(this.getPdfObject() != null)
         {
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-            this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+
+            if(lsm.isSelectionEmpty())
+            {
+                this.getPdfObject().setSelectedNotationIndex(PdfObject.SELECTED_NOTAION_NULL_VALUE);
+            } else
+            {
+                this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+            }
+
             this.pdfObjectView.getEntityScrollPane().updateTable();
         }
     }

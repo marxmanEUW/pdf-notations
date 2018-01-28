@@ -2,12 +2,17 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+import factories.DialogFactory;
 import factories.PdfObjectFactory;
 import gui.Constants;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class MenuBarActionListener implements ActionListener {
@@ -42,25 +47,34 @@ public class MenuBarActionListener implements ActionListener {
     {
         switch (e.getActionCommand()) {
             case Constants.MENUITEM_NEW_DATAFILE_NAME:
-                System.out.println("Ich erstelle ein neues Projekt.");
+                System.out.println("Ich erstelle ein neues Datendatei.");
                 break;
             case Constants.MENUITEM_OPEN_DATAFILE_NAME:
                 // @todo OpenFileDialog
-                System.out.println("Ich öffne das Projekt.");
+                System.out.println("Ich öffne das eine neue Datendatei.");
+
+                File openFile = DialogFactory.getFileFromOpenDialog("JSON (*.json)", "json");
+                // @todo create new PDFObject
+
                 break;
             case Constants.MENUITEM_SAVE_DATAFILE_NAME:
                 // @todo SaveFileDialog
-                System.out.println("Ich speichere das Projekt.");
+                System.out.println("Ich speichere die Datendatei.");
 
                 /*
                  * @todo feature from yxyxD
                  */
-                PdfObjectFactory.savePdfObjectForPdfFile(this.pdfObjectView.getPdfObject());
+                PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
 
                 break;
             case Constants.MENUITEM_SAVE_AS_DATAFILE_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich  speichere unter das Projekt.");
+
+                File saveAsFile = DialogFactory.getFileFromSaveDialog("JSON (*.json)", "json");
+                this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());
+                PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+
                 break;
             case Constants.MENUITEM_CLOSE_DATAFILE_NAME:
                 // @todo Close PdfObject

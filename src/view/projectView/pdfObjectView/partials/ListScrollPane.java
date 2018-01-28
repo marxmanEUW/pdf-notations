@@ -74,6 +74,15 @@ public class ListScrollPane extends JScrollPane {
         this.listTableModel.fireTableDataChanged();
     }
 
+    public void setSelectedRow(int i)
+    {
+        this.notationListTable.setRowSelectionInterval(i, i);
+    }
+
+    public void unselectRow()
+    {
+        this.notationListTable.clearSelection();
+    }
 
     /*
      * #########################################################################

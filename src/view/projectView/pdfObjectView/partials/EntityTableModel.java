@@ -55,7 +55,7 @@ public class EntityTableModel extends AbstractTableModel {
             return null;
         }
 
-        if (this.getPdfObject().getSelectedNotationIndex() == -1){
+        if (this.getPdfObject().getSelectedNotationIndex() == PdfObject.SELECTED_NOTAION_NULL_VALUE){
             return null;
         }
 

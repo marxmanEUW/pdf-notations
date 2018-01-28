@@ -7,11 +7,14 @@ import java.util.ArrayList;
 
 public class PdfObject {
 
+    public static final int SELECTED_NOTAION_NULL_VALUE = -1;
+
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
 
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
+
 
 
     // @todo testing
@@ -29,7 +32,7 @@ public class PdfObject {
         this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new ArrayList<>();
-        this.selectedNotationIndex = -1;
+        this.selectedNotationIndex = PdfObject.SELECTED_NOTAION_NULL_VALUE;
         this.counter = 0;
     }
 
