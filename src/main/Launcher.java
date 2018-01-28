@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class Launcher {
 
-    // @todo Look and Feel ~ Conrad
-
     // @todo testing
     public static final File FILE1 = new File("files/file1.pdf");
     public static final File FILE2 = new File("files/file2.pdf");
