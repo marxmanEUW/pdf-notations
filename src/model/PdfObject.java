@@ -72,7 +72,7 @@ public class PdfObject {
         ArrayList<Point> listOfPoints = new ArrayList<>();
         for (Notation notation : this.listOfNotations)
         {
-            listOfPoints.add(new Point(notation.getX(), notation.getY()));
+            listOfPoints.add(notation.getCoordinates());
         }
         return listOfPoints;
     }
@@ -120,7 +120,7 @@ public class PdfObject {
 
     public void addNotationAtXY(int x, int y)
     {
-        Notation newNotation = new Notation(counter++,"Punkt", x, y);
+        Notation newNotation = new Notation(counter++,"Punkt", x, y, "Beschreibung " + counter);
         this.listOfNotations.add(newNotation);
     }
 }

@@ -45,7 +45,7 @@ public class ListTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount()
     {
-        return Notation.INFORMATION_COUNT;
+        return 2;
     }
 
     @Override

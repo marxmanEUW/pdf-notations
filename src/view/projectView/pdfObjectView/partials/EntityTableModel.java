@@ -65,6 +65,7 @@ public class EntityTableModel extends AbstractTableModel {
                 case 1: return this.getPdfObject().getSelectedNotation().getName();
                 case 2: return this.getPdfObject().getSelectedNotation().getX();
                 case 3: return this.getPdfObject().getSelectedNotation().getY();
+                case 4: return this.getPdfObject().getSelectedNotation().getDescription();
                 default: return null;
             }
         } else {
@@ -73,6 +74,7 @@ public class EntityTableModel extends AbstractTableModel {
                 case 1: return "Name";
                 case 2: return "X";
                 case 3: return "Y";
+                case 4: return "Beschreibung";
                 default: return null;
             }
         }
@@ -91,6 +93,41 @@ public class EntityTableModel extends AbstractTableModel {
     {
         // @todo Rückgabe dynamisch machen
         return String.class;
+    }
+
+    public boolean isCellEditable(int rowIndex, int columnIndex)
+    {
+        // make full first column and ID cell not editable
+        if(rowIndex == 0 || columnIndex == 0)
+        {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
+    {
+        Notation selectedNotation = this.getPdfObject().getSelectedNotation();
+
+        switch (rowIndex){
+            case 1:
+                selectedNotation.setName((String) editedValue);
+                break;
+            case 2:
+                // @todo check if editedValue is really an integer
+                selectedNotation.setX(Integer.parseInt((String) editedValue));
+                this.pdfObjectView.getPdfArea().repaint();
+                break;
+            case 3:
+                // @todo check if editedValue is really an integer
+                selectedNotation.setY(Integer.parseInt((String) editedValue));
+                this.pdfObjectView.getPdfArea().repaint();
+                break;
+            case 4:
+                selectedNotation.setDescription((String) editedValue);
+                break;
+        }
     }
 
 
