@@ -45,7 +45,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
             if(lsm.isSelectionEmpty())
             {
-                this.getPdfObject().setSelectedNotationIndex(PdfObject.SELECTED_NOTAION_NULL_VALUE);
+                this.getPdfObject().setSelectedNotationIndex(PdfObject.SELECTED_NOTATION_NULL_VALUE);
             } else
             {
                 this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());

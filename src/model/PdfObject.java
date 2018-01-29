@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class PdfObject {
 
-    public static final int SELECTED_NOTAION_NULL_VALUE = -1;
+    public static final int SELECTED_NOTATION_NULL_VALUE = -1;
 
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
@@ -15,15 +15,13 @@ public class PdfObject {
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
 
-
-
     // @todo testing
     private int counter;
 
 
     /*
      * #########################################################################
-     * #                    Konstruktor                                        #
+     * #                    Constructor                                        #
      * #########################################################################
      */
     public PdfObject(String pdfAbsolutePath)
@@ -32,7 +30,7 @@ public class PdfObject {
         this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new ArrayList<>();
-        this.selectedNotationIndex = PdfObject.SELECTED_NOTAION_NULL_VALUE;
+        this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
         this.counter = 0;
     }
 
