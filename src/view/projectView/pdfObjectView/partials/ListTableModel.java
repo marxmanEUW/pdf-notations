@@ -65,8 +65,6 @@ public class ListTableModel extends AbstractTableModel {
 
     public String getColumnName(int column)
     {
-        // @todo Rückgabe dynamisch machen
-        // @todo Strings in Konstanten auslagern
         switch (column){
             case 0: return Constants.LIST_TABLE_MODEL_COLUMN_1_NAME;
             case 1: return Constants.LIST_TABLE_MODEL_COLUMN_2_NAME;
