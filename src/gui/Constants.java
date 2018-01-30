@@ -14,29 +14,18 @@ public class Constants {
     public static final String MENU_FILE_NAME = "Datei";
 
         public static final String
-            MENUITEM_NEW_DATAFILE_NAME = "Neue Datendatei anlegen";
+            MENUITEM_NEW_PROJECT_NAME = "Neues Projekt erstellen";
         public static final String
-            MENUITEM_OPEN_DATAFILE_NAME = "Datendatei öffnen";
+            MENUITEM_OPEN_PROJECT_NAME = "Projekt öffnen";
         public static final String
-            MENUITEM_SAVE_DATAFILE_NAME = "Datendatei speichern";
+            MENUITEM_SAVE_POJECT_NAME = "Projekt speichern";
         public static final String
-            MENUITEM_SAVE_AS_DATAFILE_NAME = "Datendatei speichern unter";
+            MENUITEM_SAVE_AS_PROJECT_NAME = "Projekt speichern unter";
         public static final String
-            MENUITEM_CLOSE_DATAFILE_NAME = "Datendatei schließen";
+            MENUITEM_CLOSE_PROJECT_NAME = "Projekt schließen";
         public static final String
             MENUITEM_CLOSE_NAME = "Beenden";
 
-
-    /*
-     * Menuereiter "Projekt"
-     */
-    public static final String MENU_PROJECT_NAME = "Projekt";
-
-
-        public static final String
-            MENUITEM_IMPORT_PDF_NAME = "PDF importieren";
-        public static final String
-            MENUITEM_SHOW_LIST_NAME = "Liste anzeigen";
 
 
     /*
@@ -46,6 +35,8 @@ public class Constants {
 
         public static final String
             MENUITEM_ADD_NOTATION_NAME = "Hinzufügen";
+    public static final String
+        MENUITEM_DELETE_NOTATION_NAME = "Löschen";
 
 
     /*
@@ -62,15 +53,15 @@ public class Constants {
      * Name
      */
     public static final String
-        TOOLBAR_BUTTON_NEW_DATAFILE_NAME = "Neues Projekt";
+        TOOLBAR_BUTTON_NEW_PROJECT_NAME = "Neues Projekt";
     public static final String
-        TOOLBAR_BUTTON_OPEN_DATAFILE_NAME = "Projekt öffnen";
+        TOOLBAR_BUTTON_OPEN_PROJECT_NAME = "Projekt öffnen";
     public static final String
-        TOOLBAR_BUTTON_SAVE_DATAFILE_NAME = "Projekt speichern";
+        TOOLBAR_BUTTON_SAVE_PROJECT_NAME = "Projekt speichern";
     public static final String
-        TOOLBAR_BUTTON_SAVE_AS_DATAFILE_NAME = "Project speichern unter";
+        TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME = "Project speichern unter";
     public static final String
-        TOOLBAR_BUTTON_CLOSE_DATAFILE_NAME = "Projekt schließen";
+        TOOLBAR_BUTTON_CLOSE_PROJECT_NAME = "Projekt schließen";
 
     public static final String
         TOOLBAR_BUTTON_ZOOM_IN_NAME = "Ansicht vergrößern";
@@ -84,15 +75,15 @@ public class Constants {
      * Icon Path
      */
     public static final String
-        TOOLBAR_BUTTON_NEW_DATAFILE_ICON_PATH = "icons/16px/037-file-empty.png";
+        TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH = "icons/16px/037-file-empty.png";
     public static final String
-        TOOLBAR_BUTTON_OPEN_DATAFILE_ICON_PATH = "icons/16px/049-folder-open.png";
+        TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH = "icons/16px/049-folder-open.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_DATAFILE_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_AS_DATAFILE_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
     public static final String
-        TOOLBAR_BUTTON_CLOSE_DATAFILE_ICON_PATH = "icons/16px/277-exit.png";
+        TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH = "icons/16px/277-exit.png";
 
     public static final String
         TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH = "icons/16px/136-zoom-in.png";

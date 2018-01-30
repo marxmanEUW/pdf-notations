@@ -7,18 +7,17 @@ import javax.swing.*;
 
 public class MainFrameToolBar extends JToolBar {
 
-    private JButton buttonNewDataFile;
-    private JButton buttonOpenDataFile;
-    private JButton buttonSaveDataFile;
-    private JButton buttonSaveAsDataFile;
-    private JButton buttonCloseDataFile;
+    private JButton buttonNewProject;
+    private JButton buttonOpenProject;
+    private JButton buttonSaveProject;
+    private JButton buttonSaveAsProject;
+    private JButton buttonCloseProject;
 
     private JButton buttonZoomIn;
     private JButton buttonZoomOut;
     //private JButton buttonZoomFitToPage;
 
     private JButton buttonAddNotation;
-    //private JButton buttonShowNotationList;
 
     private ToolBarActionListener toolBarActionListener;
 
@@ -29,11 +28,11 @@ public class MainFrameToolBar extends JToolBar {
      */
     public MainFrameToolBar()
     {
-        this.buttonNewDataFile = new JButton();
-        this.buttonOpenDataFile = new JButton();
-        this.buttonSaveDataFile = new JButton();
-        this.buttonSaveAsDataFile = new JButton();
-        this.buttonCloseDataFile = new JButton();
+        this.buttonNewProject = new JButton();
+        this.buttonOpenProject = new JButton();
+        this.buttonSaveProject = new JButton();
+        this.buttonSaveAsProject = new JButton();
+        this.buttonCloseProject = new JButton();
 
         this.buttonZoomIn = new JButton();
         this.buttonZoomOut = new JButton();
@@ -54,11 +53,11 @@ public class MainFrameToolBar extends JToolBar {
         this.toolBarActionListener = toolBarActionListener;
 
         // ActionCommand
-        this.buttonNewDataFile.setActionCommand(Constants.TOOLBAR_BUTTON_NEW_DATAFILE_NAME);
-        this.buttonOpenDataFile.setActionCommand(Constants.TOOLBAR_BUTTON_OPEN_DATAFILE_NAME);
-        this.buttonSaveDataFile.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_DATAFILE_NAME);
-        this.buttonSaveAsDataFile.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_AS_DATAFILE_NAME);
-        this.buttonCloseDataFile.setActionCommand(Constants.TOOLBAR_BUTTON_CLOSE_DATAFILE_NAME);
+        this.buttonNewProject.setActionCommand(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setActionCommand(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setActionCommand(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_NAME);
 
         this.buttonZoomIn.setActionCommand(Constants.TOOLBAR_BUTTON_ZOOM_IN_NAME);
         this.buttonZoomOut.setActionCommand(Constants.TOOLBAR_BUTTON_ZOOM_OUT_NAME);
@@ -66,11 +65,11 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setActionCommand(Constants.TOOLBAR_BUTTON_ADD_NOTATION_NAME);
 
         // Tooltip Text
-        this.buttonNewDataFile.setToolTipText(Constants.TOOLBAR_BUTTON_NEW_DATAFILE_NAME);
-        this.buttonOpenDataFile.setToolTipText(Constants.TOOLBAR_BUTTON_OPEN_DATAFILE_NAME);
-        this.buttonSaveDataFile.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_DATAFILE_NAME);
-        this.buttonSaveAsDataFile.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_AS_DATAFILE_NAME);
-        this.buttonCloseDataFile.setToolTipText(Constants.TOOLBAR_BUTTON_CLOSE_DATAFILE_NAME);
+        this.buttonNewProject.setToolTipText(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setToolTipText(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setToolTipText(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_NAME);
 
         this.buttonZoomIn.setToolTipText(Constants.TOOLBAR_BUTTON_ZOOM_IN_NAME);
         this.buttonZoomOut.setToolTipText(Constants.TOOLBAR_BUTTON_ZOOM_OUT_NAME);
@@ -78,11 +77,11 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setToolTipText(Constants.TOOLBAR_BUTTON_ADD_NOTATION_NAME);
 
         // Image
-        this.buttonNewDataFile.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_NEW_DATAFILE_ICON_PATH));
-        this.buttonOpenDataFile.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_OPEN_DATAFILE_ICON_PATH));
-        this.buttonSaveDataFile.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_DATAFILE_ICON_PATH));
-        this.buttonSaveAsDataFile.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_AS_DATAFILE_ICON_PATH));
-        this.buttonCloseDataFile.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_CLOSE_DATAFILE_ICON_PATH));
+        this.buttonNewProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH));
+        this.buttonOpenProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH));
+        this.buttonSaveProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH));
+        this.buttonSaveAsProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH));
+        this.buttonCloseProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH));
 
         this.buttonZoomIn.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH));
         this.buttonZoomOut.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH));
@@ -90,11 +89,11 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
 
         // Action Listener
-        this.buttonNewDataFile.addActionListener(this.toolBarActionListener);
-        this.buttonOpenDataFile.addActionListener(this.toolBarActionListener);
-        this.buttonSaveDataFile.addActionListener(this.toolBarActionListener);
-        this.buttonSaveAsDataFile.addActionListener(this.toolBarActionListener);
-        this.buttonCloseDataFile.addActionListener(this.toolBarActionListener);
+        this.buttonNewProject.addActionListener(this.toolBarActionListener);
+        this.buttonOpenProject.addActionListener(this.toolBarActionListener);
+        this.buttonSaveProject.addActionListener(this.toolBarActionListener);
+        this.buttonSaveAsProject.addActionListener(this.toolBarActionListener);
+        this.buttonCloseProject.addActionListener(this.toolBarActionListener);
 
         this.buttonZoomIn.addActionListener(this.toolBarActionListener);
         this.buttonZoomOut.addActionListener(this.toolBarActionListener);
@@ -102,11 +101,11 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.addActionListener(this.toolBarActionListener);
 
         // add
-        this.add(this.buttonNewDataFile);
-        this.add(this.buttonOpenDataFile);
-        this.add(this.buttonSaveDataFile);
-        this.add(this.buttonSaveAsDataFile);
-        this.add(this.buttonCloseDataFile);
+        this.add(this.buttonNewProject);
+        this.add(this.buttonOpenProject);
+        this.add(this.buttonSaveProject);
+        this.add(this.buttonSaveAsProject);
+        this.add(this.buttonCloseProject);
 
         this.addSeparator();
 

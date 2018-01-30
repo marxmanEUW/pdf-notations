@@ -11,9 +11,6 @@ import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 public class MenuBarActionListener implements ActionListener {
 
@@ -46,20 +43,20 @@ public class MenuBarActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()) {
-            case Constants.MENUITEM_NEW_DATAFILE_NAME:
-                System.out.println("Ich erstelle ein neues Datendatei.");
+            case Constants.MENUITEM_NEW_PROJECT_NAME:
+                System.out.println("Ich erstelle ein neues Projekt.");
                 break;
-            case Constants.MENUITEM_OPEN_DATAFILE_NAME:
+            case Constants.MENUITEM_OPEN_PROJECT_NAME:
                 // @todo OpenFileDialog
-                System.out.println("Ich öffne das eine neue Datendatei.");
+                System.out.println("Ich öffne ein Projekt.");
 
                 File openFile = DialogFactory.getFileFromOpenDialog("JSON (*.json)", "pdfnot.json");
                 // @todo create new PDFObject
 
                 break;
-            case Constants.MENUITEM_SAVE_DATAFILE_NAME:
+            case Constants.MENUITEM_SAVE_POJECT_NAME:
                 // @todo SaveFileDialog
-                System.out.println("Ich speichere die Datendatei.");
+                System.out.println("Ich speichere das Projekt.");
 
                 /*
                  * @todo feature from yxyxD
@@ -67,7 +64,7 @@ public class MenuBarActionListener implements ActionListener {
                 PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
 
                 break;
-            case Constants.MENUITEM_SAVE_AS_DATAFILE_NAME:
+            case Constants.MENUITEM_SAVE_AS_PROJECT_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich  speichere unter das Projekt.");
 
@@ -80,7 +77,7 @@ public class MenuBarActionListener implements ActionListener {
 
 
                 break;
-            case Constants.MENUITEM_CLOSE_DATAFILE_NAME:
+            case Constants.MENUITEM_CLOSE_PROJECT_NAME:
                 // @todo Close PdfObject
                 System.out.println("Ich schließe das Projekt.");
                 break;
@@ -88,19 +85,15 @@ public class MenuBarActionListener implements ActionListener {
                 // @todo letzte Änderungen Speichern bevor man schließt
                 System.exit(0);
                 break;
-            case Constants.MENUITEM_IMPORT_PDF_NAME:
-                // @todo Import PDF + Open File Dialog
-                System.out.println("Ich importiere eine neue PDF.");
-                break;
-            case Constants.MENUITEM_SHOW_LIST_NAME:
-                // @todo Show Noations List
-                System.out.println("Ich zeige die Liste der Notationen.");
-                break;
             case Constants.MENUITEM_ADD_NOTATION_NAME:
                 // @todo Add Notation
                 System.out.println("Ich bin ein neue Notation.");
                 this.getPdfArea().setAddingNotation(true);
                 this.getPdfArea().setCursorTypeToCrosshair();
+                break;
+            case Constants.MENUITEM_DELETE_NOTATION_NAME:
+                // @todo Delete Notation
+                System.out.println("Ich löschen eine Notation.");
                 break;
             case Constants.MENUITEM_ABOUT_NAME:
                 // @todo Show About Information

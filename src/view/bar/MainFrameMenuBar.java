@@ -8,19 +8,16 @@ import javax.swing.*;
 public class MainFrameMenuBar extends JMenuBar {
 
     private JMenu menuFile;
-    private JMenuItem menuItemNewDataFile;
-    private JMenuItem menuItemOpenDataFile;
-    private JMenuItem menuItemSaveDataFile;
-    private JMenuItem menuItemSaveAsDataFile;
-    private JMenuItem menuItemCloseDataFile;
+    private JMenuItem menuItemNewProject;
+    private JMenuItem menuItemOpenProject;
+    private JMenuItem menuItemSaveProject;
+    private JMenuItem menuItemSaveAsProject;
+    private JMenuItem menuItemCloseProject;
     private JMenuItem menuItemClose;
-
-    private JMenu menuProject;
-    private JMenuItem menuItemImportPDF;
-    private JMenuItem menuItemShowList;
 
     private JMenu menuNotation;
     private JMenuItem menuItemAddNotation;
+    private JMenuItem menuItemDeleteNotation;
 
     private JMenu menuHelp;
     private JMenuItem menuItemAbout;
@@ -36,19 +33,16 @@ public class MainFrameMenuBar extends JMenuBar {
     public MainFrameMenuBar()
     {
         this.menuFile = new JMenu();
-        this.menuItemNewDataFile = new JMenuItem();
-        this.menuItemOpenDataFile = new JMenuItem();
-        this.menuItemSaveDataFile = new JMenuItem();
-        this.menuItemSaveAsDataFile = new JMenuItem();
-        this.menuItemCloseDataFile = new JMenuItem();
+        this.menuItemNewProject = new JMenuItem();
+        this.menuItemOpenProject = new JMenuItem();
+        this.menuItemSaveProject = new JMenuItem();
+        this.menuItemSaveAsProject = new JMenuItem();
+        this.menuItemCloseProject = new JMenuItem();
         this.menuItemClose = new JMenuItem();
-
-        this.menuProject = new JMenu();
-        this.menuItemImportPDF = new JMenuItem();
-        this.menuItemShowList = new JMenuItem();
 
         this.menuNotation = new JMenu();
         this.menuItemAddNotation = new JMenuItem();
+        this.menuItemDeleteNotation = new JMenuItem();
 
         this.menuHelp = new JMenu();
         this.menuItemAbout = new JMenuItem();
@@ -68,7 +62,6 @@ public class MainFrameMenuBar extends JMenuBar {
         this.mbActionListener = mbActionListener;
 
         this.setupMenuFile();
-        this.setupMenuProject();
         this.setupMenuNotation();
         this.setupMenuHelp();
     }
@@ -86,53 +79,33 @@ public class MainFrameMenuBar extends JMenuBar {
     {
         // Text des Menues und der Menuepunkte
         this.menuFile.setText(Constants.MENU_FILE_NAME);
-        this.menuItemNewDataFile.setText(Constants.MENUITEM_NEW_DATAFILE_NAME);
-        this.menuItemOpenDataFile.setText(Constants.MENUITEM_OPEN_DATAFILE_NAME);
-        this.menuItemSaveDataFile.setText(Constants.MENUITEM_SAVE_DATAFILE_NAME);
-        this.menuItemSaveAsDataFile.setText(Constants.MENUITEM_SAVE_AS_DATAFILE_NAME);
-        this.menuItemCloseDataFile.setText(Constants.MENUITEM_CLOSE_DATAFILE_NAME);
+        this.menuItemNewProject.setText(Constants.MENUITEM_NEW_PROJECT_NAME);
+        this.menuItemOpenProject.setText(Constants.MENUITEM_OPEN_PROJECT_NAME);
+        this.menuItemSaveProject.setText(Constants.MENUITEM_SAVE_POJECT_NAME);
+        this.menuItemSaveAsProject.setText(Constants.MENUITEM_SAVE_AS_PROJECT_NAME);
+        this.menuItemCloseProject.setText(Constants.MENUITEM_CLOSE_PROJECT_NAME);
         this.menuItemClose.setText(Constants.MENUITEM_CLOSE_NAME);
 
         // ActionListener
-        this.menuItemNewDataFile.addActionListener(this.mbActionListener);
-        this.menuItemOpenDataFile.addActionListener(this.mbActionListener);
-        this.menuItemSaveDataFile.addActionListener(this.mbActionListener);
-        this.menuItemSaveAsDataFile.addActionListener(this.mbActionListener);
-        this.menuItemCloseDataFile.addActionListener(this.mbActionListener);
+        this.menuItemNewProject.addActionListener(this.mbActionListener);
+        this.menuItemOpenProject.addActionListener(this.mbActionListener);
+        this.menuItemSaveProject.addActionListener(this.mbActionListener);
+        this.menuItemSaveAsProject.addActionListener(this.mbActionListener);
+        this.menuItemCloseProject.addActionListener(this.mbActionListener);
         this.menuItemClose.addActionListener(this.mbActionListener);
 
         // Menuepunkte zum Menue hinzufuegen
-        this.menuFile.add(this.menuItemNewDataFile);
-        this.menuFile.add(this.menuItemOpenDataFile);
-        this.menuFile.add(this.menuItemSaveDataFile);
-        this.menuFile.add(this.menuItemSaveAsDataFile);
-        this.menuFile.add(this.menuItemCloseDataFile);
+        this.menuFile.add(this.menuItemNewProject);
+        this.menuFile.add(this.menuItemOpenProject);
+        this.menuFile.add(this.menuItemSaveProject);
+        this.menuFile.add(this.menuItemSaveAsProject);
+        this.menuFile.add(this.menuItemCloseProject);
         this.menuFile.addSeparator();
         this.menuFile.add(this.menuItemClose);
 
         this.add(this.menuFile);
     }
 
-    /*
-     * @author  yxyxD
-     */
-    private void setupMenuProject()
-    {
-        // Text des Menues und der Menuepunkte
-        this.menuProject.setText(Constants.MENU_PROJECT_NAME);
-        this.menuItemImportPDF.setText(Constants.MENUITEM_IMPORT_PDF_NAME);
-        this.menuItemShowList.setText(Constants.MENUITEM_SHOW_LIST_NAME);
-
-        // ActionListener
-        this.menuItemImportPDF.addActionListener(this.mbActionListener);
-        this.menuItemShowList.addActionListener(this.mbActionListener);
-
-        // Menuepunkte zum Menue hinzufuegen
-        this.menuProject.add(this.menuItemImportPDF);
-        this.menuProject.add(this.menuItemShowList);
-
-        this.add(this.menuProject);
-    }
 
     /*
      * @author  yxyxD
@@ -142,12 +115,15 @@ public class MainFrameMenuBar extends JMenuBar {
         // Text des Menues und der Menuepunkte
         this.menuNotation.setText(Constants.MENU_NOTATION_NAME);
         this.menuItemAddNotation.setText(Constants.MENUITEM_ADD_NOTATION_NAME);
+        this.menuItemDeleteNotation.setText(Constants.MENUITEM_DELETE_NOTATION_NAME);
 
         // ActionListener
         this.menuItemAddNotation.addActionListener(this.mbActionListener);
+        this.menuItemDeleteNotation.addActionListener(this.mbActionListener);
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuNotation.add(this.menuItemAddNotation);
+        this.menuNotation.add(this.menuItemDeleteNotation);
 
         this.add(this.menuNotation);
     }
