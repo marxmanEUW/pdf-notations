@@ -12,6 +12,8 @@
 
 # Package Files #
 *.jar
+/files/*.pdfnot
+/files/*.json
 !libs/*.jar
 !libs/pdfbox/*.jar
 !libs/gson/*.jar
