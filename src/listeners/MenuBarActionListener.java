@@ -49,7 +49,7 @@ public class MenuBarActionListener implements ActionListener {
 
                 if (newProjectFile != null)
                 {
-                    this.pdfObjectView.importNewPdf(newProjectFile);
+                    this.pdfObjectView.importNewProject(newProjectFile);
                     System.out.println("Neues Projekt mit gegebener PDF erstellt");
                 }
                 break;
@@ -59,7 +59,7 @@ public class MenuBarActionListener implements ActionListener {
 
                 if (openProjectFile != null)
                 {
-                    //this.pdfObjectView.importNewPdf(openProjectFile);
+                    this.pdfObjectView.importNewProject(openProjectFile);
                     System.out.println("Neues Projekt mit gegebener PDF erstellt");
                 }
                 break;
@@ -67,11 +67,26 @@ public class MenuBarActionListener implements ActionListener {
                 // @todo SaveFileDialog
                 System.out.println("Ich speichere das Projekt.");
 
-                /*
-                 * @todo feature from yxyxD
-                 */
-                PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+                if (this.getPdfObject().getJsonAbsolutePath() != null)
+                {
+                    PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+                }
+                else
+                {
+                    File saveFile = DialogFactory.getFileFromSaveDialog(
+                        "PDF Notation (*.pdfnot)",
+                        "pdfnot"
+                    );
 
+                    if (saveFile != null)
+                    {
+                        this.getPdfObject().setJsonAbsolutePath(
+                            saveFile.getAbsolutePath()
+                        );
+
+                        PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+                    }
+                }
                 break;
             case Constants.MENUITEM_SAVE_AS_PROJECT_NAME:
                 // @todo SaveFileDialog

@@ -19,27 +19,20 @@ public abstract class PdfObjectFactory {
      * @todo Exception zu try-catch mit alert bei Fehler
      * @author  yxyxD
      */
-    public static PdfObject loadPdfObjectForPdfFile(File pdfFile)
+    public static PdfObject loadPdfObjectFromFile(File file)
     {
         PdfObject pdfObject = null;
 
         try
         {
-            // file with saved notations
-            // does only exist, if the pdf file has been edited before
-            File jsonFile = new File(
-                pdfFile.getAbsolutePath() + NOTATION_FILE_EXTENSION
-            );
-
-            if (jsonFile.exists())
+            String filePath = file.getAbsolutePath();
+            if (filePath.endsWith(".pdf"))
             {
-                // if the file exists => load saved status
-                pdfObject = loadPdfObjectFromSavedFile(jsonFile);
+                pdfObject = new PdfObject(file.getAbsolutePath());
             }
-            else
+            else if (filePath.endsWith(".pdfnot"))
             {
-                // if the file does not exists => create new pdf object for pdf
-                pdfObject = new PdfObject(pdfFile.getAbsolutePath());
+                pdfObject = loadPdfObjectFromSavedFile(file);
             }
         }
         catch (Exception exception)

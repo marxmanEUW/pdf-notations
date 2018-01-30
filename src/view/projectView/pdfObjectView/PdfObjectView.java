@@ -1,9 +1,7 @@
 package view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
-import factories.PdfRenderFactory;
 import listeners.*;
-import main.Launcher;
 import model.PdfObject;
 import view.projectView.pdfObjectView.partials.NotationSplitPane;
 import view.projectView.pdfObjectView.partials.PdfScrollPane;
@@ -164,9 +162,9 @@ public class PdfObjectView extends JSplitPane {
     /*
      * @author  yxyxD
      */
-    public void importNewPdf(File file)
+    public void importNewProject(File file)
     {
-        this.pdfObject = PdfObjectFactory.loadPdfObjectForPdfFile(file);
+        this.pdfObject = PdfObjectFactory.loadPdfObjectFromFile(file);
         this.updateViews();
     }
 

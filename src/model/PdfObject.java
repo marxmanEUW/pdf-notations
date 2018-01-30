@@ -27,7 +27,7 @@ public class PdfObject {
     public PdfObject(String pdfAbsolutePath)
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
-        this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
+        //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new ArrayList<>();
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
