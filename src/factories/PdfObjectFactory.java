@@ -8,7 +8,7 @@ import java.io.*;
 
 public abstract class PdfObjectFactory {
 
-    private static final String NOTATION_FILE_EXTENSION = "not.json";
+    private static final String NOTATION_FILE_EXTENSION = "not";
 
     /*
      * @todo Unterscheidung machen

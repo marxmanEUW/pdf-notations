@@ -44,15 +44,24 @@ public class MenuBarActionListener implements ActionListener {
     {
         switch (e.getActionCommand()) {
             case Constants.MENUITEM_NEW_PROJECT_NAME:
-                System.out.println("Ich erstelle ein neues Projekt.");
+
+                File newProjectFile = DialogFactory.getFileFromOpenDialog("PDF (*.pdf)", "pdf");
+
+                if (newProjectFile != null)
+                {
+                    this.pdfObjectView.importNewPdf(newProjectFile);
+                    System.out.println("Neues Projekt mit gegebener PDF erstellt");
+                }
                 break;
             case Constants.MENUITEM_OPEN_PROJECT_NAME:
-                // @todo OpenFileDialog
-                System.out.println("Ich öffne ein Projekt.");
 
-                File openFile = DialogFactory.getFileFromOpenDialog("JSON (*.json)", "pdfnot.json");
-                // @todo create new PDFObject
+                File openProjectFile = DialogFactory.getFileFromOpenDialog("PDF Notation (*.pdfnot)", "pdfnot");
 
+                if (openProjectFile != null)
+                {
+                    //this.pdfObjectView.importNewPdf(openProjectFile);
+                    System.out.println("Neues Projekt mit gegebener PDF erstellt");
+                }
                 break;
             case Constants.MENUITEM_SAVE_POJECT_NAME:
                 // @todo SaveFileDialog
