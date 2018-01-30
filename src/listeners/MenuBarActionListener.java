@@ -45,7 +45,7 @@ public class MenuBarActionListener implements ActionListener {
         switch (e.getActionCommand()) {
             case Constants.MENUITEM_NEW_PROJECT_NAME:
 
-                File newProjectFile = DialogFactory.getFileFromOpenDialog("PDF (*.pdf)", "pdf");
+                File newProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDF);
 
                 if (newProjectFile != null)
                 {
@@ -55,7 +55,7 @@ public class MenuBarActionListener implements ActionListener {
                 break;
             case Constants.MENUITEM_OPEN_PROJECT_NAME:
 
-                File openProjectFile = DialogFactory.getFileFromOpenDialog("PDF Notation (*.pdfnot)", "pdfnot");
+                File openProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDFNOT);
 
                 if (openProjectFile != null)
                 {
@@ -73,10 +73,7 @@ public class MenuBarActionListener implements ActionListener {
                 }
                 else
                 {
-                    File saveFile = DialogFactory.getFileFromSaveDialog(
-                        "PDF Notation (*.pdfnot)",
-                        "pdfnot"
-                    );
+                    File saveFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
 
                     if (saveFile != null)
                     {
@@ -92,7 +89,7 @@ public class MenuBarActionListener implements ActionListener {
                 // @todo SaveFileDialog
                 System.out.println("Ich  speichere unter das Projekt.");
 
-                File saveAsFile = DialogFactory.getFileFromSaveDialog("JSON (*.json)", "json");
+                File saveAsFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
                 if (saveAsFile != null)
                 {
                     this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());

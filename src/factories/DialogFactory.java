@@ -6,12 +6,23 @@ import java.io.File;
 
 public abstract class DialogFactory {
 
-    public static File getFileFromOpenDialog(String fileType, String fileExtension)
+    public static final int FILE_TYPE_PDF = 0;
+    public static final int FILE_TYPE_PDFNOT = 1;
+
+    private static final String FILE_TYPE_ARRAY[][] = {
+        {"PDF (.*pdf)", "pdf"},
+        {"PDF Notations (.*pdfnot)", "pdfnot"}
+    };
+
+    /*
+     * @author marxmanEUW
+     */
+    public static File getFileFromOpenDialog(int fileType)
     {
         File openFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], FILE_TYPE_ARRAY[fileType][1]));
 
         int state = fileChooser.showOpenDialog(null);
 
@@ -24,12 +35,18 @@ public abstract class DialogFactory {
         return openFile;
     }
 
-    public static File getFileFromSaveDialog(String fileType, String fileExtension)
+
+    /*
+     * @author marxmanEUW
+     */
+    public static File getFileFromSaveDialog(int fileType)
     {
+        String fileExtension = FILE_TYPE_ARRAY[fileType][1];
+
         File saveFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], fileExtension));
         fileChooser.setSelectedFile(new File("newFile." + fileExtension));
 
         int state = fileChooser.showSaveDialog(null);
@@ -37,6 +54,12 @@ public abstract class DialogFactory {
         if (state == JFileChooser.APPROVE_OPTION)
         {
             saveFile = fileChooser.getSelectedFile();
+
+            if (!saveFile.getAbsolutePath().endsWith("." + fileExtension))
+            {
+                saveFile = new File(saveFile.getAbsolutePath() + "." + fileExtension);
+            }
+
             System.out.println( saveFile.getAbsolutePath() );
         }
 
