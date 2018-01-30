@@ -53,7 +53,7 @@ public class MenuBarActionListener implements ActionListener {
                 // @todo OpenFileDialog
                 System.out.println("Ich öffne das eine neue Datendatei.");
 
-                File openFile = DialogFactory.getFileFromOpenDialog("JSON (*.json)", "json");
+                File openFile = DialogFactory.getFileFromOpenDialog("JSON (*.json)", "pdfnot.json");
                 // @todo create new PDFObject
 
                 break;
@@ -72,8 +72,12 @@ public class MenuBarActionListener implements ActionListener {
                 System.out.println("Ich  speichere unter das Projekt.");
 
                 File saveAsFile = DialogFactory.getFileFromSaveDialog("JSON (*.json)", "json");
-                this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());
-                PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+                if (saveAsFile != null)
+                {
+                    this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());
+                    PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+                }
+
 
                 break;
             case Constants.MENUITEM_CLOSE_DATAFILE_NAME:

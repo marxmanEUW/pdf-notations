@@ -1,6 +1,6 @@
 {
-  "pdfAbsolutePath": "/home/arnold/IdeaProjects/pdf-notations/files/file1.pdf",
-  "jsonAbsolutePath": "/home/arnold/IdeaProjects/pdf-notations/files/file1.pdfnot.json",
+  "pdfAbsolutePath": "C:/Users/conra/IdeaProjects/pdf-notations/files/file1.pdf",
+  "jsonAbsolutePath": "C:/Users/conra/IdeaProjects/pdf-notations/files/file1.pdfnot.json",
   "listOfNotations": [
     {
       "id": 0,
