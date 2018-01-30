@@ -21,5 +21,7 @@ public class Launcher {
     {
         MainFrame mainFrame = new MainFrame();
         mainFrame.initialize();
+
+        mainFrame.getPdfObjectView().importNewPdf(FILE1);
     }
 }

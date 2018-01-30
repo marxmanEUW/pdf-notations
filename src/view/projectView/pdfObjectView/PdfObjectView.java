@@ -80,12 +80,6 @@ public class PdfObjectView extends JSplitPane {
      */
     public void initialize()
     {
-        /*
-         * @todo Diesen Eintrag löschen => es wird NullPointerExceptions geben,
-         * @todo die noch abgefangen werden müssen
-         */
-        this.pdfObject = PdfObjectFactory.loadPdfObjectForPdfFile(Launcher.FILE1);
-
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
 
@@ -179,7 +173,7 @@ public class PdfObjectView extends JSplitPane {
     /*
      * @author  yxyxD
      */
-    public void updateViews()
+    private void updateViews()
     {
         // @todo update Notationlist and NotationEntity
         this.pdfArea.importNewPdf();
