@@ -7,8 +7,6 @@ import javax.swing.*;
 
 public class MainFrameToolBar extends JToolBar {
 
-    // @todo icons
-
     private JButton buttonNewDataFile;
     private JButton buttonOpenDataFile;
     private JButton buttonSaveDataFile;
@@ -51,11 +49,6 @@ public class MainFrameToolBar extends JToolBar {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
-    /*
-     * @todo white space at beginning of toolbar,  coming from .addSeparator??????
-     */
-
     public void initialize(ToolBarActionListener toolBarActionListener)
     {
         this.toolBarActionListener = toolBarActionListener;

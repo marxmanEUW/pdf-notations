@@ -6,11 +6,10 @@ import java.io.File;
 
 public abstract class DialogFactory {
 
-    public static File getFileFromOpenDialog(String fileType, String fileTypeExtension)
+    public static File getFileFromOpenDialog(String fileType, String fileExtension)
     {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileTypeExtension));
-        fileChooser.setSelectedFile(new File("newFile." + fileTypeExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileExtension));
         int state = fileChooser.showOpenDialog(null);
 
         if (state == JFileChooser.APPROVE_OPTION)
@@ -25,11 +24,11 @@ public abstract class DialogFactory {
         return null;
     }
 
-    public static File getFileFromSaveDialog(String fileType, String fileTypeExtension)
+    public static File getFileFromSaveDialog(String fileType, String fileExtension)
     {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileTypeExtension));
-        fileChooser.setSelectedFile(new File("newFile." + fileTypeExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(fileType, fileExtension));
+        fileChooser.setSelectedFile(new File("newFile." + fileExtension));
         int state = fileChooser.showSaveDialog(null);
 
         if (state == JFileChooser.APPROVE_OPTION)

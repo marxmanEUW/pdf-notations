@@ -10,7 +10,7 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * @todo make editable
-     * @todo implement EowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
+     * @todo implement RowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
      */
 
     private PdfObjectView pdfObjectView;
