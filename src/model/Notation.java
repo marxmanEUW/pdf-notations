@@ -4,6 +4,9 @@ import java.awt.*;
 
 public class Notation {
 
+    private static final String STANDARD_NAME = "Punkt";
+    private static final String STANDARD_DESCRIPTION = "Beschreibung";
+
     public static final int INFORMATION_COUNT = 3;
 
     private int id;
@@ -19,12 +22,12 @@ public class Notation {
      * #########################################################################
      */
 
-    public Notation(Integer id, String name, int x, int y, String description)
+    public Notation(Integer id, Point coordinates)
     {
         this.id = id;
-        this.name = name;
-        this.coordinates = new Point(x, y);
-        this.description = description;
+        this.name = STANDARD_NAME + "_" + Integer.toString(id);
+        this.coordinates = coordinates;
+        this.description = STANDARD_DESCRIPTION;
     }
 
 

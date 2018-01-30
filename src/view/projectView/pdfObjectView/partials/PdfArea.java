@@ -353,28 +353,6 @@ public class PdfArea extends JPanel {
                 ovalHeight
             );
         }
-
-        /*
-        for (Point point : this.getPdfObject().getListOfPoints())
-        {
-            //@todo name refactoring
-            int upperLeftX = (int) ((double) (point.x - this.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int upperLeftY = (int) ((double) (point.y - this.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
-                * this.zoomLevel);
-            int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)
-                * this.zoomLevel);
-
-            graphics.fillOval(
-                upperLeftX,
-                upperLeftY,
-                ovalWidth,
-                ovalHeight
-            );
-        }
-        */
     }
 
     /*
@@ -409,7 +387,9 @@ public class PdfArea extends JPanel {
         return isPointInRange;
     }
 
-
+    /*
+     * @author  yxyxD
+     */
     public Notation getClickedNotation(Point point)
     {
         if (this.getPdfObject() == null)
@@ -438,6 +418,17 @@ public class PdfArea extends JPanel {
         }
 
         return clickedNotation;
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public Point getActualCoordinatesOfPoint(Point point)
+    {
+        return new Point(
+            (int) (point.getX() / this.zoomLevel),
+            (int) (point.getY() / this.zoomLevel)
+        );
     }
 }
 

@@ -5,6 +5,7 @@ import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,13 +36,18 @@ public class PdfAreaMouseClick extends MouseAdapter {
          * @todo !WICHTIG: Intelligenz bei Umrechnung für ZoomLevel gehört
          * @todo hier nicht her
          */
-        int x = (int) ((double) mouseEvent.getX() / this.getPdfArea().getZoomLevel());
-        int y = (int) ((double) mouseEvent.getY() / this.getPdfArea().getZoomLevel());
+        //int x = (int) ((double) mouseEvent.getX() / this.getPdfArea().getZoomLevel());
+        //int y = (int) ((double) mouseEvent.getY() / this.getPdfArea().getZoomLevel());
+
+        Point coordinates = this.getPdfArea().getActualCoordinatesOfPoint(
+            mouseEvent.getPoint()
+        );
+
 
         if(this.getPdfArea().getAddingNotation()
             && !this.getPdfArea().isNotationInRange(mouseEvent.getPoint()))
         {
-            this.getPdfObject().addNotationAtXY(x, y);
+            this.getPdfObject().addNewNotation(coordinates);
             this.getPdfArea().repaint();
             this.getPdfArea().setCursorTypeToDefault();
             this.getPdfArea().setAddingNotation(false);

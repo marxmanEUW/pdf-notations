@@ -117,10 +117,38 @@ public class PdfObject {
      * #                    Public Methods                                     #
      * #########################################################################
      */
-
-    public void addNotationAtXY(int x, int y)
+    /*
+     * @author  yxyxD
+     */
+    public void addNewNotation(Point coordinates)
     {
-        Notation newNotation = new Notation(counter++,"Punkt", x, y, "Beschreibung " + counter);
-        this.listOfNotations.add(newNotation);
+        this.listOfNotations.add(new Notation(
+            this.getIdForNextNotation(),
+            coordinates
+        ));
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    private int getIdForNextNotation()
+    {
+        int nextId = 0;
+        for (Notation notation : this.listOfNotations)
+        {
+            int notationID = notation.getId();
+            if (notationID >= nextId)
+            {
+                nextId = notationID + 1;
+            }
+        }
+
+        return nextId;
     }
 }
