@@ -45,87 +45,49 @@ public class BarActionListener implements ActionListener {
         switch (e.getActionCommand()) {
             case Constants.BAR_ITEM_NEW_PROJECT_NAME:
 
-                File newProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDF);
-
-                if (newProjectFile != null)
-                {
-                    this.pdfObjectView.importNewProject(newProjectFile);
-                    System.out.println("Neues Projekt mit gegebener PDF erstellt");
-                }
+                newProject();
                 break;
             case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
 
-                File openProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDFNOT);
-
-                if (openProjectFile != null)
-                {
-                    this.pdfObjectView.importNewProject(openProjectFile);
-                    System.out.println("Neues Projekt mit gegebener PDF erstellt");
-                }
+                openProject();
                 break;
             case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
-                // @todo SaveFileDialog
-                System.out.println("Ich speichere das Projekt.");
 
-                if (this.getPdfObject().getJsonAbsolutePath() != null)
-                {
-                    PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
-                }
-                else
-                {
-                    File saveFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
-
-                    if (saveFile != null)
-                    {
-                        this.getPdfObject().setJsonAbsolutePath(
-                            saveFile.getAbsolutePath()
-                        );
-
-                        PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
-                    }
-                }
+                saveProject();
                 break;
             case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-                // @todo SaveFileDialog
-                System.out.println("Ich  speichere unter das Projekt.");
 
-                File saveAsFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
-                if (saveAsFile != null)
-                {
-                    this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());
-                    PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
-                }
-
-
+                saveAsProject();
                 break;
             case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
-                // @todo Close PdfObject
-                System.out.println("Ich schließe das Projekt.");
+
+                // not implemented jet
+                //closeProject();
                 break;
             case Constants.BAR_ITEM_CLOSE_NAME:
-                // @todo letzte Änderungen Speichern bevor man schließt
-                System.exit(0);
+
+                closeProgramm();
                 break;
             case Constants.BAR_ITEM_ADD_NOTATION_NAME:
-                // @todo Add Notation
-                System.out.println("Ich bin ein neue Notation.");
-                this.getPdfArea().setAddingNotation(true);
-                this.getPdfArea().setCursorTypeToCrosshair();
+
+                addNotation();
                 break;
             case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
-                // @todo Delete Notation
-                System.out.println("Ich löschen eine Notation.");
+
+                // not implemented jet
+                //deleteNotation();
                 break;
             case Constants.BAR_ITEM_ABOUT_NAME:
-                // @todo Show About Information
-                System.out.println("Ich zeige die About Informationen.");
+
+                // not implemented jet
+                //showAbout();
                 break;
         }
     }
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Getter                                             #
      * #########################################################################
      */
     /*
@@ -142,5 +104,130 @@ public class BarActionListener implements ActionListener {
     private PdfArea getPdfArea()
     {
         return this.pdfObjectView.getPdfArea();
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    private Hilfsmethoden                              #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    private void newProject()
+    {
+        File newProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDF);
+
+        if (newProjectFile != null)
+        {
+            this.pdfObjectView.importNewProject(newProjectFile);
+            System.out.println("Neues Projekt mit gegebener PDF: " + newProjectFile.getAbsolutePath() + " erstellt");
+        }
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void openProject()
+    {
+        File openProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDFNOT);
+
+        if (openProjectFile != null)
+        {
+            this.pdfObjectView.importNewProject(openProjectFile);
+            System.out.println("Vorhandenes Projekt mit gegebener PDF " + openProjectFile.getAbsolutePath() + " erstellt");
+        }
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void saveProject()
+    {
+        if (this.getPdfObject().getJsonAbsolutePath() != null)
+        {
+            PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+        }
+        else
+        {
+            File saveFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
+
+            if (saveFile != null)
+            {
+                this.getPdfObject().setJsonAbsolutePath(
+                    saveFile.getAbsolutePath()
+                );
+
+                PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+            }
+        }
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void saveAsProject()
+    {
+        File saveAsFile = DialogFactory.getFileFromSaveDialog(DialogFactory.FILE_TYPE_PDFNOT);
+        if (saveAsFile != null)
+        {
+            this.getPdfObject().setJsonAbsolutePath(saveAsFile.getAbsolutePath());
+            PdfObjectFactory.savePdfObjectForPdfFile(this.getPdfObject());
+        }
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     * @todo close Projeect
+     */
+    private void closeProject()
+    {
+
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     * @todo Warnung anzeigen, dass alle nicht gespeicherten Änderungen verloren gehen
+     */
+    private void closeProgramm()
+    {
+        System.exit(0);
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void addNotation()
+    {
+        this.getPdfArea().setAddingNotation(true);
+        this.getPdfArea().setCursorTypeToCrosshair();
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     * @todo delete Notation
+     * @todo delete multiple Notations
+     */
+    private void deleteNotation()
+    {
+
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     * @todo show About
+     */
+    private void showAbout()
+    {
+
     }
 }
