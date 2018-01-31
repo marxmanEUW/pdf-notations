@@ -12,7 +12,7 @@ import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
 
-public class MenuBarActionListener implements ActionListener {
+public class BarActionListener implements ActionListener {
 
     private PdfObjectView pdfObjectView;
 
@@ -43,7 +43,7 @@ public class MenuBarActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()) {
-            case Constants.MENUITEM_NEW_PROJECT_NAME:
+            case Constants.BAR_ITEM_NEW_PROJECT_NAME:
 
                 File newProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDF);
 
@@ -53,7 +53,7 @@ public class MenuBarActionListener implements ActionListener {
                     System.out.println("Neues Projekt mit gegebener PDF erstellt");
                 }
                 break;
-            case Constants.MENUITEM_OPEN_PROJECT_NAME:
+            case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
 
                 File openProjectFile = DialogFactory.getFileFromOpenDialog(DialogFactory.FILE_TYPE_PDFNOT);
 
@@ -63,7 +63,7 @@ public class MenuBarActionListener implements ActionListener {
                     System.out.println("Neues Projekt mit gegebener PDF erstellt");
                 }
                 break;
-            case Constants.MENUITEM_SAVE_POJECT_NAME:
+            case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich speichere das Projekt.");
 
@@ -85,7 +85,7 @@ public class MenuBarActionListener implements ActionListener {
                     }
                 }
                 break;
-            case Constants.MENUITEM_SAVE_AS_PROJECT_NAME:
+            case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
                 // @todo SaveFileDialog
                 System.out.println("Ich  speichere unter das Projekt.");
 
@@ -98,25 +98,25 @@ public class MenuBarActionListener implements ActionListener {
 
 
                 break;
-            case Constants.MENUITEM_CLOSE_PROJECT_NAME:
+            case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
                 // @todo Close PdfObject
                 System.out.println("Ich schließe das Projekt.");
                 break;
-            case Constants.MENUITEM_CLOSE_NAME:
+            case Constants.BAR_ITEM_CLOSE_NAME:
                 // @todo letzte Änderungen Speichern bevor man schließt
                 System.exit(0);
                 break;
-            case Constants.MENUITEM_ADD_NOTATION_NAME:
+            case Constants.BAR_ITEM_ADD_NOTATION_NAME:
                 // @todo Add Notation
                 System.out.println("Ich bin ein neue Notation.");
                 this.getPdfArea().setAddingNotation(true);
                 this.getPdfArea().setCursorTypeToCrosshair();
                 break;
-            case Constants.MENUITEM_DELETE_NOTATION_NAME:
+            case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
                 // @todo Delete Notation
                 System.out.println("Ich löschen eine Notation.");
                 break;
-            case Constants.MENUITEM_ABOUT_NAME:
+            case Constants.BAR_ITEM_ABOUT_NAME:
                 // @todo Show About Information
                 System.out.println("Ich zeige die About Informationen.");
                 break;
