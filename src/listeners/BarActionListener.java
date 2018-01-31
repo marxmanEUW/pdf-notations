@@ -237,6 +237,8 @@ public class BarActionListener implements ActionListener {
     private void deleteNotation()
     {
         this.getPdfObject().deleteSelectedNotation();
+        this.getPdfArea().repaint();
+        this.pdfObjectView.getNotationListScrollPane().updateTable();
     }
 
 
