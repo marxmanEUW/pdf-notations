@@ -4,6 +4,8 @@ import listeners.BarActionListener;
 import gui.Constants;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MainFrameMenuBar extends JMenuBar {
 
@@ -102,6 +104,12 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemSaveAsProject.addActionListener(this.barActionListener);
         this.menuItemCloseProject.addActionListener(this.barActionListener);
         this.menuItemClose.addActionListener(this.barActionListener);
+
+        //Shortcuts
+        this.menuItemSaveProject.setAccelerator(KeyStroke.getKeyStroke(
+            KeyEvent.VK_S,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuFile.add(this.menuItemNewProject);

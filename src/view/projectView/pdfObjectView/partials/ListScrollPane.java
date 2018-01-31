@@ -74,9 +74,25 @@ public class ListScrollPane extends JScrollPane {
         this.listTableModel.fireTableDataChanged();
     }
 
-    public void setSelectedRow(int i)
+
+    /*
+     * @author  marxmanEUW
+     */
+    public void setSelectedRow(int notationId)
     {
-        this.notationListTable.setRowSelectionInterval(i, i);
+        int rowId = notationId;
+
+        for (int i = 0; i < this.getPdfObject().getListOfNotationsSize(); i++)
+        {
+            if (notationId == (int) this.listTableModel.getValueAt(i, 0))
+            {
+                rowId = i;
+                break;
+            }
+        }
+
+
+        this.notationListTable.setRowSelectionInterval(rowId, rowId);
     }
 
     public void unselectRow()

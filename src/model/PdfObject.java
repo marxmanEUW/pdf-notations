@@ -128,6 +128,14 @@ public class PdfObject {
         ));
     }
 
+    /*
+     * @author  marxmanEUW
+     */
+    public void deleteSelectedNotation()
+    {
+        this.listOfNotations.remove(this.selectedNotationIndex);
+    }
+
 
     /*
      * #########################################################################
