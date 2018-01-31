@@ -106,10 +106,34 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemClose.addActionListener(this.barActionListener);
 
         //Shortcuts
-        this.menuItemSaveProject.setAccelerator(KeyStroke.getKeyStroke(
-            KeyEvent.VK_S,
+        this.menuItemNewProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_NEW_PROJECT_KEY_STROKE,
             KeyEvent.CTRL_DOWN_MASK
         ));
+        this.menuItemOpenProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_OPEN_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemSaveProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_SAVE_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemSaveAsProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_SAVE_AS_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK
+        ));
+        /*
+         * removed to avoid accidentally pressing
+        this.menuItemCloseProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_CLOSE_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        */
+        this.menuItemClose.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_CLOSE_KEY_STROKE,
+            KeyEvent.ALT_DOWN_MASK
+        ));
+
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuFile.add(this.menuItemNewProject);
@@ -138,6 +162,16 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemAddNotation.addActionListener(this.barActionListener);
         this.menuItemDeleteNotation.addActionListener(this.barActionListener);
 
+        //Shortcuts
+        this.menuItemAddNotation.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ADD_NOTATION_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemDeleteNotation.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_DELETE_NOTATION_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+
         // Menuepunkte zum Menue hinzufuegen
         this.menuNotation.add(this.menuItemAddNotation);
         this.menuNotation.add(this.menuItemDeleteNotation);
@@ -159,6 +193,16 @@ public class MainFrameMenuBar extends JMenuBar {
         // ActionListener
         this.menuItemZoomIn.addActionListener(this.barActionListener);
         this.menuItemZoomOut.addActionListener(this.barActionListener);
+
+        //Shortcuts
+        this.menuItemZoomIn.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ZOOM_IN_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemZoomOut.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ZOOM_OUT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuView.add(this.menuItemZoomIn);

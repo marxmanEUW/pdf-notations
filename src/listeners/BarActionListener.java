@@ -2,6 +2,7 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 import factories.DialogFactory;
@@ -53,8 +54,6 @@ public class BarActionListener implements ActionListener {
                 break;
             case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
 
-                // @todo testing
-                System.out.println("save");
                 saveProject();
                 break;
             case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
@@ -77,6 +76,16 @@ public class BarActionListener implements ActionListener {
             case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
 
                 deleteNotation();
+                break;
+            case Constants.BAR_ITEM_ZOOM_IN_NAME:
+
+                // not implemented jet
+                //zoomIn();
+                break;
+            case Constants.BAR_ITEM_ZOOM_OUT_NAME:
+
+                // not implemented jet
+                //zoomOut();
                 break;
             case Constants.BAR_ITEM_ABOUT_NAME:
 
@@ -241,6 +250,23 @@ public class BarActionListener implements ActionListener {
         this.pdfObjectView.getNotationListScrollPane().updateTable();
     }
 
+
+    /*
+     * @todo implement zoom in button action
+     */
+    private void zoomIn()
+    {
+        System.exit(0);
+    }
+
+
+    /*
+     * @todo implement zoom out button action
+     */
+    private void zoomOut()
+    {
+
+    }
 
     /*
      * @author  marxmanEUW
