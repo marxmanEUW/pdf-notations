@@ -100,7 +100,6 @@ public class ListScrollPane extends JScrollPane {
             }
         }
 
-
         this.notationListTable.setRowSelectionInterval(rowId, rowId);
     }
 

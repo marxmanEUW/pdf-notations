@@ -25,6 +25,9 @@ public class PdfArea extends JPanel {
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
+    private final Color NOTATION_STANDARD_COLOR = Color.red;
+    private final Color NOTATION_SELECTED_COLOR = Color.blue;
+
 
     // Pdf object view
     private PdfObjectView pdfObjectView;
@@ -332,10 +335,17 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
-        graphics.setColor(Color.red);
-
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
+            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
+            {
+                graphics.setColor(this.NOTATION_SELECTED_COLOR);
+            }
+            else
+            {
+                graphics.setColor(this.NOTATION_STANDARD_COLOR);
+            }
+
             //@todo name refactoring
             int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
                 * this.zoomLevel);

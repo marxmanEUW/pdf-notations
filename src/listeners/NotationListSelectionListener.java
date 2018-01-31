@@ -58,6 +58,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
             }
 
             this.pdfObjectView.getEntityScrollPane().updateTable();
+            this.pdfObjectView.getPdfArea().repaint();
         }
     }
 
