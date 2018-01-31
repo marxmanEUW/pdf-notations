@@ -17,7 +17,9 @@ public class ListTableModel extends AbstractTableModel {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
@@ -29,25 +31,36 @@ public class ListTableModel extends AbstractTableModel {
      * #                    Overrides                                          #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public int getRowCount()
     {
         if (this.getPdfObject() == null)
         {
             return 0;
-        } else
+        }
+        else
         {
             return this.getPdfObject().getListOfNotationsSize();
         }
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public int getColumnCount()
     {
         return 2;
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
@@ -56,22 +69,36 @@ public class ListTableModel extends AbstractTableModel {
             return null;
         }
 
-        switch (columnIndex){
-            case 0: return this.getPdfObject().getListOfNotations().get(rowIndex).getId();
-            case 1: return this.getPdfObject().getListOfNotations().get(rowIndex).getName();
+        switch (columnIndex)
+        {
+            case 0:
+                return this.getPdfObject().getListOfNotations().
+                    get(rowIndex).getId();
+            case 1:
+                return this.getPdfObject().getListOfNotations().
+                    get(rowIndex).getName();
             default: return null;
         }
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
     public String getColumnName(int column)
     {
-        switch (column){
+        switch (column)
+        {
             case 0: return Constants.LIST_TABLE_MODEL_COLUMN_1_NAME;
             case 1: return Constants.LIST_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
     public Class getColumnClass(int columnIndex)
     {
         // @todo Rückgabe dynamisch machen

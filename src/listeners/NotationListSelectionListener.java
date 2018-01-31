@@ -13,7 +13,6 @@ public class NotationListSelectionListener implements ListSelectionListener {
     // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
 
     private PdfObjectView pdfObjectView;
-    private NotationSplitPane notationSplitPane;
 
 
     /*
@@ -21,12 +20,12 @@ public class NotationListSelectionListener implements ListSelectionListener {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-
-        this.notationSplitPane = this.pdfObjectView.getNotationSplitPane();
     }
 
 
@@ -35,7 +34,9 @@ public class NotationListSelectionListener implements ListSelectionListener {
      * #                    Overrides                                         #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     public void valueChanged(ListSelectionEvent e)
     {
@@ -45,15 +46,21 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
             if(lsm.isSelectionEmpty())
             {
-                this.getPdfObject().setSelectedNotationIndex(PdfObject.SELECTED_NOTATION_NULL_VALUE);
-            } else
+                this.getPdfObject().setSelectedNotationIndex(
+                    PdfObject.SELECTED_NOTATION_NULL_VALUE
+                );
+            }
+            else
             {
-                this.getPdfObject().setSelectedNotationIndex(lsm.getLeadSelectionIndex());
+                this.getPdfObject().setSelectedNotationIndex(
+                    lsm.getLeadSelectionIndex()
+                );
             }
 
             this.pdfObjectView.getEntityScrollPane().updateTable();
         }
     }
+
 
     /*
      * #########################################################################

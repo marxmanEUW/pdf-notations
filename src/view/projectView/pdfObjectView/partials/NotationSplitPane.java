@@ -43,9 +43,9 @@ public class NotationSplitPane extends JSplitPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.notationListScrollPane = this.pdfObjectView.getNotationListScrollPane();
+        this.notationListScrollPane =
+            this.pdfObjectView.getNotationListScrollPane();
         this.entityScrollPane = this.pdfObjectView.getEntityScrollPane();
-        //this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
 
         this.setTopComponent(this.notationListScrollPane);
         this.setBottomComponent(this.entityScrollPane);
@@ -57,16 +57,6 @@ public class NotationSplitPane extends JSplitPane {
      * #                    öffentliche Methoden                               #
      * #########################################################################
      */
-
-    public void updateNotationListTable()
-    {
-        this.notationListScrollPane.updateTable();
-    }
-
-    public void updateNotationEntityTable()
-    {
-        this.entityScrollPane.updateTable();
-    }
 
 
     /*

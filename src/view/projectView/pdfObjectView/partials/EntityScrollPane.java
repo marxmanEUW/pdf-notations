@@ -25,6 +25,9 @@ public class EntityScrollPane extends JScrollPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  marxmanEUW
+     */
     public EntityScrollPane()
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -39,7 +42,9 @@ public class EntityScrollPane extends JScrollPane {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
@@ -56,7 +61,9 @@ public class EntityScrollPane extends JScrollPane {
      * #                    öffentliche Methoden                               #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void updateTable()
     {
         this.entityTableModel.fireTableDataChanged();
