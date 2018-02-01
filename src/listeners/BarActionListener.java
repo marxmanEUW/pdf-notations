@@ -12,8 +12,13 @@ import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
+import javax.swing.*;
+
 
 public class BarActionListener implements ActionListener {
+
+    private static String ABOUT_TITLE = "Über";
+    private static String ABOUT_TEXT = "Hier soll ein Text stehen, \nder etwas beschreibt.";
 
     private PdfObjectView pdfObjectView;
 
@@ -90,7 +95,7 @@ public class BarActionListener implements ActionListener {
             case Constants.BAR_ITEM_ABOUT_NAME:
 
                 // not implemented jet
-                //showAbout();
+                showAbout();
                 break;
         }
     }
@@ -274,6 +279,11 @@ public class BarActionListener implements ActionListener {
      */
     private void showAbout()
     {
-
+        JOptionPane.showMessageDialog(
+            null,
+            ABOUT_TEXT,
+            ABOUT_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
     }
 }
