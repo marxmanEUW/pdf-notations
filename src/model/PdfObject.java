@@ -15,9 +15,6 @@ public class PdfObject {
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
 
-    // @todo testing
-    private int counter;
-
 
     /*
      * #########################################################################
@@ -31,7 +28,6 @@ public class PdfObject {
 
         this.listOfNotations = new ArrayList<>();
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
-        this.counter = 0;
     }
 
 
@@ -53,7 +49,7 @@ public class PdfObject {
      */
     public String getJsonAbsolutePath()
     {
-        return jsonAbsolutePath;
+        return this.jsonAbsolutePath;
     }
 
     /*
