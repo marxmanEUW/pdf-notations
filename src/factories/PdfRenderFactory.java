@@ -1,6 +1,7 @@
 package factories;
 
 import model.PdfObject;
+import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -37,7 +38,9 @@ public abstract class PdfRenderFactory {
 
         try {
             File pdfFile = new File(pdfObject.getPdfAbsolutePath());
-            PDDocument pdfDocument = PDDocument.load(pdfFile);
+            PDDocument pdfDocument = PDDocument.load(
+                pdfFile,
+                MemoryUsageSetting.setupMainMemoryOnly());
             PDFRenderer renderer = new PDFRenderer(pdfDocument);
             pdfImage = renderer.renderImage(0, zoomLevel);
             pdfDocument.close();
