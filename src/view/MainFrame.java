@@ -22,6 +22,8 @@ public class MainFrame extends JFrame {
 
     private MainFrameKeyListener mainFrameKeyListener;
 
+    private MainFrameWindowAdapter mainFrameWindowAdapter;
+
     /*
      * #########################################################################
      * #                    Constructor                                        #
@@ -40,6 +42,7 @@ public class MainFrame extends JFrame {
         this.pack();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        this.mainFrameWindowAdapter = new MainFrameWindowAdapter();
         this.mainFrameKeyListener = new MainFrameKeyListener();
 
         this.menuBar = new MainFrameMenuBar();
@@ -58,7 +61,7 @@ public class MainFrame extends JFrame {
      */
     public void initialize()
     {
-        this.addWindowListener(new MainFrameWindowAdapter());
+        this.addWindowListener(this.mainFrameWindowAdapter);
 
         this.mainFrameKeyListener.initialize(this);
         this.addKeyListener(this.mainFrameKeyListener);

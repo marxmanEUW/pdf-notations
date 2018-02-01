@@ -19,8 +19,12 @@ import javax.swing.*;
 
 public class BarActionListener implements ActionListener {
 
-    private static String ABOUT_TITLE = "Über";
-    private static String ABOUT_TEXT = "Hier soll ein Text stehen, \nder etwas beschreibt.";
+    private static String ABOUT_TITLE = "PDF Notations";
+    private static String ABOUT_TEXT =
+        "https://github.com/marxmanEUW/pdf-notations\n" +
+            "Lizenz: GPL v3\n" +
+            "Icons von [Keyamoon] (https://icomoon.io/#icons-icomoon) - GPL v3"
+        ;
 
     private MainFrame mainFrame;
 
