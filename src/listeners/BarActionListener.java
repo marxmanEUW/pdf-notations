@@ -187,7 +187,7 @@ public class BarActionListener implements ActionListener {
                     + openProjectFile.getAbsolutePath()
                     + " erstellt"
             );
-            this.getPdfObjectView().importNewProject(openProjectFile);
+            this.getPdfObjectView().openProject(openProjectFile);
         }
     }
 
@@ -244,7 +244,7 @@ public class BarActionListener implements ActionListener {
      */
     private void closeProject()
     {
-        this.pdfObjectView.closeProject();
+        this.getPdfObjectView().closeProject();
     }
 
 
@@ -290,7 +290,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomIn()
     {
-        this.pdfObjectView.getPdfArea().resizePdf(BarActionListener.ZOOM_IN);
+        this.getPdfObjectView().getPdfArea().resizePdf(BarActionListener.ZOOM_IN);
     }
 
 
@@ -299,7 +299,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomOut()
     {
-        this.pdfObjectView.getPdfArea().resizePdf(BarActionListener.ZOOM_OUT);
+        this.getPdfObjectView().getPdfArea().resizePdf(BarActionListener.ZOOM_OUT);
     }
 
     /*
