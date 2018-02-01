@@ -1,7 +1,7 @@
 package view.bar;
 
 import gui.Constants;
-import listeners.ToolBarActionListener;
+import listeners.BarActionListener;
 
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class MainFrameToolBar extends JToolBar {
 
     private JButton buttonAddNotation;
 
-    private ToolBarActionListener toolBarActionListener;
+    private BarActionListener barActionListener;
 
     /*
      * #########################################################################
@@ -48,33 +48,33 @@ public class MainFrameToolBar extends JToolBar {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-    public void initialize(ToolBarActionListener toolBarActionListener)
+    public void initialize(BarActionListener barActionListener)
     {
-        this.toolBarActionListener = toolBarActionListener;
+        this.barActionListener = barActionListener;
 
         // ActionCommand
-        this.buttonNewProject.setActionCommand(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
-        this.buttonOpenProject.setActionCommand(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME);
-        this.buttonSaveProject.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME);
-        this.buttonSaveAsProject.setActionCommand(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME);
-        this.buttonCloseProject.setActionCommand(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_NAME);
+        this.buttonNewProject.setActionCommand(Constants.BAR_ITEM_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setActionCommand(Constants.BAR_ITEM_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setActionCommand(Constants.BAR_ITEM_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setActionCommand(Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setActionCommand(Constants.BAR_ITEM_CLOSE_PROJECT_NAME);
 
-        this.buttonZoomIn.setActionCommand(Constants.TOOLBAR_BUTTON_ZOOM_IN_NAME);
-        this.buttonZoomOut.setActionCommand(Constants.TOOLBAR_BUTTON_ZOOM_OUT_NAME);
+        this.buttonZoomIn.setActionCommand(Constants.BAR_ITEM_ZOOM_IN_NAME);
+        this.buttonZoomOut.setActionCommand(Constants.BAR_ITEM_ZOOM_OUT_NAME);
 
-        this.buttonAddNotation.setActionCommand(Constants.TOOLBAR_BUTTON_ADD_NOTATION_NAME);
+        this.buttonAddNotation.setActionCommand(Constants.BAR_ITEM_ADD_NOTATION_NAME);
 
         // Tooltip Text
-        this.buttonNewProject.setToolTipText(Constants.TOOLBAR_BUTTON_NEW_PROJECT_NAME);
-        this.buttonOpenProject.setToolTipText(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_NAME);
-        this.buttonSaveProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_NAME);
-        this.buttonSaveAsProject.setToolTipText(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME);
-        this.buttonCloseProject.setToolTipText(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_NAME);
+        this.buttonNewProject.setToolTipText(Constants.BAR_ITEM_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setToolTipText(Constants.BAR_ITEM_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setToolTipText(Constants.BAR_ITEM_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setToolTipText(Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setToolTipText(Constants.BAR_ITEM_CLOSE_PROJECT_NAME);
 
-        this.buttonZoomIn.setToolTipText(Constants.TOOLBAR_BUTTON_ZOOM_IN_NAME);
-        this.buttonZoomOut.setToolTipText(Constants.TOOLBAR_BUTTON_ZOOM_OUT_NAME);
+        this.buttonZoomIn.setToolTipText(Constants.BAR_ITEM_ZOOM_IN_NAME);
+        this.buttonZoomOut.setToolTipText(Constants.BAR_ITEM_ZOOM_OUT_NAME);
 
-        this.buttonAddNotation.setToolTipText(Constants.TOOLBAR_BUTTON_ADD_NOTATION_NAME);
+        this.buttonAddNotation.setToolTipText(Constants.BAR_ITEM_ADD_NOTATION_NAME);
 
         // Image
         this.buttonNewProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH));
@@ -89,16 +89,16 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonAddNotation.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
 
         // Action Listener
-        this.buttonNewProject.addActionListener(this.toolBarActionListener);
-        this.buttonOpenProject.addActionListener(this.toolBarActionListener);
-        this.buttonSaveProject.addActionListener(this.toolBarActionListener);
-        this.buttonSaveAsProject.addActionListener(this.toolBarActionListener);
-        this.buttonCloseProject.addActionListener(this.toolBarActionListener);
+        this.buttonNewProject.addActionListener(this.barActionListener);
+        this.buttonOpenProject.addActionListener(this.barActionListener);
+        this.buttonSaveProject.addActionListener(this.barActionListener);
+        this.buttonSaveAsProject.addActionListener(this.barActionListener);
+        this.buttonCloseProject.addActionListener(this.barActionListener);
 
-        this.buttonZoomIn.addActionListener(this.toolBarActionListener);
-        this.buttonZoomOut.addActionListener(this.toolBarActionListener);
+        this.buttonZoomIn.addActionListener(this.barActionListener);
+        this.buttonZoomOut.addActionListener(this.barActionListener);
 
-        this.buttonAddNotation.addActionListener(this.toolBarActionListener);
+        this.buttonAddNotation.addActionListener(this.barActionListener);
 
         // add
         this.add(this.buttonNewProject);

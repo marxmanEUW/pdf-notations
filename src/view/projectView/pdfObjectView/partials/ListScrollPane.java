@@ -27,7 +27,9 @@ public class ListScrollPane extends JScrollPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public ListScrollPane()
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -44,19 +46,24 @@ public class ListScrollPane extends JScrollPane {
      * #                    Initialisierung                                    #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
 
         this.listTableModel = this.pdfObjectView.getListTableModel();
-        this.notationListSelectionListener = this.pdfObjectView.getNotationListSelectionListener();
+        this.notationListSelectionListener =
+            this.pdfObjectView.getNotationListSelectionListener();
 
 
 
         this.notationListTable.setModel(this.listTableModel);
 
-        this.listSelectionModel.addListSelectionListener(this.notationListSelectionListener);
+        this.listSelectionModel.addListSelectionListener(
+            this.notationListSelectionListener
+        );
         this.notationListTable.setSelectionModel(this.listSelectionModel);
 
         this.getViewport().add(notationListTable);
@@ -68,17 +75,38 @@ public class ListScrollPane extends JScrollPane {
      * #                    öffentliche Methoden                               #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     public void updateTable()
     {
         this.listTableModel.fireTableDataChanged();
     }
 
-    public void setSelectedRow(int i)
+
+    /*
+     * @author  marxmanEUW
+     */
+    public void setSelectedRow(int notationId)
     {
-        this.notationListTable.setRowSelectionInterval(i, i);
+        int rowId = notationId;
+
+        for (int i = 0; i < this.getPdfObject().getListOfNotationsSize(); i++)
+        {
+            if (notationId == (int) this.listTableModel.getValueAt(i, 0))
+            {
+                rowId = i;
+                break;
+            }
+        }
+
+        this.notationListTable.setRowSelectionInterval(rowId, rowId);
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
     public void unselectRow()
     {
         this.notationListTable.clearSelection();
@@ -89,7 +117,9 @@ public class ListScrollPane extends JScrollPane {
      * #                    Overrides                                          #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     */
     @Override
     protected void paintComponent(Graphics g)
     {

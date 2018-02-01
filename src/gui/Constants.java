@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.KeyEvent;
+
 public class Constants {
 
     /*
@@ -14,18 +16,17 @@ public class Constants {
     public static final String MENU_FILE_NAME = "Datei";
 
         public static final String
-            MENUITEM_NEW_PROJECT_NAME = "Neues Projekt erstellen";
+            BAR_ITEM_NEW_PROJECT_NAME = "Neues Projekt erstellen";
         public static final String
-            MENUITEM_OPEN_PROJECT_NAME = "Projekt öffnen";
+            BAR_ITEM_OPEN_PROJECT_NAME = "Projekt öffnen";
         public static final String
-            MENUITEM_SAVE_POJECT_NAME = "Projekt speichern";
+            BAR_ITEM_SAVE_PROJECT_NAME = "Projekt speichern";
         public static final String
-            MENUITEM_SAVE_AS_PROJECT_NAME = "Projekt speichern unter";
+            BAR_ITEM_SAVE_AS_PROJECT_NAME = "Projekt speichern unter";
         public static final String
-            MENUITEM_CLOSE_PROJECT_NAME = "Projekt schließen";
+            BAR_ITEM_CLOSE_PROJECT_NAME = "Projekt schließen";
         public static final String
-            MENUITEM_CLOSE_NAME = "Beenden";
-
+            BAR_ITEM_CLOSE_NAME = "Beenden";
 
 
     /*
@@ -34,9 +35,20 @@ public class Constants {
     public static final String MENU_NOTATION_NAME = "Notation";
 
         public static final String
-            MENUITEM_ADD_NOTATION_NAME = "Hinzufügen";
-    public static final String
-        MENUITEM_DELETE_NOTATION_NAME = "Löschen";
+            BAR_ITEM_ADD_NOTATION_NAME = "Hinzufügen";
+        public static final String
+            BAR_ITEM_DELETE_NOTATION_NAME = "Löschen";
+
+
+    /*
+     * Menuereiter "Ansicht"
+     */
+    public static final String MENU_VIEW_NAME = "Ansicht";
+
+        public static final String
+            BAR_ITEM_ZOOM_IN_NAME = "Ansicht vergrößern";
+        public static final String
+            BAR_ITEM_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
 
     /*
@@ -45,30 +57,43 @@ public class Constants {
     public static final String MENU_HELP_NAME = "Hilfe";
 
         public static final String
-            MENUITEM_ABOUT_NAME = "Über";
+            BAR_ITEM_ABOUT_NAME = "Über";
 
 
     /*
-     * ToolBar
-     * Name
+     * Menuereiter "Datei" - Key Strokes
      */
-    public static final String
-        TOOLBAR_BUTTON_NEW_PROJECT_NAME = "Neues Projekt";
-    public static final String
-        TOOLBAR_BUTTON_OPEN_PROJECT_NAME = "Projekt öffnen";
-    public static final String
-        TOOLBAR_BUTTON_SAVE_PROJECT_NAME = "Projekt speichern";
-    public static final String
-        TOOLBAR_BUTTON_SAVE_AS_PROJECT_NAME = "Project speichern unter";
-    public static final String
-        TOOLBAR_BUTTON_CLOSE_PROJECT_NAME = "Projekt schließen";
+        public static final int
+            BAR_ITEM_NEW_PROJECT_KEY_STROKE = KeyEvent.VK_N;
+        public static final int
+            BAR_ITEM_OPEN_PROJECT_KEY_STROKE = KeyEvent.VK_O;
+        public static final int
+            BAR_ITEM_SAVE_PROJECT_KEY_STROKE = KeyEvent.VK_S;
+        public static final int
+            BAR_ITEM_SAVE_AS_PROJECT_KEY_STROKE = KeyEvent.VK_S;
+        public static final int
+            BAR_ITEM_CLOSE_PROJECT_KEY_STROKE = KeyEvent.VK_W;
+        public static final int
+            BAR_ITEM_CLOSE_KEY_STROKE = KeyEvent.VK_F4;
 
-    public static final String
-        TOOLBAR_BUTTON_ZOOM_IN_NAME = "Ansicht vergrößern";
-    public static final String
-        TOOLBAR_BUTTON_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
-    public static final String TOOLBAR_BUTTON_ADD_NOTATION_NAME = "Notataion hinzufügen";
+    /*
+     * Menuereiter "Notation" - Key Strokes
+     * @todo set Key Strokes
+     */
+        public static final int
+            BAR_ITEM_ADD_NOTATION_KEY_STROKE = KeyEvent.VK_Q;
+        public static final int
+            BAR_ITEM_DELETE_NOTATION_KEY_STROKE = KeyEvent.VK_DELETE;
+
+    /*
+     * Menuereiter "Ansicht" - Key Strokes
+     */
+        public static final int
+            BAR_ITEM_ZOOM_IN_KEY_STROKE = KeyEvent.VK_PLUS;
+        public static final int
+            BAR_ITEM_ZOOM_OUT_KEY_STROKE = KeyEvent.VK_MINUS;
+
 
     /*
      * ToolBar
@@ -93,6 +118,8 @@ public class Constants {
     public static final String
         TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "icons/16px/054-price-tag.png";
 
+
+
     /*
      * NotationSplitPane
      */
@@ -104,6 +131,4 @@ public class Constants {
         ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Name";
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
-
-
 }

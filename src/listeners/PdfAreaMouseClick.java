@@ -48,18 +48,22 @@ public class PdfAreaMouseClick extends MouseAdapter {
             && !this.getPdfArea().isNotationInRange(mouseEvent.getPoint()))
         {
             this.getPdfObject().addNewNotation(coordinates);
-            this.getPdfArea().repaint();
             this.getPdfArea().setCursorTypeToDefault();
             this.getPdfArea().setAddingNotation(false);
+            this.getPdfArea().repaint();
             this.pdfObjectView.getNotationListScrollPane().updateTable();
         }
 
 
         Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
         if (notation != null) {
-            System.out.println(notation.getId());
-            this.pdfObjectView.getNotationListScrollPane().setSelectedRow(notation.getId());
-        } else
+            int selectedNotationId = notation.getId();
+            System.out.println(selectedNotationId);
+            this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
+            this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
+            this.getPdfArea().repaint();
+        }
+        else
         {
             this.pdfObjectView.getNotationListScrollPane().unselectRow();
         }

@@ -20,12 +20,6 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     private int mouseScrollCount;
 
 
-    public PdfAreaMouseWheel()
-    {
-
-    }
-
-
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
@@ -53,14 +47,12 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-                /*
+        /*
         if (!this.isZoomEnabled())
         {
             return;
         }
         */
-
-        System.out.println("rolled");
 
         // stopt bisherigen Timer, wenn er noch laeuft
         // => dazu muss Mausrad innerhalb von 100ms nochmals gedreht werden

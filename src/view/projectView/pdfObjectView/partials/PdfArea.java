@@ -7,7 +7,7 @@ import listeners.PdfAreaMouseWheel;
 import model.Notation;
 import model.PdfObject;
 
-import timer.PdfRenderingTimer;
+import threads.PdfRenderThread;
 
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -25,6 +25,9 @@ public class PdfArea extends JPanel {
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
+    private final Color NOTATION_STANDARD_COLOR = Color.red;
+    private final Color NOTATION_SELECTED_COLOR = Color.blue;
+
 
     // Pdf object view
     private PdfObjectView pdfObjectView;
@@ -43,6 +46,8 @@ public class PdfArea extends JPanel {
     private double zoomLevel;
 
     private boolean addingNotation;
+
+    private PdfRenderThread pdfRenderThread;
 
     /*
      * #########################################################################
@@ -98,7 +103,7 @@ public class PdfArea extends JPanel {
     /*
      * @author  marxmanEUW
      */
-    private PdfObject getPdfObject()
+    public PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
     }
@@ -110,6 +115,12 @@ public class PdfArea extends JPanel {
      * #                    Setter                                             #
      * #########################################################################
      */
+
+    public void setPdfImage(BufferedImage pdfImage)
+    {
+        this.pdfImage = pdfImage;
+    }
+
     /*
      * @author  marxmanEUW
      */
@@ -180,32 +191,16 @@ public class PdfArea extends JPanel {
             this.zoomLevel += zoomChange;
 
             this.zoomPdf(zoomChange);
-            this.refreshTimerOnRenderingPdf();
         }
     }
 
     /*
-     * @todo Exception werfen
-     * @todo refactoring needed
      * @author  yxyxD
      */
-    public void rerenderPdf()
+    public void reRenderPdf()
     {
-        //this.pdfAreaMouseAdapter.disableZoom();
-        System.out.println("Zoom aus");
-
-        // das geht, aber nicht schnell => neues Rendering bei
-        // jedem Zoomvorgang
-        this.pdfImage = PdfRenderFactory.renderPdfFromPdfObject(
-            this.getPdfObject(),
-            (float) this.zoomLevel
-        );
-
+        this.pdfImage = this.pdfRenderThread.getPdfImage();
         this.repaint();
-
-
-        //this.pdfAreaMouseAdapter.enableZoom();
-        System.out.println("Zoom an");
     }
 
 
@@ -224,6 +219,7 @@ public class PdfArea extends JPanel {
         double scaledImageHeight = (double) this.pdfImage.getHeight()
             + ((double) this.initialImageHeight * zoomChange);
 
+
         BufferedImage scaledPdfImage = this.getScaledPdfImage(
             scaledImageWidth,
             scaledImageHeight
@@ -237,6 +233,8 @@ public class PdfArea extends JPanel {
         this.pdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
 
         this.repaint();
+
+        this.pdfRenderThread = new PdfRenderThread(this);
     }
 
     /*
@@ -272,24 +270,6 @@ public class PdfArea extends JPanel {
             affineTransform,
             AffineTransformOp.TYPE_BILINEAR //@todo noch gucken
         );
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private void refreshTimerOnRenderingPdf()
-    {
-        if (this.pdfResizedTimer != null && this.pdfResizedTimer.isRunning())
-        {
-            this.pdfResizedTimer.stop();
-        }
-
-        this.pdfResizedTimer = new Timer(
-            this.PDF_RESIZED_TIMER_DELAY,
-            new PdfRenderingTimer(this)
-        );
-        this.pdfResizedTimer.setRepeats(false);
-        this.pdfResizedTimer.start();
     }
 
     /*
@@ -332,10 +312,17 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
-        graphics.setColor(Color.red);
-
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
+            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
+            {
+                graphics.setColor(this.NOTATION_SELECTED_COLOR);
+            }
+            else
+            {
+                graphics.setColor(this.NOTATION_STANDARD_COLOR);
+            }
+
             //@todo name refactoring
             int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
                 * this.zoomLevel);

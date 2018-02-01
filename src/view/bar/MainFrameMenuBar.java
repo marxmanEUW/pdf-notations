@@ -1,9 +1,11 @@
 package view.bar;
 
-import listeners.MenuBarActionListener;
+import listeners.BarActionListener;
 import gui.Constants;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MainFrameMenuBar extends JMenuBar {
 
@@ -19,10 +21,14 @@ public class MainFrameMenuBar extends JMenuBar {
     private JMenuItem menuItemAddNotation;
     private JMenuItem menuItemDeleteNotation;
 
+    private JMenu menuView;
+    private JMenuItem menuItemZoomIn;
+    private JMenuItem menuItemZoomOut;
+
     private JMenu menuHelp;
     private JMenuItem menuItemAbout;
 
-    private MenuBarActionListener mbActionListener;
+    private BarActionListener barActionListener;
 
 
     /*
@@ -44,6 +50,10 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemAddNotation = new JMenuItem();
         this.menuItemDeleteNotation = new JMenuItem();
 
+        this.menuView = new JMenu();
+        this.menuItemZoomIn = new JMenuItem();
+        this.menuItemZoomOut = new JMenuItem();
+
         this.menuHelp = new JMenu();
         this.menuItemAbout = new JMenuItem();
     }
@@ -57,12 +67,13 @@ public class MainFrameMenuBar extends JMenuBar {
     /*
      * @author  yxyxD
      */
-    public void initialize(MenuBarActionListener mbActionListener)
+    public void initialize(BarActionListener barActionListener)
     {
-        this.mbActionListener = mbActionListener;
+        this.barActionListener = barActionListener;
 
         this.setupMenuFile();
         this.setupMenuNotation();
+        this.setupMenuView();
         this.setupMenuHelp();
     }
 
@@ -79,20 +90,50 @@ public class MainFrameMenuBar extends JMenuBar {
     {
         // Text des Menues und der Menuepunkte
         this.menuFile.setText(Constants.MENU_FILE_NAME);
-        this.menuItemNewProject.setText(Constants.MENUITEM_NEW_PROJECT_NAME);
-        this.menuItemOpenProject.setText(Constants.MENUITEM_OPEN_PROJECT_NAME);
-        this.menuItemSaveProject.setText(Constants.MENUITEM_SAVE_POJECT_NAME);
-        this.menuItemSaveAsProject.setText(Constants.MENUITEM_SAVE_AS_PROJECT_NAME);
-        this.menuItemCloseProject.setText(Constants.MENUITEM_CLOSE_PROJECT_NAME);
-        this.menuItemClose.setText(Constants.MENUITEM_CLOSE_NAME);
+        this.menuItemNewProject.setText(Constants.BAR_ITEM_NEW_PROJECT_NAME);
+        this.menuItemOpenProject.setText(Constants.BAR_ITEM_OPEN_PROJECT_NAME);
+        this.menuItemSaveProject.setText(Constants.BAR_ITEM_SAVE_PROJECT_NAME);
+        this.menuItemSaveAsProject.setText(Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME);
+        this.menuItemCloseProject.setText(Constants.BAR_ITEM_CLOSE_PROJECT_NAME);
+        this.menuItemClose.setText(Constants.BAR_ITEM_CLOSE_NAME);
 
         // ActionListener
-        this.menuItemNewProject.addActionListener(this.mbActionListener);
-        this.menuItemOpenProject.addActionListener(this.mbActionListener);
-        this.menuItemSaveProject.addActionListener(this.mbActionListener);
-        this.menuItemSaveAsProject.addActionListener(this.mbActionListener);
-        this.menuItemCloseProject.addActionListener(this.mbActionListener);
-        this.menuItemClose.addActionListener(this.mbActionListener);
+        this.menuItemNewProject.addActionListener(this.barActionListener);
+        this.menuItemOpenProject.addActionListener(this.barActionListener);
+        this.menuItemSaveProject.addActionListener(this.barActionListener);
+        this.menuItemSaveAsProject.addActionListener(this.barActionListener);
+        this.menuItemCloseProject.addActionListener(this.barActionListener);
+        this.menuItemClose.addActionListener(this.barActionListener);
+
+        //Shortcuts
+        this.menuItemNewProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_NEW_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemOpenProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_OPEN_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemSaveProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_SAVE_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemSaveAsProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_SAVE_AS_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK + KeyEvent.SHIFT_DOWN_MASK
+        ));
+        /*
+         * removed to avoid accidentally pressing
+        this.menuItemCloseProject.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_CLOSE_PROJECT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        */
+        this.menuItemClose.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_CLOSE_KEY_STROKE,
+            KeyEvent.ALT_DOWN_MASK
+        ));
+
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuFile.add(this.menuItemNewProject);
@@ -114,12 +155,22 @@ public class MainFrameMenuBar extends JMenuBar {
     {
         // Text des Menues und der Menuepunkte
         this.menuNotation.setText(Constants.MENU_NOTATION_NAME);
-        this.menuItemAddNotation.setText(Constants.MENUITEM_ADD_NOTATION_NAME);
-        this.menuItemDeleteNotation.setText(Constants.MENUITEM_DELETE_NOTATION_NAME);
+        this.menuItemAddNotation.setText(Constants.BAR_ITEM_ADD_NOTATION_NAME);
+        this.menuItemDeleteNotation.setText(Constants.BAR_ITEM_DELETE_NOTATION_NAME);
 
         // ActionListener
-        this.menuItemAddNotation.addActionListener(this.mbActionListener);
-        this.menuItemDeleteNotation.addActionListener(this.mbActionListener);
+        this.menuItemAddNotation.addActionListener(this.barActionListener);
+        this.menuItemDeleteNotation.addActionListener(this.barActionListener);
+
+        //Shortcuts
+        this.menuItemAddNotation.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ADD_NOTATION_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemDeleteNotation.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_DELETE_NOTATION_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuNotation.add(this.menuItemAddNotation);
@@ -128,6 +179,39 @@ public class MainFrameMenuBar extends JMenuBar {
         this.add(this.menuNotation);
     }
 
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void setupMenuView()
+    {
+        // Text des Menues und der Menuepunkte
+        this.menuView.setText(Constants.MENU_VIEW_NAME);
+        this.menuItemZoomIn.setText(Constants.BAR_ITEM_ZOOM_IN_NAME);
+        this.menuItemZoomOut.setText(Constants.BAR_ITEM_ZOOM_OUT_NAME);
+
+        // ActionListener
+        this.menuItemZoomIn.addActionListener(this.barActionListener);
+        this.menuItemZoomOut.addActionListener(this.barActionListener);
+
+        //Shortcuts
+        this.menuItemZoomIn.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ZOOM_IN_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+        this.menuItemZoomOut.setAccelerator(KeyStroke.getKeyStroke(
+            Constants.BAR_ITEM_ZOOM_OUT_KEY_STROKE,
+            KeyEvent.CTRL_DOWN_MASK
+        ));
+
+        // Menuepunkte zum Menue hinzufuegen
+        this.menuView.add(this.menuItemZoomIn);
+        this.menuView.add(this.menuItemZoomOut);
+
+        this.add(this.menuView);
+    }
+
+
     /*
      * @author  yxyxD
      */
@@ -135,10 +219,10 @@ public class MainFrameMenuBar extends JMenuBar {
     {
         // Text des Menues und der Menuepunkte
         this.menuHelp.setText(Constants.MENU_HELP_NAME);
-        this.menuItemAbout.setText(Constants.MENUITEM_ABOUT_NAME);
+        this.menuItemAbout.setText(Constants.BAR_ITEM_ABOUT_NAME);
 
         // ActionListener
-        this.menuItemAbout.addActionListener(this.mbActionListener);
+        this.menuItemAbout.addActionListener(this.barActionListener);
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuHelp.add(this.menuItemAbout);
