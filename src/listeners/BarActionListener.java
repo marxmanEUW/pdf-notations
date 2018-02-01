@@ -2,7 +2,6 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.File;
 
 import factories.DialogFactory;
@@ -14,6 +13,12 @@ import view.projectView.pdfObjectView.partials.PdfArea;
 
 
 public class BarActionListener implements ActionListener {
+
+    /*
+     * @todo zoomsteps in eingene klasse auslagern
+     */
+    private static final double ZOOM_IN = 0.1;
+    private static final double ZOOM_OUT = -0.1;
 
     private PdfObjectView pdfObjectView;
 
@@ -46,46 +51,46 @@ public class BarActionListener implements ActionListener {
         switch (e.getActionCommand()) {
             case Constants.BAR_ITEM_NEW_PROJECT_NAME:
 
-                newProject();
+                this.newProject();
                 break;
             case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
 
-                openProject();
+                this.openProject();
                 break;
             case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
 
-                saveProject();
+                this.saveProject();
                 break;
             case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
 
-                saveAsProject();
+                this.saveAsProject();
                 break;
             case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
 
-                // not implemented jet
-                //closeProject();
+                // not implemented yet
+                this.closeProject();
                 break;
             case Constants.BAR_ITEM_CLOSE_NAME:
 
-                closeProgramm();
+                this.closeProgramm();
                 break;
             case Constants.BAR_ITEM_ADD_NOTATION_NAME:
 
-                addNotation();
+                this.addNotation();
                 break;
             case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
 
-                deleteNotation();
+                this.deleteNotation();
                 break;
             case Constants.BAR_ITEM_ZOOM_IN_NAME:
 
                 // not implemented jet
-                //zoomIn();
+                this.zoomIn();
                 break;
             case Constants.BAR_ITEM_ZOOM_OUT_NAME:
 
                 // not implemented jet
-                //zoomOut();
+                this.zoomOut();
                 break;
             case Constants.BAR_ITEM_ABOUT_NAME:
 
@@ -133,7 +138,7 @@ public class BarActionListener implements ActionListener {
 
         if (newProjectFile != null)
         {
-            this.pdfObjectView.importNewProject(newProjectFile);
+            this.pdfObjectView.openProject(newProjectFile);
             System.out.println(
                 "Neues Projekt mit gegebener PDF: "
                     + newProjectFile.getAbsolutePath()
@@ -154,7 +159,7 @@ public class BarActionListener implements ActionListener {
 
         if (openProjectFile != null)
         {
-            this.pdfObjectView.importNewProject(openProjectFile);
+            this.pdfObjectView.openProject(openProjectFile);
             System.out.println(
                 "Vorhandenes Projekt mit gegebener PDF "
                     + openProjectFile.getAbsolutePath()
@@ -211,11 +216,12 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
-     * @todo close Projeect
+     * @todo close Project
+     * @note    yxyxD => implemented code to close project
      */
     private void closeProject()
     {
-
+        this.pdfObjectView.closeProject();
     }
 
 
@@ -256,7 +262,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomIn()
     {
-        System.exit(0);
+        this.pdfObjectView.getPdfArea().resizePdf(BarActionListener.ZOOM_IN);
     }
 
 
@@ -265,7 +271,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomOut()
     {
-
+        this.pdfObjectView.getPdfArea().resizePdf(BarActionListener.ZOOM_OUT);
     }
 
     /*

@@ -23,17 +23,12 @@ public class PdfArea extends JPanel {
     // constants
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
-    private final int PDF_RESIZED_TIMER_DELAY = 3000;
     private final int NOTATION_RADIUS = 10;
     private final Color NOTATION_STANDARD_COLOR = Color.red;
     private final Color NOTATION_SELECTED_COLOR = Color.blue;
-
-
+    
     // Pdf object view
     private PdfObjectView pdfObjectView;
-
-    // Timer
-    private Timer pdfResizedTimer;
 
     // listeners and adapters
     private PdfAreaMouseClick pdfAreaMouseClick;
@@ -77,7 +72,7 @@ public class PdfArea extends JPanel {
         this.addMouseListener(this.pdfAreaMouseClick);
         this.addMouseWheelListener(this.pdfAreaMouseWheel);
 
-        this.importNewPdf();
+        this.loadPdf();
         this.setFocusable(true);
     }
 
@@ -115,12 +110,6 @@ public class PdfArea extends JPanel {
      * #                    Setter                                             #
      * #########################################################################
      */
-
-    public void setPdfImage(BufferedImage pdfImage)
-    {
-        this.pdfImage = pdfImage;
-    }
-
     /*
      * @author  marxmanEUW
      */
@@ -152,7 +141,7 @@ public class PdfArea extends JPanel {
     @Override
     protected void paintComponent(Graphics graphics)
     {
-        super.paintComponent(graphics);
+        //super.paintComponent(graphics);
 
         this.repaintPdfGraphics(graphics);
         this.repaintNotationPoints(graphics);
@@ -169,12 +158,24 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
-    public void importNewPdf()
+    public void loadPdf()
     {
-        if (this.getPdfObject() == null) { return; }
-        if (this.getPdfObject().getPdfAbsolutePath() == null) { return; }
+        if (this.getPdfObject() == null)
+        {
+            // no pdf to import => load empty pdf
+            this.pdfImage = new BufferedImage(
+                1,
+                1,
+                BufferedImage.TYPE_INT_RGB);
+            System.out.println("empty image");
+        }
+        else
+        {
+            this.pdfImage = PdfRenderFactory.renderPdfFromPdfObject(
+                this.getPdfObject()
+            );
+        }
 
-        this.pdfImage = PdfRenderFactory.renderPdfFromPdfObject(this.getPdfObject());
         this.initialImageWidth = this.pdfImage.getWidth();
         this.initialImageHeight = this.pdfImage.getHeight();
 
@@ -294,12 +295,17 @@ public class PdfArea extends JPanel {
      */
     private void repaintPdfGraphics(Graphics graphics)
     {
-        if (this.pdfImage == null) { return; }
-
-        this.setPreferredSize(new Dimension(
-            this.pdfImage.getWidth(),
-            this.pdfImage.getHeight())
-        );
+        if (this.pdfImage == null)
+        {
+            this.setPreferredSize(new Dimension(0, 0));
+        }
+        else
+        {
+            this.setPreferredSize(new Dimension(
+                this.pdfImage.getWidth(),
+                this.pdfImage.getHeight())
+            );
+        }
 
         graphics.drawImage(this.pdfImage, 0, 0, this);
     }

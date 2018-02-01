@@ -48,6 +48,9 @@ public class PdfObjectView extends JSplitPane {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
     public PdfObjectView()
     {
         this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
@@ -76,6 +79,9 @@ public class PdfObjectView extends JSplitPane {
      * #                    Initializing                                       #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
     public void initialize()
     {
         this.pdfScrollPane.initialize(this);
@@ -102,57 +108,89 @@ public class PdfObjectView extends JSplitPane {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
     public PdfObject getPdfObject()
     {
         return this.pdfObject;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public PdfScrollPane getPdfScrollPane()
     {
         return this.pdfScrollPane;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public PdfArea getPdfArea()
     {
         return this.pdfArea;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public NotationSplitPane getNotationSplitPane()
     {
         return this.notationSplitPane;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public ListScrollPane getNotationListScrollPane()
     {
         return this.notationListScrollPane;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public ListTableModel getListTableModel()
     {
         return this.listTableModel;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public EntityScrollPane getEntityScrollPane()
     {
         return this.entityScrollPane;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public EntityTableModel getEntityTableModel()
     {
         return this.entityTableModel;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public NotationListSelectionListener getNotationListSelectionListener()
     {
         return this.notationListSelectionListener;
     }
 
-
+    /*
+     * @author  yxyxD
+     */
     public PdfAreaMouseClick getPdfAreaMouseClick()
     {
         return this.pdfAreaMouseClick;
     }
 
+    /*
+     * @author  yxyxD
+     */
     public PdfAreaMouseWheel getPdfAreaMouseWheel()
     {
         return this.pdfAreaMouseWheel;
@@ -162,7 +200,7 @@ public class PdfObjectView extends JSplitPane {
     /*
      * @author  yxyxD
      */
-    public void importNewProject(File file)
+    public void openProject(File file)
     {
         this.pdfObject = PdfObjectFactory.loadPdfObjectFromFile(file);
         this.updateViews();
@@ -171,9 +209,19 @@ public class PdfObjectView extends JSplitPane {
     /*
      * @author  yxyxD
      */
+    public void closeProject()
+    {
+        this.pdfObject = null;
+        this.updateViews();
+    }
+
+
+    /*
+     * @author  yxyxD
+     */
     private void updateViews()
     {
         // @todo update Notationlist and NotationEntity
-        this.pdfArea.importNewPdf();
+        this.pdfArea.loadPdf();
     }
 }
