@@ -232,9 +232,9 @@ public class PdfArea extends JPanel {
 
         this.pdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
 
-        this.pdfRenderThread = new PdfRenderThread(this);
-
         this.repaint();
+
+        this.pdfRenderThread = new PdfRenderThread(this);
     }
 
     /*
