@@ -2,14 +2,19 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import factories.DialogFactory;
 import factories.PdfObjectFactory;
 import gui.Constants;
 import model.PdfObject;
+import view.MainFrame;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
+
+import javax.swing.*;
 
 
 public class BarActionListener implements ActionListener {
@@ -21,6 +26,14 @@ public class BarActionListener implements ActionListener {
     private static final double ZOOM_OUT = -0.1;
 
     private PdfObjectView pdfObjectView;
+    private static String ABOUT_TITLE = "PDF Notations";
+    private static String ABOUT_TEXT =
+        "https://github.com/marxmanEUW/pdf-notations\n" +
+            "Lizenz: GPL v3\n" +
+            "Icons von [Keyamoon] (https://icomoon.io/#icons-icomoon) - GPL v3"
+        ;
+
+    private MainFrame mainFrame;
 
 
     /*
@@ -31,9 +44,9 @@ public class BarActionListener implements ActionListener {
     /*
      * @author  marxmanEUW
      */
-    public void initialize(PdfObjectView pdfObjectView)
+    public void initialize(MainFrame mainFrame)
     {
-        this.pdfObjectView = pdfObjectView;
+        this.mainFrame = mainFrame;
     }
 
 
@@ -95,7 +108,7 @@ public class BarActionListener implements ActionListener {
             case Constants.BAR_ITEM_ABOUT_NAME:
 
                 // not implemented jet
-                //showAbout();
+                showAbout();
                 break;
         }
     }
@@ -108,9 +121,17 @@ public class BarActionListener implements ActionListener {
     /*
      * @author  marxmanEUW
      */
+    private PdfObjectView getPdfObjectView()
+    {
+        return this.mainFrame.getPdfObjectView();
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
     private PdfObject getPdfObject()
     {
-        return this.pdfObjectView.getPdfObject();
+        return this.getPdfObjectView().getPdfObject();
     }
 
     /*
@@ -118,7 +139,7 @@ public class BarActionListener implements ActionListener {
      */
     private PdfArea getPdfArea()
     {
-        return this.pdfObjectView.getPdfArea();
+        return this.getPdfObjectView().getPdfArea();
     }
 
 
@@ -144,6 +165,7 @@ public class BarActionListener implements ActionListener {
                     + newProjectFile.getAbsolutePath()
                     + " erstellt"
             );
+
         }
     }
 
@@ -165,6 +187,7 @@ public class BarActionListener implements ActionListener {
                     + openProjectFile.getAbsolutePath()
                     + " erstellt"
             );
+            this.getPdfObjectView().importNewProject(openProjectFile);
         }
     }
 
@@ -231,7 +254,12 @@ public class BarActionListener implements ActionListener {
      */
     private void closeProgramm()
     {
-        System.exit(0);
+        this.mainFrame.dispatchEvent(
+            new WindowEvent(
+                this.mainFrame,
+                WindowEvent.WINDOW_CLOSING
+            )
+        );
     }
 
 
@@ -253,7 +281,7 @@ public class BarActionListener implements ActionListener {
     {
         this.getPdfObject().deleteSelectedNotation();
         this.getPdfArea().repaint();
-        this.pdfObjectView.getNotationListScrollPane().updateTable();
+        this.getPdfObjectView().getNotationListScrollPane().updateTable();
     }
 
 
@@ -280,6 +308,11 @@ public class BarActionListener implements ActionListener {
      */
     private void showAbout()
     {
-
+        JOptionPane.showMessageDialog(
+            this.mainFrame,
+            ABOUT_TEXT,
+            ABOUT_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
     }
 }
