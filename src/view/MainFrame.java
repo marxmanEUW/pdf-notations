@@ -3,6 +3,7 @@ package view;
 import listeners.MainFrameKeyListener;
 import listeners.BarActionListener;
 import gui.Constants;
+import listeners.MainFrameWindowAdapter;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -32,7 +33,7 @@ public class MainFrame extends JFrame {
 
         this.setLayout(new BorderLayout());
         this.setTitle(Constants.FRAME_TITLE);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
         this.setPreferredSize(new Dimension(1200, 600));
@@ -57,11 +58,13 @@ public class MainFrame extends JFrame {
      */
     public void initialize()
     {
+        this.addWindowListener(new MainFrameWindowAdapter());
+
         this.mainFrameKeyListener.initialize(this);
         this.addKeyListener(this.mainFrameKeyListener);
         this.setFocusable(true);
 
-        this.barActionListener.initialize(this.pdfObjectView);
+        this.barActionListener.initialize(this);
 
         this.menuBar.initialize(this.barActionListener);
         this.toolBar.initialize(this.barActionListener);
