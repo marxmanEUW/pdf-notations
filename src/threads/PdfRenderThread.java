@@ -6,13 +6,12 @@ import view.projectView.pdfObjectView.partials.PdfArea;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class PdfRenderThread implements Runnable {
 
     private static final ThreadGroup PDF_RENDER_GROUP
         = new ThreadGroup("pdfRenderGroup");
-
-    //private Thread thread;
 
     private PdfArea pdfArea;
     private float requiredZoom;
@@ -41,38 +40,44 @@ public class PdfRenderThread implements Runnable {
         }
 
 
+        this.pdfImage = this.renderPdfImage();
+
+        if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
+        {
+            this.pdfArea.reRenderPdf();
+        }
+
+
+        this.pdfArea.enableZoom();
+    }
+
+    public BufferedImage getRenderedPdfImage()
+    {
+        return this.pdfImage;
+    }
+
+
+    private BufferedImage renderPdfImage()
+    {
+        BufferedImage pdfImage = null;
+
         try
         {
-            System.out.println("Thread start");
-            System.out.println(PdfRenderThread.PDF_RENDER_GROUP.activeCount());
-
             File pdfFile = new File(
                 this.pdfArea.getPdfObject().getPdfAbsolutePath()
             );
             PDDocument pdfDocument = PDDocument.load(pdfFile);
             PDFRenderer renderer = new PDFRenderer(pdfDocument);
-            this.pdfImage = renderer.renderImage(
+            pdfImage = renderer.renderImage(
                 0,
                 requiredZoom);
             pdfDocument.close();
-
-            if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
-            {
-                this.pdfArea.reRenderPdf();
-            }
-
-            System.out.println("Thread done");
         }
-        catch (Exception exception)
+        catch (IOException ioException)
         {
-            exception.printStackTrace();
+            ioException.printStackTrace();
         }
 
-        this.pdfArea.enableZoom();
-    }
-
-    public BufferedImage getPdfImage()
-    {
-        return this.pdfImage;
+        return pdfImage;
     }
 }

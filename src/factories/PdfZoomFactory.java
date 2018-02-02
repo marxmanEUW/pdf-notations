@@ -20,32 +20,38 @@ public class PdfZoomFactory {
 
 
     /*
+     * #########################################################################
+     * #                    Public Methods                                     #
+     * #########################################################################
+     */
+    /*
      * @author  yxyxD
      */
     public static double getPercentageZoomChangeForMouseScroll(
         int mouseScrollCount
     )
     {
-        double zoomLevel;
+        double zoomPercentage;
 
-        if (mouseScrollCount > MINIMAL_POSITIVE_SCROLL_COUNT)
+        int realScrollCount = getInvertedMouseScrollCount(mouseScrollCount);
+
+        if (realScrollCount > MINIMAL_POSITIVE_SCROLL_COUNT)
         {
-            zoomLevel = getAbsoluteZoomValue(mouseScrollCount)
+            zoomPercentage = getAbsoluteZoomValue(realScrollCount)
                 / TOTAL_PERCENTAGE;
         }
-        else if (mouseScrollCount < MAXIMAL_NEGATIVE_SCROLL_COUNT)
+        else if (realScrollCount < MAXIMAL_NEGATIVE_SCROLL_COUNT)
         {
-            zoomLevel = (getAbsoluteZoomValue(mouseScrollCount) * (-1))
+            zoomPercentage = (getAbsoluteZoomValue(realScrollCount) * (-1))
                 / TOTAL_PERCENTAGE;
         }
         else
         {
-            // ScrollCount unterschreitet Mindestwertgrenzen
-            // => keinen Zoom ausfuehren
-            zoomLevel = 0.0;
+            // no relevant scroll happened, so there will be no zoom
+            zoomPercentage = 0.0;
         }
 
-        return zoomLevel;
+        return zoomPercentage;
     }
 
     /*
@@ -76,7 +82,20 @@ public class PdfZoomFactory {
 
 
 
-    //------------------------------------------------
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    private static int getInvertedMouseScrollCount(int mouseScrollCount)
+    {
+        // events off wheel rotation return wrong values => they need to be
+        // inverted
+        return (mouseScrollCount * (-1));
+    }
 
     /*
      * @author  yxyxD
@@ -86,7 +105,7 @@ public class PdfZoomFactory {
         double zoomLevel;
 
         int residualValue = getResidualValueOfScrollCount(mouseScrollCount);
-        if (Math.abs(residualValue) < RESIDUAL_VALUE_ROUNDING_BORDER)
+        if (Math.abs(residualValue) <= RESIDUAL_VALUE_ROUNDING_BORDER)
         {
             zoomLevel = getAbsoluteZoomValueRoundedDown(
                 mouseScrollCount,

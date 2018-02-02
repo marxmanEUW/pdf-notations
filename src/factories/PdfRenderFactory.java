@@ -19,7 +19,10 @@ public abstract class PdfRenderFactory {
         return renderPdf(pdfObject, (float) 1.0);
     }
 
-    public static BufferedImage renderPdfFromPdfObject(PdfObject pdfObject, float zoomLevel)
+    public static BufferedImage renderPdfFromPdfObject(
+        PdfObject pdfObject,
+        float zoomLevel
+    )
     {
         return renderPdf(pdfObject, zoomLevel);
     }

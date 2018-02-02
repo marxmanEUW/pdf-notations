@@ -14,8 +14,6 @@ import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 
@@ -44,7 +42,7 @@ public class PdfArea extends JPanel {
     private boolean addingNotation;
 
     private PdfRenderThread pdfRenderThread;
-    private boolean isZoomEnbabled;
+    private boolean isZoomEnabled;
 
     /*
      * #########################################################################
@@ -56,6 +54,8 @@ public class PdfArea extends JPanel {
      */
     public PdfArea()
     {
+        this.setFocusable(true);
+
         this.pdfImage = null;
         this.zoomLevel = 1.0;
         this.addingNotation = false;
@@ -75,7 +75,6 @@ public class PdfArea extends JPanel {
         this.addMouseWheelListener(this.pdfAreaMouseWheel);
 
         this.loadPdf();
-        this.setFocusable(true);
     }
 
 
@@ -92,6 +91,9 @@ public class PdfArea extends JPanel {
         return zoomLevel;
     }
 
+    /*
+     * @author  marxmanEUW
+     */
     public boolean getAddingNotation()
     {
         return addingNotation;
@@ -108,9 +110,9 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
-    public boolean isZoomEnbabled()
+    public boolean isZoomEnabled()
     {
-        return this.isZoomEnbabled;
+        return this.isZoomEnabled;
     }
 
 
@@ -142,6 +144,8 @@ public class PdfArea extends JPanel {
     {
         this.setCursor(Cursor.getDefaultCursor());
     }
+
+
     /*
      * #########################################################################
      * #                    Overrides                                          #
@@ -150,18 +154,20 @@ public class PdfArea extends JPanel {
     @Override
     protected void paintComponent(Graphics graphics)
     {
-        //super.paintComponent(graphics);
+        this.disableZoom();
 
         this.repaintPdfGraphics(graphics);
         this.repaintNotationPoints(graphics);
 
         this.pdfObjectView.getPdfScrollPane().getViewport().revalidate();
+
+        this.enableZoom();
     }
 
 
     /*
      * #########################################################################
-     * #                    oeffentliche Methoden                              #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
     /*
@@ -169,7 +175,7 @@ public class PdfArea extends JPanel {
      */
     public void enableZoom()
     {
-        this.isZoomEnbabled = true;
+        this.isZoomEnabled = true;
     }
 
     /*
@@ -177,7 +183,7 @@ public class PdfArea extends JPanel {
      */
     public void disableZoom()
     {
-        this.isZoomEnbabled = false;
+        this.isZoomEnabled = false;
     }
 
     /*
@@ -217,7 +223,16 @@ public class PdfArea extends JPanel {
         {
             this.zoomLevel += zoomChange;
 
-            this.zoomPdf(zoomChange);
+            this.pdfImage = PdfZoomFactory.getZoomedImage(
+                this.initialImageWidth,
+                this.initialImageHeight,
+                this.pdfImage,
+                zoomChange
+            );
+
+            this.repaint();
+
+            this.pdfRenderThread = new PdfRenderThread(this);
         }
     }
 
@@ -226,33 +241,16 @@ public class PdfArea extends JPanel {
      */
     public void reRenderPdf()
     {
-        this.pdfImage = this.pdfRenderThread.getPdfImage();
+        this.pdfImage = this.pdfRenderThread.getRenderedPdfImage();
         this.repaint();
     }
 
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
-    /*
-     * @author  yxyxD
-     */
-    private void zoomPdf(double zoomChange)
-    {
-        this.pdfImage = PdfZoomFactory.getZoomedImage(
-            this.initialImageWidth,
-            this.initialImageHeight,
-            this.pdfImage,
-            zoomChange
-        );
-
-        this.repaint();
-
-        this.pdfRenderThread = new PdfRenderThread(this);
-    }
-
     /*
      * @author  yxyxD
      */

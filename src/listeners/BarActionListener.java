@@ -2,7 +2,6 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
@@ -290,7 +289,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomIn()
     {
-        if (this.getPdfObjectView().getPdfArea().isZoomEnbabled())
+        if (this.getPdfObjectView().getPdfArea().isZoomEnabled())
         {
             this.getPdfObjectView().getPdfArea().resizePdf(
                 BarActionListener.ZOOM_IN
@@ -305,7 +304,7 @@ public class BarActionListener implements ActionListener {
      */
     private void zoomOut()
     {
-        if (this.getPdfObjectView().getPdfArea().isZoomEnbabled())
+        if (this.getPdfObjectView().getPdfArea().isZoomEnabled())
         {
             this.getPdfObjectView().getPdfArea().resizePdf(
                 BarActionListener.ZOOM_OUT

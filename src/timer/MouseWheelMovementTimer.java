@@ -8,16 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MouseWheelMovementTimer implements ActionListener {
 
-    private final double TOTAL_PERCENTAGE = 100.0;
-
-    private final int MINIMAL_POSITIVE_SCROLL_COUNT = 5;
-    private final int MAXIMAL_NEGATIVE_SCROLL_COUNT = -5;
-    private final int ZOOM_STEP_PERCENTAGE = 10;
-    private final int RESIDUAL_VALUE_ROUNDING_BORDER
-        = (int) Math.ceil((double) this.ZOOM_STEP_PERCENTAGE / 2.0);
-
     private PdfAreaMouseWheel pdfAreaMouseWheel;
-
     private int mouseScrollCount;
 
 
