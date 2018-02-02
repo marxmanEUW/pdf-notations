@@ -47,12 +47,12 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-        /*
-        if (!this.isZoomEnabled())
+
+        if (!this.pdfArea.isZoomEnbabled())
         {
             return;
         }
-        */
+
 
         // stopt bisherigen Timer, wenn er noch laeuft
         // => dazu muss Mausrad innerhalb von 100ms nochmals gedreht werden

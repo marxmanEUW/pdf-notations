@@ -9,7 +9,10 @@ import java.io.File;
 
 public class PdfRenderThread implements Runnable {
 
-    private Thread thread;
+    private static final ThreadGroup PDF_RENDER_GROUP
+        = new ThreadGroup("pdfRenderGroup");
+
+    //private Thread thread;
 
     private PdfArea pdfArea;
     private float requiredZoom;
@@ -22,17 +25,26 @@ public class PdfRenderThread implements Runnable {
         this.pdfArea = pdfArea;
         this.requiredZoom = (float) pdfArea.getZoomLevel();
 
-        this.thread = new Thread(this);
-        this.thread.setPriority(Thread.MAX_PRIORITY);
-        this.thread.start();
+        PdfRenderThread.PDF_RENDER_GROUP.interrupt();
+
+        Thread thread = new Thread(PdfRenderThread.PDF_RENDER_GROUP,this);
+        thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
     }
 
     @Override
     public void run()
     {
+        if (PdfRenderThread.PDF_RENDER_GROUP.activeCount() >= 5)
+        {
+            this.pdfArea.disableZoom();
+        }
+
+
         try
         {
             System.out.println("Thread start");
+            System.out.println(PdfRenderThread.PDF_RENDER_GROUP.activeCount());
 
             File pdfFile = new File(
                 this.pdfArea.getPdfObject().getPdfAbsolutePath()
@@ -55,6 +67,8 @@ public class PdfRenderThread implements Runnable {
         {
             exception.printStackTrace();
         }
+
+        this.pdfArea.enableZoom();
     }
 
     public BufferedImage getPdfImage()

@@ -43,6 +43,7 @@ public class PdfArea extends JPanel {
     private boolean addingNotation;
 
     private PdfRenderThread pdfRenderThread;
+    private boolean isZoomEnbabled;
 
     /*
      * #########################################################################
@@ -103,6 +104,13 @@ public class PdfArea extends JPanel {
         return this.pdfObjectView.getPdfObject();
     }
 
+    /*
+     * @author  yxyxD
+     */
+    public boolean isZoomEnbabled()
+    {
+        return this.isZoomEnbabled;
+    }
 
 
     /*
@@ -158,6 +166,22 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
+    public void enableZoom()
+    {
+        this.isZoomEnbabled = true;
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void disableZoom()
+    {
+        this.isZoomEnbabled = false;
+    }
+
+    /*
+     * @author  yxyxD
+     */
     public void loadPdf()
     {
         if (this.getPdfObject() == null)
@@ -174,6 +198,7 @@ public class PdfArea extends JPanel {
             this.pdfImage = PdfRenderFactory.renderPdfFromPdfObject(
                 this.getPdfObject()
             );
+            this.enableZoom();
         }
 
         this.initialImageWidth = this.pdfImage.getWidth();

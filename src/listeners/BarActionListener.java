@@ -286,20 +286,32 @@ public class BarActionListener implements ActionListener {
 
 
     /*
-     * @todo implement zoom in button action
+     * @author  marxmanEUW
      */
     private void zoomIn()
     {
-        this.getPdfObjectView().getPdfArea().resizePdf(BarActionListener.ZOOM_IN);
+        if (this.getPdfObjectView().getPdfArea().isZoomEnbabled())
+        {
+            this.getPdfObjectView().getPdfArea().resizePdf(
+                BarActionListener.ZOOM_IN
+            );
+        }
+
     }
 
 
     /*
-     * @todo implement zoom out button action
+     * @author  marxmanEUW
      */
     private void zoomOut()
     {
-        this.getPdfObjectView().getPdfArea().resizePdf(BarActionListener.ZOOM_OUT);
+        if (this.getPdfObjectView().getPdfArea().isZoomEnbabled())
+        {
+            this.getPdfObjectView().getPdfArea().resizePdf(
+                BarActionListener.ZOOM_OUT
+            );
+        }
+
     }
 
     /*
