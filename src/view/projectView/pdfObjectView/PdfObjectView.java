@@ -222,6 +222,6 @@ public class PdfObjectView extends JSplitPane {
     private void updateViews()
     {
         // @todo update Notationlist and NotationEntity
-        this.pdfArea.loadPdf();
+        this.pdfArea.refreshPdfArea();
     }
 }

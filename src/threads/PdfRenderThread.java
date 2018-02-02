@@ -18,27 +18,72 @@ public class PdfRenderThread implements Runnable {
 
     private BufferedImage pdfImage;
 
+    private boolean isImportInitial;
 
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    public PdfRenderThread(PdfArea pdfArea, boolean isImportInitial)
+    {
+        this.pdfArea = pdfArea;
+        this.requiredZoom = (float) pdfArea.getZoomLevel();
+        this.isImportInitial = isImportInitial;
+
+        setupThread();
+    }
+
+    /*
+     * @author  yxyxD
+     */
     public PdfRenderThread(PdfArea pdfArea)
     {
         this.pdfArea = pdfArea;
         this.requiredZoom = (float) pdfArea.getZoomLevel();
+        this.isImportInitial = false;
 
-        PdfRenderThread.PDF_RENDER_GROUP.interrupt();
-
-        Thread thread = new Thread(PdfRenderThread.PDF_RENDER_GROUP,this);
-        thread.setPriority(Thread.MAX_PRIORITY);
-        thread.start();
+        setupThread();
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    public BufferedImage getRenderedPdfImage()
+    {
+        return this.pdfImage;
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public boolean isImportInitial()
+    {
+        return this.isImportInitial;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
     @Override
     public void run()
     {
-        if (PdfRenderThread.PDF_RENDER_GROUP.activeCount() >= 5)
-        {
-            this.pdfArea.disableZoom();
-        }
-
+        System.out.println(PDF_RENDER_GROUP.activeCount());
 
         this.pdfImage = this.renderPdfImage();
 
@@ -46,17 +91,33 @@ public class PdfRenderThread implements Runnable {
         {
             this.pdfArea.reRenderPdf();
         }
-
-
-        this.pdfArea.enableZoom();
     }
 
-    public BufferedImage getRenderedPdfImage()
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    private void setupThread()
     {
-        return this.pdfImage;
+        // avoid having more thant 5 threads by disabling the zoom
+        if (PdfRenderThread.PDF_RENDER_GROUP.activeCount() >= 4)
+        {
+            this.pdfArea.disableZoom();
+        }
+
+        Thread thread = new Thread(PdfRenderThread.PDF_RENDER_GROUP,this);
+        thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
     }
 
-
+    /*
+     * @author  yxyxD
+     */
     private BufferedImage renderPdfImage()
     {
         BufferedImage pdfImage = null;

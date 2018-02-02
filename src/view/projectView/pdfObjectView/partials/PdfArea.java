@@ -1,7 +1,5 @@
 package view.projectView.pdfObjectView.partials;
 
-
-import factories.PdfRenderFactory;
 import factories.PdfZoomFactory;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
@@ -19,17 +17,17 @@ import java.awt.image.BufferedImage;
 
 public class PdfArea extends JPanel {
 
+    // Pdf object view
+    private PdfObjectView pdfObjectView;
+
     // constants
     private final double MINIMUM_ZOOM_FACTOR = 0.5;
     private final double MAXIMUM_ZOOM_FACTOR = 1.5;
     private final int NOTATION_RADIUS = 10;
     private final Color NOTATION_STANDARD_COLOR = Color.red;
     private final Color NOTATION_SELECTED_COLOR = Color.blue;
-    
-    // Pdf object view
-    private PdfObjectView pdfObjectView;
 
-    // listeners and adapters
+    // listeners / adapters
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
 
@@ -55,10 +53,6 @@ public class PdfArea extends JPanel {
     public PdfArea()
     {
         this.setFocusable(true);
-
-        this.pdfImage = null;
-        this.zoomLevel = 1.0;
-        this.addingNotation = false;
     }
 
     /*
@@ -74,7 +68,7 @@ public class PdfArea extends JPanel {
         this.addMouseListener(this.pdfAreaMouseClick);
         this.addMouseWheelListener(this.pdfAreaMouseWheel);
 
-        this.loadPdf();
+        this.refreshPdfArea();
     }
 
 
@@ -189,8 +183,12 @@ public class PdfArea extends JPanel {
     /*
      * @author  yxyxD
      */
-    public void loadPdf()
+    public void refreshPdfArea()
     {
+        this.zoomLevel = 1.0;
+        this.addingNotation = false;
+        this.disableZoom();
+
         if (this.getPdfObject() == null)
         {
             // no pdf to import => load empty pdf
@@ -198,20 +196,13 @@ public class PdfArea extends JPanel {
                 1,
                 1,
                 BufferedImage.TYPE_INT_RGB);
-            System.out.println("empty image");
+
+            this.repaint();
         }
         else
         {
-            this.pdfImage = PdfRenderFactory.renderPdfFromPdfObject(
-                this.getPdfObject()
-            );
-            this.enableZoom();
+            this.pdfRenderThread = new PdfRenderThread(this, true);
         }
-
-        this.initialImageWidth = this.pdfImage.getWidth();
-        this.initialImageHeight = this.pdfImage.getHeight();
-
-        this.repaint();
     }
 
     /*
@@ -242,6 +233,13 @@ public class PdfArea extends JPanel {
     public void reRenderPdf()
     {
         this.pdfImage = this.pdfRenderThread.getRenderedPdfImage();
+
+        if (this.pdfRenderThread.isImportInitial())
+        {
+            this.initialImageWidth = this.pdfImage.getWidth();
+            this.initialImageHeight = this.pdfImage.getHeight();
+        }
+
         this.repaint();
     }
 
