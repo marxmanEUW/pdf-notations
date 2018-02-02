@@ -8,6 +8,9 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/*
+ * @todo    diese Klasse obsolidieren => alles mit Rendern über den Thread machen
+ */
 public abstract class PdfRenderFactory {
 
 

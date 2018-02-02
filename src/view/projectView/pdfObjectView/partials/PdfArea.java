@@ -2,6 +2,7 @@ package view.projectView.pdfObjectView.partials;
 
 
 import factories.PdfRenderFactory;
+import factories.PdfZoomFactory;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
 import model.Notation;
@@ -240,62 +241,16 @@ public class PdfArea extends JPanel {
      */
     private void zoomPdf(double zoomChange)
     {
-        double scaledImageWidth = (double) this.pdfImage.getWidth()
-            + ((double) this.initialImageWidth * zoomChange);
-        double scaledImageHeight = (double) this.pdfImage.getHeight()
-            + ((double) this.initialImageHeight * zoomChange);
-
-
-        BufferedImage scaledPdfImage = this.getScaledPdfImage(
-            scaledImageWidth,
-            scaledImageHeight
+        this.pdfImage = PdfZoomFactory.getZoomedImage(
+            this.initialImageWidth,
+            this.initialImageHeight,
+            this.pdfImage,
+            zoomChange
         );
-
-        AffineTransformOp transformOp = this.getAffineTransformOp(
-            scaledImageWidth,
-            scaledImageHeight
-        );
-
-        this.pdfImage = transformOp.filter(this.pdfImage, scaledPdfImage);
 
         this.repaint();
 
         this.pdfRenderThread = new PdfRenderThread(this);
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private BufferedImage getScaledPdfImage(
-        double scaledImageWidth,
-        double scaledImageHeight
-    )
-    {
-        return new BufferedImage(
-            (int) scaledImageWidth,
-            (int) scaledImageHeight,
-            BufferedImage.TYPE_INT_ARGB
-        );
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private AffineTransformOp getAffineTransformOp(
-        double scaledImageWidth,
-        double scaledImageHeight
-    )
-    {
-        AffineTransform affineTransform = new AffineTransform();
-        affineTransform.scale(
-            (scaledImageWidth / (double) this.pdfImage.getWidth()),
-            (scaledImageHeight / (double) this.pdfImage.getHeight())
-        );
-
-        return new AffineTransformOp(
-            affineTransform,
-            AffineTransformOp.TYPE_BILINEAR //@todo noch gucken
-        );
     }
 
     /*

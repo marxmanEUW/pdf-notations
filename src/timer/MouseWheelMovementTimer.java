@@ -1,5 +1,6 @@
 package timer;
 
+import factories.PdfZoomFactory;
 import listeners.PdfAreaMouseWheel;
 
 import java.awt.event.ActionEvent;
@@ -40,77 +41,13 @@ public class MouseWheelMovementTimer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        double zoomPercentage = this.getZoomLevelAsPercentage();
+        double zoomPercentage =
+            PdfZoomFactory.getPercentageZoomChangeForMouseScroll(
+                this.mouseScrollCount
+            );
+
         this.pdfAreaMouseWheel.getPdfArea().resizePdf(zoomPercentage);
 
         this.pdfAreaMouseWheel.resetMouseRollCount();
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    private Hilfsmethoden                              #
-     * #########################################################################
-     */
-    private double getZoomLevelAsPercentage()
-    {
-        double zoomLevel;
-
-        if (this.mouseScrollCount > this.MINIMAL_POSITIVE_SCROLL_COUNT)
-        {
-            zoomLevel = this.getAbsoluteZoomValue()
-                / this.TOTAL_PERCENTAGE;
-        }
-        else if (this.mouseScrollCount < this.MAXIMAL_NEGATIVE_SCROLL_COUNT)
-        {
-            zoomLevel = (this.getAbsoluteZoomValue() * (-1))
-                / this.TOTAL_PERCENTAGE;
-        }
-        else
-        {
-            // ScrollCount unterschreitet Mindestwertgrenzen
-            // => keinen Zoom ausfuehren
-            zoomLevel = 0.0;
-        }
-
-        return zoomLevel;
-    }
-
-
-    private double getAbsoluteZoomValue()
-    {
-        double zoomLevel;
-
-        int residualValue = this.getResidualValueOfScrollCount();
-        if (Math.abs(residualValue) < this.RESIDUAL_VALUE_ROUNDING_BORDER)
-        {
-            zoomLevel = this.getAbsoluteZoomValueRoundedDown(residualValue);
-        }
-        else
-        {
-            zoomLevel = this.getAbsoluteZoomValueRoundedUp(residualValue);
-        }
-
-        return zoomLevel;
-    }
-
-    private int getResidualValueOfScrollCount()
-    {
-        return this.mouseScrollCount % this.ZOOM_STEP_PERCENTAGE;
-    }
-
-    private double getAbsoluteZoomValueRoundedUp(int residualValue)
-    {
-        return
-            Math.abs((double) this.mouseScrollCount)
-            - Math.abs((double) residualValue)
-            + (double) this.ZOOM_STEP_PERCENTAGE;
-    }
-
-    private double getAbsoluteZoomValueRoundedDown(int residualValue)
-    {
-        return
-            Math.abs((double) this.mouseScrollCount)
-            - Math.abs((double) residualValue);
     }
 }
