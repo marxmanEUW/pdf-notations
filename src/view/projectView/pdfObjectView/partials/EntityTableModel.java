@@ -1,6 +1,7 @@
 package view.projectView.pdfObjectView.partials;
 
 import gui.Constants;
+import model.Entity;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -43,7 +44,7 @@ public class EntityTableModel extends AbstractTableModel {
         }
         else
         {
-            return Notation.INFORMATION_COUNT + 2;
+            return this.getPdfObject().getEntityCount();
         }
     }
 
@@ -69,42 +70,19 @@ public class EntityTableModel extends AbstractTableModel {
             return null;
         }
 
-        if (
-            this.getPdfObject().getSelectedNotationIndex() ==
-                PdfObject.SELECTED_NOTATION_NULL_VALUE
-            )
+        if (this.getPdfObject().getSelectedNotationIndex() ==
+                PdfObject.SELECTED_NOTATION_NULL_VALUE)
         {
             return null;
         }
 
         if (columnIndex == 1)
         {
-            switch (rowIndex)
-            {
-                case 0:
-                    return this.getPdfObject().getSelectedNotation().getId();
-                case 1:
-                    return this.getPdfObject().getSelectedNotation().getName();
-                case 2:
-                    return this.getPdfObject().getSelectedNotation().getX();
-                case 3:
-                    return this.getPdfObject().getSelectedNotation().getY();
-                case 4:
-                    return this.getPdfObject().getSelectedNotation().getDescription();
-                default: return null;
-            }
+            return this.getPdfObject().getSelectedNotation().getValue(rowIndex);
         }
         else
         {
-            switch (rowIndex)
-            {
-                case 0: return "Id";
-                case 1: return "Name";
-                case 2: return "X";
-                case 3: return "Y";
-                case 4: return "Beschreibung";
-                default: return null;
-            }
+            return this.getPdfObject().getSelectedNotation().getValueName(rowIndex);
         }
     }
 
@@ -147,6 +125,7 @@ public class EntityTableModel extends AbstractTableModel {
         {
             return true;
         }
+
     }
 
 
@@ -155,29 +134,31 @@ public class EntityTableModel extends AbstractTableModel {
      */
     public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
     {
+        Class valueClass = this.getPdfObject().getSelectedNotation().getValue(rowIndex).getClass();
+
         Notation selectedNotation = this.getPdfObject().getSelectedNotation();
+        String stringValue = editedValue.toString();
 
-        switch (rowIndex)
+        if (valueClass == String.class)
         {
-            case 1:
-                selectedNotation.setName((String) editedValue);
-                break;
-            case 2:
-                // @todo check if editedValue is really an integer
-                selectedNotation.setX(Integer.parseInt((String) editedValue));
-                this.pdfObjectView.getPdfArea().repaint();
-                break;
-            case 3:
-                // @todo check if editedValue is really an integer
-                selectedNotation.setY(Integer.parseInt((String) editedValue));
-                this.pdfObjectView.getPdfArea().repaint();
-                break;
-            case 4:
-                selectedNotation.setDescription((String) editedValue);
-                break;
+            System.out.println("String");
+            selectedNotation.setValue(rowIndex, stringValue);
         }
-    }
+        else if (valueClass == Integer.class)
+        {
+            System.out.println("Integer");
+            int intValue = Integer.parseInt(stringValue);
+            selectedNotation.setValue(rowIndex, intValue);
+        }
+        else if (valueClass == Double.class)
+        {
+            System.out.println("Double");
+            Double doubleValue = Double.parseDouble(stringValue);
+            selectedNotation.setValue(rowIndex, doubleValue);
+        }
 
+        this.pdfObjectView.getPdfArea().repaint();
+    }
 
     /*
      * #########################################################################

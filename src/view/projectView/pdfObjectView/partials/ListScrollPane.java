@@ -91,7 +91,7 @@ public class ListScrollPane extends JScrollPane {
     {
         int rowId = notationId;
 
-        for (int i = 0; i < this.getPdfObject().getListOfNotationsSize(); i++)
+        for (int i = 0; i < this.getPdfObject().getListOfNotations().size(); i++)
         {
             if (notationId == (int) this.listTableModel.getValueAt(i, 0))
             {

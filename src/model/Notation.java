@@ -1,98 +1,52 @@
 package model;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Notation {
 
-    private static final String STANDARD_NAME = "Punkt";
-    private static final String STANDARD_DESCRIPTION = "Beschreibung";
+    public static final String STANDARD_NAME = "Punkt";
+    public static final Double STANDARD_DESCRIPTION = 42.0;
 
-    public static final int INFORMATION_COUNT = 3;
-
-    private int id;
-    private String name;
-    private Point coordinates;
-    private String description;
     // @todo timestamp
 
+    private ArrayList<Entity> listOfEntities;
 
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
      */
-
-    public Notation(Integer id, Point coordinates)
+    public Notation(ArrayList<Entity> listOfEntities)
     {
-        this.id = id;
-        this.name = STANDARD_NAME + "_" + Integer.toString(id);
-        this.coordinates = coordinates;
-        this.description = STANDARD_DESCRIPTION;
+        this.listOfEntities = listOfEntities;
     }
-
 
     /*
      * #########################################################################
      * #                    Getter                                             #
      * #########################################################################
      */
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Point getCoordinates()
+    // @todo implement old getter for easier handling
+    public Object getValue(int index)
     {
-        return this.coordinates;
+        return this.listOfEntities.get(index).getValue();
     }
 
-    public int getX()
+    public String getValueName(int index)
     {
-        return this.coordinates.x;
+        return this.listOfEntities.get(index).getName();
     }
 
-    public int getY()
-    {
-        return this.coordinates.y;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
 
     /*
      * #########################################################################
      * #                    Setter                                             #
      * #########################################################################
      */
-
-    public void setName(String name)
+    public void setValue(int index, Object value)
     {
-        this.name = name;
-    }
-
-    public void setCoordinates(Point coordinates)
-    {
-        this.coordinates = coordinates;
-    }
-
-    public void setX(int x)
-    {
-        this.coordinates.x = x;
-    }
-
-    public void setY(int y)
-    {
-        this.coordinates.y = y;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
+        this.listOfEntities.get(index).setValue(value);
+        /**/
     }
 }

@@ -43,7 +43,7 @@ public class ListTableModel extends AbstractTableModel {
         }
         else
         {
-            return this.getPdfObject().getListOfNotationsSize();
+            return this.getPdfObject().getListOfNotations().size();
         }
     }
 
@@ -69,16 +69,8 @@ public class ListTableModel extends AbstractTableModel {
             return null;
         }
 
-        switch (columnIndex)
-        {
-            case 0:
-                return this.getPdfObject().getListOfNotations().
-                    get(rowIndex).getId();
-            case 1:
-                return this.getPdfObject().getListOfNotations().
-                    get(rowIndex).getName();
-            default: return null;
-        }
+        return this.getPdfObject().getListOfNotations().
+            get(rowIndex).getValue(columnIndex);
     }
 
 

@@ -1,8 +1,5 @@
 package model;
 
-import factories.PdfObjectFactory;
-
-import java.awt.Point;
 import java.util.ArrayList;
 
 public class PdfObject {
@@ -14,7 +11,7 @@ public class PdfObject {
 
     private ArrayList<Notation> listOfNotations;
     private int selectedNotationIndex;
-
+    private ArrayList<String[]> listOfEntityNamesAndTypes;
 
     /*
      * #########################################################################
@@ -28,6 +25,19 @@ public class PdfObject {
 
         this.listOfNotations = new ArrayList<>();
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
+
+        this.listOfEntityNamesAndTypes = new ArrayList<>();
+        String[] entity1 = {Entity.TYPE_INTEGER,"Id der Notation"};
+        String[] entity2 = {Entity.TYPE_STRING,"Name der Notation"};
+        String[] entity3 = {Entity.TYPE_INTEGER,"X Kooridnate der Notation"};
+        String[] entity4 = {Entity.TYPE_INTEGER,"Y Kooridnate der Notation"};
+        String[] entity5 = {Entity.TYPE_DOUBLE,"Wert der Notation"};
+
+        this.addEntityNameAndType(entity1);
+        this.addEntityNameAndType(entity2);
+        this.addEntityNameAndType(entity3);
+        this.addEntityNameAndType(entity4);
+        this.addEntityNameAndType(entity5);
     }
 
 
@@ -44,6 +54,7 @@ public class PdfObject {
         return this.pdfAbsolutePath;
     }
 
+
     /*
      * @author  yxyxD
      */
@@ -51,6 +62,7 @@ public class PdfObject {
     {
         return this.jsonAbsolutePath;
     }
+
 
     /*
      * @author  marxmanEUW
@@ -61,34 +73,28 @@ public class PdfObject {
     }
 
 
-
-
-    public ArrayList<Point> getListOfPoints()
-    {
-        ArrayList<Point> listOfPoints = new ArrayList<>();
-        for (Notation notation : this.listOfNotations)
-        {
-            listOfPoints.add(notation.getCoordinates());
-        }
-        return listOfPoints;
-    }
-
-    public int getListOfNotationsSize()
-    {
-        return this.listOfNotations.size();
-    }
-
     public Notation getSelectedNotation()
     {
         return this.listOfNotations.get(selectedNotationIndex);
     }
 
+
     public int getSelectedNotationIndex()
     {
-        return selectedNotationIndex;
+        return this.selectedNotationIndex;
     }
 
 
+    public int getEntityCount()
+    {
+        return this.listOfEntityNamesAndTypes.size();
+    }
+
+
+    public ArrayList<String[]> getListOfEntityNamesAndTypes()
+    {
+        return listOfEntityNamesAndTypes;
+    }
     /*
      * #########################################################################
      * #                    Setter                                             #
@@ -114,15 +120,13 @@ public class PdfObject {
      * #########################################################################
      */
     /*
-     * @author  yxyxD
+     * @author  marxmanEUW
      */
-    public void addNewNotation(Point coordinates)
+    public void addNotation(Notation notation)
     {
-        this.listOfNotations.add(new Notation(
-            this.getIdForNextNotation(),
-            coordinates
-        ));
+        this.listOfNotations.add(notation);
     }
+
 
     /*
      * @author  marxmanEUW
@@ -134,19 +138,14 @@ public class PdfObject {
 
 
     /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
-    /*
      * @author  yxyxD
      */
-    private int getIdForNextNotation()
+    public int getIdForNextNotation()
     {
         int nextId = 0;
         for (Notation notation : this.listOfNotations)
         {
-            int notationID = notation.getId();
+            int notationID = (int) notation.getValue(0);
             if (notationID >= nextId)
             {
                 nextId = notationID + 1;
@@ -154,5 +153,16 @@ public class PdfObject {
         }
 
         return nextId;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    private void addEntityNameAndType(String[] entity)
+    {
+        this.listOfEntityNamesAndTypes.add(entity);
     }
 }

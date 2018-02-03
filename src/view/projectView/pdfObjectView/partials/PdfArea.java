@@ -13,6 +13,7 @@ import view.projectView.pdfObjectView.PdfObjectView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 
 public class PdfArea extends JPanel {
@@ -292,11 +293,11 @@ public class PdfArea extends JPanel {
     private void repaintNotationPoints(Graphics graphics)
     {
         if (this.getPdfObject() == null) { return; }
-        if (this.getPdfObject().getListOfPoints() == null) { return; }
+        if (this.getPdfObject().getListOfNotations() == null) { return; }
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
+            if ((int) notation.getValue(0) == this.getPdfObject().getSelectedNotationIndex())
             {
                 graphics.setColor(this.NOTATION_SELECTED_COLOR);
             }
@@ -306,9 +307,9 @@ public class PdfArea extends JPanel {
             }
 
             //@todo name refactoring
-            int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
+            int upperLeftX = (int) ((double) ((int) notation.getValue(2) - this.NOTATION_RADIUS)
                 * this.zoomLevel);
-            int upperLeftY = (int) ((double) (notation.getY() - this.NOTATION_RADIUS)
+            int upperLeftY = (int) ((double) ((int) notation.getValue(3)  - this.NOTATION_RADIUS)
                 * this.zoomLevel);
             int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
                 * this.zoomLevel);
@@ -343,7 +344,7 @@ public class PdfArea extends JPanel {
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            Point notationPoint = notation.getCoordinates();
+            Point notationPoint = new Point((int) notation.getValue(2), (int) notation.getValue(3));
 
             double distance = actualPoint.distance(notationPoint);
             if (distance <= minimalRange)
@@ -376,7 +377,7 @@ public class PdfArea extends JPanel {
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            Point notationPoint = notation.getCoordinates();
+            Point notationPoint = new Point((int) notation.getValue(2), (int) notation.getValue(3));
             double distance = actualPoint.distance(notationPoint);
 
             if (distance <= (double) NOTATION_RADIUS)
