@@ -24,7 +24,6 @@ public class BarActionListener implements ActionListener {
     private static final double ZOOM_IN = 0.1;
     private static final double ZOOM_OUT = -0.1;
 
-    private PdfObjectView pdfObjectView;
     private static String ABOUT_TITLE = "PDF Notations";
     private static String ABOUT_TEXT =
         "https://github.com/marxmanEUW/pdf-notations\n" +
@@ -158,7 +157,7 @@ public class BarActionListener implements ActionListener {
 
         if (newProjectFile != null)
         {
-            this.pdfObjectView.openProject(newProjectFile);
+            this.getPdfObjectView().openProject(newProjectFile);
             System.out.println(
                 "Neues Projekt mit gegebener PDF: "
                     + newProjectFile.getAbsolutePath()
@@ -180,7 +179,7 @@ public class BarActionListener implements ActionListener {
 
         if (openProjectFile != null)
         {
-            this.pdfObjectView.openProject(openProjectFile);
+            this.getPdfObjectView().openProject(openProjectFile);
             System.out.println(
                 "Vorhandenes Projekt mit gegebener PDF "
                     + openProjectFile.getAbsolutePath()
