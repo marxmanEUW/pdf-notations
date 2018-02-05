@@ -25,17 +25,19 @@ public class PdfObjectView extends JSplitPane {
     private final int DEVIDER_LOCATION
         = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8);
 
-
+    // PDF-Object
     private PdfObject pdfObject;
 
-
+    // Listeners
     private NotationListSelectionListener notationListSelectionListener;
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
 
+    // Left part of the center component
     private PdfScrollPane pdfScrollPane;
         private PdfArea pdfArea;
 
+    // Right part of the center component
     private NotationSplitPane notationSplitPane;
         private ListScrollPane notationListScrollPane;
             private ListTableModel listTableModel;
@@ -198,6 +200,11 @@ public class PdfObjectView extends JSplitPane {
 
 
     /*
+     * #########################################################################
+     * #                    Open Methods                                       #
+     * #########################################################################
+     */
+    /*
      * @author  yxyxD
      */
     public void openProject(File file)
@@ -216,6 +223,11 @@ public class PdfObjectView extends JSplitPane {
     }
 
 
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
     /*
      * @author  yxyxD
      */

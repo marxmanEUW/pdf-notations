@@ -4,11 +4,11 @@ import listeners.BarActionListener;
 import gui.Constants;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class MainFrameMenuBar extends JMenuBar {
 
+    // "File"-menu
     private JMenu menuFile;
     private JMenuItem menuItemNewProject;
     private JMenuItem menuItemOpenProject;
@@ -17,17 +17,21 @@ public class MainFrameMenuBar extends JMenuBar {
     private JMenuItem menuItemCloseProject;
     private JMenuItem menuItemClose;
 
+    // "Notation"-menu
     private JMenu menuNotation;
     private JMenuItem menuItemAddNotation;
     private JMenuItem menuItemDeleteNotation;
 
+    // "View"-menu
     private JMenu menuView;
     private JMenuItem menuItemZoomIn;
     private JMenuItem menuItemZoomOut;
 
+    // "Help"-menu
     private JMenu menuHelp;
     private JMenuItem menuItemAbout;
 
+    // Listener
     private BarActionListener barActionListener;
 
 
@@ -35,6 +39,9 @@ public class MainFrameMenuBar extends JMenuBar {
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
+     */
+    /*
+     * @author  yxyxD
      */
     public MainFrameMenuBar()
     {
@@ -61,7 +68,7 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     /*
@@ -75,12 +82,100 @@ public class MainFrameMenuBar extends JMenuBar {
         this.setupMenuNotation();
         this.setupMenuView();
         this.setupMenuHelp();
+
+        this.barActionListener.updateBars();
     }
 
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemNewProjectEnabled(boolean enabled)
+    {
+        this.menuItemNewProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemOpenProjectEnabled(boolean enabled)
+    {
+        this.menuItemOpenProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemSaveProjectEnabled(boolean enabled)
+    {
+        this.menuItemSaveProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemSaveAsProjectEnabled(boolean enabled)
+    {
+        this.menuItemSaveAsProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemCloseProjectEnabled(boolean enabled)
+    {
+        this.menuItemCloseProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemCloseEnabled(boolean enabled)
+    {
+        this.menuItemClose.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemAddNotationEnabled(boolean enabled)
+    {
+        this.menuItemAddNotation.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemDeleteNotationEnabled(boolean enabled)
+    {
+        this.menuItemDeleteNotation.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemZoomInEnabled(boolean enabled)
+    {
+        this.menuItemZoomIn.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setMenuItemZoomOutEnabled(boolean enabled)
+    {
+        this.menuItemZoomOut.setEnabled(enabled);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
@@ -162,7 +257,7 @@ public class MainFrameMenuBar extends JMenuBar {
         this.menuItemAddNotation.addActionListener(this.barActionListener);
         this.menuItemDeleteNotation.addActionListener(this.barActionListener);
 
-        //Shortcuts
+        // Shortcuts
         this.menuItemAddNotation.setAccelerator(KeyStroke.getKeyStroke(
             Constants.BAR_ITEM_ADD_NOTATION_KEY_STROKE,
             KeyEvent.CTRL_DOWN_MASK

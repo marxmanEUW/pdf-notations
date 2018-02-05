@@ -10,6 +10,8 @@ import factories.PdfObjectFactory;
 import gui.Constants;
 import model.PdfObject;
 import view.MainFrame;
+import view.bar.MainFrameMenuBar;
+import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
@@ -36,7 +38,7 @@ public class BarActionListener implements ActionListener {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     /*
@@ -63,23 +65,28 @@ public class BarActionListener implements ActionListener {
             case Constants.BAR_ITEM_NEW_PROJECT_NAME:
 
                 this.newProject();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
 
                 this.openProject();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
 
                 this.saveProject();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
 
                 this.saveAsProject();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
 
                 // not implemented yet
                 this.closeProject();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_CLOSE_NAME:
 
@@ -88,20 +95,24 @@ public class BarActionListener implements ActionListener {
             case Constants.BAR_ITEM_ADD_NOTATION_NAME:
 
                 this.addNotation();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
 
                 this.deleteNotation();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ZOOM_IN_NAME:
 
                 // not implemented jet
                 this.zoomIn();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ZOOM_OUT_NAME:
 
                 // not implemented jet
                 this.zoomOut();
+                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ABOUT_NAME:
 
@@ -140,10 +151,20 @@ public class BarActionListener implements ActionListener {
         return this.getPdfObjectView().getPdfArea();
     }
 
+    private MainFrameMenuBar getMainFrameMenuBar()
+    {
+        return this.mainFrame.getJMenuBar();
+    }
+
+    private MainFrameToolBar getMainFrameToolBar()
+    {
+        return this.mainFrame.getToolBar();
+    }
+
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
@@ -324,5 +345,63 @@ public class BarActionListener implements ActionListener {
             ABOUT_TITLE,
             JOptionPane.PLAIN_MESSAGE
         );
+    }
+
+
+
+
+    /*
+     * @author  yxyxD
+     */
+    public void updateBars()
+    {
+        // disable all project depended buttons if no project is loaded
+        if (this.getPdfObject() == null)
+        {
+            this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemSaveAsProjectEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemCloseProjectEnabled(false);
+
+            this.getMainFrameMenuBar().setMenuItemAddNotationEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemDeleteNotationEnabled(false);
+
+            this.getMainFrameMenuBar().setMenuItemZoomInEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(false);
+        }
+        else
+        {
+            this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemSaveAsProjectEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemCloseProjectEnabled(true);
+
+            this.getMainFrameMenuBar().setMenuItemAddNotationEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemDeleteNotationEnabled(true);
+
+            this.getMainFrameMenuBar().setMenuItemZoomInEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(true);
+        }
+
+        if (this.getPdfObject() == null)
+        {
+            this.getMainFrameToolBar().setButtonSaveProjectEnabled(false);
+            this.getMainFrameToolBar().setButtonSaveAsProjectEnabled(false);
+            this.getMainFrameToolBar().setButtonCloseProjectEnabled(false);
+
+            this.getMainFrameToolBar().setButtonZoomOutEnabled(false);
+            this.getMainFrameToolBar().setButtonZoomInEnabled(false);
+
+            this.getMainFrameToolBar().setButtonAddNotationEnabled(false);
+        }
+        else
+        {
+            this.getMainFrameToolBar().setButtonSaveProjectEnabled(true);
+            this.getMainFrameToolBar().setButtonSaveAsProjectEnabled(true);
+            this.getMainFrameToolBar().setButtonCloseProjectEnabled(true);
+
+            this.getMainFrameToolBar().setButtonZoomOutEnabled(true);
+            this.getMainFrameToolBar().setButtonZoomInEnabled(true);
+
+            this.getMainFrameToolBar().setButtonAddNotationEnabled(true);
+        }
     }
 }

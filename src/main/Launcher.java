@@ -3,7 +3,6 @@ package main;
 import view.MainFrame;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Launcher {
 
@@ -13,7 +12,7 @@ public class Launcher {
     public static final String PROJECT_NAME = "Project-Name";
 
     /*
-     * @todo main-method must not throw an exception
+     * @author  yxyxD
      */
     public static void main(String[] args)
     {

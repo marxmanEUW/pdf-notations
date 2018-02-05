@@ -13,15 +13,16 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+    // Bars
     private MainFrameMenuBar menuBar;
-    private BarActionListener barActionListener;
-
     private MainFrameToolBar toolBar;
 
+    // PDF-Object
     private PdfObjectView pdfObjectView;
 
+    // Listeners
+    private BarActionListener barActionListener;
     private MainFrameKeyListener mainFrameKeyListener;
-
     private MainFrameWindowAdapter mainFrameWindowAdapter;
 
     /*
@@ -98,19 +99,34 @@ public class MainFrame extends JFrame {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     */
     public MainFrameMenuBar getJMenuBar()
     {
         return this.menuBar;
     }
 
+    /*
+     * @author  yxyxD
+     */
+    public MainFrameToolBar getToolBar()
+    {
+        return this.toolBar;
+    }
+
+    /*
+     * @author  yxyxD
+     */
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
     }
 
+
     /*
      * #########################################################################
-     * #                    oeffentliche Methoden                              #
+     * #                    Open Methods                                       #
      * #########################################################################
      */
 
@@ -118,7 +134,7 @@ public class MainFrame extends JFrame {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     private void setLookAndFell()
