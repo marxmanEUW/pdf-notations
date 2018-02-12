@@ -45,7 +45,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
 
         if(this.getPdfArea().getAddingNotation()
-            && !this.getPdfArea().isNotationInRange(mouseEvent.getPoint()))
+            && !this.getPdfArea().isNotationInRangeOfOtherNotation(mouseEvent.getPoint()))
         {
             this.getPdfObject().addNewNotation(coordinates);
             this.getPdfArea().setCursorTypeToDefault();

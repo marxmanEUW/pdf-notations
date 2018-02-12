@@ -89,7 +89,7 @@ public class PdfRenderThread implements Runnable {
 
         if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
         {
-            this.pdfArea.reRenderPdf();
+            this.pdfArea.appointReRenderedPdf();
         }
     }
 

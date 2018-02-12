@@ -37,7 +37,7 @@ public class MouseWheelMovementTimer implements ActionListener {
                 this.mouseScrollCount
             );
 
-        this.pdfAreaMouseWheel.getPdfArea().resizePdf(zoomPercentage);
+        this.pdfAreaMouseWheel.getPdfArea().zoomPdf(zoomPercentage);
 
         this.pdfAreaMouseWheel.resetMouseRollCount();
     }

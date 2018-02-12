@@ -311,7 +311,7 @@ public class BarActionListener implements ActionListener {
     {
         if (this.getPdfObjectView().getPdfArea().isZoomEnabled())
         {
-            this.getPdfObjectView().getPdfArea().resizePdf(
+            this.getPdfObjectView().getPdfArea().zoomPdf(
                 BarActionListener.ZOOM_IN
             );
         }
@@ -326,7 +326,7 @@ public class BarActionListener implements ActionListener {
     {
         if (this.getPdfObjectView().getPdfArea().isZoomEnabled())
         {
-            this.getPdfObjectView().getPdfArea().resizePdf(
+            this.getPdfObjectView().getPdfArea().zoomPdf(
                 BarActionListener.ZOOM_OUT
             );
         }

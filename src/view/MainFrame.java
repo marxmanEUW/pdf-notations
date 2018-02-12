@@ -30,6 +30,12 @@ public class MainFrame extends JFrame {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  AbellaMort
+     * @changes
+     *      2018-02-12 (AbellaMort) created
+     * @brief   Constructor of the MainFrame.
+     */
     public MainFrame()
     {
         this.setLookAndFell();
@@ -57,8 +63,14 @@ public class MainFrame extends JFrame {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
+     */
+    /*
+     * @author  AbellaMort
+     * @changes
+     *      2018-02-12 (AbellaMort) created
+     * @brief   Initialises the MainFrame.
      */
     public void initialize()
     {
@@ -101,6 +113,9 @@ public class MainFrame extends JFrame {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MenuBar of the MainFrame.
      */
     public MainFrameMenuBar getJMenuBar()
     {
@@ -109,6 +124,9 @@ public class MainFrame extends JFrame {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Toolbar of the MainFrame
      */
     public MainFrameToolBar getToolBar()
     {
@@ -117,19 +135,14 @@ public class MainFrame extends JFrame {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfObjectView of the MainFrame
      */
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
     }
-
-
-    /*
-     * #########################################################################
-     * #                    Open Methods                                       #
-     * #########################################################################
-     */
-
 
 
     /*

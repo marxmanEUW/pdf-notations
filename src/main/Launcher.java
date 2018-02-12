@@ -9,10 +9,12 @@ public class Launcher {
     // @todo testing
     public static final File FILE1 = new File("files/file1.pdf");
     public static final File FILE2 = new File("files/file2.pdf");
-    public static final String PROJECT_NAME = "Project-Name";
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Starting point of the program.
      */
     public static void main(String[] args)
     {
@@ -21,4 +23,11 @@ public class Launcher {
 
         mainFrame.getPdfObjectView().openProject(FILE1);
     }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief
+     */
 }

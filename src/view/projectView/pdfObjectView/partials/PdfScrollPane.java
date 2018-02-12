@@ -22,6 +22,9 @@ public class PdfScrollPane extends JScrollPane {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a PdfScrollPane which holds the PdfArea.
      */
     public PdfScrollPane()
     {
@@ -37,6 +40,9 @@ public class PdfScrollPane extends JScrollPane {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initialises the PdfScrollPane
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -50,7 +56,7 @@ public class PdfScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
