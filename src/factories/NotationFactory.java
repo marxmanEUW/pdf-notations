@@ -1,6 +1,7 @@
 package factories;
 
 import model.*;
+import model.entity.Entity;
 
 import java.util.ArrayList;
 

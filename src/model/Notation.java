@@ -1,6 +1,7 @@
 package model;
 
-import java.awt.*;
+import model.entity.Entity;
+
 import java.util.ArrayList;
 
 public class Notation {
@@ -47,6 +48,5 @@ public class Notation {
     public void setValue(int index, Object value)
     {
         this.listOfEntities.get(index).setValue(value);
-        /**/
     }
 }

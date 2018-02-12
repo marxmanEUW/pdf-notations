@@ -1,5 +1,7 @@
 package model;
 
+import model.entity.Entity;
+
 import java.util.ArrayList;
 
 public class PdfObject {

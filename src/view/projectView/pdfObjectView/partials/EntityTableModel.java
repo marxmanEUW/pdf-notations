@@ -1,7 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
 import gui.Constants;
-import model.Entity;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
