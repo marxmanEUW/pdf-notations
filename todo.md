@@ -12,7 +12,12 @@ marxmanEUW
  - GUI OpenFile Dialog andere MenuBar Operation
  - MainFrameToolBar
 
+
+
+## 13.02.2018
+
 yxyxD
- - REFACTOR
- - 
+- zoom via Crtl + MouseWheel
+- disable zoom on mouse when there is nothing to zoom
+- check the saving process => there is no saving path declared
  

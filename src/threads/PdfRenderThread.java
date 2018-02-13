@@ -10,23 +10,26 @@ import java.io.IOException;
 
 public class PdfRenderThread implements Runnable {
 
-    private static final ThreadGroup PDF_RENDER_GROUP
+    public static final ThreadGroup PDF_RENDER_GROUP
         = new ThreadGroup("pdfRenderGroup");
 
     private PdfArea pdfArea;
     private float requiredZoom;
 
-    private BufferedImage pdfImage;
+    private BufferedImage reRenderedPdfImage;
 
     private boolean isImportInitial;
 
     /*
      * #########################################################################
-     * #                    Constructor                                        #
+     * #                    Constructors                                       #
      * #########################################################################
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a new PdfRender-Thread. Considers initial imports.
      */
     public PdfRenderThread(PdfArea pdfArea, boolean isImportInitial)
     {
@@ -34,11 +37,19 @@ public class PdfRenderThread implements Runnable {
         this.requiredZoom = (float) pdfArea.getZoomLevel();
         this.isImportInitial = isImportInitial;
 
-        setupThread();
+        Thread thread = new Thread(
+            PdfRenderThread.PDF_RENDER_GROUP,
+            this
+        );
+        thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a new PdfRender-Thread.
      */
     public PdfRenderThread(PdfArea pdfArea)
     {
@@ -46,7 +57,12 @@ public class PdfRenderThread implements Runnable {
         this.requiredZoom = (float) pdfArea.getZoomLevel();
         this.isImportInitial = false;
 
-        setupThread();
+        Thread thread = new Thread(
+            PdfRenderThread.PDF_RENDER_GROUP,
+            this
+        );
+        thread.setPriority(Thread.MAX_PRIORITY);
+        thread.start();
     }
 
 
@@ -57,14 +73,21 @@ public class PdfRenderThread implements Runnable {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the re-rendered pdfImage.
      */
     public BufferedImage getRenderedPdfImage()
     {
-        return this.pdfImage;
+        return this.reRenderedPdfImage;
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns whether the pdfImage of this thread has been imported
+     *          initially or not.
      */
     public boolean isImportInitial()
     {
@@ -79,13 +102,17 @@ public class PdfRenderThread implements Runnable {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time a thread gets started.
      */
     @Override
     public void run()
     {
+        //@todo remove sysout
         System.out.println(PDF_RENDER_GROUP.activeCount());
 
-        this.pdfImage = this.renderPdfImage();
+        this.renderPdfImage();
 
         if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
         {
@@ -101,27 +128,13 @@ public class PdfRenderThread implements Runnable {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Renders the reRenderedPdfImage on the zoom level, that was required when
+     *          the thread has been started.
      */
-    private void setupThread()
+    private void renderPdfImage()
     {
-        // avoid having more thant 5 threads by disabling the zoom
-        if (PdfRenderThread.PDF_RENDER_GROUP.activeCount() >= 4)
-        {
-            this.pdfArea.disableZoom();
-        }
-
-        Thread thread = new Thread(PdfRenderThread.PDF_RENDER_GROUP,this);
-        thread.setPriority(Thread.MAX_PRIORITY);
-        thread.start();
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private BufferedImage renderPdfImage()
-    {
-        BufferedImage pdfImage = null;
-
         try
         {
             File pdfFile = new File(
@@ -129,16 +142,15 @@ public class PdfRenderThread implements Runnable {
             );
             PDDocument pdfDocument = PDDocument.load(pdfFile);
             PDFRenderer renderer = new PDFRenderer(pdfDocument);
-            pdfImage = renderer.renderImage(
+            this.reRenderedPdfImage = renderer.renderImage(
                 0,
                 requiredZoom);
             pdfDocument.close();
         }
         catch (IOException ioException)
         {
+            this.reRenderedPdfImage = null;
             ioException.printStackTrace();
         }
-
-        return pdfImage;
     }
 }

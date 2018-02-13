@@ -63,63 +63,42 @@ public class BarActionListener implements ActionListener {
     {
         switch (e.getActionCommand()) {
             case Constants.BAR_ITEM_NEW_PROJECT_NAME:
-
                 this.newProject();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
-
                 this.openProject();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
-
                 this.saveProject();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-
-                this.saveAsProject();
-                this.updateBars();
+                this.saveAsProject();;
                 break;
             case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
-
-                // not implemented yet
                 this.closeProject();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_CLOSE_NAME:
-
                 this.closeProgramm();
                 break;
             case Constants.BAR_ITEM_ADD_NOTATION_NAME:
-
                 this.addNotation();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
-
                 this.deleteNotation();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ZOOM_IN_NAME:
-
-                // not implemented jet
                 this.zoomIn();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ZOOM_OUT_NAME:
-
-                // not implemented jet
                 this.zoomOut();
-                this.updateBars();
                 break;
             case Constants.BAR_ITEM_ABOUT_NAME:
-
-                // not implemented jet
+                // not implemented yet
                 showAbout();
                 break;
         }
+
+        this.updateBars();
     }
 
     /*

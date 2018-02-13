@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class PdfZoomFactory {
 
+    //@todo own class for zoom constants
     public static final double MINIMUM_ZOOM = 0.5;
     public static final double MAXIMUM_ZOOM = 1.5;
     public static final double ZOOM_STEP_IN = 0.1;
@@ -26,6 +27,10 @@ public class PdfZoomFactory {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Converts the scroll count of a MouseWheelMoved-Event into a
+     *          equivalent zoom percentage.
      */
     public static double getPercentageZoomChangeForMouseScroll(
         int mouseScrollCount
@@ -58,6 +63,13 @@ public class PdfZoomFactory {
      * @author  yxyxD
      * @todo    besser: die pdfArea direkt übergeben
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Scales the current pdfImage of the PdfArea according to the
+     *          zoom change.
+     */
     public static BufferedImage getZoomedImage(
         int initialImageWidth,
         int initialImageHeight,
@@ -89,34 +101,41 @@ public class PdfZoomFactory {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Converts to MouseScrollCount into the actual scroll count, since
+     *          the MouseScrollCount of the MouseScrollEvent is inverted.
      */
     private static int getInvertedMouseScrollCount(int mouseScrollCount)
     {
-        // events off wheel rotation return wrong values => they need to be
-        // inverted
         return (mouseScrollCount * (-1));
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Calculates and returns the zoom change as absolute value.
      */
     private static double getAbsoluteZoomValue(int mouseScrollCount)
     {
         double zoomLevel;
 
-        int residualValue = getResidualValueOfScrollCount(mouseScrollCount);
+        int residualValue = mouseScrollCount % ZOOM_STEP_PERCENTAGE;
         if (Math.abs(residualValue) <= RESIDUAL_VALUE_ROUNDING_BORDER)
         {
-            zoomLevel = getAbsoluteZoomValueRoundedDown(
-                mouseScrollCount,
-                residualValue
-            );
+            // round down
+            zoomLevel =
+                Math.abs((double) mouseScrollCount)
+                - Math.abs((double) residualValue);
         }
         else
         {
-            zoomLevel = getAbsoluteZoomValueRoundedUp(
-                mouseScrollCount,
-                residualValue);
+            // round up
+            zoomLevel =
+                Math.abs((double) mouseScrollCount)
+                - Math.abs((double) residualValue)
+                + (double) ZOOM_STEP_PERCENTAGE;
         }
 
         return zoomLevel;
@@ -124,44 +143,9 @@ public class PdfZoomFactory {
 
     /*
      * @author  yxyxD
-     */
-    private static int getResidualValueOfScrollCount(int mouseScrollCount)
-    {
-        return mouseScrollCount % ZOOM_STEP_PERCENTAGE;
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private static double getAbsoluteZoomValueRoundedUp(
-        int mouseScrollCount,
-        int residualValue
-    )
-    {
-        return
-            Math.abs((double) mouseScrollCount)
-                - Math.abs((double) residualValue)
-                + (double) ZOOM_STEP_PERCENTAGE;
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    private static double getAbsoluteZoomValueRoundedDown(
-        int mouseScrollCount,
-        int residualValue
-    )
-    {
-        return
-            Math.abs((double) mouseScrollCount)
-                - Math.abs((double) residualValue);
-    }
-
-
-    //--------------------------------------------------------------
-
-    /*
-     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Creates and returns the scaled image for the current pdfImage.
      */
     private static BufferedImage getScaledPdfImage(
         int initialImageWidth,
@@ -184,6 +168,10 @@ public class PdfZoomFactory {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Creates and returns an AffineTransformOperation-Object which
+     *          scales the pdfImage.
      */
     private static AffineTransformOp getAffineTransformOp(
         BufferedImage oldPdfImage,

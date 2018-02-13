@@ -21,6 +21,12 @@ public class PdfObject {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a PdfObject.
+     */
     public PdfObject(String pdfAbsolutePath)
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
@@ -38,6 +44,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the absolute path to the pdf-file.
      */
     public String getPdfAbsolutePath()
     {
@@ -46,6 +55,9 @@ public class PdfObject {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   returns the absolute path to the json-file.
      */
     public String getJsonAbsolutePath()
     {
@@ -59,9 +71,6 @@ public class PdfObject {
     {
         return this.listOfNotations;
     }
-
-
-
 
     public ArrayList<Point> getListOfPoints()
     {
@@ -96,6 +105,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Sets the absolute path to the pdfnot-file.
      */
     public void setJsonAbsolutePath(String jsonAbsolutePath)
     {
@@ -115,6 +127,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Adds a new notation to the pdf-file.
      */
     public void addNewNotation(Point coordinates)
     {
@@ -140,6 +155,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the ID for the next notation to be created.
      */
     private int getIdForNextNotation()
     {

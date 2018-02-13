@@ -8,16 +8,19 @@ import java.io.*;
 
 public abstract class PdfObjectFactory {
 
-    private static final String NOTATION_FILE_EXTENSION = "not";
-
     /*
-     * @todo Unterscheidung machen
-     * @todo Pdf wird zu ersten Mal durch das Programm eingelesen => neues Objekt
-     * @todo Pdf wurde schon einmal eingelesen => altes Pdf-Objekt neu laden
+     * #########################################################################
+     * #                    Public Methods                                     #
+     * #########################################################################
      */
     /*
-     * @todo Exception zu try-catch mit alert bei Fehler
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Creates and returns a Pdf-Object for the passed file. If the
+     *          file is a pdf-File an empty Pdf-Object will be created. If the
+     *          file is a pdfnot-File the Pdf-Object will be generated from
+     *          the files JSON.
      */
     public static PdfObject loadPdfObjectFromFile(File file)
     {
@@ -44,8 +47,11 @@ public abstract class PdfObjectFactory {
     }
 
     /*
-     * @todo Exception zu try-catch mit alert bei Fehler
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Saves the data of a Pdf-Object in a pdfnot-File in the same
+     *          directory the pdf-File is located
      */
     public static void savePdfObjectForPdfFile(PdfObject pdfObject)
     {
@@ -63,19 +69,17 @@ public abstract class PdfObjectFactory {
         }
     }
 
+
     /*
-     * @author  yxyxD
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
      */
-    public static String getAbsolutePathToJsonFile(String pdfAbsolutePath)
-    {
-        return pdfAbsolutePath + NOTATION_FILE_EXTENSION;
-    }
-
-
-
-
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Creates a Pdf-Object from a pdfnot-File.
      */
     private static PdfObject loadPdfObjectFromSavedFile(File jsonFile)
         throws IOException
@@ -90,7 +94,5 @@ public abstract class PdfObjectFactory {
         fileReader.close();
         return pdfObject;
     }
-
-
 
 }
