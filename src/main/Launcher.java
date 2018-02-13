@@ -6,10 +6,6 @@ import java.io.File;
 
 public class Launcher {
 
-    // @todo testing
-    public static final File FILE1 = new File("files/file1.pdf");
-    public static final File FILE2 = new File("files/file2.pdf");
-
     /*
      * @author  yxyxD
      * @changes
@@ -21,13 +17,7 @@ public class Launcher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.initialize();
 
-        mainFrame.getPdfObjectView().openProject(FILE1);
+        //@todo for testing purposes
+        mainFrame.getPdfObjectView().openProject(new File("files/file1.pdf"));
     }
-
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
-     * @brief
-     */
 }
