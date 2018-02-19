@@ -1,8 +1,9 @@
 package model.entity;
 
-public class IntegerEntityCon extends EntityCon{
+public class EntityCon {
 
-    private Integer integerValue;
+    private String valueName;
+    private Object value;
 
 
     /*
@@ -10,9 +11,9 @@ public class IntegerEntityCon extends EntityCon{
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public IntegerEntityCon(String valueName)
+    public EntityCon(String valueName)
     {
-        super(valueName);
+        this.valueName = valueName;
     }
 
 
@@ -23,7 +24,7 @@ public class IntegerEntityCon extends EntityCon{
      */
     public void setValue(Object value)
     {
-        this.integerValue = Integer.valueOf(String.valueOf(value));
+        this.value = value;
     }
 
 
@@ -32,8 +33,14 @@ public class IntegerEntityCon extends EntityCon{
      * #                    Getter                                             #
      * #########################################################################
      */
-    public Integer getValue()
+    public String getValueName()
     {
-        return this.integerValue;
+        return this.valueName;
+    }
+
+
+    public Object getValue()
+    {
+        return this.value;
     }
 }

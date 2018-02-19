@@ -2,11 +2,12 @@ package model.entity;
 
 public class Entity<type> {
 
+
     public static final String TYPE_STRING = "String";
     public static final String TYPE_INTEGER = "Integer";
     public static final String TYPE_DOUBLE = "Double";
 
-
+/*
     // @todo testing
     private String name;
     private type value;
@@ -35,4 +36,5 @@ public class Entity<type> {
     {
         this.value = value;
     }
+    */
 }

@@ -20,6 +20,6 @@ public class Launcher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.initialize();
 
-        mainFrame.getPdfObjectView().openProject(FILE1);
+        //mainFrame.getPdfObjectView().openProject(FILE1);
     }
 }

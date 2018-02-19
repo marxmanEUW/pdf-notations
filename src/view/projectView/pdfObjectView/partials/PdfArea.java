@@ -297,7 +297,8 @@ public class PdfArea extends JPanel {
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            if ((int) notation.getValue(0) == this.getPdfObject().getSelectedNotationIndex())
+            int notationId = Integer.valueOf(String.valueOf(notation.getValue(0)));
+            if (notationId == this.getPdfObject().getSelectedNotationIndex())
             {
                 graphics.setColor(this.NOTATION_SELECTED_COLOR);
             }

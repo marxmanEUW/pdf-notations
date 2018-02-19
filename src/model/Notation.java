@@ -1,6 +1,6 @@
 package model;
 
-import model.entity.Entity;
+import model.entity.*;
 
 import java.util.ArrayList;
 
@@ -11,14 +11,14 @@ public class Notation {
 
     // @todo timestamp
 
-    private ArrayList<Entity> listOfEntities;
+    private ArrayList<EntityCon> listOfEntities;
 
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
      */
-    public Notation(ArrayList<Entity> listOfEntities)
+    public Notation(ArrayList<EntityCon> listOfEntities)
     {
         this.listOfEntities = listOfEntities;
     }
@@ -36,7 +36,7 @@ public class Notation {
 
     public String getValueName(int index)
     {
-        return this.listOfEntities.get(index).getName();
+        return this.listOfEntities.get(index).getValueName();
     }
 
 
