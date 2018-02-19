@@ -1,29 +1,16 @@
 package view.projectView.pdfObjectView;
 
+import constants.Environment;
 import factories.PdfObjectFactory;
 import listeners.*;
 import model.PdfObject;
-import view.projectView.pdfObjectView.partials.NotationSplitPane;
-import view.projectView.pdfObjectView.partials.PdfScrollPane;
-import view.projectView.pdfObjectView.partials.EntityScrollPane;
-import view.projectView.pdfObjectView.partials.ListScrollPane;
-import view.projectView.pdfObjectView.partials.PdfArea;
-import view.projectView.pdfObjectView.partials.EntityTableModel;
-import view.projectView.pdfObjectView.partials.ListTableModel;
+import view.MainFrame;
+import view.projectView.pdfObjectView.partials.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 public class PdfObjectView extends JSplitPane {
-
-    /*
-     * @note "final" could be removed to impelement a feature which can memorize
-     *       the position of the dividers even after a restart
-     */
-    // @todo Dividerposition an Größe des MainFrames festmachen
-    private final int DEVIDER_LOCATION
-        = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8);
 
     // PDF-Object
     private PdfObject pdfObject;
@@ -59,7 +46,6 @@ public class PdfObjectView extends JSplitPane {
     public PdfObjectView()
     {
         this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-        this.setDividerLocation(this.DEVIDER_LOCATION);
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
 
@@ -90,8 +76,11 @@ public class PdfObjectView extends JSplitPane {
      *      2018-02-12 (yxyxD)  created
      * @brief   Initialises the PdfObjectView.
      */
-    public void initialize()
+    public void initialize(MainFrame mainFrame)
     {
+        this.setDividerLocation(
+            (int) (mainFrame.getWidth() * Environment.PDF_OBJECT_VIEW_DEVIDER_LOCATION));
+
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
 
@@ -260,8 +249,8 @@ public class PdfObjectView extends JSplitPane {
      */
     public void openProject(File file)
     {
-        // todo load pdf via thread
         this.pdfObject = PdfObjectFactory.loadPdfObjectFromFile(file);
+
         this.updateViews();
     }
 
@@ -274,6 +263,7 @@ public class PdfObjectView extends JSplitPane {
     public void closeProject()
     {
         this.pdfObject = null;
+
         this.updateViews();
     }
 
@@ -292,7 +282,7 @@ public class PdfObjectView extends JSplitPane {
      */
     private void updateViews()
     {
-        // @todo update Notationlist and NotationEntity
+        // @todo marxmanEUW -  update Notationlist and NotationEntity
         this.pdfArea.refreshPdfArea();
     }
 }

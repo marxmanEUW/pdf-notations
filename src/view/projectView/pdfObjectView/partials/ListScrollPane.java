@@ -9,10 +9,6 @@ import java.awt.*;
 
 public class ListScrollPane extends JScrollPane {
 
-    /*
-     * @todo implement RowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
-     */
-
     private PdfObjectView pdfObjectView;
 
     private ListTableModel listTableModel;

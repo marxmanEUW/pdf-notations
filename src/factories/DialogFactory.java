@@ -1,18 +1,13 @@
 package factories;
 
+import constants.Environment;
+import constants.Labels;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
 public abstract class DialogFactory {
-
-    public static final int FILE_TYPE_PDF = 0;
-    public static final int FILE_TYPE_PDFNOT = 1;
-
-    private static final String FILE_TYPE_ARRAY[][] = {
-        {"PDF (.*pdf)", "pdf"},
-        {"PDF Notations (.*pdfnot)", "pdfnot"}
-    };
 
     /*
      * @author marxmanEUW
@@ -22,7 +17,7 @@ public abstract class DialogFactory {
         File openFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], FILE_TYPE_ARRAY[fileType][1]));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], Environment.FILE_TYPE_ARRAY[fileType][1]));
 
         int state = fileChooser.showOpenDialog(null);
 
@@ -41,12 +36,12 @@ public abstract class DialogFactory {
      */
     public static File getFileFromSaveDialog(int fileType)
     {
-        String fileExtension = FILE_TYPE_ARRAY[fileType][1];
+        String fileExtension = Environment.FILE_TYPE_ARRAY[fileType][1];
 
         File saveFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], fileExtension));
         fileChooser.setSelectedFile(new File("newFile." + fileExtension));
 
         int state = fileChooser.showSaveDialog(null);
@@ -64,5 +59,39 @@ public abstract class DialogFactory {
         }
 
         return saveFile;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Shows the Waring-At-Close-Dialog whenever a project or
+     *          the entire window is closed.
+     */
+    public static int showWarningAtCloseDialog()
+    {
+        return JOptionPane.showConfirmDialog(
+            null,
+            Labels.WARNING_TEXT,
+            Labels.WARNING_TITLE,
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Shows the About-Dialog.
+     */
+    public static void showAboutDialog()
+    {
+        JOptionPane.showMessageDialog(
+            null,
+            Labels.ABOUT_TEXT,
+            Labels.ABOUT_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
     }
 }

@@ -1,5 +1,6 @@
 package threads;
 
+import constants.Environment;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import view.projectView.pdfObjectView.partials.PdfArea;
@@ -9,9 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class PdfRenderThread implements Runnable {
-
-    public static final ThreadGroup PDF_RENDER_GROUP
-        = new ThreadGroup("pdfRenderGroup");
 
     private PdfArea pdfArea;
     private float requiredZoom;
@@ -38,7 +36,7 @@ public class PdfRenderThread implements Runnable {
         this.isImportInitial = isImportInitial;
 
         Thread thread = new Thread(
-            PdfRenderThread.PDF_RENDER_GROUP,
+            Environment.PDF_RENDER_GROUP,
             this
         );
         thread.setPriority(Thread.MAX_PRIORITY);
@@ -58,7 +56,7 @@ public class PdfRenderThread implements Runnable {
         this.isImportInitial = false;
 
         Thread thread = new Thread(
-            PdfRenderThread.PDF_RENDER_GROUP,
+            Environment.PDF_RENDER_GROUP,
             this
         );
         thread.setPriority(Thread.MAX_PRIORITY);
@@ -109,9 +107,6 @@ public class PdfRenderThread implements Runnable {
     @Override
     public void run()
     {
-        //@todo remove sysout
-        System.out.println(PDF_RENDER_GROUP.activeCount());
-
         this.renderPdfImage();
 
         if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())

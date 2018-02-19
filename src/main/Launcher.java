@@ -9,6 +9,14 @@ public class Launcher {
     /*
      * @author  yxyxD
      * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief
+     */
+
+
+    /*
+     * @author  yxyxD
+     * @changes
      *      2018-02-12 (yxyxD)  created
      * @brief   Starting point of the program.
      */
@@ -17,7 +25,7 @@ public class Launcher {
         MainFrame mainFrame = new MainFrame();
         mainFrame.initialize();
 
-        //@todo for testing purposes
+        //@todo yxyxD for testing purposes
         mainFrame.getPdfObjectView().openProject(new File("files/file1.pdf"));
     }
 }

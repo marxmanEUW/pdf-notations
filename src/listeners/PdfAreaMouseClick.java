@@ -80,7 +80,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
         Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
         if (notation != null) {
             int selectedNotationId = notation.getId();
-            System.out.println(selectedNotationId);
             this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
             this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
             this.getPdfArea().repaint();

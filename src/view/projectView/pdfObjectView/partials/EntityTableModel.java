@@ -1,6 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
-import gui.Constants;
+import constants.Labels;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -116,8 +116,8 @@ public class EntityTableModel extends AbstractTableModel {
     {
         switch (column)
         {
-            case 0: return Constants.ENTITY_TABLE_MODEL_COLUMN_1_NAME;
-            case 1: return Constants.ENTITY_TABLE_MODEL_COLUMN_2_NAME;
+            case 0: return Labels.ENTITY_TABLE_MODEL_COLUMN_1_NAME;
+            case 1: return Labels.ENTITY_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }
@@ -128,7 +128,6 @@ public class EntityTableModel extends AbstractTableModel {
      */
     public Class getColumnClass(int columnIndex)
     {
-        // @todo Rückgabe dynamisch machen
         return String.class;
     }
 
@@ -163,12 +162,12 @@ public class EntityTableModel extends AbstractTableModel {
                 selectedNotation.setName((String) editedValue);
                 break;
             case 2:
-                // @todo check if editedValue is really an integer
+                // @todo marxmanEUW - check if editedValue is really an integer
                 selectedNotation.setX(Integer.parseInt((String) editedValue));
                 this.pdfObjectView.getPdfArea().repaint();
                 break;
             case 3:
-                // @todo check if editedValue is really an integer
+                // @todo marxmanEUW - check if editedValue is really an integer
                 selectedNotation.setY(Integer.parseInt((String) editedValue));
                 this.pdfObjectView.getPdfArea().repaint();
                 break;
@@ -181,7 +180,7 @@ public class EntityTableModel extends AbstractTableModel {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*

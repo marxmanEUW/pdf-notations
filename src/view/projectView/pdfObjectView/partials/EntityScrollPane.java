@@ -8,11 +8,6 @@ import java.awt.*;
 
 public class EntityScrollPane extends JScrollPane {
 
-    /*
-     * @todo make editable
-     * @todo implement RowSorter, alter musste entfernt werden, weil er Fehler ausgeworfen hat
-     */
-
     private PdfObjectView pdfObjectView;
 
     private EntityTableModel entityTableModel;

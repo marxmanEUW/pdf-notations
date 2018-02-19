@@ -1,5 +1,6 @@
 package listeners;
 
+import constants.Environment;
 import model.PdfObject;
 import threads.PdfRenderThread;
 import timer.MouseWheelMovementTimer;
@@ -11,9 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 
 public class PdfAreaMouseWheel extends MouseAdapter {
-
-    // @todo own class for timer constants
-    private final int TIMER_DELAY = 100;
 
     private PdfObjectView pdfObjectView;
     private PdfArea pdfArea;
@@ -108,7 +106,8 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
         if (!this.pdfArea.isZoomEnabled()) { return; }
-        if (PdfRenderThread.PDF_RENDER_GROUP.activeCount() >= 5) { return; }
+        if (Environment.PDF_RENDER_GROUP.activeCount() >=
+            Environment.MAX_RENDER_THREADS) { return; }
 
         int wheelRotation = mouseWheelEvent.getWheelRotation();
 
@@ -169,7 +168,7 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     private void createNewTimer()
     {
         this.mouseWheelMovementTimer = new Timer(
-            this.TIMER_DELAY,
+            Environment.TIMER_DELAY,
             new MouseWheelMovementTimer(this)
         );
         this.mouseWheelMovementTimer.setRepeats(false);

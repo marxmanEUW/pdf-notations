@@ -1,8 +1,8 @@
 package view;
 
+import constants.Labels;
 import listeners.MainFrameKeyListener;
 import listeners.BarActionListener;
-import gui.Constants;
 import listeners.MainFrameWindowAdapter;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
@@ -41,13 +41,15 @@ public class MainFrame extends JFrame {
         this.setLookAndFell();
 
         this.setLayout(new BorderLayout());
-        this.setTitle(Constants.FRAME_TITLE);
+        this.setTitle(Labels.FRAME_TITLE);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
-        this.setPreferredSize(new Dimension(1200, 600));
+        this.setPreferredSize(new Dimension(
+            (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+            (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
         this.pack();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 
         this.mainFrameWindowAdapter = new MainFrameWindowAdapter();
         this.mainFrameKeyListener = new MainFrameKeyListener();
@@ -85,8 +87,7 @@ public class MainFrame extends JFrame {
         this.menuBar.initialize(this.barActionListener);
         this.toolBar.initialize(this.barActionListener);
 
-
-        this.pdfObjectView.initialize();
+        this.pdfObjectView.initialize(this);
 
 
         this.setJMenuBar(this.menuBar);
