@@ -2,15 +2,18 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
+import constants.Environment;
 import factories.DialogFactory;
 import factories.PdfObjectFactory;
-import gui.Constants;
+import constants.Labels;
 import model.PdfObject;
+import threads.PdfRenderThread;
 import view.MainFrame;
+import view.bar.MainFrameMenuBar;
+import view.bar.MainFrameToolBar;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
@@ -19,19 +22,12 @@ import javax.swing.*;
 
 public class BarActionListener implements ActionListener {
 
-    private static String ABOUT_TITLE = "PDF Notations";
-    private static String ABOUT_TEXT =
-        "https://github.com/marxmanEUW/pdf-notations\n" +
-            "Lizenz: GPL v3\n" +
-            "Icons von [Keyamoon] (https://icomoon.io/#icons-icomoon) - GPL v3"
-        ;
-
     private MainFrame mainFrame;
 
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     /*
@@ -55,55 +51,43 @@ public class BarActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         switch (e.getActionCommand()) {
-            case Constants.BAR_ITEM_NEW_PROJECT_NAME:
-
-                newProject();
+            case Labels.BAR_ITEM_NEW_PROJECT_NAME:
+                this.newProject();
                 break;
-            case Constants.BAR_ITEM_OPEN_PROJECT_NAME:
-
-                openProject();
+            case Labels.BAR_ITEM_OPEN_PROJECT_NAME:
+                this.openProject();
                 break;
-            case Constants.BAR_ITEM_SAVE_PROJECT_NAME:
-
-                saveProject();
+            case Labels.BAR_ITEM_SAVE_PROJECT_NAME:
+                this.saveProject();
                 break;
-            case Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-
-                saveAsProject();
+            case Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME:
+                this.saveAsProject();;
                 break;
-            case Constants.BAR_ITEM_CLOSE_PROJECT_NAME:
-
-                // not implemented jet
-                //closeProject();
+            case Labels.BAR_ITEM_CLOSE_PROJECT_NAME:
+                this.closeProject();
                 break;
-            case Constants.BAR_ITEM_CLOSE_NAME:
-
-                closeProgramm();
+            case Labels.BAR_ITEM_CLOSE_NAME:
+                this.closeProgram();
                 break;
-            case Constants.BAR_ITEM_ADD_NOTATION_NAME:
-
-                addNotation();
+            case Labels.BAR_ITEM_ADD_NOTATION_NAME:
+                this.addNotation();
                 break;
-            case Constants.BAR_ITEM_DELETE_NOTATION_NAME:
-
-                deleteNotation();
+            case Labels.BAR_ITEM_DELETE_NOTATION_NAME:
+                this.deleteNotation();
                 break;
-            case Constants.BAR_ITEM_ZOOM_IN_NAME:
-
-                // not implemented jet
-                //zoomIn();
+            case Labels.BAR_ITEM_ZOOM_IN_NAME:
+                this.zoomIn();
                 break;
-            case Constants.BAR_ITEM_ZOOM_OUT_NAME:
-
-                // not implemented jet
-                //zoomOut();
+            case Labels.BAR_ITEM_ZOOM_OUT_NAME:
+                this.zoomOut();
                 break;
-            case Constants.BAR_ITEM_ABOUT_NAME:
-
-                // not implemented jet
+            case Labels.BAR_ITEM_ABOUT_NAME:
+                // not implemented yet
                 showAbout();
                 break;
         }
+
+        this.updateBars();
     }
 
     /*
@@ -135,10 +119,20 @@ public class BarActionListener implements ActionListener {
         return this.getPdfObjectView().getPdfArea();
     }
 
+    private MainFrameMenuBar getMainFrameMenuBar()
+    {
+        return this.mainFrame.getJMenuBar();
+    }
+
+    private MainFrameToolBar getMainFrameToolBar()
+    {
+        return this.mainFrame.getToolBar();
+    }
+
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
@@ -147,12 +141,18 @@ public class BarActionListener implements ActionListener {
     private void newProject()
     {
         File newProjectFile = DialogFactory.getFileFromOpenDialog(
-            DialogFactory.FILE_TYPE_PDF
+            Environment.FILE_TYPE_PDF
         );
 
         if (newProjectFile != null)
         {
-            this.getPdfObjectView().importNewProject(newProjectFile);
+            this.getPdfObjectView().openProject(newProjectFile);
+            System.out.println(
+                "Neues Projekt mit gegebener PDF: "
+                    + newProjectFile.getAbsolutePath()
+                    + " erstellt"
+            );
+
         }
     }
 
@@ -163,12 +163,18 @@ public class BarActionListener implements ActionListener {
     private void openProject()
     {
         File openProjectFile = DialogFactory.getFileFromOpenDialog(
-            DialogFactory.FILE_TYPE_PDFNOT
+            Environment.FILE_TYPE_PDFNOT
         );
 
         if (openProjectFile != null)
         {
-            this.getPdfObjectView().importNewProject(openProjectFile);
+            this.getPdfObjectView().openProject(openProjectFile);
+            System.out.println(
+                "Vorhandenes Projekt mit gegebener PDF "
+                    + openProjectFile.getAbsolutePath()
+                    + " erstellt"
+            );
+            this.getPdfObjectView().openProject(openProjectFile);
         }
     }
 
@@ -185,7 +191,7 @@ public class BarActionListener implements ActionListener {
         else
         {
             File saveFile = DialogFactory.getFileFromSaveDialog(
-                DialogFactory.FILE_TYPE_PDFNOT
+                Environment.FILE_TYPE_PDFNOT
             );
 
             if (saveFile != null)
@@ -199,14 +205,13 @@ public class BarActionListener implements ActionListener {
         }
     }
 
-
     /*
      * @author  marxmanEUW
      */
     private void saveAsProject()
     {
         File saveAsFile = DialogFactory.getFileFromSaveDialog(
-            DialogFactory.FILE_TYPE_PDFNOT
+            Environment.FILE_TYPE_PDFNOT
         );
         if (saveAsFile != null)
         {
@@ -220,19 +225,21 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
-     * @todo close Projeect
      */
     private void closeProject()
     {
-
+        int userChoice = DialogFactory.showWarningAtCloseDialog();
+        if (userChoice == JOptionPane.YES_OPTION)
+        {
+            this.getPdfObjectView().closeProject();
+        }
     }
 
 
     /*
      * @author  marxmanEUW
-     * @todo Warnung anzeigen, dass alle nicht gespeicherten Änderungen verloren gehen
      */
-    private void closeProgramm()
+    private void closeProgram()
     {
         this.mainFrame.dispatchEvent(
             new WindowEvent(
@@ -255,7 +262,6 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
-     * @todo delete multiple Notations
      */
     private void deleteNotation()
     {
@@ -266,33 +272,101 @@ public class BarActionListener implements ActionListener {
 
 
     /*
-     * @todo implement zoom in button action
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Increases the zoom of the pdfImage.
      */
     private void zoomIn()
     {
-        System.exit(0);
+        if (Environment.PDF_RENDER_GROUP.activeCount() >=
+            Environment.MAX_RENDER_THREADS) { return; }
+        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
+
+        this.getPdfObjectView().getPdfArea().zoomPdf(
+            Environment.ZOOM_IN
+        );
     }
 
 
     /*
-     * @todo implement zoom out button action
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Decreases the zoom of the pdfImage.
      */
     private void zoomOut()
     {
+        if (Environment.PDF_RENDER_GROUP.activeCount() >=
+            Environment.MAX_RENDER_THREADS) { return; }
+        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
 
+        this.getPdfObjectView().getPdfArea().zoomPdf(
+            Environment.ZOOM_OUT
+        );
     }
 
     /*
      * @author  marxmanEUW
-     * @todo show About
      */
     private void showAbout()
     {
-        JOptionPane.showMessageDialog(
-            this.mainFrame,
-            ABOUT_TEXT,
-            ABOUT_TITLE,
-            JOptionPane.PLAIN_MESSAGE
-        );
+        DialogFactory.showAboutDialog();
+    }
+
+
+    /*
+     * @author  yxyxD
+     */
+    public void updateBars()
+    {
+        // disable all project depended buttons if no project is loaded
+        if (this.getPdfObject() == null)
+        {
+            this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemSaveAsProjectEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemCloseProjectEnabled(false);
+
+            this.getMainFrameMenuBar().setMenuItemAddNotationEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemDeleteNotationEnabled(false);
+
+            this.getMainFrameMenuBar().setMenuItemZoomInEnabled(false);
+            this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(false);
+        }
+        else
+        {
+            this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemSaveAsProjectEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemCloseProjectEnabled(true);
+
+            this.getMainFrameMenuBar().setMenuItemAddNotationEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemDeleteNotationEnabled(true);
+
+            this.getMainFrameMenuBar().setMenuItemZoomInEnabled(true);
+            this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(true);
+        }
+
+        if (this.getPdfObject() == null)
+        {
+            this.getMainFrameToolBar().setButtonSaveProjectEnabled(false);
+            this.getMainFrameToolBar().setButtonSaveAsProjectEnabled(false);
+            this.getMainFrameToolBar().setButtonCloseProjectEnabled(false);
+
+            this.getMainFrameToolBar().setButtonZoomOutEnabled(false);
+            this.getMainFrameToolBar().setButtonZoomInEnabled(false);
+
+            this.getMainFrameToolBar().setButtonAddNotationEnabled(false);
+        }
+        else
+        {
+            this.getMainFrameToolBar().setButtonSaveProjectEnabled(true);
+            this.getMainFrameToolBar().setButtonSaveAsProjectEnabled(true);
+            this.getMainFrameToolBar().setButtonCloseProjectEnabled(true);
+
+            this.getMainFrameToolBar().setButtonZoomOutEnabled(true);
+            this.getMainFrameToolBar().setButtonZoomInEnabled(true);
+
+            this.getMainFrameToolBar().setButtonAddNotationEnabled(true);
+        }
     }
 }

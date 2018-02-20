@@ -13,11 +13,34 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
     private PdfObjectView pdfObjectView;
 
+
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs the MouseClick-Adapter for the PdfArea.
+     */
     public PdfAreaMouseClick()
     {
-
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initializing                                       #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initializes the MouseClick-Adapter.
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
@@ -29,23 +52,22 @@ public class PdfAreaMouseClick extends MouseAdapter {
      * #                    Overrides                                          #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time a mouse button has been clicked.
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent)
     {
-        /*
-         * @todo !WICHTIG: Intelligenz bei Umrechnung für ZoomLevel gehört
-         * @todo hier nicht her
-         */
-        //int x = (int) ((double) mouseEvent.getX() / this.getPdfArea().getZoomLevel());
-        //int y = (int) ((double) mouseEvent.getY() / this.getPdfArea().getZoomLevel());
-
         Point coordinates = this.getPdfArea().getActualCoordinatesOfPoint(
             mouseEvent.getPoint()
         );
 
 
         if(this.getPdfArea().getAddingNotation()
-            && !this.getPdfArea().isNotationInRange(mouseEvent.getPoint()))
+            && !this.getPdfArea().isNotationInRangeOfOtherNotation(mouseEvent.getPoint()))
         {
             this.getPdfObject().addNewNotation(coordinates);
             this.getPdfArea().setCursorTypeToDefault();
@@ -58,7 +80,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
         Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
         if (notation != null) {
             int selectedNotationId = notation.getId();
-            System.out.println(selectedNotationId);
             this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
             this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
             this.getPdfArea().repaint();
@@ -70,24 +91,48 @@ public class PdfAreaMouseClick extends MouseAdapter {
     }
 
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time a mouse button has been pressed.
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent)
     {
         //System.out.println("Mouse pressed");
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time a mouse button has been released.
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent)
     {
         //System.out.println("Mouse released");
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time the mouse has entered the PdfArea.
+     */
     @Override
     public void mouseEntered(MouseEvent mouseEvent)
     {
         //System.out.println("Mouse entered");
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time the mouse has left the PdfArea.
+     */
     @Override
     public void mouseExited(MouseEvent mouseEvent)
     {
@@ -97,7 +142,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*

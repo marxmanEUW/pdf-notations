@@ -10,8 +10,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class NotationListSelectionListener implements ListSelectionListener {
 
-    // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
-
     private PdfObjectView pdfObjectView;
 
 

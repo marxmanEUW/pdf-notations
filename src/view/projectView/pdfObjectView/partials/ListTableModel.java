@@ -1,7 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
-import gui.Constants;
-import model.Notation;
+import constants.Labels;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -89,8 +88,8 @@ public class ListTableModel extends AbstractTableModel {
     {
         switch (column)
         {
-            case 0: return Constants.LIST_TABLE_MODEL_COLUMN_1_NAME;
-            case 1: return Constants.LIST_TABLE_MODEL_COLUMN_2_NAME;
+            case 0: return Labels.LIST_TABLE_MODEL_COLUMN_1_NAME;
+            case 1: return Labels.LIST_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }
@@ -101,7 +100,6 @@ public class ListTableModel extends AbstractTableModel {
      */
     public Class getColumnClass(int columnIndex)
     {
-        // @todo Rückgabe dynamisch machen
         return String.class;
     }
 

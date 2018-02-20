@@ -13,7 +13,6 @@ public class Notation {
     private String name;
     private Point coordinates;
     private String description;
-    // @todo timestamp
 
 
     /*

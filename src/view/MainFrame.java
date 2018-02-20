@@ -1,8 +1,8 @@
 package view;
 
+import constants.Labels;
 import listeners.MainFrameKeyListener;
 import listeners.BarActionListener;
-import gui.Constants;
 import listeners.MainFrameWindowAdapter;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
@@ -13,15 +13,16 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+    // Bars
     private MainFrameMenuBar menuBar;
-    private BarActionListener barActionListener;
-
     private MainFrameToolBar toolBar;
 
+    // PDF-Object
     private PdfObjectView pdfObjectView;
 
+    // Listeners
+    private BarActionListener barActionListener;
     private MainFrameKeyListener mainFrameKeyListener;
-
     private MainFrameWindowAdapter mainFrameWindowAdapter;
 
     /*
@@ -29,18 +30,26 @@ public class MainFrame extends JFrame {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  AbellaMort
+     * @changes
+     *      2018-02-12 (AbellaMort) created
+     * @brief   Constructor of the MainFrame.
+     */
     public MainFrame()
     {
         this.setLookAndFell();
 
         this.setLayout(new BorderLayout());
-        this.setTitle(Constants.FRAME_TITLE);
+        this.setTitle(Labels.FRAME_TITLE);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        // @todo beide zeilen zu testzwecken -> loeschen und unter zeile auskommentieren
-        this.setPreferredSize(new Dimension(1200, 600));
+        this.setPreferredSize(new Dimension(
+            (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
+            (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
         this.pack();
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 
         this.mainFrameWindowAdapter = new MainFrameWindowAdapter();
         this.mainFrameKeyListener = new MainFrameKeyListener();
@@ -56,8 +65,14 @@ public class MainFrame extends JFrame {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
+     */
+    /*
+     * @author  AbellaMort
+     * @changes
+     *      2018-02-12 (AbellaMort) created
+     * @brief   Initialises the MainFrame.
      */
     public void initialize()
     {
@@ -72,8 +87,7 @@ public class MainFrame extends JFrame {
         this.menuBar.initialize(this.barActionListener);
         this.toolBar.initialize(this.barActionListener);
 
-
-        this.pdfObjectView.initialize();
+        this.pdfObjectView.initialize(this);
 
 
         this.setJMenuBar(this.menuBar);
@@ -98,27 +112,43 @@ public class MainFrame extends JFrame {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MenuBar of the MainFrame.
+     */
     public MainFrameMenuBar getJMenuBar()
     {
         return this.menuBar;
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Toolbar of the MainFrame
+     */
+    public MainFrameToolBar getToolBar()
+    {
+        return this.toolBar;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfObjectView of the MainFrame
+     */
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
     }
 
-    /*
-     * #########################################################################
-     * #                    oeffentliche Methoden                              #
-     * #########################################################################
-     */
-
-
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethoden                              #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     private void setLookAndFell()
