@@ -10,8 +10,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class NotationListSelectionListener implements ListSelectionListener {
 
-   // @todo marxmanEUW mehrfachauswahl in der notationlist verhindern
-
     private PdfObjectView pdfObjectView;
 
 

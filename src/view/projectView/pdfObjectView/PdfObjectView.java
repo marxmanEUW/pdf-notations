@@ -282,7 +282,8 @@ public class PdfObjectView extends JSplitPane {
      */
     private void updateViews()
     {
-        // @todo marxmanEUW -  update Notationlist and NotationEntity
         this.pdfArea.refreshPdfArea();
+        this.entityScrollPane.updateTable();
+        this.notationListScrollPane.updateTable();
     }
 }

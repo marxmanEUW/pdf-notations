@@ -1,6 +1,8 @@
 package view.projectView.pdfObjectView.partials;
 
+import constants.Environment;
 import constants.Labels;
+import factories.DialogFactory;
 import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -162,14 +164,10 @@ public class EntityTableModel extends AbstractTableModel {
                 selectedNotation.setName((String) editedValue);
                 break;
             case 2:
-                // @todo marxmanEUW - check if editedValue is really an integer
-                selectedNotation.setX(Integer.parseInt((String) editedValue));
-                this.pdfObjectView.getPdfArea().repaint();
+                setOneCoordinate(Environment.X_IDENTIFIER, (String) editedValue);
                 break;
             case 3:
-                // @todo marxmanEUW - check if editedValue is really an integer
-                selectedNotation.setY(Integer.parseInt((String) editedValue));
-                this.pdfObjectView.getPdfArea().repaint();
+                setOneCoordinate(Environment.Y_IDENTIFIER, (String) editedValue);
                 break;
             case 4:
                 selectedNotation.setDescription((String) editedValue);
@@ -189,5 +187,53 @@ public class EntityTableModel extends AbstractTableModel {
     private PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private boolean isInteger(String value)
+    {
+        boolean status = true;
+        if(value.length() < 1)
+        {
+            return false;
+        }
+
+        for(char c : value.toCharArray())
+        {
+            if(!Character.isDigit(c))
+            {
+                status = false;
+                break;
+            }
+        }
+
+        return status;
+    }
+
+
+    private void setOneCoordinate(char coordinateIdentifier, String value)
+    {
+        Notation selectedNotation = this.getPdfObject().getSelectedNotation();
+
+        if (isInteger(value))
+        {
+            switch (coordinateIdentifier)
+            {
+                case Environment.X_IDENTIFIER:
+                    selectedNotation.setX(Integer.parseInt(value));
+                    break;
+                case Environment.Y_IDENTIFIER:
+                    selectedNotation.setY(Integer.parseInt(value));
+                    break;
+            }
+            this.pdfObjectView.getPdfArea().repaint();
+        }
+        else
+        {
+            DialogFactory.showWarningThatValueIsNoInt(value);
+        }
     }
 }

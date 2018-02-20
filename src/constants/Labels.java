@@ -106,4 +106,12 @@ public abstract class Labels {
             "Lizenz: GPL v3\n" +
             "Icons von [Keyamoon] (https://icomoon.io/#icons-icomoon) - GPL v3"
         ;
+
+    /*
+     * Waring-That-Value-Is-No-Int
+     */
+    public static final String INTEGER_TITLE = "PDF Notations";
+    public static final String INTEGER_TEXT =
+        "Der einegebene Wert ist keine Ganzzahl! \n"
+        +  "Eingebener Wert: ";
 }

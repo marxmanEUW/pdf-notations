@@ -55,4 +55,10 @@ public abstract class Environment {
     public static final ThreadGroup PDF_RENDER_GROUP
         = new ThreadGroup("pdfRenderGroup");
     public static final int MAX_RENDER_THREADS = 5;
+
+    /*
+     * Coordinate Identifier
+     */
+    public static final char X_IDENTIFIER = 'x';
+    public static final char Y_IDENTIFIER = 'y';
 }

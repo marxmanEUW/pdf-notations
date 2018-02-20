@@ -61,6 +61,7 @@ public class ListScrollPane extends JScrollPane {
             this.notationListSelectionListener
         );
         this.notationListTable.setSelectionModel(this.listSelectionModel);
+        this.notationListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.getViewport().add(notationListTable);
     }

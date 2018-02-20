@@ -94,4 +94,20 @@ public abstract class DialogFactory {
             JOptionPane.PLAIN_MESSAGE
         );
     }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-20 (marxmanEUW)  created
+     * @brief   Shows the Waring-That-Value-Is-No-Int dialog.
+     */
+    public static void showWarningThatValueIsNoInt(String value)
+    {
+        JOptionPane.showMessageDialog(
+            null,
+            Labels.INTEGER_TEXT + value,
+            Labels.INTEGER_TITLE,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
 }
