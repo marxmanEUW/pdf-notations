@@ -98,13 +98,31 @@ public abstract class Labels {
 
     /*
      * About-Dialog
-     * @todo Abella Mort - about dialog text
      */
+
+    public static final String GITHUB_URL =
+        "https://github.com/marxmanEUW/pdf-notations";
+    public static final String LICENSE_URL =
+        "https://www.gnu.org/licenses/gpl.html";
+    public static final String ICON_URL =
+        "https://icomoon.io/#icons-icomoon";
+
     public static final String ABOUT_TITLE = "PDF Notations";
     public static final String ABOUT_TEXT =
-        "https://github.com/marxmanEUW/pdf-notations\n" +
-            "Lizenz: GPL v3\n" +
-            "Icons von [Keyamoon] (https://icomoon.io/#icons-icomoon) - GPL v3"
+        "<html><body>"
+        + "<p>Diese Software steht frei zur Verfügung auf </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + GITHUB_URL + "\">GitHub.com</a>"
+        + "</p>"
+        + "<p> Lizenzinformationen: </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + LICENSE_URL + "\">GNU GPLv3</a>"
+        + "</p>"
+        + "<p> IconPack: </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + ICON_URL + "\">IcoMoon</a>"
+        + "</p>"
+        + "</body></html>"
         ;
 
     /*

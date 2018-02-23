@@ -2,9 +2,12 @@ package factories;
 
 import constants.Environment;
 import constants.Labels;
+import listeners.EditorPaneListener;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.File;
 
 public abstract class DialogFactory {
@@ -83,16 +86,30 @@ public abstract class DialogFactory {
      * @author  yxyxD
      * @changes
      *      2018-02-19 (yxyxD)  created
+     *      2018-02-20 (AbellaMort) Changed to EditorPane with Hyperlinks
      * @brief   Shows the About-Dialog.
      */
     public static void showAboutDialog()
     {
+
+        JEditorPane htmlPane = new JEditorPane(
+            "text/html",
+            Labels.ABOUT_TEXT
+        );
+
+        htmlPane.setEditable(false);
+
+        htmlPane.addHyperlinkListener(new EditorPaneListener());
+        // @todo set background according to JOptionPane default
+        htmlPane.setBackground(Color.WHITE);
+
         JOptionPane.showMessageDialog(
             null,
-            Labels.ABOUT_TEXT,
+            htmlPane,
             Labels.ABOUT_TITLE,
             JOptionPane.PLAIN_MESSAGE
         );
+
     }
 
     /*
@@ -127,4 +144,10 @@ public abstract class DialogFactory {
             JOptionPane.WARNING_MESSAGE
         );
     }
+
+    /*
+     *
+     * @todo ErrorDialog
+     *
+     */
 }

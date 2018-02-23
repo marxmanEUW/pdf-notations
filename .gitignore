@@ -34,3 +34,6 @@ hs_err_pid*
 *.iws
 
 *.pdf
+
+# pflichtenheft
+doc/pflichtenheft*
