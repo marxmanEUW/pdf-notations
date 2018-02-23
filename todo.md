@@ -22,4 +22,10 @@ yxyxD
 - check the zoom disabling process for multi-threads and zoom-disable on mouse 
 scroll and bar-listener
 - check the saving process => there is no saving path declared
+
+## 23.02.2018
+
+marxmanEUW
+- table Null-Pointer-Exception
+- Warning when trying to delete a notation
  

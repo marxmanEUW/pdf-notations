@@ -265,9 +265,15 @@ public class BarActionListener implements ActionListener {
      */
     private void deleteNotation()
     {
-        this.getPdfObject().deleteSelectedNotation();
-        this.getPdfArea().repaint();
-        this.getPdfObjectView().getNotationListScrollPane().updateTable();
+        int userChoice = DialogFactory.showWarningDeleteNotation(
+            this.getPdfObject().getSelectedNotationIndex()
+        );
+        if (userChoice == JOptionPane.YES_OPTION)
+        {
+            this.getPdfObject().deleteSelectedNotation();
+            this.getPdfArea().repaint();
+            this.getPdfObjectView().getNotationListScrollPane().updateTable();
+        }
     }
 
 

@@ -110,4 +110,21 @@ public abstract class DialogFactory {
             JOptionPane.WARNING_MESSAGE
         );
     }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-23 (marxmanEUW)  created
+     * @brief   Shows the Waring-Delete-Notation dialog.
+     */
+    public static int showWarningDeleteNotation(int value)
+    {
+        return JOptionPane.showConfirmDialog(
+            null,
+            Labels.DELETE_NOTATION_TEXT + value,
+            Labels.DELETE_NOTATION_TITLE,
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
 }

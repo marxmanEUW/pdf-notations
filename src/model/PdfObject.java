@@ -3,7 +3,6 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PdfObject {
 
@@ -88,7 +87,14 @@ public class PdfObject {
 
     public Notation getSelectedNotation()
     {
-        return this.listOfNotations.get(selectedNotationIndex);
+        if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
+        {
+            return this.listOfNotations.get(selectedNotationIndex);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public int getSelectedNotationIndex()

@@ -114,4 +114,12 @@ public abstract class Labels {
     public static final String INTEGER_TEXT =
         "Der einegebene Wert ist keine Ganzzahl! \n"
         +  "Eingebener Wert: ";
+
+    /*
+     * Waring-Delte-Notation
+     */
+    public static final String DELETE_NOTATION_TITLE = "PDF Notations";
+    public static final String DELETE_NOTATION_TEXT =
+        "Soll die Notation wirklich gelöscht werden? \n"
+            +  "Notations-ID: ";
 }

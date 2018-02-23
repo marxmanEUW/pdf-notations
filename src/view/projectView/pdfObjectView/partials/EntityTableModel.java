@@ -158,6 +158,8 @@ public class EntityTableModel extends AbstractTableModel {
     {
         Notation selectedNotation = this.getPdfObject().getSelectedNotation();
 
+        if (selectedNotation == null) { return; }
+
         switch (rowIndex)
         {
             case 1:
