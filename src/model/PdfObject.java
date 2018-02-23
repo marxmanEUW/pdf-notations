@@ -1,9 +1,9 @@
 package model;
 
-import factories.PdfObjectFactory;
-
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PdfObject {
 
@@ -12,7 +12,7 @@ public class PdfObject {
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
 
-    private ArrayList<Notation> listOfNotations;
+    private HashMap<Integer, Notation> listOfNotations;
     private int selectedNotationIndex;
 
 
@@ -32,7 +32,7 @@ public class PdfObject {
         this.pdfAbsolutePath = pdfAbsolutePath;
         //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
-        this.listOfNotations = new ArrayList<>();
+        this.listOfNotations = new HashMap<>();
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
     }
 
@@ -67,7 +67,7 @@ public class PdfObject {
     /*
      * @author  marxmanEUW
      */
-    public ArrayList<Notation> getListOfNotations()
+    public HashMap<Integer, Notation> getListOfNotations()
     {
         return this.listOfNotations;
     }
@@ -75,10 +75,9 @@ public class PdfObject {
     public ArrayList<Point> getListOfPoints()
     {
         ArrayList<Point> listOfPoints = new ArrayList<>();
-        for (Notation notation : this.listOfNotations)
-        {
-            listOfPoints.add(notation.getCoordinates());
-        }
+        this.listOfNotations.forEach(
+            (key, value) -> listOfPoints.add(value.getCoordinates())
+        );
         return listOfPoints;
     }
 
@@ -97,6 +96,12 @@ public class PdfObject {
         return selectedNotationIndex;
     }
 
+    public ArrayList<Notation> getListOfNotationsAsList()
+    {
+        ArrayList<Notation> listOfNotationsAsList = new ArrayList<>();
+        listOfNotationsAsList.addAll(this.listOfNotations.values());
+        return listOfNotationsAsList;
+    }
 
     /*
      * #########################################################################
@@ -133,10 +138,14 @@ public class PdfObject {
      */
     public void addNewNotation(Point coordinates)
     {
-        this.listOfNotations.add(new Notation(
-            this.getIdForNextNotation(),
+        int nextId = this.getIdForNextNotation();
+
+        Notation newNotation = new Notation(
+            nextId,
             coordinates
-        ));
+        );
+
+        this.listOfNotations.put(nextId, newNotation);
     }
 
     /*
@@ -162,12 +171,13 @@ public class PdfObject {
     private int getIdForNextNotation()
     {
         int nextId = 0;
-        for (Notation notation : this.listOfNotations)
+
+        for (Notation notation : this.listOfNotations.values())
         {
-            int notationID = notation.getId();
-            if (notationID >= nextId)
+            int notationId = notation.getId();
+            if (notationId >= nextId)
             {
-                nextId = notationID + 1;
+                nextId = notationId + 1;
             }
         }
 

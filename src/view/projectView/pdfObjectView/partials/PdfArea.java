@@ -12,6 +12,7 @@ import threads.PdfRenderThread;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -362,7 +363,7 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
             if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
             {
@@ -406,7 +407,7 @@ public class PdfArea extends JPanel {
         // minimal required distance for no overlapping is two time the radius
         double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
             Point notationPoint = notation.getCoordinates();
 
@@ -435,7 +436,8 @@ public class PdfArea extends JPanel {
         Point actualPoint = this.getActualCoordinatesOfPoint(point);
 
         Notation clickedNotation = null;
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
             Point notationPoint = notation.getCoordinates();
             double distance = actualPoint.distance(notationPoint);

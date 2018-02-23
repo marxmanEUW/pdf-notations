@@ -66,10 +66,19 @@ public class ListScrollPane extends JScrollPane {
         this.getViewport().add(notationListTable);
     }
 
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    public JTable getNotationListTable()
+    {
+        return notationListTable;
+    }
 
     /*
      * #########################################################################
-     * #                    öffentliche Methoden                               #
+     * #                    public methods                                     #
      * #########################################################################
      */
     /*
@@ -126,7 +135,7 @@ public class ListScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    private methods                                    #
      * #########################################################################
      */
     /*

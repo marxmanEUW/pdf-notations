@@ -162,6 +162,7 @@ public class EntityTableModel extends AbstractTableModel {
         {
             case 1:
                 selectedNotation.setName((String) editedValue);
+                this.pdfObjectView.getNotationListScrollPane().repaint();
                 break;
             case 2:
                 setOneCoordinate(Environment.X_IDENTIFIER, (String) editedValue);
@@ -214,6 +215,9 @@ public class EntityTableModel extends AbstractTableModel {
     }
 
 
+    /*
+     * @author  marxmanEUW
+     */
     private void setOneCoordinate(char coordinateIdentifier, String value)
     {
         Notation selectedNotation = this.getPdfObject().getSelectedNotation();

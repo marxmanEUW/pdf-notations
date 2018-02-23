@@ -71,10 +71,10 @@ public class ListTableModel extends AbstractTableModel {
         switch (columnIndex)
         {
             case 0:
-                return this.getPdfObject().getListOfNotations().
+                return this.getPdfObject().getListOfNotationsAsList().
                     get(rowIndex).getId();
             case 1:
-                return this.getPdfObject().getListOfNotations().
+                return this.getPdfObject().getListOfNotationsAsList().
                     get(rowIndex).getName();
             default: return null;
         }
