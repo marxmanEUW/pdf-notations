@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"valueName": "Untitled",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model",
+			"valueName": "Model",
 			"ownedElements": [
 				{
 					"_type": "UMLUseCaseDiagram",
@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "UseCaseDiagram1",
+					"valueName": "UseCaseDiagram1",
 					"visible": true,
 					"defaultDiagram": false,
 					"ownedViews": [
@@ -5196,7 +5196,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Anwender",
+					"valueName": "Anwender",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -5208,7 +5208,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PDF-Datei importieren",
+					"valueName": "PDF-Datei importieren",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5267,7 +5267,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PDF-Notations",
+					"valueName": "PDF-Notations",
 					"visibility": "public"
 				},
 				{
@@ -5276,7 +5276,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Notationen hinzufügen",
+					"valueName": "Notationen hinzufügen",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5335,7 +5335,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Notationen bearbeiten",
+					"valueName": "Notationen bearbeiten",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5394,7 +5394,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PDF-Datei speichern",
+					"valueName": "PDF-Datei speichern",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5453,7 +5453,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PDF-Datei erneut öffnen",
+					"valueName": "PDF-Datei erneut öffnen",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5512,7 +5512,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Actor1",
+					"valueName": "Actor1",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -5524,7 +5524,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Notationen löschen",
+					"valueName": "Notationen löschen",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

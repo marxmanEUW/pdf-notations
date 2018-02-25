@@ -69,8 +69,17 @@ public class ListTableModel extends AbstractTableModel {
             return null;
         }
 
-        return this.getPdfObject().getListOfNotations().
-            get(rowIndex).getValue(columnIndex);
+        if (columnIndex == 1)
+        {
+            return this.getPdfObject().getListOfNotations().
+                get(rowIndex).getValue(3);
+        }
+        else
+        {
+            return this.getPdfObject().getListOfNotations().
+                get(rowIndex).getValue(columnIndex);
+        }
+
     }
 
 

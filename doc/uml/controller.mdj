@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"valueName": "Untitled",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model",
+			"valueName": "Model",
 			"ownedElements": [
 				{
 					"_type": "UMLClassDiagram",
@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
+					"valueName": "Main",
 					"visible": true,
 					"defaultDiagram": true,
 					"ownedViews": [
@@ -2329,7 +2329,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "MenuBarActionListener",
+					"valueName": "MenuBarActionListener",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -2358,7 +2358,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PdfAreaMouseClick",
+					"valueName": "PdfAreaMouseClick",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -2387,7 +2387,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ActionListener",
+					"valueName": "ActionListener",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -2400,7 +2400,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "MouseAdapter",
+					"valueName": "MouseAdapter",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -2413,7 +2413,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PdfAreaMouseWheel",
+					"valueName": "PdfAreaMouseWheel",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -2442,7 +2442,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ToolBarActionListener",
+					"valueName": "ToolBarActionListener",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",

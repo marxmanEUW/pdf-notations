@@ -1,7 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
 import gui.Constants;
-import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -133,28 +132,7 @@ public class EntityTableModel extends AbstractTableModel {
      */
     public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
     {
-        Class valueClass = this.getPdfObject().getSelectedNotation().getValue(rowIndex).getClass();
-
-        Notation selectedNotation = this.getPdfObject().getSelectedNotation();
-        String stringValue = editedValue.toString();
-
-        if (valueClass == String.class)
-        {
-            System.out.println("String");
-            selectedNotation.setValue(rowIndex, stringValue);
-        }
-        else if (valueClass == Integer.class)
-        {
-            System.out.println("Integer");
-            int intValue = Integer.parseInt(stringValue);
-            selectedNotation.setValue(rowIndex, intValue);
-        }
-        else if (valueClass == Double.class)
-        {
-            System.out.println("Double");
-            Double doubleValue = Double.parseDouble(stringValue);
-            selectedNotation.setValue(rowIndex, doubleValue);
-        }
+        this.getPdfObject().getSelectedNotation().setValue(rowIndex, editedValue);
 
         this.pdfObjectView.getPdfArea().repaint();
     }

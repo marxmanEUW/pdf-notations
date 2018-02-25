@@ -44,9 +44,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
             // @ todo move to external dialog
             Notation emptyNotation = NotationFactory.getEmptyNotation(this.getPdfObject().getListOfEntityNamesAndTypes());
             emptyNotation.setValue(0, this.getPdfObject().getIdForNextNotation());
-            emptyNotation.setValue(1, Notation.STANDARD_NAME);
-            emptyNotation.setValue(2, coordinates.x);
-            emptyNotation.setValue(3, coordinates.y);
+            emptyNotation.setValue(1, coordinates.x);
+            emptyNotation.setValue(2, coordinates.y);
+            emptyNotation.setValue(3, Notation.STANDARD_NAME);
             emptyNotation.setValue(4, Notation.STANDARD_DESCRIPTION);
             this.getPdfObject().addNotation(emptyNotation);
 
@@ -59,8 +59,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
         Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
         if (notation != null) {
-            int selectedNotationId = (int) notation.getValue(0);
-            //System.out.println(selectedNotationId);
+            int selectedNotationId = notation.getId();
             this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
             this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
             this.getPdfArea().repaint();

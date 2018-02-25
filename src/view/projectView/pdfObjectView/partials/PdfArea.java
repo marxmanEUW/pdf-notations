@@ -308,9 +308,9 @@ public class PdfArea extends JPanel {
             }
 
             //@todo name refactoring
-            int upperLeftX = (int) ((double) ((int) notation.getValue(2) - this.NOTATION_RADIUS)
+            int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
                 * this.zoomLevel);
-            int upperLeftY = (int) ((double) ((int) notation.getValue(3)  - this.NOTATION_RADIUS)
+            int upperLeftY = (int) ((double) (notation.getY()  - this.NOTATION_RADIUS)
                 * this.zoomLevel);
             int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
                 * this.zoomLevel);
@@ -345,7 +345,7 @@ public class PdfArea extends JPanel {
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            Point notationPoint = new Point((int) notation.getValue(2), (int) notation.getValue(3));
+            Point notationPoint = new Point(notation.getX(), notation.getY());
 
             double distance = actualPoint.distance(notationPoint);
             if (distance <= minimalRange)
@@ -378,7 +378,7 @@ public class PdfArea extends JPanel {
 
         for (Notation notation : this.getPdfObject().getListOfNotations())
         {
-            Point notationPoint = new Point((int) notation.getValue(2), (int) notation.getValue(3));
+            Point notationPoint = new Point(notation.getX(), notation.getY());
             double distance = actualPoint.distance(notationPoint);
 
             if (distance <= (double) NOTATION_RADIUS)

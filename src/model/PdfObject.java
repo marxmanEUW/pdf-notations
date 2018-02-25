@@ -1,7 +1,5 @@
 package model;
 
-import model.entity.Entity;
-
 import java.util.ArrayList;
 
 public class PdfObject {
@@ -29,11 +27,11 @@ public class PdfObject {
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
 
         this.listOfEntityNamesAndTypes = new ArrayList<>();
-        String[] entity1 = {Entity.TYPE_INTEGER,"Id der Notation"};
-        String[] entity2 = {Entity.TYPE_STRING,"Name der Notation"};
-        String[] entity3 = {Entity.TYPE_INTEGER,"X Kooridnate der Notation"};
-        String[] entity4 = {Entity.TYPE_INTEGER,"Y Kooridnate der Notation"};
-        String[] entity5 = {Entity.TYPE_DOUBLE,"Wert der Notation"};
+        String[] entity1 = {"Id der Notation", Entity.TYPE_INTEGER};
+        String[] entity2 = {"X Kooridnate der Notation", Entity.TYPE_INTEGER};
+        String[] entity3 = {"Y Kooridnate der Notation", Entity.TYPE_INTEGER};
+        String[] entity4 = {"Name der Notation", Entity.TYPE_STRING};
+        String[] entity5 = {"Wert der Notation", Entity.TYPE_DOUBLE};
 
         this.addEntityNameAndType(entity1);
         this.addEntityNameAndType(entity2);
@@ -147,7 +145,7 @@ public class PdfObject {
         int nextId = 0;
         for (Notation notation : this.listOfNotations)
         {
-            int notationID = (int) notation.getValue(0);
+            int notationID = notation.getId();
             if (notationID >= nextId)
             {
                 nextId = notationID + 1;

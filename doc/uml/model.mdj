@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"valueName": "Untitled",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -9,7 +9,7 @@
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
-			"name": "Model",
+			"valueName": "Model",
 			"ownedElements": [
 				{
 					"_type": "UMLClassDiagram",
@@ -17,7 +17,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Main",
+					"valueName": "Main",
 					"visible": true,
 					"defaultDiagram": true,
 					"ownedViews": [
@@ -903,7 +903,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-name: String",
+											"text": "-valueName: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1190,7 +1190,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setName(name: String): void",
+											"text": "+setName(valueName: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2425,7 +2425,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PdfObject",
+					"valueName": "PdfObject",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -2433,7 +2433,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "besitzt",
+							"valueName": "besitzt",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAFhEwf4LqXK9QQ=",
@@ -2484,7 +2484,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "pdfAbsolutePath",
+							"valueName": "pdfAbsolutePath",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2502,7 +2502,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "jsonAbsolutePath",
+							"valueName": "jsonAbsolutePath",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2520,7 +2520,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "listOfNotations",
+							"valueName": "listOfNotations",
 							"stereotype": "",
 							"visibility": "private",
 							"isStatic": false,
@@ -2539,7 +2539,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "selectedNotationIndex",
+							"valueName": "selectedNotationIndex",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2559,7 +2559,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "addNewNotation",
+							"valueName": "addNewNotation",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2570,7 +2570,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUIQM664X6Ak="
 									},
-									"name": "coordinates",
+									"valueName": "coordinates",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2586,7 +2586,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUIQM664X6Ak="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2607,7 +2607,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "deleteNotation",
+							"valueName": "deleteNotation",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2618,7 +2618,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUIYTma6Rk6o="
 									},
-									"name": "notation",
+									"valueName": "notation",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2636,7 +2636,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUIYTma6Rk6o="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2657,7 +2657,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "getPdfAbsolutePath",
+							"valueName": "getPdfAbsolutePath",
 							"stereotype": "",
 							"visibility": "public",
 							"isStatic": false,
@@ -2669,7 +2669,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJJt+rXMCTs="
 									},
-									"name": "pdfAbsolutePath",
+									"valueName": "pdfAbsolutePath",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2690,7 +2690,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "getJsonAbsolutePath",
+							"valueName": "getJsonAbsolutePath",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2701,7 +2701,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJNtprYBXMQ="
 									},
-									"name": "jsonAbsolutePath",
+									"valueName": "jsonAbsolutePath",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2722,7 +2722,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "getListOfNotations",
+							"valueName": "getListOfNotations",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2733,7 +2733,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJkUs7cWx1M="
 									},
-									"name": "listOfNotations",
+									"valueName": "listOfNotations",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2754,7 +2754,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "getSelectedNotationIndex",
+							"valueName": "getSelectedNotationIndex",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2765,7 +2765,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJov8bdyctk="
 									},
-									"name": "selectedNotationIndex",
+									"valueName": "selectedNotationIndex",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2786,7 +2786,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "getSelectedNotation",
+							"valueName": "getSelectedNotation",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2797,7 +2797,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJo48LeQhUA="
 									},
-									"name": "selectedNotation",
+									"valueName": "selectedNotation",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2820,7 +2820,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "setSelectedNotationIndex",
+							"valueName": "setSelectedNotationIndex",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2831,7 +2831,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJuj97hN/S4="
 									},
-									"name": "selectedNotationIndex",
+									"valueName": "selectedNotationIndex",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2847,7 +2847,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJuj97hN/S4="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2868,7 +2868,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEwePdKUrcYk="
 							},
-							"name": "setJsonAbsolutePath",
+							"valueName": "setJsonAbsolutePath",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2879,7 +2879,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJuyLbhrHIw="
 									},
-									"name": "jsonAbsolutePath",
+									"valueName": "jsonAbsolutePath",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2895,7 +2895,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUJuyLbhrHIw="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -2922,7 +2922,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Notation",
+					"valueName": "Notation",
 					"visibility": "public",
 					"attributes": [
 						{
@@ -2931,7 +2931,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "id",
+							"valueName": "id",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2949,7 +2949,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "name",
+							"valueName": "valueName",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2967,7 +2967,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "coordinates",
+							"valueName": "coordinates",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -2985,7 +2985,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "description",
+							"valueName": "description",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3005,7 +3005,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getId",
+							"valueName": "getId",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3016,7 +3016,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKD2rbo/Vm0="
 									},
-									"name": "Id",
+									"valueName": "Id",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3037,7 +3037,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getName",
+							"valueName": "getName",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3048,7 +3048,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKEKt7pvyvk="
 									},
-									"name": "name",
+									"valueName": "valueName",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3069,7 +3069,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getCoordinates",
+							"valueName": "getCoordinates",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3080,7 +3080,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKEUnrqNZtU="
 									},
-									"name": "coordiantes",
+									"valueName": "coordiantes",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3101,7 +3101,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getX",
+							"valueName": "getX",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3112,7 +3112,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKEeYbqr4J4="
 									},
-									"name": "x",
+									"valueName": "x",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3133,7 +3133,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getY",
+							"valueName": "getY",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3144,7 +3144,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKEobrrJquw="
 									},
-									"name": "y",
+									"valueName": "y",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3165,7 +3165,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "getDescription",
+							"valueName": "getDescription",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3176,7 +3176,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKFhvbrndqU="
 									},
-									"name": "description",
+									"valueName": "description",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3197,7 +3197,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "setName",
+							"valueName": "setName",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3208,7 +3208,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKFrS7sFD0E="
 									},
-									"name": "name",
+									"valueName": "valueName",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3224,7 +3224,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKFrS7sFD0E="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3245,7 +3245,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "setCoorinates",
+							"valueName": "setCoorinates",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3256,7 +3256,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKF0q7sje9E="
 									},
-									"name": "coordinates",
+									"valueName": "coordinates",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3272,7 +3272,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKF0q7sje9E="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3293,7 +3293,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "setX",
+							"valueName": "setX",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3304,7 +3304,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKF/BLtB7eY="
 									},
-									"name": "x",
+									"valueName": "x",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3320,7 +3320,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKF/BLtB7eY="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3341,7 +3341,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "setY",
+							"valueName": "setY",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3352,7 +3352,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKGJ2rtfiRg="
 									},
-									"name": "y",
+									"valueName": "y",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3368,7 +3368,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKGJ2rtfiRg="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3389,7 +3389,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEweo7qVVRfE="
 							},
-							"name": "setDescription",
+							"valueName": "setDescription",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -3400,7 +3400,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKGXL7t9cb0="
 									},
-									"name": "description",
+									"valueName": "description",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3416,7 +3416,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhUKGXL7t9cb0="
 									},
-									"name": "void",
+									"valueName": "void",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -3443,7 +3443,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Class1",
+					"valueName": "Class1",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -3456,7 +3456,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Class2",
+					"valueName": "Class2",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
