@@ -1,6 +1,8 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PdfObject {
 
@@ -9,7 +11,7 @@ public class PdfObject {
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
 
-    private ArrayList<Notation> listOfNotations;
+    private HashMap<Integer, Notation> listOfNotations;
     private int selectedNotationIndex;
     private ArrayList<String[]> listOfEntityNamesAndTypes;
 
@@ -18,12 +20,18 @@ public class PdfObject {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a PdfObject.
+     */
     public PdfObject(String pdfAbsolutePath)
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
         //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
-        this.listOfNotations = new ArrayList<>();
+        this.listOfNotations = new HashMap<>();
         this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
 
         this.listOfEntityNamesAndTypes = new ArrayList<>();
@@ -48,6 +56,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the absolute path to the pdf-file.
      */
     public String getPdfAbsolutePath()
     {
@@ -57,6 +68,9 @@ public class PdfObject {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   returns the absolute path to the json-file.
      */
     public String getJsonAbsolutePath()
     {
@@ -67,15 +81,27 @@ public class PdfObject {
     /*
      * @author  marxmanEUW
      */
-    public ArrayList<Notation> getListOfNotations()
+    public HashMap<Integer, Notation> getListOfNotations()
     {
         return this.listOfNotations;
     }
 
 
+    public int getListOfNotationsSize()
+    {
+        return this.listOfNotations.size();
+    }
+
     public Notation getSelectedNotation()
     {
-        return this.listOfNotations.get(selectedNotationIndex);
+        if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
+        {
+            return this.listOfNotations.get(selectedNotationIndex);
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
@@ -90,6 +116,12 @@ public class PdfObject {
         return this.listOfEntityNamesAndTypes.size();
     }
 
+    public ArrayList<Notation> getListOfNotationsAsList()
+    {
+        ArrayList<Notation> listOfNotationsAsList = new ArrayList<>();
+        listOfNotationsAsList.addAll(this.listOfNotations.values());
+        return listOfNotationsAsList;
+    }
 
     public ArrayList<String[]> getListOfEntityNamesAndTypes()
     {
@@ -102,6 +134,9 @@ public class PdfObject {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Sets the absolute path to the pdfnot-file.
      */
     public void setJsonAbsolutePath(String jsonAbsolutePath)
     {
@@ -120,11 +155,21 @@ public class PdfObject {
      * #########################################################################
      */
     /*
-     * @author  marxmanEUW
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Adds a new notation to the pdf-file.
      */
-    public void addNotation(Notation notation)
+    public void addNotation(Notation notation, Point coordinates)
     {
-        this.listOfNotations.add(notation);
+        int nextId = this.getIdForNextNotation();
+
+        Notation newNotation = new Notation(
+            nextId,
+            coordinates
+        );
+
+        this.listOfNotations.put(nextId, newNotation);
     }
 
 
@@ -138,17 +183,26 @@ public class PdfObject {
 
 
     /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the ID for the next notation to be created.
      */
     public int getIdForNextNotation()
     {
         int nextId = 0;
-        for (Notation notation : this.listOfNotations)
+
+        for (Notation notation : this.listOfNotations.values())
         {
-            int notationID = notation.getId();
-            if (notationID >= nextId)
+            int notationId = notation.getId();
+            if (notationId >= nextId)
             {
-                nextId = notationID + 1;
+                nextId = notationId + 1;
             }
         }
 
@@ -156,11 +210,6 @@ public class PdfObject {
     }
 
 
-    /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
     private void addEntityNameAndType(String[] entity)
     {
         this.listOfEntityNamesAndTypes.add(entity);

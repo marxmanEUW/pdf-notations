@@ -1,6 +1,9 @@
 package view.projectView.pdfObjectView.partials;
 
-import gui.Constants;
+import constants.Environment;
+import constants.Labels;
+import factories.DialogFactory;
+import model.Notation;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -92,8 +95,8 @@ public class EntityTableModel extends AbstractTableModel {
     {
         switch (column)
         {
-            case 0: return Constants.ENTITY_TABLE_MODEL_COLUMN_1_NAME;
-            case 1: return Constants.ENTITY_TABLE_MODEL_COLUMN_2_NAME;
+            case 0: return Labels.ENTITY_TABLE_MODEL_COLUMN_1_NAME;
+            case 1: return Labels.ENTITY_TABLE_MODEL_COLUMN_2_NAME;
             default: return null;
         }
     }
@@ -104,7 +107,6 @@ public class EntityTableModel extends AbstractTableModel {
      */
     public Class getColumnClass(int columnIndex)
     {
-        // @todo Rückgabe dynamisch machen
         return String.class;
     }
 
@@ -123,7 +125,6 @@ public class EntityTableModel extends AbstractTableModel {
         {
             return true;
         }
-
     }
 
 
@@ -139,7 +140,7 @@ public class EntityTableModel extends AbstractTableModel {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
@@ -148,5 +149,56 @@ public class EntityTableModel extends AbstractTableModel {
     private PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private boolean isInteger(String value)
+    {
+        boolean status = true;
+        if(value.length() < 1)
+        {
+            return false;
+        }
+
+        for(char c : value.toCharArray())
+        {
+            if(!Character.isDigit(c))
+            {
+                status = false;
+                break;
+            }
+        }
+
+        return status;
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void setOneCoordinate(char coordinateIdentifier, String value)
+    {
+        Notation selectedNotation = this.getPdfObject().getSelectedNotation();
+
+        if (isInteger(value))
+        {
+            switch (coordinateIdentifier)
+            {
+                case Environment.X_IDENTIFIER:
+                    selectedNotation.setX(Integer.parseInt(value));
+                    break;
+                case Environment.Y_IDENTIFIER:
+                    selectedNotation.setY(Integer.parseInt(value));
+                    break;
+            }
+            this.pdfObjectView.getPdfArea().repaint();
+        }
+        else
+        {
+            DialogFactory.showWarningThatValueIsNoInt(value);
+        }
     }
 }

@@ -1,14 +1,11 @@
-package gui;
+package constants;
 
-import java.awt.event.KeyEvent;
-
-public class Constants {
+public abstract class Labels {
 
     /*
      * Titel des Fensters
      */
     public static final String FRAME_TITLE = "PDF-NOTATIONS";
-
 
     /*
      * Menuereiter "Datei"
@@ -28,7 +25,6 @@ public class Constants {
         public static final String
             BAR_ITEM_CLOSE_NAME = "Beenden";
 
-
     /*
      * Menuereiter "Notation"
      */
@@ -38,7 +34,6 @@ public class Constants {
             BAR_ITEM_ADD_NOTATION_NAME = "Hinzufügen";
         public static final String
             BAR_ITEM_DELETE_NOTATION_NAME = "Löschen";
-
 
     /*
      * Menuereiter "Ansicht"
@@ -50,7 +45,6 @@ public class Constants {
         public static final String
             BAR_ITEM_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
-
     /*
      * Menuereiter "Hilfe"
      */
@@ -58,42 +52,6 @@ public class Constants {
 
         public static final String
             BAR_ITEM_ABOUT_NAME = "Über";
-
-
-    /*
-     * Menuereiter "Datei" - Key Strokes
-     */
-        public static final int
-            BAR_ITEM_NEW_PROJECT_KEY_STROKE = KeyEvent.VK_N;
-        public static final int
-            BAR_ITEM_OPEN_PROJECT_KEY_STROKE = KeyEvent.VK_O;
-        public static final int
-            BAR_ITEM_SAVE_PROJECT_KEY_STROKE = KeyEvent.VK_S;
-        public static final int
-            BAR_ITEM_SAVE_AS_PROJECT_KEY_STROKE = KeyEvent.VK_S;
-        public static final int
-            BAR_ITEM_CLOSE_PROJECT_KEY_STROKE = KeyEvent.VK_W;
-        public static final int
-            BAR_ITEM_CLOSE_KEY_STROKE = KeyEvent.VK_F4;
-
-
-    /*
-     * Menuereiter "Notation" - Key Strokes
-     * @todo set Key Strokes
-     */
-        public static final int
-            BAR_ITEM_ADD_NOTATION_KEY_STROKE = KeyEvent.VK_Q;
-        public static final int
-            BAR_ITEM_DELETE_NOTATION_KEY_STROKE = KeyEvent.VK_DELETE;
-
-    /*
-     * Menuereiter "Ansicht" - Key Strokes
-     */
-        public static final int
-            BAR_ITEM_ZOOM_IN_KEY_STROKE = KeyEvent.VK_PLUS;
-        public static final int
-            BAR_ITEM_ZOOM_OUT_KEY_STROKE = KeyEvent.VK_MINUS;
-
 
     /*
      * ToolBar
@@ -118,8 +76,6 @@ public class Constants {
     public static final String
         TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "icons/16px/054-price-tag.png";
 
-
-
     /*
      * NotationSplitPane
      */
@@ -131,4 +87,57 @@ public class Constants {
         ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Name";
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
+
+    /*
+     * Waring-At-Close-Dialog
+     */
+    public static final String WARNING_TITLE = "PDF Notations";
+    public static final String WARNING_TEXT =
+        "Beim Schließen gehen alle nicht gespeicherten Änderungen verloren. \n"
+        + "Möchten Sie fortfahren?";
+
+    /*
+     * About-Dialog
+     */
+
+    public static final String GITHUB_URL =
+        "https://github.com/marxmanEUW/pdf-notations";
+    public static final String LICENSE_URL =
+        "https://www.gnu.org/licenses/gpl.html";
+    public static final String ICON_URL =
+        "https://icomoon.io/#icons-icomoon";
+
+    public static final String ABOUT_TITLE = "PDF Notations";
+    public static final String ABOUT_TEXT =
+        "<html><body>"
+        + "<p>Diese Software steht frei zur Verfügung auf </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + GITHUB_URL + "\">GitHub.com</a>"
+        + "</p>"
+        + "<p> Lizenzinformationen: </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + LICENSE_URL + "\">GNU GPLv3</a>"
+        + "</p>"
+        + "<p> IconPack: </p>"
+        + "<p align=\"center\"> "
+        + "<a href=\"" + ICON_URL + "\">IcoMoon</a>"
+        + "</p>"
+        + "</body></html>"
+        ;
+
+    /*
+     * Waring-That-Value-Is-No-Int
+     */
+    public static final String INTEGER_TITLE = "PDF Notations";
+    public static final String INTEGER_TEXT =
+        "Der einegebene Wert ist keine Ganzzahl! \n"
+        +  "Eingebener Wert: ";
+
+    /*
+     * Waring-Delte-Notation
+     */
+    public static final String DELETE_NOTATION_TITLE = "PDF Notations";
+    public static final String DELETE_NOTATION_TEXT =
+        "Soll die Notation wirklich gelöscht werden? \n"
+            +  "Notations-ID: ";
 }

@@ -1,6 +1,8 @@
 package listeners;
 
+import constants.Environment;
 import model.PdfObject;
+import threads.PdfRenderThread;
 import timer.MouseWheelMovementTimer;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
@@ -10,8 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 
 public class PdfAreaMouseWheel extends MouseAdapter {
-
-    private final int TIMER_DELAY = 100;
 
     private PdfObjectView pdfObjectView;
     private PdfArea pdfArea;
@@ -23,11 +23,30 @@ public class PdfAreaMouseWheel extends MouseAdapter {
 
     /*
      * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs the MouseWheel-Adapter for the PdfArea.
+     */
+    public PdfAreaMouseWheel()
+    {
+    }
+
+
+    /*
+     * #########################################################################
      * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initializes the MouseWheel-Adapter.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -43,18 +62,24 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the scroll count selected by the MouseWheelMoved-Event.
      */
     public int getMouseScrollCount()
     {
-        return mouseScrollCount;
+        return this.mouseScrollCount;
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfArea the MouseWheel-Adapter is listening to.
      */
     public PdfArea getPdfArea()
     {
-        return pdfArea;
+        return this.pdfArea;
     }
 
     /*
@@ -73,14 +98,16 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time the mouse wheel has been moved.
      */
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-        if (!this.pdfArea.isZoomEnabled())
-        {
-            return;
-        }
+        if (!this.pdfArea.isZoomEnabled()) { return; }
+        if (Environment.PDF_RENDER_GROUP.activeCount() >=
+            Environment.MAX_RENDER_THREADS) { return; }
 
         int wheelRotation = mouseWheelEvent.getWheelRotation();
 
@@ -96,6 +123,9 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Resets the count of selected mouse scrolls.
      */
     public void resetMouseRollCount()
     {
@@ -110,14 +140,11 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     /*
      * @author  yxyxD
-     */
-    private void increaseMouseRollCount(int wheelRotation)
-    {
-        this.mouseScrollCount += (wheelRotation * (-1));
-    }
-
-    /*
-     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Stops the MouseWheelMovementTimer (if there is one up and
+     *          running) an adds the new wheel rotation to the count of selected
+     *          mouse scrolls.
      */
     private void stopExistingTimerAndIncreaseCounter(int wheelRotation)
     {
@@ -133,11 +160,15 @@ public class PdfAreaMouseWheel extends MouseAdapter {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Creates a new MouseWheelMovementTimer, that waits for future
+     *          mouse scrolls until a certain time limit has been reached.
      */
     private void createNewTimer()
     {
         this.mouseWheelMovementTimer = new Timer(
-            this.TIMER_DELAY,
+            Environment.TIMER_DELAY,
             new MouseWheelMovementTimer(this)
         );
         this.mouseWheelMovementTimer.setRepeats(false);

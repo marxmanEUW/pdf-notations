@@ -1,6 +1,6 @@
 package view.bar;
 
-import gui.Constants;
+import constants.Labels;
 import listeners.BarActionListener;
 
 import javax.swing.*;
@@ -45,48 +45,52 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     public void initialize(BarActionListener barActionListener)
     {
         this.barActionListener = barActionListener;
 
+
         // ActionCommand
-        this.buttonNewProject.setActionCommand(Constants.BAR_ITEM_NEW_PROJECT_NAME);
-        this.buttonOpenProject.setActionCommand(Constants.BAR_ITEM_OPEN_PROJECT_NAME);
-        this.buttonSaveProject.setActionCommand(Constants.BAR_ITEM_SAVE_PROJECT_NAME);
-        this.buttonSaveAsProject.setActionCommand(Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME);
-        this.buttonCloseProject.setActionCommand(Constants.BAR_ITEM_CLOSE_PROJECT_NAME);
+        this.buttonNewProject.setActionCommand(Labels.BAR_ITEM_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setActionCommand(Labels.BAR_ITEM_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setActionCommand(Labels.BAR_ITEM_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setActionCommand(Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setActionCommand(Labels.BAR_ITEM_CLOSE_PROJECT_NAME);
 
-        this.buttonZoomIn.setActionCommand(Constants.BAR_ITEM_ZOOM_IN_NAME);
-        this.buttonZoomOut.setActionCommand(Constants.BAR_ITEM_ZOOM_OUT_NAME);
+        this.buttonZoomOut.setActionCommand(Labels.BAR_ITEM_ZOOM_OUT_NAME);
+        this.buttonZoomIn.setActionCommand(Labels.BAR_ITEM_ZOOM_IN_NAME);
 
-        this.buttonAddNotation.setActionCommand(Constants.BAR_ITEM_ADD_NOTATION_NAME);
+        this.buttonAddNotation.setActionCommand(Labels.BAR_ITEM_ADD_NOTATION_NAME);
+
 
         // Tooltip Text
-        this.buttonNewProject.setToolTipText(Constants.BAR_ITEM_NEW_PROJECT_NAME);
-        this.buttonOpenProject.setToolTipText(Constants.BAR_ITEM_OPEN_PROJECT_NAME);
-        this.buttonSaveProject.setToolTipText(Constants.BAR_ITEM_SAVE_PROJECT_NAME);
-        this.buttonSaveAsProject.setToolTipText(Constants.BAR_ITEM_SAVE_AS_PROJECT_NAME);
-        this.buttonCloseProject.setToolTipText(Constants.BAR_ITEM_CLOSE_PROJECT_NAME);
+        this.buttonNewProject.setToolTipText(Labels.BAR_ITEM_NEW_PROJECT_NAME);
+        this.buttonOpenProject.setToolTipText(Labels.BAR_ITEM_OPEN_PROJECT_NAME);
+        this.buttonSaveProject.setToolTipText(Labels.BAR_ITEM_SAVE_PROJECT_NAME);
+        this.buttonSaveAsProject.setToolTipText(Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME);
+        this.buttonCloseProject.setToolTipText(Labels.BAR_ITEM_CLOSE_PROJECT_NAME);
 
-        this.buttonZoomIn.setToolTipText(Constants.BAR_ITEM_ZOOM_IN_NAME);
-        this.buttonZoomOut.setToolTipText(Constants.BAR_ITEM_ZOOM_OUT_NAME);
+        this.buttonZoomOut.setToolTipText(Labels.BAR_ITEM_ZOOM_OUT_NAME);
+        this.buttonZoomIn.setToolTipText(Labels.BAR_ITEM_ZOOM_IN_NAME);
 
-        this.buttonAddNotation.setToolTipText(Constants.BAR_ITEM_ADD_NOTATION_NAME);
+        this.buttonAddNotation.setToolTipText(Labels.BAR_ITEM_ADD_NOTATION_NAME);
+
 
         // Image
-        this.buttonNewProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH));
-        this.buttonOpenProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH));
-        this.buttonSaveProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH));
-        this.buttonSaveAsProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH));
-        this.buttonCloseProject.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH));
+        this.buttonNewProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH));
+        this.buttonOpenProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH));
+        this.buttonSaveProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH));
+        this.buttonSaveAsProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH));
+        this.buttonCloseProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH));
 
-        this.buttonZoomIn.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH));
-        this.buttonZoomOut.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH));
+        this.buttonZoomOut.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH));
+        this.buttonZoomIn.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH));
 
-        this.buttonAddNotation.setIcon(new ImageIcon(Constants.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
+        this.buttonAddNotation.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
+
 
         // Action Listener
         this.buttonNewProject.addActionListener(this.barActionListener);
@@ -95,8 +99,8 @@ public class MainFrameToolBar extends JToolBar {
         this.buttonSaveAsProject.addActionListener(this.barActionListener);
         this.buttonCloseProject.addActionListener(this.barActionListener);
 
-        this.buttonZoomIn.addActionListener(this.barActionListener);
         this.buttonZoomOut.addActionListener(this.barActionListener);
+        this.buttonZoomIn.addActionListener(this.barActionListener);
 
         this.buttonAddNotation.addActionListener(this.barActionListener);
 
@@ -109,11 +113,65 @@ public class MainFrameToolBar extends JToolBar {
 
         this.addSeparator();
 
-        this.add(this.buttonZoomIn);
         this.add(this.buttonZoomOut);
+        this.add(this.buttonZoomIn);
 
         this.addSeparator();
 
         this.add(this.buttonAddNotation);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonSaveProjectEnabled(boolean enabled)
+    {
+        this.buttonSaveProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonSaveAsProjectEnabled(boolean enabled)
+    {
+        this.buttonSaveAsProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonCloseProjectEnabled(boolean enabled)
+    {
+        this.buttonCloseProject.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonZoomInEnabled(boolean enabled)
+    {
+        this.buttonZoomIn.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonZoomOutEnabled(boolean enabled)
+    {
+        this.buttonZoomOut.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setButtonAddNotationEnabled(boolean enabled)
+    {
+        this.buttonAddNotation.setEnabled(enabled);
     }
 }

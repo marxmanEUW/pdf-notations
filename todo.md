@@ -12,7 +12,20 @@ marxmanEUW
  - GUI OpenFile Dialog andere MenuBar Operation
  - MainFrameToolBar
 
+
+
+## 13.02.2018
+
 yxyxD
- - REFACTOR
- - 
+- zoom via Crtl + MouseWheel
+- disable zoom on mouse when there is nothing to zoom
+- check the zoom disabling process for multi-threads and zoom-disable on mouse 
+scroll and bar-listener
+- check the saving process => there is no saving path declared
+
+## 23.02.2018
+
+marxmanEUW
+- table Null-Pointer-Exception
+- Warning when trying to delete a notation
  

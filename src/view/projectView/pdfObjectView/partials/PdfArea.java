@@ -1,5 +1,6 @@
 package view.projectView.pdfObjectView.partials;
 
+import constants.Environment;
 import factories.PdfZoomFactory;
 import listeners.PdfAreaMouseClick;
 import listeners.PdfAreaMouseWheel;
@@ -11,6 +12,7 @@ import threads.PdfRenderThread;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
@@ -20,13 +22,6 @@ public class PdfArea extends JPanel {
 
     // Pdf object view
     private PdfObjectView pdfObjectView;
-
-    // constants
-    private final double MINIMUM_ZOOM_FACTOR = 0.5;
-    private final double MAXIMUM_ZOOM_FACTOR = 1.5;
-    private final int NOTATION_RADIUS = 10;
-    private final Color NOTATION_STANDARD_COLOR = Color.red;
-    private final Color NOTATION_SELECTED_COLOR = Color.blue;
 
     // listeners / adapters
     private PdfAreaMouseClick pdfAreaMouseClick;
@@ -50,14 +45,26 @@ public class PdfArea extends JPanel {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a PdfArea which visualises the Pdf and its Notations.
      */
     public PdfArea()
     {
         this.setFocusable(true);
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initializing                                       #
+     * #########################################################################
+     */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initialises the PdfArea.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -78,8 +85,46 @@ public class PdfArea extends JPanel {
      * #                    Getter                                             #
      * #########################################################################
      */
+
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Returns the pdfImage of the PdfArea.
+     */
+
+    public BufferedImage getPdfImage()
+    {
+        return this.pdfImage;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Returns the initial width of the pdfImage.
+     */
+    public int getInitialImageWidth()
+    {
+        return this.initialImageWidth;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Returns the initial height of the pdfImage.
+     */
+    public int getInitialImageHeight()
+    {
+        return this.initialImageHeight;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the current zoom level of the pdf.
      */
     public double getZoomLevel()
     {
@@ -104,6 +149,9 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the current status of the zoom (enabled or disabled).
      */
     public boolean isZoomEnabled()
     {
@@ -146,17 +194,23 @@ public class PdfArea extends JPanel {
      * #                    Overrides                                          #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Repaints the PdfObject and its Notations.
+     */
     @Override
     protected void paintComponent(Graphics graphics)
     {
-        this.disableZoom();
+        this.setZoomEnabled(false);
 
         this.repaintPdfGraphics(graphics);
         this.repaintNotationPoints(graphics);
 
         this.pdfObjectView.getPdfScrollPane().getViewport().revalidate();
 
-        this.enableZoom();
+        this.setZoomEnabled(true);
     }
 
 
@@ -165,30 +219,25 @@ public class PdfArea extends JPanel {
      * #                    Public Methods                                     #
      * #########################################################################
      */
-    /*
-     * @author  yxyxD
-     */
-    public void enableZoom()
+
+
+    public void setZoomEnabled(boolean zoomEnabled)
     {
-        this.isZoomEnabled = true;
+        this.isZoomEnabled = zoomEnabled;
     }
 
     /*
      * @author  yxyxD
-     */
-    public void disableZoom()
-    {
-        this.isZoomEnabled = false;
-    }
-
-    /*
-     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Refreshes the PdfArea after an new PdfObject has been loaded or
+     *          an old PdfObject has been closed.
      */
     public void refreshPdfArea()
     {
         this.zoomLevel = 1.0;
         this.addingNotation = false;
-        this.disableZoom();
+        this.setZoomEnabled(false);
 
         if (this.getPdfObject() == null)
         {
@@ -202,23 +251,28 @@ public class PdfArea extends JPanel {
         }
         else
         {
-            this.pdfRenderThread = new PdfRenderThread(this, true);
+            this.pdfRenderThread = new PdfRenderThread(
+                this,
+                true
+            );
         }
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Zooms the Pdf by resizing the image. Also starts a new thread
+     *          to re-render to Pdf on the current zoom level.
      */
-    public void resizePdf(double zoomChange)
+    public void zoomPdf(double zoomChange)
     {
         if (this.isPdfZoomable(zoomChange))
         {
             this.zoomLevel += zoomChange;
 
             this.pdfImage = PdfZoomFactory.getZoomedImage(
-                this.initialImageWidth,
-                this.initialImageHeight,
-                this.pdfImage,
+                this,
                 zoomChange
             );
 
@@ -230,11 +284,17 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   ! IMPORTANT: May only be called by the PdfRenderThread.
+     *          Sets the pdfImage to the re-rendered Pdf and repaints the
+     *          PdfArea.
      */
-    public void reRenderPdf()
+    public void appointReRenderedPdf()
     {
         this.pdfImage = this.pdfRenderThread.getRenderedPdfImage();
 
+        // if the pdf was imported initially, set initial width and height
         if (this.pdfRenderThread.isImportInitial())
         {
             this.initialImageWidth = this.pdfImage.getWidth();
@@ -252,13 +312,16 @@ public class PdfArea extends JPanel {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Checks if the requested zoom is allowed.
      */
     private boolean isPdfZoomable(double zoomChange)
     {
         boolean isPdfZoomable = false;
 
-        if (((this.zoomLevel + zoomChange) > this.MINIMUM_ZOOM_FACTOR)
-            && ((this.zoomLevel + zoomChange) < this.MAXIMUM_ZOOM_FACTOR)
+        if (((this.zoomLevel + zoomChange) > Environment.MINIMUM_ZOOM_FACTOR)
+            && ((this.zoomLevel + zoomChange) < Environment.MAXIMUM_ZOOM_FACTOR)
             && (this.pdfImage != null)) {
 
             isPdfZoomable = true;
@@ -269,6 +332,9 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Repaints the pdfImage.
      */
     private void repaintPdfGraphics(Graphics graphics)
     {
@@ -289,61 +355,60 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Repaints the Notations on the pdfImage.
      */
     private void repaintNotationPoints(Graphics graphics)
     {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfNotations() == null) { return; }
 
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
-            int notationId = Integer.valueOf(String.valueOf(notation.getValue(0)));
-            if (notationId == this.getPdfObject().getSelectedNotationIndex())
+            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
             {
-                graphics.setColor(this.NOTATION_SELECTED_COLOR);
+                graphics.setColor(Environment.NOTATION_SELECTED_COLOR);
             }
             else
             {
-                graphics.setColor(this.NOTATION_STANDARD_COLOR);
+                graphics.setColor(Environment.NOTATION_STANDARD_COLOR);
             }
 
-            //@todo name refactoring
-            int upperLeftX = (int) ((double) (notation.getX() - this.NOTATION_RADIUS)
+            int circleX = (int) ((double) (notation.getX() - Environment.NOTATION_RADIUS)
                 * this.zoomLevel);
-            int upperLeftY = (int) ((double) (notation.getY()  - this.NOTATION_RADIUS)
+            int circleY = (int) ((double) (notation.getY() - Environment.NOTATION_RADIUS)
                 * this.zoomLevel);
-            int ovalWidth = (int) (((double) this.NOTATION_RADIUS * 2.0)
-                * this.zoomLevel);
-            int ovalHeight = (int) (((double) this.NOTATION_RADIUS * 2.0)
+            int circleDiameter = (int) (((double) Environment.NOTATION_RADIUS * 2.0)
                 * this.zoomLevel);
 
             graphics.fillOval(
-                upperLeftX,
-                upperLeftY,
-                ovalWidth,
-                ovalHeight
+                circleX,
+                circleY,
+                circleDiameter,
+                circleDiameter
             );
         }
     }
 
     /*
-     * @todo Wahrheitsfunktion, damit punkte nicht überlappend gezeichnet werden
-     * @todo können
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Checks if a Notation can be painted at the clicked location.
+     *          That is not allowed if an other Notation would get painted over.
      */
-    public boolean isNotationInRange(Point point)
+    public boolean isNotationInRangeOfOtherNotation(Point point)
     {
         boolean isPointInRange = false;
 
         // get coordinates of actual point (without zoom factor)
-        Point actualPoint = new Point(
-            (int) (point.getX() / this.zoomLevel),
-            (int) (point.getY() / this.zoomLevel)
-        );
+        Point actualPoint = this.getActualCoordinatesOfPoint(point);
 
         // minimal required distance for no overlapping is two time the radius
-        double minimalRange = (double) NOTATION_RADIUS * 2.0;
+        double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
             Point notationPoint = new Point(notation.getX(), notation.getY());
 
@@ -360,28 +425,25 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Notation located in the area that has been clicked
+     *          on (if there is any Notation).
      */
     public Notation getClickedNotation(Point point)
     {
-        if (this.getPdfObject() == null)
-        {
-            return null;
-        }
+        //if (this.getPdfObject() == null) { return null; }
+
+        Point actualPoint = this.getActualCoordinatesOfPoint(point);
 
         Notation clickedNotation = null;
 
-        // get coordinates of actual point (without zoom factor)
-        Point actualPoint = new Point(
-            (int) (point.getX() / this.zoomLevel),
-            (int) (point.getY() / this.zoomLevel)
-        );
-
-        for (Notation notation : this.getPdfObject().getListOfNotations())
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
         {
             Point notationPoint = new Point(notation.getX(), notation.getY());
             double distance = actualPoint.distance(notationPoint);
 
-            if (distance <= (double) NOTATION_RADIUS)
+            if (distance <= (double) Environment.NOTATION_RADIUS)
             {
                 clickedNotation = notation;
                 break;
@@ -393,6 +455,10 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the actual coordinates of the location clicked on,
+     *          because they differ based on the zoom level.
      */
     public Point getActualCoordinatesOfPoint(Point point)
     {

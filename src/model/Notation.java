@@ -7,8 +7,6 @@ public class Notation {
     public static final String STANDARD_NAME = "Punkt";
     public static final Double STANDARD_DESCRIPTION = 42.0;
 
-    // @todo timestamp
-
     private ArrayList<Entity> listOfEntities;
 
     /*

@@ -17,6 +17,12 @@ public class MouseWheelMovementTimer implements ActionListener {
      * #                    Constructor                                        #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a new MouseWheelMovement-Timer
+     */
     public MouseWheelMovementTimer(PdfAreaMouseWheel pdfAreaMouseWheel)
     {
         this.pdfAreaMouseWheel = pdfAreaMouseWheel;
@@ -29,6 +35,13 @@ public class MouseWheelMovementTimer implements ActionListener {
      * #                    Overrides                                          #
      * #########################################################################
      */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Method called every time the time limit of the timer has been
+     *          reached.
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
@@ -37,7 +50,7 @@ public class MouseWheelMovementTimer implements ActionListener {
                 this.mouseScrollCount
             );
 
-        this.pdfAreaMouseWheel.getPdfArea().resizePdf(zoomPercentage);
+        this.pdfAreaMouseWheel.getPdfArea().zoomPdf(zoomPercentage);
 
         this.pdfAreaMouseWheel.resetMouseRollCount();
     }

@@ -1,18 +1,16 @@
 package factories;
 
+import constants.Environment;
+import constants.Labels;
+import listeners.EditorPaneListener;
+
 import javax.swing.*;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.File;
 
 public abstract class DialogFactory {
-
-    public static final int FILE_TYPE_PDF = 0;
-    public static final int FILE_TYPE_PDFNOT = 1;
-
-    private static final String FILE_TYPE_ARRAY[][] = {
-        {"PDF (.*pdf)", "pdf"},
-        {"PDF Notations (.*pdfnot)", "pdfnot"}
-    };
 
     /*
      * @author marxmanEUW
@@ -22,7 +20,7 @@ public abstract class DialogFactory {
         File openFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], FILE_TYPE_ARRAY[fileType][1]));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], Environment.FILE_TYPE_ARRAY[fileType][1]));
 
         int state = fileChooser.showOpenDialog(null);
 
@@ -41,12 +39,12 @@ public abstract class DialogFactory {
      */
     public static File getFileFromSaveDialog(int fileType)
     {
-        String fileExtension = FILE_TYPE_ARRAY[fileType][1];
+        String fileExtension = Environment.FILE_TYPE_ARRAY[fileType][1];
 
         File saveFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(FILE_TYPE_ARRAY[fileType][0], fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], fileExtension));
         fileChooser.setSelectedFile(new File("newFile." + fileExtension));
 
         int state = fileChooser.showSaveDialog(null);
@@ -65,4 +63,91 @@ public abstract class DialogFactory {
 
         return saveFile;
     }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     * @brief   Shows the Waring-At-Close-Dialog whenever a project or
+     *          the entire window is closed.
+     */
+    public static int showWarningAtCloseDialog()
+    {
+        return JOptionPane.showConfirmDialog(
+            null,
+            Labels.WARNING_TEXT,
+            Labels.WARNING_TITLE,
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-19 (yxyxD)  created
+     *      2018-02-20 (AbellaMort) Changed to EditorPane with Hyperlinks
+     * @brief   Shows the About-Dialog.
+     */
+    public static void showAboutDialog()
+    {
+
+        JEditorPane htmlPane = new JEditorPane(
+            "text/html",
+            Labels.ABOUT_TEXT
+        );
+
+        htmlPane.setEditable(false);
+
+        htmlPane.addHyperlinkListener(new EditorPaneListener());
+        // @todo set background according to JOptionPane default
+        htmlPane.setBackground(Color.WHITE);
+
+        JOptionPane.showMessageDialog(
+            null,
+            htmlPane,
+            Labels.ABOUT_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
+
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-20 (marxmanEUW)  created
+     * @brief   Shows the Waring-That-Value-Is-No-Int dialog.
+     */
+    public static void showWarningThatValueIsNoInt(String value)
+    {
+        JOptionPane.showMessageDialog(
+            null,
+            Labels.INTEGER_TEXT + value,
+            Labels.INTEGER_TITLE,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-23 (marxmanEUW)  created
+     * @brief   Shows the Waring-Delete-Notation dialog.
+     */
+    public static int showWarningDeleteNotation(int value)
+    {
+        return JOptionPane.showConfirmDialog(
+            null,
+            Labels.DELETE_NOTATION_TEXT + value,
+            Labels.DELETE_NOTATION_TITLE,
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+    }
+
+    /*
+     *
+     * @todo ErrorDialog
+     *
+     */
 }

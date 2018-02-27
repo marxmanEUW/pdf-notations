@@ -10,8 +10,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class NotationListSelectionListener implements ListSelectionListener {
 
-    // @todo was soll angezeigt / gemacht werden, wenn mehrer Reihen ausgewählt werden
-
     private PdfObjectView pdfObjectView;
 
 
@@ -52,9 +50,19 @@ public class NotationListSelectionListener implements ListSelectionListener {
             }
             else
             {
-                this.getPdfObject().setSelectedNotationIndex(
-                    lsm.getLeadSelectionIndex()
-                );
+                if(!lsm.getValueIsAdjusting())
+                {
+                    JTable notationList = this.pdfObjectView.getNotationListScrollPane().
+                        getNotationListTable();
+
+
+                    int selectedRow = notationList.getSelectedRow();
+                    this.getPdfObject().setSelectedNotationIndex(
+                        (int) notationList.getValueAt(selectedRow, 0)
+                    );
+                }
+
+
             }
 
             this.pdfObjectView.getEntityScrollPane().updateTable();

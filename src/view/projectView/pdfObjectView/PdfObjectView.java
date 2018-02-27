@@ -1,41 +1,30 @@
 package view.projectView.pdfObjectView;
 
+import constants.Environment;
 import factories.PdfObjectFactory;
 import listeners.*;
 import model.PdfObject;
-import view.projectView.pdfObjectView.partials.NotationSplitPane;
-import view.projectView.pdfObjectView.partials.PdfScrollPane;
-import view.projectView.pdfObjectView.partials.EntityScrollPane;
-import view.projectView.pdfObjectView.partials.ListScrollPane;
-import view.projectView.pdfObjectView.partials.PdfArea;
-import view.projectView.pdfObjectView.partials.EntityTableModel;
-import view.projectView.pdfObjectView.partials.ListTableModel;
+import view.MainFrame;
+import view.projectView.pdfObjectView.partials.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 public class PdfObjectView extends JSplitPane {
 
-    /*
-     * @note "final" could be removed to impelement a feature which can memorize
-     *       the position of the dividers even after a restart
-     */
-    // @todo Dividerposition an Größe des MainFrames festmachen
-    private final int DEVIDER_LOCATION
-        = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8);
-
-
+    // PDF-Object
     private PdfObject pdfObject;
 
-
+    // Listeners
     private NotationListSelectionListener notationListSelectionListener;
     private PdfAreaMouseClick pdfAreaMouseClick;
     private PdfAreaMouseWheel pdfAreaMouseWheel;
 
+    // Left part of the center component
     private PdfScrollPane pdfScrollPane;
         private PdfArea pdfArea;
 
+    // Right part of the center component
     private NotationSplitPane notationSplitPane;
         private ListScrollPane notationListScrollPane;
             private ListTableModel listTableModel;
@@ -50,11 +39,13 @@ public class PdfObjectView extends JSplitPane {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs a PdfObjectView that holds on PdfObject.
      */
     public PdfObjectView()
     {
         this.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-        this.setDividerLocation(this.DEVIDER_LOCATION);
         this.setOneTouchExpandable(true);
         this.setContinuousLayout(true);
 
@@ -81,9 +72,15 @@ public class PdfObjectView extends JSplitPane {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initialises the PdfObjectView.
      */
-    public void initialize()
+    public void initialize(MainFrame mainFrame)
     {
+        this.setDividerLocation(
+            (int) (mainFrame.getWidth() * Environment.PDF_OBJECT_VIEW_DEVIDER_LOCATION));
+
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
 
@@ -110,6 +107,9 @@ public class PdfObjectView extends JSplitPane {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfObject held by the View.
      */
     public PdfObject getPdfObject()
     {
@@ -118,6 +118,9 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfScrollPane which holds the PdfArea.
      */
     public PdfScrollPane getPdfScrollPane()
     {
@@ -126,6 +129,9 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfArea held by the PdfScrollPane.
      */
     public PdfArea getPdfArea()
     {
@@ -134,6 +140,10 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the NotationSplitPane which holds the
+     *          NotationListScrollPane and the EntityScrollPane.
      */
     public NotationSplitPane getNotationSplitPane()
     {
@@ -142,6 +152,10 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the NotationListScrollPane held by the
+     *          NotationSplitPane.
      */
     public ListScrollPane getNotationListScrollPane()
     {
@@ -150,6 +164,10 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the ListTableModel held by the NotationListScrollPane.
+     *          The TableModel contains a list with all Notations on the Pdf.
      */
     public ListTableModel getListTableModel()
     {
@@ -158,6 +176,9 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the EntityScrollPane held by the NotationSplitPane.
      */
     public EntityScrollPane getEntityScrollPane()
     {
@@ -166,6 +187,11 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the EntityTableModel held by the EntityScrollPane. The
+     *          TableModel shows the data of the selected Notation if there is
+     *          one.
      */
     public EntityTableModel getEntityTableModel()
     {
@@ -174,6 +200,11 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the NotationSelectionListener of the NotationSplitPane
+     *          that handles Events on the ListTableModel and the
+     *          EntityTableModel.
      */
     public NotationListSelectionListener getNotationListSelectionListener()
     {
@@ -182,6 +213,10 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfAreaMouseClick of the PdfArea that handles
+     *          MouseClick-Events on the PdfArea.
      */
     public PdfAreaMouseClick getPdfAreaMouseClick()
     {
@@ -190,6 +225,10 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfAreaMouseWheel of the PdfArea that handles
+     *          MouseScroll-Events on the PdfArea.
      */
     public PdfAreaMouseWheel getPdfAreaMouseWheel()
     {
@@ -198,30 +237,53 @@ public class PdfObjectView extends JSplitPane {
 
 
     /*
+     * #########################################################################
+     * #                    Open Methods                                       #
+     * #########################################################################
+     */
+    /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Opens a new Project.
      */
     public void openProject(File file)
     {
         this.pdfObject = PdfObjectFactory.loadPdfObjectFromFile(file);
+
         this.updateViews();
     }
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Closes a loaded Project.
      */
     public void closeProject()
     {
         this.pdfObject = null;
+
         this.updateViews();
     }
 
 
     /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Updates the PdfObjectView-Components when a new Pdf-Object has
+     *          been loaded (or closed).
      */
     private void updateViews()
     {
-        // @todo update Notationlist and NotationEntity
         this.pdfArea.refreshPdfArea();
+        this.entityScrollPane.updateTable();
+        this.notationListScrollPane.updateTable();
     }
 }
