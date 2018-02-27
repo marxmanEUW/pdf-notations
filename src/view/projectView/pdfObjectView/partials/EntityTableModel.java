@@ -130,6 +130,7 @@ public class EntityTableModel extends AbstractTableModel {
 
     /*
      * @author  marxmanEUW
+     * @todo check if editedValue has the right value type
      */
     public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
     {

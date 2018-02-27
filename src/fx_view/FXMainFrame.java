@@ -1,6 +1,6 @@
 package fx_view;
 
-import gui.Constants;
+import constants.Labels;
 import javafx.application.*;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
@@ -20,9 +20,9 @@ public class FXMainFrame extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception
+    public void start(Stage primaryStage)
     {
-        primaryStage.setTitle(Constants.FRAME_TITLE);
+        primaryStage.setTitle(Labels.FRAME_TITLE);
 
         Group root = new Group();
         Scene scene = new Scene(root, 350, 250, Color.WHITE);

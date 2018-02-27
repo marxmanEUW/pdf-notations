@@ -160,16 +160,9 @@ public class PdfObject {
      *      2018-02-12 (yxyxD)  created
      * @brief   Adds a new notation to the pdf-file.
      */
-    public void addNotation(Notation notation, Point coordinates)
+    public void addNotation(Notation newNotation)
     {
-        int nextId = this.getIdForNextNotation();
-
-        Notation newNotation = new Notation(
-            nextId,
-            coordinates
-        );
-
-        this.listOfNotations.put(nextId, newNotation);
+        this.listOfNotations.put(newNotation.getId(), newNotation);
     }
 
 
@@ -181,12 +174,6 @@ public class PdfObject {
         this.listOfNotations.remove(this.selectedNotationIndex);
     }
 
-
-    /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
     /*
      * @author  yxyxD
      * @changes
@@ -208,6 +195,12 @@ public class PdfObject {
 
         return nextId;
     }
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+
 
 
     private void addEntityNameAndType(String[] entity)
