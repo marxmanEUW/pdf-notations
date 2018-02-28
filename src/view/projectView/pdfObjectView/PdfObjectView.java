@@ -15,6 +15,9 @@ public class PdfObjectView extends JSplitPane {
     // PDF-Object
     private PdfObject pdfObject;
 
+    // MainFrame
+    private MainFrame mainFrame;
+
     // Listeners
     private NotationListSelectionListener notationListSelectionListener;
     private PdfAreaMouseClick pdfAreaMouseClick;
@@ -78,8 +81,12 @@ public class PdfObjectView extends JSplitPane {
      */
     public void initialize(MainFrame mainFrame)
     {
+        this.mainFrame = mainFrame;
+
         this.setDividerLocation(
-            (int) (mainFrame.getWidth() * Environment.PDF_OBJECT_VIEW_DEVIDER_LOCATION));
+            (int) (this.mainFrame.getWidth()
+                * Environment.PDF_OBJECT_VIEW_DIVIDER_LOCATION)
+        );
 
         this.pdfScrollPane.initialize(this);
         this.pdfArea.initialize(this);
@@ -114,6 +121,17 @@ public class PdfObjectView extends JSplitPane {
     public PdfObject getPdfObject()
     {
         return this.pdfObject;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-28 (yxyxD)  created
+     * @brief   Returns the MainFrame of the PdfObjectView.
+     */
+    public MainFrame getMainFrame()
+    {
+        return this.mainFrame;
     }
 
     /*

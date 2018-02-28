@@ -1,6 +1,7 @@
 package view.projectView.pdfObjectView.partials;
 
 
+import constants.Environment;
 import model.PdfObject;
 
 import view.projectView.pdfObjectView.PdfObjectView;
@@ -30,6 +31,13 @@ public class PdfScrollPane extends JScrollPane {
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.getVerticalScrollBar().setUnitIncrement(
+            Environment.JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT
+        );
+        this.getHorizontalScrollBar().setUnitIncrement(
+            Environment.JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT
+        );
     }
 
 

@@ -12,7 +12,8 @@ public abstract class Environment {
     /*
      * GUI
      */
-    public static final double PDF_OBJECT_VIEW_DEVIDER_LOCATION = 0.75;
+    public static final double PDF_OBJECT_VIEW_DIVIDER_LOCATION = 0.75;
+    public static final int JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT = 10;
 
     /*
      * Zoom variables

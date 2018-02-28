@@ -1,9 +1,11 @@
 package view.bar;
 
+import constants.Environment;
 import constants.Labels;
 import listeners.BarActionListener;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainFrameToolBar extends JToolBar {
 
@@ -18,6 +20,8 @@ public class MainFrameToolBar extends JToolBar {
     //private JButton buttonZoomFitToPage;
 
     private JButton buttonAddNotation;
+
+    private JLabel labelZoomLevel;
 
     private BarActionListener barActionListener;
 
@@ -40,6 +44,14 @@ public class MainFrameToolBar extends JToolBar {
 
         this.buttonAddNotation = new JButton();
         //this.buttonShowNotationList = new JButton();
+
+        this.labelZoomLevel = new JLabel("");
+        Font labelFont = new Font(
+            this.labelZoomLevel.getFont().getName(),
+            Font.BOLD,
+            this.labelZoomLevel.getFont().getSize()
+        );
+        this.labelZoomLevel.setFont(labelFont);
     }
 
 
@@ -114,6 +126,7 @@ public class MainFrameToolBar extends JToolBar {
         this.addSeparator();
 
         this.add(this.buttonZoomOut);
+        this.add(this.labelZoomLevel);
         this.add(this.buttonZoomIn);
 
         this.addSeparator();
@@ -173,5 +186,17 @@ public class MainFrameToolBar extends JToolBar {
     public void setButtonAddNotationEnabled(boolean enabled)
     {
         this.buttonAddNotation.setEnabled(enabled);
+    }
+
+    /*
+     * @author  yxyxD
+     */
+    public void setLabelZoomLevel(double zoomLevel)
+    {
+        String newZoomString = Integer.toString(
+            (int) (zoomLevel * Environment.TOTAL_PERCENTAGE)
+        );
+
+        this.labelZoomLevel.setText(newZoomString + " %");
     }
 }

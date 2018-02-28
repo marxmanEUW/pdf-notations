@@ -139,6 +139,17 @@ public class PdfArea extends JPanel {
     }
 
     /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-28 (yxyxD)  created
+     * @brief   Returns the PdfObjectView.
+     */
+    public PdfObjectView getPdfObjectView()
+    {
+        return this.pdfObjectView;
+    }
+
+    /*
      * @author  marxmanEUW
      */
     public PdfObject getPdfObject()
@@ -208,6 +219,9 @@ public class PdfArea extends JPanel {
         this.repaintNotationPoints(graphics);
 
         this.pdfObjectView.getPdfScrollPane().getViewport().revalidate();
+        this.getPdfObjectView().getMainFrame().getToolBar().setLabelZoomLevel(
+            this.zoomLevel
+        );
 
         this.setZoomEnabled(true);
     }
@@ -319,8 +333,8 @@ public class PdfArea extends JPanel {
     {
         boolean isPdfZoomable = false;
 
-        if (((this.zoomLevel + zoomChange) > Environment.MINIMUM_ZOOM_FACTOR)
-            && ((this.zoomLevel + zoomChange) < Environment.MAXIMUM_ZOOM_FACTOR)
+        if (((this.zoomLevel + zoomChange) >= Environment.MINIMUM_ZOOM_FACTOR)
+            && ((this.zoomLevel + zoomChange) <= Environment.MAXIMUM_ZOOM_FACTOR)
             && (this.pdfImage != null)) {
 
             isPdfZoomable = true;

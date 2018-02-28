@@ -8,6 +8,8 @@ import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 
@@ -108,11 +110,22 @@ public class PdfAreaMouseWheel extends MouseAdapter {
         if (!this.pdfArea.isZoomEnabled()) { return; }
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
+        if (this.pdfArea.getPdfObject() == null) { return; }
 
-        int wheelRotation = mouseWheelEvent.getWheelRotation();
+        if (mouseWheelEvent.isControlDown())
+        {
+            int wheelRotation = mouseWheelEvent.getWheelRotation();
 
-        this.stopExistingTimerAndIncreaseCounter(wheelRotation);
-        this.createNewTimer();
+            this.stopExistingTimerAndIncreaseCounter(wheelRotation);
+            this.createNewTimer();
+        }
+        else
+        {
+            this.pdfArea
+                .getPdfObjectView()
+                    .getPdfScrollPane()
+                        .dispatchEvent(mouseWheelEvent);
+        }
     }
 
 

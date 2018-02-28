@@ -17,11 +17,9 @@ marxmanEUW
 ## 13.02.2018
 
 yxyxD
-- zoom via Crtl + MouseWheel
-- disable zoom on mouse when there is nothing to zoom
-- check the zoom disabling process for multi-threads and zoom-disable on mouse 
-scroll and bar-listener
-- check the saving process => there is no saving path declared
+- check the saving process => there is no saving path 
+  declared
+- check loading of .pdfnot files
 
 ## 23.02.2018
 

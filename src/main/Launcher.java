@@ -9,14 +9,6 @@ public class Launcher {
     /*
      * @author  yxyxD
      * @changes
-     *      2018-02-19 (yxyxD)  created
-     * @brief
-     */
-
-
-    /*
-     * @author  yxyxD
-     * @changes
      *      2018-02-12 (yxyxD)  created
      * @brief   Starting point of the program.
      */
