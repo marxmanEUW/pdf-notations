@@ -1,97 +1,156 @@
 package fx_view;
 
 import constants.Labels;
+import fx_listener.FXBarActionListener;
+import fx_view.bar.FXMainFrameMenuBar;
+import fx_view.bar.FXMainFrameToolBar;
+import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.application.*;
-import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.*;
 import javafx.stage.*;
 
 public class FXMainFrame extends Application {
 
+    private Stage window;
+    private Scene scene;
+
+    // layouts
+    private BorderPane layout;
+    private VBox topComponent;
+
+    // Bars
+    private FXMainFrameMenuBar menuBar;
+    private FXMainFrameToolBar toolBar;
+
+    // PDF-Object
+    private FXPdfObjectView pdfObjectView;
+
+    // Listeners
+    private FXBarActionListener barActionListener;
+
+
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-27 (marxmanEUW) created
+     * @brief   Constructor of the MainFrame.
+     */
     public FXMainFrame()
     {
 
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Initialising                                       #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-27 (marxmanEUW) created
+     * @brief   Initialises the MainFrame.
+     */
+    public void initialize()
+    {
+        Application.launch(this.getClass());
+    }
+
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-27 (marxmanEUW) created
+     * @brief   Initialises the MainFrame.
+     *          Gets called from the initialize method.
+     */
     @Override
     public void start(Stage primaryStage)
     {
-        primaryStage.setTitle(Labels.FRAME_TITLE);
+        this.window = primaryStage;
 
-        Group root = new Group();
-        Scene scene = new Scene(root, 350, 250, Color.WHITE);
+        // create important components
+        this.layout = new BorderPane();
+        this.scene = new Scene(this.layout);
 
-        SplitPane splitPane = new SplitPane();
-        splitPane.prefWidthProperty().bind(scene.widthProperty());
-        splitPane.prefHeightProperty().bind(scene.heightProperty());
+        this.window.setTitle(Labels.FRAME_TITLE);
 
-        VBox leftArea = new VBox(10);
-        HBox rowBox = new HBox(20);
-        final Text leftText = TextBuilder.create()
-            .text("Left ")
-            .translateX(20)
-            .fill(Color.RED)
-            .font(Font.font(null, FontWeight.BOLD, 20))
-            .build();
+        // initialize GUI components and add them
+        // Bar Action Listener
+        this.barActionListener = new FXBarActionListener();
+        this.barActionListener.initialize(this);
 
-        rowBox.getChildren().add(leftText);
-        leftArea.getChildren().add(rowBox);
+        // Menu Bar
+        this.menuBar = new FXMainFrameMenuBar();
+        this.menuBar.initialize(this.barActionListener);
 
-        leftArea.setAlignment(Pos.CENTER);
+        // Tool Bar
+        this.toolBar = new FXMainFrameToolBar();
+        this.toolBar.initialize(this.barActionListener);
 
-        SplitPane splitPane2 = new SplitPane();
-        splitPane2.setOrientation(Orientation.VERTICAL);
-        splitPane2.prefWidthProperty().bind(scene.widthProperty());
-        splitPane2.prefHeightProperty().bind(scene.heightProperty());
+        // set Menu Bar and Tool BAr at Top
+        this.topComponent = new VBox();
+        this.topComponent.getChildren().add(this.menuBar);
+        this.topComponent.getChildren().add(this.toolBar);
+        this.layout.setTop(this.topComponent);
 
-        HBox centerArea = new HBox();
+        // Pdf Object View
+        this.pdfObjectView = new FXPdfObjectView();
+        this.pdfObjectView.initialize();
 
-        final Text upperRight = TextBuilder.create()
-            .text("Text")
-            .x(100)
-            .y(50)
-            .fill(Color.RED)
-            .font(Font.font(null, FontWeight.BOLD, 35))
-            .translateY(50)
-            .build();
-        centerArea.getChildren().add(upperRight);
+        this.layout.setCenter(this.pdfObjectView);
 
-        HBox rightArea = new HBox();
 
-        final Text lowerRight = TextBuilder.create()
-            .text("Lower Right")
-            .x(100)
-            .y(50)
-            .fill(Color.RED)
-            .font(Font.font(null, FontWeight.BOLD, 35))
-            .translateY(50)
-            .build();
-        rightArea.getChildren().add(lowerRight);
+        //set scene and display
+        this.window.setScene(this.scene);
 
-        splitPane2.getItems().add(centerArea);
-        splitPane2.getItems().add(rightArea);
+        this.window.setMaximized(true);
 
-        splitPane.getItems().add(leftArea);
+        this.window.show();
+    }
 
-        splitPane.getItems().add(splitPane2);
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MenuBar of the MainFrame.
+     */
+    public FXMainFrameMenuBar getJMenuBar()
+    {
+        return this.menuBar;
+    }
 
-        ObservableList<SplitPane.Divider> dividers = splitPane.getDividers();
-        for (int i = 0; i < dividers.size(); i++) {
-            dividers.get(i).setPosition((i + 1.0) / 3);
-        }
-        HBox hbox = new HBox();
-        hbox.getChildren().add(splitPane);
-        root.getChildren().add(hbox);
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Toolbar of the MainFrame
+     */
+    public FXMainFrameToolBar getToolBar()
+    {
+        return this.toolBar;
+    }
 
-        primaryStage.setScene(scene);
-
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the PdfObjectView of the MainFrame
+     */
+    public FXPdfObjectView getPdfObjectView()
+    {
+        return this.pdfObjectView;
     }
 }
