@@ -47,6 +47,13 @@ public class NotationListSelectionListener implements ListSelectionListener {
     {
         if(this.getPdfObject() != null)
         {
+            JTable entityTable = this.pdfObjectView.getEntityScrollPane().getNotationEntityTable();
+
+            if (entityTable.isEditing())
+            {
+                entityTable.getCellEditor().stopCellEditing();
+            }
+
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if(lsm.isSelectionEmpty())

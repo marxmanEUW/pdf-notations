@@ -66,6 +66,23 @@ public class EntityScrollPane extends JScrollPane {
     /*
      * @author  marxmanEUW
      * @changes
+     *      2018-03-01 (marxmanEUW)  created
+     * @brief   Returns the NotationEntityTable of the EntityScrollPane.
+     */
+    public JTable getNotationEntityTable()
+    {
+        return notationEntityTable;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Repaints the EntityScrollPane.
      */
