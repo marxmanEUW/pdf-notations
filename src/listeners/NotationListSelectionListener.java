@@ -51,7 +51,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
             if (entityTable.isEditing())
             {
-                entityTable.getCellEditor().stopCellEditing();
+                entityTable.getCellEditor().cancelCellEditing();
             }
 
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
