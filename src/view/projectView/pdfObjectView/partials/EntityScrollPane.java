@@ -22,6 +22,10 @@ public class EntityScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the EntityScrollPane which shows the information of
+     *          the selected notation.
      */
     public EntityScrollPane()
     {
@@ -34,11 +38,14 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the EntityScrollPane.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -53,24 +60,15 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    öffentliche Methoden                               #
+     * #                    Overrides                                          #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Repaints the EntityScrollPane.
      */
-    public void updateTable()
-    {
-        this.entityTableModel.fireTableDataChanged();
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    Overrides                                          #
-     * #########################################################################
-     */
-
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -80,11 +78,31 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Updates the content of the NotationEntityTable
+     */
+    public void updateTable()
+    {
+        this.entityTableModel.fireTableDataChanged();
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

@@ -17,6 +17,9 @@ public class MainFrameKeyListener implements KeyListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the MainFrameKeyListener.
      */
     public void initialize(MainFrame mainFrame)
     {
@@ -29,12 +32,19 @@ public class MainFrameKeyListener implements KeyListener {
      * #                    Overrides                                          #
      * #########################################################################
      */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets called when a key is released.
+     *          If "Escape"-Key was released it sets some variables to abort
+     *          procedure to add a notation.
+     */
     @Override
     public void keyReleased(KeyEvent e)
     {
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
         {
-            System.out.println("Escape released");
             this.mainFrame.getPdfObjectView().getPdfArea().setAddingNotation(false);
             this.mainFrame.getPdfObjectView().getPdfArea().setCursorTypeToDefault();
         }

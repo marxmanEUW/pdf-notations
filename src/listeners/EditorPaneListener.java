@@ -13,7 +13,7 @@ public class EditorPaneListener implements HyperlinkListener {
      * @author AbellaMort
      * @changes
      *      2018-02-20 (AbellaMort) created
-     * @brief Listener that implements HyperlinkListener that opens the machines
+     * @brief   Listener that implements HyperlinkListener that opens the machines
      *          default browser when a hyperlink is clicked
      * @todo Catch Statements
      *

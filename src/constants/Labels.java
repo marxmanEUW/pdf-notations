@@ -3,12 +3,12 @@ package constants;
 public abstract class Labels {
 
     /*
-     * Titel des Fensters
+     * Window Title
      */
     public static final String FRAME_TITLE = "PDF-NOTATIONS";
 
     /*
-     * Menuereiter "Datei"
+     * Menu "File"
      */
     public static final String MENU_FILE_NAME = "Datei";
 
@@ -26,7 +26,7 @@ public abstract class Labels {
             BAR_ITEM_CLOSE_NAME = "Beenden";
 
     /*
-     * Menuereiter "Notation"
+     * Menu "Notation"
      */
     public static final String MENU_NOTATION_NAME = "Notation";
 
@@ -36,7 +36,7 @@ public abstract class Labels {
             BAR_ITEM_DELETE_NOTATION_NAME = "Löschen";
 
     /*
-     * Menuereiter "Ansicht"
+     * Menu "View"
      */
     public static final String MENU_VIEW_NAME = "Ansicht";
 
@@ -46,7 +46,7 @@ public abstract class Labels {
             BAR_ITEM_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
     /*
-     * Menuereiter "Hilfe"
+     * Menu "Help"
      */
     public static final String MENU_HELP_NAME = "Hilfe";
 

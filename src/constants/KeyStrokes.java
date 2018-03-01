@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 public abstract class KeyStrokes {
 
     /*
-     * Menuereiter "Datei" - Key Strokes
+     * Menu "File" - Key Strokes
      */
     public static final int
         BAR_ITEM_NEW_PROJECT_KEY_STROKE = KeyEvent.VK_N;
@@ -21,7 +21,7 @@ public abstract class KeyStrokes {
         BAR_ITEM_CLOSE_KEY_STROKE = KeyEvent.VK_F4;
 
     /*
-     * Menuereiter "Notation" - Key Strokes
+     * Menu "Notation" - Key Strokes
      */
     public static final int
         BAR_ITEM_ADD_NOTATION_KEY_STROKE = KeyEvent.VK_Q;
@@ -29,7 +29,7 @@ public abstract class KeyStrokes {
         BAR_ITEM_DELETE_NOTATION_KEY_STROKE = KeyEvent.VK_DELETE;
 
     /*
-     * Menuereiter "Ansicht" - Key Strokes
+     * Menu "View" - Key Strokes
      */
     public static final int
         BAR_ITEM_ZOOM_IN_KEY_STROKE = KeyEvent.VK_PLUS;

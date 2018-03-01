@@ -65,12 +65,21 @@ public class PdfObject {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfNotations of the PdfObject.
      */
     public HashMap<Integer, Notation> getListOfNotations()
     {
         return this.listOfNotations;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfPoints of the PdfObject.
+     */
     public ArrayList<Point> getListOfPoints()
     {
         ArrayList<Point> listOfPoints = new ArrayList<>();
@@ -80,11 +89,13 @@ public class PdfObject {
         return listOfPoints;
     }
 
-    public int getListOfNotationsSize()
-    {
-        return this.listOfNotations.size();
-    }
-
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the selected notation of the PdfObject.
+     *          Returns null if no notation was selected.
+     */
     public Notation getSelectedNotation()
     {
         if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
@@ -97,11 +108,23 @@ public class PdfObject {
         }
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ID/index of the selected notation of the PdfObject.
+     */
     public int getSelectedNotationIndex()
     {
         return selectedNotationIndex;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfNotations of the PdfObject as ArrayList.
+     */
     public ArrayList<Notation> getListOfNotationsAsList()
     {
         ArrayList<Notation> listOfNotationsAsList = new ArrayList<>();
@@ -125,6 +148,12 @@ public class PdfObject {
         this.jsonAbsolutePath = jsonAbsolutePath;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the SelectedNotationIndex of the PdfObject.
+     */
     public void setSelectedNotationIndex(int selectedNotationIndex)
     {
         this.selectedNotationIndex = selectedNotationIndex;
@@ -156,6 +185,9 @@ public class PdfObject {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Deletes the selected notation.
      */
     public void deleteSelectedNotation()
     {

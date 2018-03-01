@@ -132,6 +132,9 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns AddingNotation of the PdfArea.
      */
     public boolean getAddingNotation()
     {
@@ -151,6 +154,9 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     public PdfObject getPdfObject()
     {
@@ -176,6 +182,9 @@ public class PdfArea extends JPanel {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets AddingNotation of PdfArea.
      */
     public void setAddingNotation(boolean addingNotation)
     {
@@ -184,14 +193,20 @@ public class PdfArea extends JPanel {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the cursor to CrossHair.
      */
-    public void setCursorTypeToCrosshair()
+    public void setCursorTypeToCrossHair()
     {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     }
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the cursor to default.
      */
     public void setCursorTypeToDefault()
     {

@@ -16,14 +16,19 @@ public class NotationSplitPane extends JSplitPane {
     private ListScrollPane notationListScrollPane;
     private EntityScrollPane entityScrollPane;
 
-    //private NotationListSelectionListener notationListSelectionListener;
 
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the NotationSplitPane which contains ListScrollPane
+     *          and EntityScrollPane.
+     */
     public NotationSplitPane()
     {
         this.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -35,10 +40,15 @@ public class NotationSplitPane extends JSplitPane {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initialises the NotationSplitPane.
+     */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
@@ -54,21 +64,26 @@ public class NotationSplitPane extends JSplitPane {
 
     /*
      * #########################################################################
-     * #                    öffentliche Methoden                               #
-     * #########################################################################
-     */
-
-
-    /*
-     * #########################################################################
      * #                    Overrides                                          #
      * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Repaints the NotationSplitPane.
      */
     @Override
     public void paintComponent(Graphics graphics)
     {
         super.paintComponent(graphics);
     }
+
+    /*
+     * #########################################################################
+     * #                    Public Methods                                     #
+     * #########################################################################
+     */
 
 
     /*
@@ -78,6 +93,9 @@ public class NotationSplitPane extends JSplitPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

@@ -25,6 +25,10 @@ public class ListScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the ListScrollPane which lists every notation of the
+     *          PdfObject.
      */
     public ListScrollPane()
     {
@@ -39,11 +43,14 @@ public class ListScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the ListScrollPane.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -71,33 +78,63 @@ public class ListScrollPane extends JScrollPane {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the NotationListTable of the ListScrollPane.
+     */
     public JTable getNotationListTable()
     {
         return notationListTable;
     }
 
+
     /*
      * #########################################################################
-     * #                    public methods                                     #
+     * #                    Overrides                                          #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Repaints the ListSCrollPane.
+     */
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Public Methods                                     #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Updates the content of the NotationListTable.
      */
     public void updateTable()
     {
         this.listTableModel.fireTableDataChanged();
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the selected fow of the NotationListTable.
      */
     public void setSelectedRow(int notationId)
     {
         int rowId = notationId;
 
-        for (int i = 0; i < this.getPdfObject().getListOfNotationsSize(); i++)
+        for (int i = 0; i < this.getPdfObject().getListOfNotations().size(); i++)
         {
             if (notationId == (int) this.listTableModel.getValueAt(i, 0))
             {
@@ -109,37 +146,28 @@ public class ListScrollPane extends JScrollPane {
         this.notationListTable.setRowSelectionInterval(rowId, rowId);
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Deselects every row of the NotationListTable.
      */
-    public void unselectRow()
+    public void deselectRow()
     {
         this.notationListTable.clearSelection();
     }
 
+
     /*
      * #########################################################################
-     * #                    Overrides                                          #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
-     */
-    @Override
-    protected void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    private methods                                    #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

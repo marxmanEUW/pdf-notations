@@ -13,11 +13,14 @@ public class ListTableModel extends AbstractTableModel {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the ListTableModel.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -32,6 +35,9 @@ public class ListTableModel extends AbstractTableModel {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the number of rows.
      */
     @Override
     public int getRowCount()
@@ -42,13 +48,15 @@ public class ListTableModel extends AbstractTableModel {
         }
         else
         {
-            return this.getPdfObject().getListOfNotationsSize();
+            return this.getPdfObject().getListOfNotations().size();
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the number of columns.
      */
     @Override
     public int getColumnCount()
@@ -56,9 +64,11 @@ public class ListTableModel extends AbstractTableModel {
         return 2;
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the value for a specific cell.
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
@@ -80,9 +90,11 @@ public class ListTableModel extends AbstractTableModel {
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the name of a column (for the table header).
      */
     public String getColumnName(int column)
     {
@@ -94,22 +106,28 @@ public class ListTableModel extends AbstractTableModel {
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the class of a column.
      */
     public Class getColumnClass(int columnIndex)
     {
         return String.class;
     }
 
+
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

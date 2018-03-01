@@ -86,7 +86,7 @@ public class PdfAreaMouseClick extends MouseAdapter {
         }
         else
         {
-            this.pdfObjectView.getNotationListScrollPane().unselectRow();
+            this.pdfObjectView.getNotationListScrollPane().deselectRow();
         }
     }
 
@@ -147,6 +147,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {
@@ -155,6 +158,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfArea.
      */
     private PdfArea getPdfArea()
     {

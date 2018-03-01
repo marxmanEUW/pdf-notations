@@ -10,7 +10,6 @@ import factories.DialogFactory;
 import factories.PdfObjectFactory;
 import constants.Labels;
 import model.PdfObject;
-import threads.PdfRenderThread;
 import view.MainFrame;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
@@ -32,6 +31,9 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   initializes the Bar Action Listener.
      */
     public void initialize(MainFrame mainFrame)
     {
@@ -46,6 +48,9 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Distinguishes which button was pressed.
      */
     @Override
     public void actionPerformed(ActionEvent e)
@@ -82,7 +87,6 @@ public class BarActionListener implements ActionListener {
                 this.zoomOut();
                 break;
             case Labels.BAR_ITEM_ABOUT_NAME:
-                // not implemented yet
                 showAbout();
                 break;
         }
@@ -97,6 +101,9 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObjectView.
      */
     private PdfObjectView getPdfObjectView()
     {
@@ -105,6 +112,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {
@@ -113,17 +123,32 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfArea.
      */
     private PdfArea getPdfArea()
     {
         return this.getPdfObjectView().getPdfArea();
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MainFrameMenuBar.
+     */
     private MainFrameMenuBar getMainFrameMenuBar()
     {
         return this.mainFrame.getJMenuBar();
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MainFrameToolBar.
+     */
     private MainFrameToolBar getMainFrameToolBar()
     {
         return this.mainFrame.getToolBar();
@@ -137,6 +162,10 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets selected PDF-file from an OpenFileDialog and sends it to
+     *          the PdfObjectView to create a new project.
      */
     private void newProject()
     {
@@ -147,18 +176,16 @@ public class BarActionListener implements ActionListener {
         if (newProjectFile != null)
         {
             this.getPdfObjectView().openProject(newProjectFile);
-            System.out.println(
-                "Neues Projekt mit gegebener PDF: "
-                    + newProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-
         }
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets selected pdfnot-file from an OpenFileDialog and sends it to
+     *          the PdfObjectView to open a project.
      */
     private void openProject()
     {
@@ -169,18 +196,16 @@ public class BarActionListener implements ActionListener {
         if (openProjectFile != null)
         {
             this.getPdfObjectView().openProject(openProjectFile);
-            System.out.println(
-                "Vorhandenes Projekt mit gegebener PDF "
-                    + openProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-            this.getPdfObjectView().openProject(openProjectFile);
         }
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Saves the project. If JsonAbsolutePath is not set, it prompts
+     *          the user to set it.
      */
     private void saveProject()
     {
@@ -207,12 +232,16 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets new pdfnot-FileLocation and saves Poject to this file.
      */
     private void saveAsProject()
     {
         File saveAsFile = DialogFactory.getFileFromSaveDialog(
             Environment.FILE_TYPE_PDFNOT
         );
+
         if (saveAsFile != null)
         {
             this.getPdfObject().setJsonAbsolutePath(
@@ -225,6 +254,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Closes the project.
      */
     private void closeProject()
     {
@@ -238,6 +270,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Closes the program.
      */
     private void closeProgram()
     {
@@ -252,21 +287,35 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets some variables. The next click into the PdfArea creates a
+     *          new Notation.
      */
     private void addNotation()
     {
         this.getPdfArea().setAddingNotation(true);
-        this.getPdfArea().setCursorTypeToCrosshair();
+        this.getPdfArea().setCursorTypeToCrossHair();
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Asks the user if he wants to delete the selected notation.
+     *          Deletes the selected Notation if answer was "yes".
      */
     private void deleteNotation()
     {
+        int selectedNotationId = this.getPdfObject().getSelectedNotationIndex();
+        if (selectedNotationId == PdfObject.SELECTED_NOTATION_NULL_VALUE)
+        {
+            return;
+        }
+
         int userChoice = DialogFactory.showWarningDeleteNotation(
-            this.getPdfObject().getSelectedNotationIndex()
+            selectedNotationId
         );
         if (userChoice == JOptionPane.YES_OPTION)
         {
@@ -314,6 +363,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shw AboutDialog.
      */
     private void showAbout()
     {

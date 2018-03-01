@@ -1,13 +1,11 @@
 package view.projectView.pdfObjectView.partials;
 
-
 import constants.Environment;
 import model.PdfObject;
 
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
-
 
 public class PdfScrollPane extends JScrollPane {
 
@@ -69,6 +67,9 @@ public class PdfScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

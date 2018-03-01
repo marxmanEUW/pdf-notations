@@ -5,7 +5,6 @@ import constants.Labels;
 import listeners.EditorPaneListener;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
@@ -13,7 +12,11 @@ import java.io.File;
 public abstract class DialogFactory {
 
     /*
-     * @author marxmanEUW
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shows a OpenFileDialog and returns the selected file
+     *          or returns null if no file was selected.
      */
     public static File getFileFromOpenDialog(int fileType)
     {
@@ -27,7 +30,6 @@ public abstract class DialogFactory {
         if (state == JFileChooser.APPROVE_OPTION)
         {
             openFile = fileChooser.getSelectedFile();
-            System.out.println( openFile.getAbsolutePath() );
         }
 
         return openFile;
@@ -35,7 +37,11 @@ public abstract class DialogFactory {
 
 
     /*
-     * @author marxmanEUW
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shows a SaveFileDialog and returns the selected file
+     *          or returns null if no file was selected.
      */
     public static File getFileFromSaveDialog(int fileType)
     {
@@ -57,8 +63,6 @@ public abstract class DialogFactory {
             {
                 saveFile = new File(saveFile.getAbsolutePath() + "." + fileExtension);
             }
-
-            System.out.println( saveFile.getAbsolutePath() );
         }
 
         return saveFile;

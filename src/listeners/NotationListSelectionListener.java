@@ -20,6 +20,9 @@ public class NotationListSelectionListener implements ListSelectionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the NotationSelectionListener.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -34,6 +37,10 @@ public class NotationListSelectionListener implements ListSelectionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets called if the selected row of a table was changed.
+     *          Updates SelectedNotationIndex and NotationEntityTable.
      */
     @Override
     public void valueChanged(ListSelectionEvent e)
@@ -61,8 +68,6 @@ public class NotationListSelectionListener implements ListSelectionListener {
                         (int) notationList.getValueAt(selectedRow, 0)
                     );
                 }
-
-
             }
 
             this.pdfObjectView.getEntityScrollPane().updateTable();
@@ -78,6 +83,9 @@ public class NotationListSelectionListener implements ListSelectionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

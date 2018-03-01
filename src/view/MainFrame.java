@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
      */
     public MainFrame()
     {
-        this.setLookAndFell();
+        this.setLookAndFeel();
 
         this.setLayout(new BorderLayout());
         this.setTitle(Labels.FRAME_TITLE);
@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
         );
 
 
-        this.setLookAndFell();
+        this.setLookAndFeel();
 
         this.setVisible(true);
     }
@@ -151,7 +151,13 @@ public class MainFrame extends JFrame {
      * #                    Private Methods                                    #
      * #########################################################################
      */
-    private void setLookAndFell()
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the look and feel of the program.
+     */
+    private void setLookAndFeel()
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
