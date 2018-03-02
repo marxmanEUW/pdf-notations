@@ -1,5 +1,7 @@
 package listeners;
 
+import factories.DialogFactory;
+
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import java.awt.*;
@@ -15,7 +17,6 @@ public class EditorPaneListener implements HyperlinkListener {
      *      2018-02-20 (AbellaMort) created
      * @brief   Listener that implements HyperlinkListener that opens the machines
      *          default browser when a hyperlink is clicked
-     * @todo Catch Statements
      *
      */
 
@@ -29,11 +30,11 @@ public class EditorPaneListener implements HyperlinkListener {
           }
           catch (URISyntaxException syntaxException)
           {
-
+              DialogFactory.showErrorDialog(syntaxException.getMessage());
           }
-          catch (IOException error)
+          catch (IOException ioException)
           {
-
+              DialogFactory.showErrorDialog(ioException.getMessage());
           }
       }
     }

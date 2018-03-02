@@ -1,6 +1,7 @@
 package view;
 
 import constants.Labels;
+import factories.DialogFactory;
 import listeners.MainFrameKeyListener;
 import listeners.BarActionListener;
 import listeners.MainFrameWindowAdapter;
@@ -155,20 +156,32 @@ public class MainFrame extends JFrame {
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created
+     *      2018-03-02 (AbellaMort)  Changed errorhandling to display errors in
+     *          errordialog
      * @brief   Sets the look and feel of the program.
      */
     private void setLookAndFeel()
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+        }
+        catch (ClassNotFoundException classNotFoundException)
+        {
+            DialogFactory.showErrorDialog(classNotFoundException.getMessage());
+        }
+        catch (InstantiationException instantiationException)
+        {
+            DialogFactory.showErrorDialog(instantiationException.getMessage());
+        }
+        catch (IllegalAccessException illegalAccessException)
+        {
+            DialogFactory.showErrorDialog(illegalAccessException.getMessage());
+        }
+        catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException)
+        {
+            DialogFactory.showErrorDialog(
+                unsupportedLookAndFeelException.getMessage()
+            );
         }
     }
 }

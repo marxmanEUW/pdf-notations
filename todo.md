@@ -1,5 +1,3 @@
-# Todo Liste
-
 ## 17.01.2018
 
 AbellaMort

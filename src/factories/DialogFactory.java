@@ -104,7 +104,6 @@ public abstract class DialogFactory {
         htmlPane.setEditable(false);
 
         htmlPane.addHyperlinkListener(new EditorPaneListener());
-        // @todo set background according to JOptionPane default
         htmlPane.setBackground(Color.WHITE);
 
         JOptionPane.showMessageDialog(
@@ -150,8 +149,21 @@ public abstract class DialogFactory {
     }
 
     /*
-     *
-     * @todo ErrorDialog
+     * @author AbellaMort
+     * @changes
+     *      2018-03-02 (AbellaMort) created
+     * @brief Shows the ErrorDialog
      *
      */
+
+    public static void showErrorDialog(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(
+            null,
+            errorMessage,
+            Labels.ERROR_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
 }

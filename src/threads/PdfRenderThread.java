@@ -1,6 +1,7 @@
 package threads;
 
 import constants.Environment;
+import factories.DialogFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import view.projectView.pdfObjectView.partials.PdfArea;
@@ -145,7 +146,8 @@ public class PdfRenderThread implements Runnable {
         catch (IOException ioException)
         {
             this.reRenderedPdfImage = null;
-            ioException.printStackTrace();
+            // @todo yxyxD ist das so clever?
+            DialogFactory.showErrorDialog(ioException.getMessage());
         }
     }
 }

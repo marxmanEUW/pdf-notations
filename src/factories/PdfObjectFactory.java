@@ -40,8 +40,7 @@ public abstract class PdfObjectFactory {
         }
         catch (Exception exception)
         {
-            //@todo yxyxD
-            System.out.println(exception.getMessage());
+            DialogFactory.showErrorDialog(exception.getMessage());
         }
 
         return pdfObject;
@@ -66,8 +65,7 @@ public abstract class PdfObjectFactory {
         }
         catch (Exception exception)
         {
-            //@todo yxyxD
-            System.out.println(exception.getMessage());
+            DialogFactory.showErrorDialog(exception.getMessage());
         }
     }
 

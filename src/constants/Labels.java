@@ -126,6 +126,12 @@ public abstract class Labels {
         ;
 
     /*
+     *  ErrorDialog
+     */
+
+    public static final String ERROR_TITLE = "Error";
+
+    /*
      * Waring-That-Value-Is-No-Int
      */
     public static final String INTEGER_TITLE = "PDF Notations";
@@ -134,7 +140,7 @@ public abstract class Labels {
         +  "Eingebener Wert: ";
 
     /*
-     * Waring-Delte-Notation
+     * Warning-Delete-Notation
      */
     public static final String DELETE_NOTATION_TITLE = "PDF Notations";
     public static final String DELETE_NOTATION_TEXT =
