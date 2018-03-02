@@ -297,7 +297,7 @@ public class PdfArea extends JPanel {
     {
         if (this.isPdfZoomable(zoomChange))
         {
-            this.zoomLevel += zoomChange;
+            this.zoomLevel = this.calculateAndReturnNewZoomLevel(zoomChange);
 
             this.pdfImage = PdfZoomFactory.getZoomedImage(
                 this,
@@ -348,8 +348,10 @@ public class PdfArea extends JPanel {
     {
         boolean isPdfZoomable = false;
 
-        if (((this.zoomLevel + zoomChange) >= Environment.MINIMUM_ZOOM_FACTOR)
-            && ((this.zoomLevel + zoomChange) <= Environment.MAXIMUM_ZOOM_FACTOR)
+        double newZoomLevel = this.calculateAndReturnNewZoomLevel(zoomChange);
+
+        if ((newZoomLevel >= Environment.MINIMUM_ZOOM_FACTOR)
+            && (newZoomLevel <= Environment.MAXIMUM_ZOOM_FACTOR)
             && (this.pdfImage != null)) {
 
             isPdfZoomable = true;
@@ -420,11 +422,26 @@ public class PdfArea extends JPanel {
     }
 
     /*
+     * @author  AbellaMort
+     * @changes
+     *      2018-03-02 (AbellaMort) created
+     * @brief   Calculates and returns the new ZoomLevel. Necessary to correct
+     *      float point calculation errors by rounding to one decimal point.
+     */
+
+    private double calculateAndReturnNewZoomLevel(double zoomChange)
+    {
+        return Math.round((this.zoomLevel + zoomChange)*10.0)/10.0;
+    }
+
+    /*
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
      * @brief   Checks if a Notation can be painted at the clicked location.
      *          That is not allowed if an other Notation would get painted over.
+     *
+     *  @todo yxyxD y u du this???!!!?????!1111!!!
      */
     public boolean isNotationInRangeOfOtherNotation(Point point)
     {
