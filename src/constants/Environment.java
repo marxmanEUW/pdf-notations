@@ -61,4 +61,9 @@ public abstract class Environment {
      */
     public static final char X_IDENTIFIER = 'x';
     public static final char Y_IDENTIFIER = 'y';
+
+    /*
+     * PdfImage DPI
+     */
+    public static final float PDF_IMAGE_DPI = 150;
 }

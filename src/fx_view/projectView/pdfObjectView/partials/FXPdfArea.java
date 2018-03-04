@@ -1,10 +1,11 @@
 package fx_view.projectView.pdfObjectView.partials;
 
+import factories.PdfImageFactory;
 import fx_handler.FXPdfAreaScrollHandler;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
-import javafx.geometry.Point2D;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import model.PdfObject;
 
 import java.io.File;
 
@@ -78,6 +79,14 @@ public class FXPdfArea extends ScrollPane {
         return pdfImage;
     }
 
+    /*
+     * @author  marxmanEUW
+     */
+    public PdfObject getPdfObject()
+    {
+        return this.pdfObjectView.getPdfObject();
+    }
+
 
     /*
      * #########################################################################
@@ -104,7 +113,25 @@ public class FXPdfArea extends ScrollPane {
         }
     }
 
+    /*
+     * @author  marxmanEUW
+     */
+    public void refreshPdfArea()
+    {
+        this.zoomLevel = 1.0;
+        //this.addingNotation = false;
+        //this.setZoomEnabled(false);
 
+        if (this.getPdfObject() == null)
+        {
+            // no pdf to import => load empty pdf
+            this.pdfImage = new ImageView();
+        }
+        else
+        {
+            this.pdfImage = PdfImageFactory.getPdfImageForPdfObject(this.getPdfObject());
+        }
+    }
     /*
      * #########################################################################
      * #                    Private Methods                                    #
