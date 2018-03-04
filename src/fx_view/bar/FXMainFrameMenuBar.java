@@ -2,7 +2,7 @@ package fx_view.bar;
 
 import constants.FXKeyStrokes;
 import constants.Labels;
-import fx_listener.FXBarActionListener;
+import fx_handler.FXBarActionHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -33,7 +33,7 @@ public class FXMainFrameMenuBar extends MenuBar {
     private MenuItem menuItemAbout;
 
     // Listener
-    private FXBarActionListener barActionListener;
+    private FXBarActionHandler barActionHandler;
 
 
     /*
@@ -75,9 +75,9 @@ public class FXMainFrameMenuBar extends MenuBar {
     /*
      * @author  yxyxD
      */
-    public void initialize(FXBarActionListener barActionListener)
+    public void initialize(FXBarActionHandler barActionHandler)
     {
-        this.barActionListener = barActionListener;
+        this.barActionHandler = barActionHandler;
 
         this.setupMenuFile();
         this.setupMenuNotation();
@@ -85,7 +85,7 @@ public class FXMainFrameMenuBar extends MenuBar {
         this.setupMenuHelp();
 
         // @todo implement
-        //this.barActionListener.updateBars();
+        //this.barActionHandler.updateBars();
     }
 
 
@@ -196,12 +196,12 @@ public class FXMainFrameMenuBar extends MenuBar {
         this.menuItemClose.setText(Labels.BAR_ITEM_CLOSE_NAME);
 
         // ActionListener
-        this.menuItemNewProject.setOnAction(this.barActionListener);
-        this.menuItemOpenProject.setOnAction(this.barActionListener);
-        this.menuItemSaveProject.setOnAction(this.barActionListener);
-        this.menuItemSaveAsProject.setOnAction(this.barActionListener);
-        this.menuItemCloseProject.setOnAction(this.barActionListener);
-        this.menuItemClose.setOnAction(this.barActionListener);
+        this.menuItemNewProject.setOnAction(this.barActionHandler);
+        this.menuItemOpenProject.setOnAction(this.barActionHandler);
+        this.menuItemSaveProject.setOnAction(this.barActionHandler);
+        this.menuItemSaveAsProject.setOnAction(this.barActionHandler);
+        this.menuItemCloseProject.setOnAction(this.barActionHandler);
+        this.menuItemClose.setOnAction(this.barActionHandler);
 
 
         //Shortcuts
@@ -257,8 +257,8 @@ public class FXMainFrameMenuBar extends MenuBar {
         this.menuItemDeleteNotation.setText(Labels.BAR_ITEM_DELETE_NOTATION_NAME);
 
         // ActionListener
-        this.menuItemAddNotation.setOnAction(this.barActionListener);
-        this.menuItemDeleteNotation.setOnAction(this.barActionListener);
+        this.menuItemAddNotation.setOnAction(this.barActionHandler);
+        this.menuItemDeleteNotation.setOnAction(this.barActionHandler);
 
         // Shortcuts
         this.menuItemAddNotation.setAccelerator(new KeyCodeCombination(
@@ -290,8 +290,8 @@ public class FXMainFrameMenuBar extends MenuBar {
 
 
         // ActionListener
-        this.menuItemZoomIn.setOnAction(this.barActionListener);
-        this.menuItemZoomOut.setOnAction(this.barActionListener);
+        this.menuItemZoomIn.setOnAction(this.barActionHandler);
+        this.menuItemZoomOut.setOnAction(this.barActionHandler);
 
 
         //Shortcuts
@@ -322,7 +322,7 @@ public class FXMainFrameMenuBar extends MenuBar {
         this.menuItemAbout.setText(Labels.BAR_ITEM_ABOUT_NAME);
 
         // ActionListener
-        this.menuItemAbout.setOnAction(this.barActionListener);
+        this.menuItemAbout.setOnAction(this.barActionHandler);
 
         // Menuepunkte zum Menue hinzufuegen
         this.menuHelp.getItems().add(this.menuItemAbout);

@@ -1,7 +1,7 @@
 package fx_view.bar;
 
 import constants.Labels;
-import fx_listener.FXBarActionListener;
+import fx_handler.FXBarActionHandler;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -22,7 +22,7 @@ public class FXMainFrameToolBar extends ToolBar {
 
     private Button buttonAddNotation;
 
-    private FXBarActionListener barActionListener;
+    private FXBarActionHandler barActionHandler;
 
     /*
      * #########################################################################
@@ -49,9 +49,9 @@ public class FXMainFrameToolBar extends ToolBar {
      * #                    Initialising                                       #
      * #########################################################################
      */
-    public void initialize(FXBarActionListener barActionListener)
+    public void initialize(FXBarActionHandler barActionHandler)
     {
-        this.barActionListener = barActionListener;
+        this.barActionHandler = barActionHandler;
 
 
         // ActionCommand
@@ -105,16 +105,16 @@ public class FXMainFrameToolBar extends ToolBar {
         ));
 
         // Action Listener
-        this.buttonNewProject.setOnAction(this.barActionListener);
-        this.buttonOpenProject.setOnAction(this.barActionListener);
-        this.buttonSaveProject.setOnAction(this.barActionListener);
-        this.buttonSaveAsProject.setOnAction(this.barActionListener);
-        this.buttonCloseProject.setOnAction(this.barActionListener);
+        this.buttonNewProject.setOnAction(this.barActionHandler);
+        this.buttonOpenProject.setOnAction(this.barActionHandler);
+        this.buttonSaveProject.setOnAction(this.barActionHandler);
+        this.buttonSaveAsProject.setOnAction(this.barActionHandler);
+        this.buttonCloseProject.setOnAction(this.barActionHandler);
 
-        this.buttonZoomOut.setOnAction(this.barActionListener);
-        this.buttonZoomIn.setOnAction(this.barActionListener);
+        this.buttonZoomOut.setOnAction(this.barActionHandler);
+        this.buttonZoomIn.setOnAction(this.barActionHandler);
 
-        this.buttonAddNotation.setOnAction(this.barActionListener);
+        this.buttonAddNotation.setOnAction(this.barActionHandler);
 
         // add
         this.getItems().add(this.buttonNewProject);

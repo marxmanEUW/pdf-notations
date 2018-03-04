@@ -1,4 +1,4 @@
-package fx_listener;
+package fx_handler;
 
 import constants.Labels;
 import fx_view.*;
@@ -8,19 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
-
-import java.io.File;
 
 
-public class FXBarActionListener implements EventHandler<ActionEvent> {
+public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     private FXMainFrame mainFrame;
 
 
     /*
      * #########################################################################
-     * #                    Initialising                                       #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
@@ -59,9 +56,6 @@ public class FXBarActionListener implements EventHandler<ActionEvent> {
         switch (identifier) {
             case Labels.BAR_ITEM_NEW_PROJECT_NAME:
                 System.out.println("Neues Projekt");
-                File f = new File("U0qnKx4ofOCfRB3XNeYyAQwVFVPZMhevG9XRqgXADmE.jpg");
-                ImageView iv = new ImageView(f.toURI().toString());
-                this.getPdfObjectView().getPdfArea().setContent(iv);
                 //this.newProject();
                 break;
             case Labels.BAR_ITEM_OPEN_PROJECT_NAME:

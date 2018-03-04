@@ -1,7 +1,7 @@
 package fx_view;
 
 import constants.Labels;
-import fx_listener.FXBarActionListener;
+import fx_handler.FXBarActionHandler;
 import fx_view.bar.FXMainFrameMenuBar;
 import fx_view.bar.FXMainFrameToolBar;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
@@ -27,7 +27,7 @@ public class FXMainFrame extends Application {
     private FXPdfObjectView pdfObjectView;
 
     // Listeners
-    private FXBarActionListener barActionListener;
+    private FXBarActionHandler barActionHandler;
 
 
     /*
@@ -84,16 +84,16 @@ public class FXMainFrame extends Application {
 
         // initialize GUI components and add them
         // Bar Action Listener
-        this.barActionListener = new FXBarActionListener();
-        this.barActionListener.initialize(this);
+        this.barActionHandler = new FXBarActionHandler();
+        this.barActionHandler.initialize(this);
 
         // Menu Bar
         this.menuBar = new FXMainFrameMenuBar();
-        this.menuBar.initialize(this.barActionListener);
+        this.menuBar.initialize(this.barActionHandler);
 
         // Tool Bar
         this.toolBar = new FXMainFrameToolBar();
-        this.toolBar.initialize(this.barActionListener);
+        this.toolBar.initialize(this.barActionHandler);
 
         // set Menu Bar and Tool BAr at Top
         this.topComponent = new VBox();

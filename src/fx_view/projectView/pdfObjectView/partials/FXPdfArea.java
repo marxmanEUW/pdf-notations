@@ -1,5 +1,8 @@
 package fx_view.projectView.pdfObjectView.partials;
 
+import fx_handler.FXPdfAreaScrollHandler;
+import fx_view.projectView.pdfObjectView.FXPdfObjectView;
+import javafx.geometry.Point2D;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 
@@ -7,15 +10,112 @@ import java.io.File;
 
 public class FXPdfArea extends ScrollPane {
 
-    private final static String PATH_TO_IMAGE = "rtbvbls2fojz.jpg";
+    private final static String PATH_TO_IMAGE = "C:\\Users\\Conrad\\Pictures\\rtbvbls2fojz.jpg";
+    private final static String PATH_TO_PDF = "files\\file1.pdf";
 
+    // Pdf object view
+    private FXPdfObjectView pdfObjectView;
+
+    // event handler
+    private FXPdfAreaScrollHandler scrollHandler;
+
+    // local variables
     private ImageView pdfImage;
+    private double zoomLevel;
 
 
-    public void initialize()
+    /*
+     * #########################################################################
+     * #                    Constructor                                        #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public FXPdfArea()
     {
+        this.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+        this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        this.setPannable(true);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Initializing                                       #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public void initialize(FXPdfObjectView pdfObjectView)
+    {
+        this.pdfObjectView = pdfObjectView;
+        this.scrollHandler = this.pdfObjectView.getScrollHandler();
+
         File file = new File(PATH_TO_IMAGE);
         this.pdfImage = new ImageView(file.toURI().toString());
+        this.pdfImage.setPreserveRatio(true);
+
+        this.zoomLevel = 1.0;
+
+        this.pdfImage.setOnScroll(this.scrollHandler);
+
         this.setContent(this.pdfImage);
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public ImageView getPdfImage()
+    {
+        return pdfImage;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    public Methods                                     #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @todo zoom to mouse position
+     */
+    public void zoomPdf(double zoomChange)
+    {
+        if (this.isPdfZoomable(zoomChange))
+        {
+            double oldZoomLevel = this.zoomLevel;
+            this.zoomLevel += zoomChange;
+
+            double newWidth = this.pdfImage.getImage().getWidth() * this.zoomLevel;
+            double newHeight = this.pdfImage.getImage().getHeight() * this.zoomLevel;
+
+            // no need to set height, because the aspect ratio can not change
+            // -> height gets calculated automatically
+            pdfImage.setFitWidth(newWidth);
+        }
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @todo implement logic
+     */
+    private boolean isPdfZoomable(double zoomChange)
+    {
+        return true;
     }
 }
