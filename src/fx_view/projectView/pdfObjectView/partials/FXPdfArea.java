@@ -4,6 +4,7 @@ import factories.PdfImageFactory;
 import fx_handler.FXPdfAreaScrollHandler;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.PdfObject;
 
@@ -54,15 +55,10 @@ public class FXPdfArea extends ScrollPane {
         this.pdfObjectView = pdfObjectView;
         this.scrollHandler = this.pdfObjectView.getScrollHandler();
 
-        File file = new File(PATH_TO_IMAGE);
-        this.pdfImage = new ImageView(file.toURI().toString());
-        this.pdfImage.setPreserveRatio(true);
+        //File file = new File(PATH_TO_IMAGE);
+        //this.pdfImage = new ImageView(file.toURI().toString());
 
-        this.zoomLevel = 1.0;
-
-        this.pdfImage.setOnScroll(this.scrollHandler);
-
-        this.setContent(this.pdfImage);
+        this.refreshPdfArea();
     }
 
 
@@ -125,13 +121,26 @@ public class FXPdfArea extends ScrollPane {
         if (this.getPdfObject() == null)
         {
             // no pdf to import => load empty pdf
-            this.pdfImage = new ImageView();
+            this.pdfImage = null;
         }
         else
         {
-            this.pdfImage = PdfImageFactory.getPdfImageForPdfObject(this.getPdfObject());
+            Image newPdfImage = PdfImageFactory.getPdfImageForPdfObject(this.getPdfObject());
+            if (newPdfImage != null)
+            {
+                this.pdfImage = new ImageView();
+                this.pdfImage.setImage(newPdfImage);
+                this.pdfImage.setPreserveRatio(true);
+
+                this.pdfImage.setOnScroll(this.scrollHandler);
+
+                this.setContent(this.pdfImage);
+            }
+
         }
     }
+
+
     /*
      * #########################################################################
      * #                    Private Methods                                    #

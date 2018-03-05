@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public abstract class PdfImageFactory {
 
-    public static ImageView getPdfImageForPdfObject(PdfObject pdfObject)
+    public static Image getPdfImageForPdfObject(PdfObject pdfObject)
     {
 
         BufferedImage tempImage;
@@ -37,8 +37,6 @@ public abstract class PdfImageFactory {
         }
         Image pdfImage = SwingFXUtils.toFXImage(tempImage, null);
 
-        ImageView pdfImageView = new ImageView(pdfImage);
-
-        return pdfImageView;
+        return pdfImage;
     }
 }

@@ -11,24 +11,3 @@ public class TestLauncher {
     }
 }
 
-        /*
-        BufferedImage tempImage;
-        try
-        {
-            File pdfFile = new File(PATH_TO_PDF);
-            PDDocument pdfDocument = PDDocument.load(pdfFile);
-            PDFRenderer renderer = new PDFRenderer(pdfDocument);
-            tempImage = renderer.renderImageWithDPI(
-                0,
-                100);
-            pdfDocument.close();
-        }
-        catch (IOException ioException)
-        {
-            tempImage = null;
-            ioException.printStackTrace();
-        }
-
-        Image tempImage2 = SwingFXUtils.toFXImage(tempImage, null);
-        this.pdfImage = new ImageView(tempImage2);
-        */

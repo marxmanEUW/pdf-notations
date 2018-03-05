@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 
+import java.io.File;
+
 
 public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
@@ -60,6 +62,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
                 break;
             case Labels.BAR_ITEM_OPEN_PROJECT_NAME:
                 System.out.println("Öffnen Projekt");
+                this.mainFrame.getPdfObjectView().openProject(new File("files/file1.pdf"));
                 //this.openProject();
                 break;
             case Labels.BAR_ITEM_SAVE_PROJECT_NAME:
