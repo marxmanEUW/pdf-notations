@@ -1,6 +1,7 @@
 package fx_handler;
 
 import constants.Labels;
+import fx_threads.FXPdfRenderTask;
 import fx_view.*;
 import fx_view.bar.*;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;

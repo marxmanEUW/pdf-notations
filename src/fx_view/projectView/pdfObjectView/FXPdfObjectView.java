@@ -20,6 +20,9 @@ public class FXPdfObjectView extends SplitPane {
     // Left part of the center component
     private FXPdfArea pdfArea;
 
+    // Right part
+    private Label label2;
+
 
     /*
      * #########################################################################
@@ -48,7 +51,7 @@ public class FXPdfObjectView extends SplitPane {
     {
         this.scrollHandler.initialize(this);
 
-        Label label2 = new Label("Label 2");
+        this.label2 = new Label("Label 2");
 
         this.pdfArea = new FXPdfArea();
         this.pdfArea.initialize(this);
@@ -85,6 +88,11 @@ public class FXPdfObjectView extends SplitPane {
     public FXPdfAreaScrollHandler getScrollHandler()
     {
         return scrollHandler;
+    }
+
+    public Label getLabel2()
+    {
+        return label2;
     }
 
     /*
