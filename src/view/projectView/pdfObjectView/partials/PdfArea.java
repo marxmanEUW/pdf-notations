@@ -213,6 +213,17 @@ public class PdfArea extends JPanel {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the zoom.
+     */
+    private void setZoomEnabled(boolean zoomEnabled)
+    {
+        this.isZoomEnabled = zoomEnabled;
+    }
+
 
     /*
      * #########################################################################
@@ -247,13 +258,6 @@ public class PdfArea extends JPanel {
      * #                    Public Methods                                     #
      * #########################################################################
      */
-
-
-    public void setZoomEnabled(boolean zoomEnabled)
-    {
-        this.isZoomEnabled = zoomEnabled;
-    }
-
     /*
      * @author  yxyxD
      * @changes
@@ -330,6 +334,83 @@ public class PdfArea extends JPanel {
         }
 
         this.repaint();
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Checks if a Notation can be painted at the clicked location.
+     *          That is not allowed if an other Notation would get painted over.
+     */
+    public boolean isNotationInRangeOfOtherNotation(Point point)
+    {
+        boolean isPointInRange = false;
+
+        // get coordinates of actual point (without zoom factor)
+        Point actualPoint = this.getActualCoordinatesOfPoint(point);
+
+        // minimal required distance for no overlapping is two time the radius
+        double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
+
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        {
+            Point notationPoint = notation.getCoordinates();
+
+            double distance = actualPoint.distance(notationPoint);
+            if (distance <= minimalRange)
+            {
+                isPointInRange = true;
+                break;
+            }
+        }
+
+        return isPointInRange;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Notation located in the area that has been clicked
+     *          on (if there is any Notation).
+     */
+    public Notation getClickedNotation(Point point)
+    {
+        //if (this.getPdfObject() == null) { return null; }
+
+        Point actualPoint = this.getActualCoordinatesOfPoint(point);
+
+        Notation clickedNotation = null;
+
+        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        {
+            Point notationPoint = notation.getCoordinates();
+            double distance = actualPoint.distance(notationPoint);
+
+            if (distance <= (double) Environment.NOTATION_RADIUS)
+            {
+                clickedNotation = notation;
+                break;
+            }
+        }
+
+        return clickedNotation;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the actual coordinates of the location clicked on,
+     *          because they differ based on the zoom level.
+     */
+    public Point getActualCoordinatesOfPoint(Point point)
+    {
+        return new Point(
+            (int) (point.getX() / this.zoomLevel),
+            (int) (point.getY() / this.zoomLevel)
+        );
     }
 
 
@@ -434,83 +515,5 @@ public class PdfArea extends JPanel {
         return Math.round((this.zoomLevel + zoomChange)*10.0)/10.0;
     }
 
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
-     * @brief   Checks if a Notation can be painted at the clicked location.
-     *          That is not allowed if an other Notation would get painted over.
-     *
-     *  @todo yxyxD y u du this???!!!?????!1111!!!
-     */
-    public boolean isNotationInRangeOfOtherNotation(Point point)
-    {
-        boolean isPointInRange = false;
-
-        // get coordinates of actual point (without zoom factor)
-        Point actualPoint = this.getActualCoordinatesOfPoint(point);
-
-        // minimal required distance for no overlapping is two time the radius
-        double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
-
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
-        {
-            Point notationPoint = notation.getCoordinates();
-
-            double distance = actualPoint.distance(notationPoint);
-            if (distance <= minimalRange)
-            {
-                isPointInRange = true;
-                break;
-            }
-        }
-
-        return isPointInRange;
-    }
-
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the Notation located in the area that has been clicked
-     *          on (if there is any Notation).
-     */
-    public Notation getClickedNotation(Point point)
-    {
-        //if (this.getPdfObject() == null) { return null; }
-
-        Point actualPoint = this.getActualCoordinatesOfPoint(point);
-
-        Notation clickedNotation = null;
-
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
-        {
-            Point notationPoint = notation.getCoordinates();
-            double distance = actualPoint.distance(notationPoint);
-
-            if (distance <= (double) Environment.NOTATION_RADIUS)
-            {
-                clickedNotation = notation;
-                break;
-            }
-        }
-
-        return clickedNotation;
-    }
-
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the actual coordinates of the location clicked on,
-     *          because they differ based on the zoom level.
-     */
-    public Point getActualCoordinatesOfPoint(Point point)
-    {
-        return new Point(
-            (int) (point.getX() / this.zoomLevel),
-            (int) (point.getY() / this.zoomLevel)
-        );
-    }
 }
 
