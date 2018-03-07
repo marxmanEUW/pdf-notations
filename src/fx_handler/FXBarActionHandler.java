@@ -1,16 +1,23 @@
 package fx_handler;
 
+import constants.Environment;
 import constants.Labels;
+import factories.FXDialogFactory;
+import factories.PdfObjectFactory;
 import fx_threads.FXPdfRenderTask;
 import fx_view.*;
 import fx_view.bar.*;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
+import fx_view.projectView.pdfObjectView.partials.FXPdfArea;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
+import model.PdfObject;
 
 import java.io.File;
+import java.util.Optional;
 
 
 public class FXBarActionHandler implements EventHandler<ActionEvent> {
@@ -58,25 +65,19 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
         switch (identifier) {
             case Labels.BAR_ITEM_NEW_PROJECT_NAME:
-                System.out.println("Neues Projekt");
-                //this.newProject();
+                this.newProject();
                 break;
             case Labels.BAR_ITEM_OPEN_PROJECT_NAME:
-                System.out.println("Öffnen Projekt");
-                this.mainFrame.getPdfObjectView().openProject(new File("files/file1.pdf"));
-                //this.openProject();
+                this.openProject();
                 break;
             case Labels.BAR_ITEM_SAVE_PROJECT_NAME:
-                System.out.println("Speichern Projekt");
-                //this.saveProject();
+                this.saveProject();
                 break;
             case Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-                System.out.println("Speichern unter Projekt");
-                //this.saveAsProject();;
+                this.saveAsProject();
                 break;
             case Labels.BAR_ITEM_CLOSE_PROJECT_NAME:
-                System.out.println("Schließen Projekt");
-                //this.closeProject();
+                this.closeProject();
                 break;
             case Labels.BAR_ITEM_CLOSE_NAME:
                 System.out.println("Schließen Programm");
@@ -123,20 +124,18 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     * @todo implement
      */
-    private void getPdfObject()
+    private PdfObject getPdfObject()
     {
-        //return this.getPdfObjectView().getPdfObject();
+        return this.getPdfObjectView().getPdfObject();
     }
 
     /*
      * @author  marxmanEUW
-     * @todo implement
      */
-    private void getPdfArea()
+    private FXPdfArea getPdfArea()
     {
-        //return this.getPdfObjectView().getPdfArea();
+        return this.getPdfObjectView().getPdfArea();
     }
 
     private FXMainFrameMenuBar getMainFrameMenuBar()
@@ -157,51 +156,39 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
      */
     /*
      * @author  marxmanEUW
-     *
+     */
     private void newProject()
     {
-        File newProjectFile = DialogFactory.getFileFromOpenDialog(
+        File newProjectFile = FXDialogFactory.getFileFromOpenDialog(
             Environment.FILE_TYPE_PDF
         );
 
         if (newProjectFile != null)
         {
             this.getPdfObjectView().openProject(newProjectFile);
-            System.out.println(
-                "Neues Projekt mit gegebener PDF: "
-                    + newProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-
         }
     }
 
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void openProject()
     {
-        File openProjectFile = DialogFactory.getFileFromOpenDialog(
+        File openProjectFile = FXDialogFactory.getFileFromOpenDialog(
             Environment.FILE_TYPE_PDFNOT
         );
 
         if (openProjectFile != null)
         {
             this.getPdfObjectView().openProject(openProjectFile);
-            System.out.println(
-                "Vorhandenes Projekt mit gegebener PDF "
-                    + openProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-            this.getPdfObjectView().openProject(openProjectFile);
         }
     }
 
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void saveProject()
     {
         if (this.getPdfObject().getJsonAbsolutePath() != null)
@@ -210,7 +197,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
         }
         else
         {
-            File saveFile = DialogFactory.getFileFromSaveDialog(
+            File saveFile = FXDialogFactory.getFileFromSaveDialog(
                 Environment.FILE_TYPE_PDFNOT
             );
 
@@ -227,10 +214,10 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void saveAsProject()
     {
-        File saveAsFile = DialogFactory.getFileFromSaveDialog(
+        File saveAsFile = FXDialogFactory.getFileFromSaveDialog(
             Environment.FILE_TYPE_PDFNOT
         );
         if (saveAsFile != null)
@@ -245,13 +232,14 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void closeProject()
     {
-        int userChoice = DialogFactory.showWarningAtCloseDialog();
-        if (userChoice == JOptionPane.YES_OPTION)
+        Optional<ButtonType> userChoice = FXDialogFactory.showWarningAtCloseDialog();
+        if ((userChoice.isPresent()) && (userChoice.get() == ButtonType.OK))
         {
             this.getPdfObjectView().closeProject();
+            System.out.println("asdasd");
         }
     }
 

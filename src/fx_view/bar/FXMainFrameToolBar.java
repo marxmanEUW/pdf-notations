@@ -6,6 +6,7 @@ import fx_handler.FXBarActionHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
 
@@ -70,38 +71,30 @@ public class FXMainFrameToolBar extends ToolBar {
 
         // Image
         this.buttonNewProject.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH)
-                .toURI().toString()
-        ));
+            new Image(Labels.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH))
+        );
         this.buttonOpenProject.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH)
         ));
         this.buttonSaveProject.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH)
         ));
         this.buttonSaveAsProject.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH)
         ));
         this.buttonCloseProject.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH)
         ));
 
         this.buttonZoomOut.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH)
         ));
         this.buttonZoomIn.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH)
         ));
 
         this.buttonAddNotation.setGraphic(new ImageView(
-            new File(Labels.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH)
-                .toURI().toString()
+            new Image(Labels.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH)
         ));
 
         // Action Listener

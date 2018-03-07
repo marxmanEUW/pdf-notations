@@ -85,6 +85,16 @@ public class Notation {
         return (int) this.listOfEntities.get(2).getValue();
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the y-coordinate of the notation.
+     */
+    public Point getCoordinates()
+    {
+        return new Point(this.getX(), this.getY());
+    }
 
     /*
      * #########################################################################
