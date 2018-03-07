@@ -7,6 +7,7 @@ public abstract class Labels {
      */
     public static final String FRAME_TITLE = "PDF-NOTATIONS";
 
+
     /*
      * Menu "File"
      */
@@ -25,6 +26,7 @@ public abstract class Labels {
         public static final String
             BAR_ITEM_CLOSE_NAME = "Beenden";
 
+
     /*
      * Menu "Notation"
      */
@@ -34,6 +36,7 @@ public abstract class Labels {
             BAR_ITEM_ADD_NOTATION_NAME = "Hinzufügen";
         public static final String
             BAR_ITEM_DELETE_NOTATION_NAME = "Löschen";
+
 
     /*
      * Menu "View"
@@ -45,6 +48,7 @@ public abstract class Labels {
         public static final String
             BAR_ITEM_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
+
     /*
      * Menu "Help"
      */
@@ -52,6 +56,7 @@ public abstract class Labels {
 
         public static final String
             BAR_ITEM_ABOUT_NAME = "Über";
+
 
     /*
      * ToolBar
@@ -76,6 +81,7 @@ public abstract class Labels {
     public static final String
         TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "icons/16px/054-price-tag.png";
 
+
     /*
      * NotationSplitPane
      */
@@ -88,6 +94,7 @@ public abstract class Labels {
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
 
+
     /*
      * Waring-At-Close-Dialog
      */
@@ -96,15 +103,15 @@ public abstract class Labels {
         "Beim Schließen gehen alle nicht gespeicherten Änderungen verloren. \n"
         + "Möchten Sie fortfahren?";
 
+
     /*
      * About-Dialog
      */
-
-    public static final String GITHUB_URL =
+    private static final String GITHUB_URL =
         "https://github.com/marxmanEUW/pdf-notations";
-    public static final String LICENSE_URL =
+    private static final String LICENSE_URL =
         "https://www.gnu.org/licenses/gpl.html";
-    public static final String ICON_URL =
+    private static final String ICON_URL =
         "https://icomoon.io/#icons-icomoon";
 
     public static final String ABOUT_TITLE = "PDF Notations";
@@ -125,11 +132,12 @@ public abstract class Labels {
         + "</body></html>"
         ;
 
+
     /*
      *  ErrorDialog
      */
-
     public static final String ERROR_TITLE = "Error";
+
 
     /*
      * Waring-That-Value-Is-No-Int
@@ -139,6 +147,7 @@ public abstract class Labels {
         "Der einegebene Wert ist keine Ganzzahl! \n"
         +  "Eingebener Wert: ";
 
+
     /*
      * Warning-Delete-Notation
      */
@@ -146,4 +155,5 @@ public abstract class Labels {
     public static final String DELETE_NOTATION_TEXT =
         "Soll die Notation wirklich gelöscht werden? \n"
             +  "Notations-ID: ";
+
 }

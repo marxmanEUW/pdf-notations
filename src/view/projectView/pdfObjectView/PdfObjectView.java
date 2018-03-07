@@ -44,7 +44,7 @@ public class PdfObjectView extends JSplitPane {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Constructs a PdfObjectView that holds on PdfObject.
+     * @brief   Constructs a PdfObjectView that holds a PdfObject.
      */
     public PdfObjectView()
     {
@@ -55,7 +55,7 @@ public class PdfObjectView extends JSplitPane {
         // listeners
         this.notationListSelectionListener = new NotationListSelectionListener();
         this.pdfAreaMouseClick = new PdfAreaMouseClick();
-        this.pdfAreaMouseWheel = new PdfAreaMouseWheel();;
+        this.pdfAreaMouseWheel = new PdfAreaMouseWheel();
 
         // GUI elements
         this.pdfScrollPane = new PdfScrollPane();
@@ -160,18 +160,6 @@ public class PdfObjectView extends JSplitPane {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the NotationSplitPane which holds the
-     *          NotationListScrollPane and the EntityScrollPane.
-     */
-    public NotationSplitPane getNotationSplitPane()
-    {
-        return this.notationSplitPane;
-    }
-
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
      * @brief   Returns the NotationListScrollPane held by the
      *          NotationSplitPane.
      */
@@ -256,7 +244,7 @@ public class PdfObjectView extends JSplitPane {
 
     /*
      * #########################################################################
-     * #                    Open Methods                                       #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
     /*

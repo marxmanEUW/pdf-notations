@@ -9,12 +9,14 @@ public abstract class Environment {
      */
     public static final double TOTAL_PERCENTAGE = 100.0;
 
+
     /*
      * GUI
      */
     public static final double PDF_OBJECT_VIEW_DIVIDER_LOCATION = 0.75;
     public static final double NOTATION_SPLIT_PANE_DIVIDER_LOCATION = 0.45;
     public static final int JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT = 10;
+
 
     /*
      * Zoom variables
@@ -35,6 +37,7 @@ public abstract class Environment {
     public static final double ZOOM_IN = 0.1;
     public static final double ZOOM_OUT = -0.1;
 
+
     /*
      * File variables
      */
@@ -46,10 +49,12 @@ public abstract class Environment {
         {"PDF Notations (.*pdfnot)", "pdfnot"}
     };
 
+
     /*
      * MouseWheelMovement-Timer
      */
     public static final int TIMER_DELAY = 100;
+
 
     /*
      * PdfRenderThread
@@ -57,6 +62,7 @@ public abstract class Environment {
     public static final ThreadGroup PDF_RENDER_GROUP
         = new ThreadGroup("pdfRenderGroup");
     public static final int MAX_RENDER_THREADS = 5;
+
 
     /*
      * Coordinate Identifier

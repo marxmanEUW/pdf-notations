@@ -82,7 +82,7 @@ public class EntityTableModel extends AbstractTableModel {
         }
 
         if (
-            this.getPdfObject().getSelectedNotationIndex() ==
+            this.getPdfObject().getSelectedNotationId() ==
                 Environment.SELECTED_NOTATION_NULL_VALUE
             )
         {

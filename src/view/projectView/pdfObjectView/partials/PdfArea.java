@@ -2,8 +2,6 @@ package view.projectView.pdfObjectView.partials;
 
 import constants.Environment;
 import factories.PdfZoomFactory;
-import listeners.PdfAreaMouseClick;
-import listeners.PdfAreaMouseWheel;
 import model.Notation;
 import model.PdfObject;
 
@@ -12,7 +10,6 @@ import threads.PdfRenderThread;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -22,20 +19,18 @@ public class PdfArea extends JPanel {
     // Pdf object view
     private PdfObjectView pdfObjectView;
 
-    // listeners / adapters
-    private PdfAreaMouseClick pdfAreaMouseClick;
-    private PdfAreaMouseWheel pdfAreaMouseWheel;
-
-    // local variables
+    // PDF image
     private BufferedImage pdfImage;
     private int initialImageWidth;
     private int initialImageHeight;
     private double zoomLevel;
 
-    private boolean addingNotation;
-
+    // pdfRenderThread
     private PdfRenderThread pdfRenderThread;
+
+    // state variables
     private boolean isZoomEnabled;
+    private boolean addingNotation;
 
     /*
      * #########################################################################
@@ -69,11 +64,8 @@ public class PdfArea extends JPanel {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfAreaMouseClick = this.pdfObjectView.getPdfAreaMouseClick();
-        this.pdfAreaMouseWheel = this.pdfObjectView.getPdfAreaMouseWheel();
-
-        this.addMouseListener(this.pdfAreaMouseClick);
-        this.addMouseWheelListener(this.pdfAreaMouseWheel);
+        this.addMouseListener(this.pdfObjectView.getPdfAreaMouseClick());
+        this.addMouseWheelListener(this.pdfObjectView.getPdfAreaMouseWheel());
 
         this.refreshPdfArea();
     }
@@ -84,14 +76,12 @@ public class PdfArea extends JPanel {
      * #                    Getter                                             #
      * #########################################################################
      */
-
     /*
      * @author  yxyxD
      * @changes
      *      2018-02-19 (yxyxD)  created
      * @brief   Returns the pdfImage of the PdfArea.
      */
-
     public BufferedImage getPdfImage()
     {
         return this.pdfImage;
@@ -167,11 +157,11 @@ public class PdfArea extends JPanel {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the current status of the zoom (enabled or disabled).
+     * @brief   Returns whether or not the zoom is disabled.
      */
-    public boolean isZoomEnabled()
+    public boolean isZoomDisabled()
     {
-        return this.isZoomEnabled;
+        return !this.isZoomEnabled;
     }
 
 
@@ -353,7 +343,9 @@ public class PdfArea extends JPanel {
         // minimal required distance for no overlapping is two time the radius
         double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
             Point notationPoint = notation.getCoordinates();
 
@@ -383,7 +375,9 @@ public class PdfArea extends JPanel {
 
         Notation clickedNotation = null;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
             Point notationPoint = notation.getCoordinates();
             double distance = actualPoint.distance(notationPoint);
@@ -475,9 +469,11 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
-            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
+            if (notation.getId() == this.getPdfObject().getSelectedNotationId())
             {
                 graphics.setColor(Environment.NOTATION_SELECTED_COLOR);
             }
@@ -486,12 +482,18 @@ public class PdfArea extends JPanel {
                 graphics.setColor(Environment.NOTATION_STANDARD_COLOR);
             }
 
-            int circleX = (int) ((double) (notation.getX() - Environment.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int circleY = (int) ((double) (notation.getY() - Environment.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int circleDiameter = (int) (((double) Environment.NOTATION_RADIUS * 2.0)
-                * this.zoomLevel);
+            int circleX = (int)
+                ((double) (notation.getX() - Environment.NOTATION_RADIUS)
+                    * this.zoomLevel
+                );
+            int circleY = (int)
+                ((double) (notation.getY() - Environment.NOTATION_RADIUS)
+                    * this.zoomLevel
+                );
+            int circleDiameter = (int)
+                (((double) Environment.NOTATION_RADIUS * 2.0)
+                    * this.zoomLevel
+                );
 
             graphics.fillOval(
                 circleX,
@@ -512,7 +514,7 @@ public class PdfArea extends JPanel {
 
     private double calculateAndReturnNewZoomLevel(double zoomChange)
     {
-        return Math.round((this.zoomLevel + zoomChange)*10.0)/10.0;
+        return Math.round((this.zoomLevel + zoomChange) * 10.0) / 10.0;
     }
 
 }

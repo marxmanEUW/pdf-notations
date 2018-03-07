@@ -165,9 +165,10 @@ public class MainFrame extends JFrame {
     /*
      * @author  marxmanEUW
      * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     *      2018-03-02 (AbellaMort)  Changed errorhandling to display errors in
-     *          errordialog
+     *      2018-02-12 (marxmanEUW) created
+     *      2018-03-02 (AbellaMort) Changed error-handling to display errors in
+     *                              error-dialog
+     *      2018-03-07  (yxyxD)     handling all exception on one catch-statement
      * @brief   Sets the look and feel of the program.
      */
     private void setLookAndFeel()
@@ -175,23 +176,10 @@ public class MainFrame extends JFrame {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         }
-        catch (ClassNotFoundException classNotFoundException)
+        catch (Exception exception)
         {
-            DialogFactory.showErrorDialog(classNotFoundException.getMessage());
-        }
-        catch (InstantiationException instantiationException)
-        {
-            DialogFactory.showErrorDialog(instantiationException.getMessage());
-        }
-        catch (IllegalAccessException illegalAccessException)
-        {
-            DialogFactory.showErrorDialog(illegalAccessException.getMessage());
-        }
-        catch (UnsupportedLookAndFeelException unsupportedLookAndFeelException)
-        {
-            DialogFactory.showErrorDialog(
-                unsupportedLookAndFeelException.getMessage()
-            );
+            DialogFactory.showErrorDialog(exception.getMessage());
         }
     }
+
 }

@@ -59,7 +59,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
             if(lsm.isSelectionEmpty())
             {
-                this.getPdfObject().setSelectedNotationIndex(
+                this.getPdfObject().setSelectedNotationId(
                     Environment.SELECTED_NOTATION_NULL_VALUE
                 );
             }
@@ -71,7 +71,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
                         getNotationListScrollPane().getNotationListTable();
 
                     int selectedRow = listTable.getSelectedRow();
-                    this.getPdfObject().setSelectedNotationIndex(
+                    this.getPdfObject().setSelectedNotationId(
                         (int) listTable.getValueAt(selectedRow, 0)
                     );
                 }
