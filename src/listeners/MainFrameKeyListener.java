@@ -1,6 +1,5 @@
 package listeners;
 
-import model.PdfObject;
 import view.MainFrame;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
@@ -44,17 +43,6 @@ public class MainFrameKeyListener implements KeyListener {
     private PdfObjectView getPdfObjectView()
     {
         return this.mainFrame.getPdfObjectView();
-    }
-
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     * @brief   Returns the PdfObject of the PdfObjectView.
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.getPdfObjectView().getPdfObject();
     }
 
     /*

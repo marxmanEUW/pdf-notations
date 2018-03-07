@@ -5,8 +5,6 @@ import factories.DialogFactory;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class EditorPaneListener implements HyperlinkListener {
 
@@ -19,7 +17,6 @@ public class EditorPaneListener implements HyperlinkListener {
      *          default browser when a hyperlink is clicked
      *
      */
-
     @Override
     public void hyperlinkUpdate(HyperlinkEvent e)
     {
@@ -28,13 +25,9 @@ public class EditorPaneListener implements HyperlinkListener {
           try {
               Desktop.getDesktop().browse(e.getURL().toURI());
           }
-          catch (URISyntaxException syntaxException)
+          catch (Exception exception)
           {
-              DialogFactory.showErrorDialog(syntaxException.getMessage());
-          }
-          catch (IOException ioException)
-          {
-              DialogFactory.showErrorDialog(ioException.getMessage());
+              DialogFactory.showErrorDialog(exception.getMessage());
           }
       }
     }

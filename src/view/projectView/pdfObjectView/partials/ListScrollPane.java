@@ -99,7 +99,7 @@ public class ListScrollPane extends JScrollPane {
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created
-     * @brief   Repaints the ListSCrollPane.
+     * @brief   Repaints the ListScrollPane.
      */
     @Override
     protected void paintComponent(Graphics g)

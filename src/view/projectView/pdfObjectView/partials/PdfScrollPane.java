@@ -1,15 +1,12 @@
 package view.projectView.pdfObjectView.partials;
 
 import constants.Environment;
-import model.PdfObject;
 
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 
 public class PdfScrollPane extends JScrollPane {
-
-    private PdfObjectView pdfObjectView;
 
 
     /*
@@ -50,9 +47,7 @@ public class PdfScrollPane extends JScrollPane {
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-
-        this.getViewport().add(this.pdfObjectView.getPdfArea());
+        this.getViewport().add(pdfObjectView.getPdfArea());
     }
 }
 

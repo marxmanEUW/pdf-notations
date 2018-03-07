@@ -111,11 +111,11 @@ public class EntityTableModel extends AbstractTableModel {
         {
             switch (rowIndex)
             {
-                case 0: return "Id";
-                case 1: return "Name";
-                case 2: return "X";
-                case 3: return "Y";
-                case 4: return "Beschreibung";
+                case 0: return Labels.ENTITY_TABLE_MODEL_PROPERTY_ID;
+                case 1: return Labels.ENTITY_TABLE_MODEL_PROPERTY_NAME;
+                case 2: return Labels.ENTITY_TABLE_MODEL_PROPERTY_X;
+                case 3: return Labels.ENTITY_TABLE_MODEL_PROPERTY_Y;
+                case 4: return Labels.ENTITY_TABLE_MODEL_PROPERTY_DESCRIPTION;
                 default: return null;
             }
         }

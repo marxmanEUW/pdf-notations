@@ -235,7 +235,7 @@ public class BarActionListener implements ActionListener {
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created
-     * @brief   Gets new pdfnot-FileLocation and saves Poject to this file.
+     * @brief   Gets new pdfnot-FileLocation and saves Project to this file.
      */
     private void saveAsProject()
     {

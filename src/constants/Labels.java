@@ -90,9 +90,20 @@ public abstract class Labels {
     public static final String
         LIST_TABLE_MODEL_COLUMN_2_NAME = "Name";
     public static final String
-        ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Name";
+        ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Eigenschaft";
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
+
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_ID =  "Id";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_NAME = "Name";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_X = "X";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_Y = "Y";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_DESCRIPTION = "Beschreibung";
 
 
     /*
