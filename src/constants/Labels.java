@@ -63,23 +63,23 @@ public abstract class Labels {
      * Icon Path
      */
     public static final String
-        TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH = "icons/16px/037-file-empty.png";
+        TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH = "/icons/file-empty-16px.png";
     public static final String
-        TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH = "icons/16px/049-folder-open.png";
+        TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH = "/icons/folder-open-16px.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH = "/icons/floppy-disk-16px.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH = "/icons/floppy-disk-16px.png";
     public static final String
-        TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH = "icons/16px/277-exit.png";
+        TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH = "/icons/exit-16px.png";
 
     public static final String
-        TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH = "icons/16px/136-zoom-in.png";
+        TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH = "/icons/zoom-in-16px.png";
     public static final String
-        TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH = "icons/16px/137-zoom-out.png";
+        TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH = "/icons/zoom-out-16px.png";
 
     public static final String
-        TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "icons/16px/054-price-tag.png";
+        TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "/icons/price-tag-16px.png";
 
 
     /*

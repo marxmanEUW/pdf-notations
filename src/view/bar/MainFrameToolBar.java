@@ -100,16 +100,16 @@ public class MainFrameToolBar extends JToolBar {
 
 
         // Image
-        this.buttonNewProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH));
-        this.buttonOpenProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH));
-        this.buttonSaveProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH));
-        this.buttonSaveAsProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH));
-        this.buttonCloseProject.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH));
+        this.buttonNewProject.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH)));
+        this.buttonOpenProject.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH)));
+        this.buttonSaveProject.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH)));
+        this.buttonSaveAsProject.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH)));
+        this.buttonCloseProject.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH)));
 
-        this.buttonZoomOut.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH));
-        this.buttonZoomIn.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH));
+        this.buttonZoomOut.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH)));
+        this.buttonZoomIn.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH)));
 
-        this.buttonAddNotation.setIcon(new ImageIcon(Labels.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH));
+        this.buttonAddNotation.setIcon(new ImageIcon(getClass().getResource(Labels.TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH)));
 
 
         // Action Listener
