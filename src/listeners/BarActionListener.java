@@ -43,59 +43,6 @@ public class BarActionListener implements ActionListener {
 
     /*
      * #########################################################################
-     * #                    Overrides                                          #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     * @brief   Distinguishes which button was pressed.
-     */
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        switch (e.getActionCommand()) {
-            case Labels.BAR_ITEM_NEW_PROJECT_NAME:
-                this.newProject();
-                break;
-            case Labels.BAR_ITEM_OPEN_PROJECT_NAME:
-                this.openProject();
-                break;
-            case Labels.BAR_ITEM_SAVE_PROJECT_NAME:
-                this.saveProject();
-                break;
-            case Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-                this.saveAsProject();;
-                break;
-            case Labels.BAR_ITEM_CLOSE_PROJECT_NAME:
-                this.closeProject();
-                break;
-            case Labels.BAR_ITEM_CLOSE_NAME:
-                this.closeProgram();
-                break;
-            case Labels.BAR_ITEM_ADD_NOTATION_NAME:
-                this.addNotation();
-                break;
-            case Labels.BAR_ITEM_DELETE_NOTATION_NAME:
-                this.deleteNotation();
-                break;
-            case Labels.BAR_ITEM_ZOOM_IN_NAME:
-                this.zoomIn();
-                break;
-            case Labels.BAR_ITEM_ZOOM_OUT_NAME:
-                this.zoomOut();
-                break;
-            case Labels.BAR_ITEM_ABOUT_NAME:
-                showAbout();
-                break;
-        }
-
-        this.updateBars();
-    }
-
-    /*
-     * #########################################################################
      * #                    Getter                                             #
      * #########################################################################
      */
@@ -125,7 +72,7 @@ public class BarActionListener implements ActionListener {
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created
-     * @brief   Returns the PdfArea.
+     * @brief   Returns the PdfArea of the PdfObjectView.
      */
     private PdfArea getPdfArea()
     {
@@ -136,7 +83,7 @@ public class BarActionListener implements ActionListener {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the MainFrameMenuBar.
+     * @brief   Returns the MenuBar of the MainFrame.
      */
     private MainFrameMenuBar getMainFrameMenuBar()
     {
@@ -147,11 +94,65 @@ public class BarActionListener implements ActionListener {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the MainFrameToolBar.
+     * @brief   Returns the ToolBar of the MainFrame.
      */
     private MainFrameToolBar getMainFrameToolBar()
     {
         return this.mainFrame.getToolBar();
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Distinguishes which button was pressed.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        switch (e.getActionCommand()) {
+            case Labels.BAR_ITEM_NEW_PROJECT_NAME:
+                this.newProject();
+                break;
+            case Labels.BAR_ITEM_OPEN_PROJECT_NAME:
+                this.openProject();
+                break;
+            case Labels.BAR_ITEM_SAVE_PROJECT_NAME:
+                this.saveProject();
+                break;
+            case Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME:
+                this.saveAsProject();
+                break;
+            case Labels.BAR_ITEM_CLOSE_PROJECT_NAME:
+                this.closeProject();
+                break;
+            case Labels.BAR_ITEM_CLOSE_NAME:
+                this.closeProgram();
+                break;
+            case Labels.BAR_ITEM_ADD_NOTATION_NAME:
+                this.addNotation();
+                break;
+            case Labels.BAR_ITEM_DELETE_NOTATION_NAME:
+                this.deleteNotation();
+                break;
+            case Labels.BAR_ITEM_ZOOM_IN_NAME:
+                this.zoomIn();
+                break;
+            case Labels.BAR_ITEM_ZOOM_OUT_NAME:
+                this.zoomOut();
+                break;
+            case Labels.BAR_ITEM_ABOUT_NAME:
+                showAbout();
+                break;
+        }
+
+        this.updateBars();
     }
 
 
@@ -309,7 +310,7 @@ public class BarActionListener implements ActionListener {
     private void deleteNotation()
     {
         int selectedNotationId = this.getPdfObject().getSelectedNotationIndex();
-        if (selectedNotationId == PdfObject.SELECTED_NOTATION_NULL_VALUE)
+        if (selectedNotationId == Environment.SELECTED_NOTATION_NULL_VALUE)
         {
             return;
         }

@@ -1,13 +1,10 @@
 package model;
 
+import constants.Environment;
+
 import java.awt.*;
 
 public class Notation {
-
-    private static final String STANDARD_NAME = "Punkt";
-    private static final String STANDARD_DESCRIPTION = "Beschreibung";
-
-    public static final int INFORMATION_COUNT = 3;
 
     private int id;
     private String name;
@@ -30,9 +27,9 @@ public class Notation {
     public Notation(Integer id, Point coordinates)
     {
         this.id = id;
-        this.name = STANDARD_NAME + "_" + Integer.toString(id);
+        this.name = Environment.STANDARD_NAME + "_" + Integer.toString(id);
         this.coordinates = coordinates;
-        this.description = STANDARD_DESCRIPTION;
+        this.description = Environment.STANDARD_DESCRIPTION;
     }
 
 
@@ -119,17 +116,6 @@ public class Notation {
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     * @brief   Sets the coordinates of the notation.
-     */
-    public void setCoordinates(Point coordinates)
-    {
-        this.coordinates = coordinates;
     }
 
     /*

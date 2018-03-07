@@ -1,7 +1,7 @@
 package listeners;
 
+import constants.Environment;
 import model.PdfObject;
-import view.projectView.pdfObjectView.partials.NotationSplitPane;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     /*
@@ -47,7 +47,8 @@ public class NotationListSelectionListener implements ListSelectionListener {
     {
         if(this.getPdfObject() != null)
         {
-            JTable entityTable = this.pdfObjectView.getEntityScrollPane().getNotationEntityTable();
+            JTable entityTable = this.pdfObjectView.
+                getEntityScrollPane().getNotationEntityTable();
 
             if (entityTable.isEditing())
             {
@@ -59,20 +60,19 @@ public class NotationListSelectionListener implements ListSelectionListener {
             if(lsm.isSelectionEmpty())
             {
                 this.getPdfObject().setSelectedNotationIndex(
-                    PdfObject.SELECTED_NOTATION_NULL_VALUE
+                    Environment.SELECTED_NOTATION_NULL_VALUE
                 );
             }
             else
             {
                 if(!lsm.getValueIsAdjusting())
                 {
-                    JTable notationList = this.pdfObjectView.getNotationListScrollPane().
-                        getNotationListTable();
+                    JTable listTable = this.pdfObjectView.
+                        getNotationListScrollPane().getNotationListTable();
 
-
-                    int selectedRow = notationList.getSelectedRow();
+                    int selectedRow = listTable.getSelectedRow();
                     this.getPdfObject().setSelectedNotationIndex(
-                        (int) notationList.getValueAt(selectedRow, 0)
+                        (int) listTable.getValueAt(selectedRow, 0)
                     );
                 }
             }
@@ -85,7 +85,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*

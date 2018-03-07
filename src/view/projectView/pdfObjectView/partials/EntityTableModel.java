@@ -51,7 +51,7 @@ public class EntityTableModel extends AbstractTableModel {
         }
         else
         {
-            return Notation.INFORMATION_COUNT + 2;
+            return Environment.INFORMATION_COUNT + 2;
         }
     }
 
@@ -83,7 +83,7 @@ public class EntityTableModel extends AbstractTableModel {
 
         if (
             this.getPdfObject().getSelectedNotationIndex() ==
-                PdfObject.SELECTED_NOTATION_NULL_VALUE
+                Environment.SELECTED_NOTATION_NULL_VALUE
             )
         {
             return null;
@@ -102,7 +102,8 @@ public class EntityTableModel extends AbstractTableModel {
                 case 3:
                     return this.getPdfObject().getSelectedNotation().getY();
                 case 4:
-                    return this.getPdfObject().getSelectedNotation().getDescription();
+                    return this.getPdfObject().getSelectedNotation().
+                        getDescription();
                 default: return null;
             }
         }
@@ -152,18 +153,18 @@ public class EntityTableModel extends AbstractTableModel {
      * @changes
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns if a specific cell should be editable.
+     *          Make full first column and ID cell not editable.
      */
     public boolean isCellEditable(int rowIndex, int columnIndex)
     {
-        // make full first column and ID cell not editable
-        if(rowIndex == 0 || columnIndex == 0)
+        boolean returnValue = true;
+
+        if (rowIndex == 0 || columnIndex == 0)
         {
-            return false;
+            returnValue = false;
         }
-        else
-        {
-            return true;
-        }
+
+        return returnValue;
     }
 
     /*
@@ -185,10 +186,16 @@ public class EntityTableModel extends AbstractTableModel {
                 this.pdfObjectView.getNotationListScrollPane().repaint();
                 break;
             case 2:
-                setOneCoordinate(Environment.X_IDENTIFIER, (String) editedValue);
+                setOneCoordinate(
+                    Environment.X_IDENTIFIER,
+                    (String) editedValue
+                );
                 break;
             case 3:
-                setOneCoordinate(Environment.Y_IDENTIFIER, (String) editedValue);
+                setOneCoordinate(
+                    Environment.Y_IDENTIFIER,
+                    (String) editedValue
+                );
                 break;
             case 4:
                 selectedNotation.setDescription((String) editedValue);

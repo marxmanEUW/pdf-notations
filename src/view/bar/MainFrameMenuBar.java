@@ -3,6 +3,7 @@ package view.bar;
 import constants.KeyStrokes;
 import constants.Labels;
 import listeners.BarActionListener;
+import view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -75,9 +76,9 @@ public class MainFrameMenuBar extends JMenuBar {
     /*
      * @author  yxyxD
      */
-    public void initialize(BarActionListener barActionListener)
+    public void initialize(MainFrame mainFrame)
     {
-        this.barActionListener = barActionListener;
+        this.barActionListener = mainFrame.getBarActionListener();
 
         this.setupMenuFile();
         this.setupMenuNotation();

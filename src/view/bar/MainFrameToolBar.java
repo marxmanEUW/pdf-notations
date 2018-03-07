@@ -3,6 +3,7 @@ package view.bar;
 import constants.Environment;
 import constants.Labels;
 import listeners.BarActionListener;
+import view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,18 +18,21 @@ public class MainFrameToolBar extends JToolBar {
 
     private JButton buttonZoomIn;
     private JButton buttonZoomOut;
-    //private JButton buttonZoomFitToPage;
 
     private JButton buttonAddNotation;
 
     private JLabel labelZoomLevel;
 
-    private BarActionListener barActionListener;
-
     /*
      * #########################################################################
      * #                    Constructor                                        #
      * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the ToolBar for the MainFrame.
      */
     public MainFrameToolBar()
     {
@@ -40,10 +44,8 @@ public class MainFrameToolBar extends JToolBar {
 
         this.buttonZoomIn = new JButton();
         this.buttonZoomOut = new JButton();
-        //this.buttonZoomFitToPage = new JButton();
 
         this.buttonAddNotation = new JButton();
-        //this.buttonShowNotationList = new JButton();
 
         this.labelZoomLevel = new JLabel("");
         Font labelFont = new Font(
@@ -60,9 +62,15 @@ public class MainFrameToolBar extends JToolBar {
      * #                    Initialising                                       #
      * #########################################################################
      */
-    public void initialize(BarActionListener barActionListener)
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initialises the MainFrameToolBar.
+     */
+    public void initialize(MainFrame mainFrame)
     {
-        this.barActionListener = barActionListener;
+        BarActionListener barActionListener = mainFrame.getBarActionListener();
 
 
         // ActionCommand
@@ -105,16 +113,16 @@ public class MainFrameToolBar extends JToolBar {
 
 
         // Action Listener
-        this.buttonNewProject.addActionListener(this.barActionListener);
-        this.buttonOpenProject.addActionListener(this.barActionListener);
-        this.buttonSaveProject.addActionListener(this.barActionListener);
-        this.buttonSaveAsProject.addActionListener(this.barActionListener);
-        this.buttonCloseProject.addActionListener(this.barActionListener);
+        this.buttonNewProject.addActionListener(barActionListener);
+        this.buttonOpenProject.addActionListener(barActionListener);
+        this.buttonSaveProject.addActionListener(barActionListener);
+        this.buttonSaveAsProject.addActionListener(barActionListener);
+        this.buttonCloseProject.addActionListener(barActionListener);
 
-        this.buttonZoomOut.addActionListener(this.barActionListener);
-        this.buttonZoomIn.addActionListener(this.barActionListener);
+        this.buttonZoomOut.addActionListener(barActionListener);
+        this.buttonZoomIn.addActionListener(barActionListener);
 
-        this.buttonAddNotation.addActionListener(this.barActionListener);
+        this.buttonAddNotation.addActionListener(barActionListener);
 
         // add
         this.add(this.buttonNewProject);

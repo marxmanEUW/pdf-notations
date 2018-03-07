@@ -1,6 +1,5 @@
 package view.projectView.pdfObjectView.partials;
 
-import listeners.NotationListSelectionListener;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -13,7 +12,6 @@ public class ListScrollPane extends JScrollPane {
 
     private ListTableModel listTableModel;
     private ListSelectionModel listSelectionModel;
-    private NotationListSelectionListener notationListSelectionListener;
 
     private JTable notationListTable;
 
@@ -32,8 +30,12 @@ public class ListScrollPane extends JScrollPane {
      */
     public ListScrollPane()
     {
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setHorizontalScrollBarPolicy(
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+        this.setVerticalScrollBarPolicy(
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+        );
 
         this.notationListTable = new JTable();
 
@@ -57,18 +59,16 @@ public class ListScrollPane extends JScrollPane {
         this.pdfObjectView = pdfObjectView;
 
         this.listTableModel = this.pdfObjectView.getListTableModel();
-        this.notationListSelectionListener =
-            this.pdfObjectView.getNotationListSelectionListener();
-
-
 
         this.notationListTable.setModel(this.listTableModel);
 
         this.listSelectionModel.addListSelectionListener(
-            this.notationListSelectionListener
+            this.pdfObjectView.getNotationListSelectionListener()
         );
         this.notationListTable.setSelectionModel(this.listSelectionModel);
-        this.notationListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.notationListTable.setSelectionMode(
+            ListSelectionModel.SINGLE_SELECTION
+        );
 
         this.getViewport().add(notationListTable);
     }
@@ -86,7 +86,7 @@ public class ListScrollPane extends JScrollPane {
      */
     public JTable getNotationListTable()
     {
-        return notationListTable;
+        return this.notationListTable;
     }
 
 
@@ -134,9 +134,11 @@ public class ListScrollPane extends JScrollPane {
     {
         int rowId = notationId;
 
-        for (int i = 0; i < this.getPdfObject().getListOfNotations().size(); i++)
+        for (int i = 0; i < this.getPdfObject().getListOfNotations().size();
+             i++)
         {
-            if (notationId == (int) this.listTableModel.getValueAt(i, 0))
+            if (notationId ==
+                (int) this.listTableModel.getValueAt(i, 0))
             {
                 rowId = i;
                 break;

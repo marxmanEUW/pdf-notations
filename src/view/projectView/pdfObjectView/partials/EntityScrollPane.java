@@ -1,14 +1,11 @@
 package view.projectView.pdfObjectView.partials;
 
-import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class EntityScrollPane extends JScrollPane {
-
-    private PdfObjectView pdfObjectView;
 
     private EntityTableModel entityTableModel;
 
@@ -29,8 +26,12 @@ public class EntityScrollPane extends JScrollPane {
      */
     public EntityScrollPane()
     {
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setHorizontalScrollBarPolicy(
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+        this.setVerticalScrollBarPolicy(
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+        );
 
         this.notationEntityTable = new JTable();
     }
@@ -49,9 +50,7 @@ public class EntityScrollPane extends JScrollPane {
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-
-        this.entityTableModel = this.pdfObjectView.getEntityTableModel();
+        this.entityTableModel = pdfObjectView.getEntityTableModel();
 
         this.notationEntityTable.setModel(this.entityTableModel);
         this.getViewport().add(notationEntityTable);
@@ -71,7 +70,7 @@ public class EntityScrollPane extends JScrollPane {
      */
     public JTable getNotationEntityTable()
     {
-        return notationEntityTable;
+        return this.notationEntityTable;
     }
 
 
@@ -107,22 +106,5 @@ public class EntityScrollPane extends JScrollPane {
     public void updateTable()
     {
         this.entityTableModel.fireTableDataChanged();
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     * @brief   Returns the PdfObject of the PdfObjectView.
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.pdfObjectView.getPdfObject();
     }
 }

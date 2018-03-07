@@ -9,6 +9,11 @@ import java.awt.event.WindowEvent;
 public class MainFrameWindowAdapter extends WindowAdapter {
 
     /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created

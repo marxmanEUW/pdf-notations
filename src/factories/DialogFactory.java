@@ -23,7 +23,10 @@ public abstract class DialogFactory {
         File openFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], Environment.FILE_TYPE_ARRAY[fileType][1]));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(
+            Environment.FILE_TYPE_ARRAY[fileType][0],
+            Environment.FILE_TYPE_ARRAY[fileType][1])
+        );
 
         int state = fileChooser.showOpenDialog(null);
 
@@ -50,8 +53,13 @@ public abstract class DialogFactory {
         File saveFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], fileExtension));
-        fileChooser.setSelectedFile(new File("newFile." + fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(
+            Environment.FILE_TYPE_ARRAY[fileType][0],
+            fileExtension)
+        );
+        fileChooser.setSelectedFile(
+            new File("newFile." + fileExtension)
+        );
 
         int state = fileChooser.showSaveDialog(null);
 
@@ -61,7 +69,9 @@ public abstract class DialogFactory {
 
             if (!saveFile.getAbsolutePath().endsWith("." + fileExtension))
             {
-                saveFile = new File(saveFile.getAbsolutePath() + "." + fileExtension);
+                saveFile = new File(
+                    saveFile.getAbsolutePath() + "." + fileExtension
+                );
             }
         }
 

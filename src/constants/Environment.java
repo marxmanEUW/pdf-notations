@@ -13,6 +13,7 @@ public abstract class Environment {
      * GUI
      */
     public static final double PDF_OBJECT_VIEW_DIVIDER_LOCATION = 0.75;
+    public static final double NOTATION_SPLIT_PANE_DIVIDER_LOCATION = 0.45;
     public static final int JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT = 10;
 
     /*
@@ -62,4 +63,17 @@ public abstract class Environment {
      */
     public static final char X_IDENTIFIER = 'x';
     public static final char Y_IDENTIFIER = 'y';
+
+    /*
+     * PdfObject
+     */
+    public static final int SELECTED_NOTATION_NULL_VALUE = -1;
+
+    /*
+     * Notation
+     */
+    public static final String STANDARD_NAME = "Notation";
+    public static final String STANDARD_DESCRIPTION = "Beschreibung";
+
+    public static final int INFORMATION_COUNT = 3;
 }

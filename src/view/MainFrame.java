@@ -85,8 +85,8 @@ public class MainFrame extends JFrame {
 
         this.barActionListener.initialize(this);
 
-        this.menuBar.initialize(this.barActionListener);
-        this.toolBar.initialize(this.barActionListener);
+        this.menuBar.initialize(this);
+        this.toolBar.initialize(this);
 
         this.pdfObjectView.initialize(this);
 
@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the Toolbar of the MainFrame
+     * @brief   Returns the Toolbar of the MainFrame.
      */
     public MainFrameToolBar getToolBar()
     {
@@ -139,13 +139,23 @@ public class MainFrame extends JFrame {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the PdfObjectView of the MainFrame
+     * @brief   Returns the PdfObjectView of the MainFrame.
      */
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-07 (marxmanEUW)  created
+     * @brief   Returns the BarActionListener of the MainFrame.
+     */
+    public BarActionListener getBarActionListener()
+    {
+        return barActionListener;
+    }
 
     /*
      * #########################################################################

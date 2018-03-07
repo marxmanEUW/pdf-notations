@@ -1,12 +1,12 @@
 package model;
 
+import constants.Environment;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PdfObject {
-
-    public static final int SELECTED_NOTATION_NULL_VALUE = -1;
 
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
@@ -29,10 +29,9 @@ public class PdfObject {
     public PdfObject(String pdfAbsolutePath)
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
-        //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new HashMap<>();
-        this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
+        this.selectedNotationIndex = Environment.SELECTED_NOTATION_NULL_VALUE;
     }
 
 
@@ -98,7 +97,8 @@ public class PdfObject {
      */
     public Notation getSelectedNotation()
     {
-        if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
+        if (this.selectedNotationIndex !=
+            Environment.SELECTED_NOTATION_NULL_VALUE)
         {
             return this.listOfNotations.get(selectedNotationIndex);
         }
@@ -127,9 +127,7 @@ public class PdfObject {
      */
     public ArrayList<Notation> getListOfNotationsAsList()
     {
-        ArrayList<Notation> listOfNotationsAsList = new ArrayList<>();
-        listOfNotationsAsList.addAll(this.listOfNotations.values());
-        return listOfNotationsAsList;
+        return new ArrayList<>(this.listOfNotations.values());
     }
 
     /*
