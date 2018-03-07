@@ -343,7 +343,9 @@ public class PdfArea extends JPanel {
         // minimal required distance for no overlapping is two time the radius
         double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
             Point notationPoint = notation.getCoordinates();
 
@@ -373,7 +375,9 @@ public class PdfArea extends JPanel {
 
         Notation clickedNotation = null;
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
             Point notationPoint = notation.getCoordinates();
             double distance = actualPoint.distance(notationPoint);
@@ -465,9 +469,11 @@ public class PdfArea extends JPanel {
         if (this.getPdfObject() == null) { return; }
         if (this.getPdfObject().getListOfPoints() == null) { return; }
 
-        for (Notation notation : this.getPdfObject().getListOfNotations().values())
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+        )
         {
-            if (notation.getId() == this.getPdfObject().getSelectedNotationIndex())
+            if (notation.getId() == this.getPdfObject().getSelectedNotationId())
             {
                 graphics.setColor(Environment.NOTATION_SELECTED_COLOR);
             }
@@ -476,12 +482,18 @@ public class PdfArea extends JPanel {
                 graphics.setColor(Environment.NOTATION_STANDARD_COLOR);
             }
 
-            int circleX = (int) ((double) (notation.getX() - Environment.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int circleY = (int) ((double) (notation.getY() - Environment.NOTATION_RADIUS)
-                * this.zoomLevel);
-            int circleDiameter = (int) (((double) Environment.NOTATION_RADIUS * 2.0)
-                * this.zoomLevel);
+            int circleX = (int)
+                ((double) (notation.getX() - Environment.NOTATION_RADIUS)
+                    * this.zoomLevel
+                );
+            int circleY = (int)
+                ((double) (notation.getY() - Environment.NOTATION_RADIUS)
+                    * this.zoomLevel
+                );
+            int circleDiameter = (int)
+                (((double) Environment.NOTATION_RADIUS * 2.0)
+                    * this.zoomLevel
+                );
 
             graphics.fillOval(
                 circleX,
@@ -502,7 +514,7 @@ public class PdfArea extends JPanel {
 
     private double calculateAndReturnNewZoomLevel(double zoomChange)
     {
-        return Math.round((this.zoomLevel + zoomChange)*10.0)/10.0;
+        return Math.round((this.zoomLevel + zoomChange) * 10.0) / 10.0;
     }
 
 }

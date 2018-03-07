@@ -12,7 +12,7 @@ public class PdfObject {
     private String jsonAbsolutePath;
 
     private HashMap<Integer, Notation> listOfNotations;
-    private int selectedNotationIndex;
+    private int selectedNotationId;
 
 
     /*
@@ -32,7 +32,7 @@ public class PdfObject {
         //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new HashMap<>();
-        this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
+        this.selectedNotationId = PdfObject.SELECTED_NOTATION_NULL_VALUE;
     }
 
 
@@ -98,9 +98,9 @@ public class PdfObject {
      */
     public Notation getSelectedNotation()
     {
-        if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
+        if (this.selectedNotationId != SELECTED_NOTATION_NULL_VALUE)
         {
-            return this.listOfNotations.get(selectedNotationIndex);
+            return this.listOfNotations.get(selectedNotationId);
         }
         else
         {
@@ -114,9 +114,9 @@ public class PdfObject {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns the ID/index of the selected notation of the PdfObject.
      */
-    public int getSelectedNotationIndex()
+    public int getSelectedNotationId()
     {
-        return selectedNotationIndex;
+        return selectedNotationId;
     }
 
     /*
@@ -154,9 +154,9 @@ public class PdfObject {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Sets the SelectedNotationIndex of the PdfObject.
      */
-    public void setSelectedNotationIndex(int selectedNotationIndex)
+    public void setSelectedNotationId(int selectedNotationId)
     {
-        this.selectedNotationIndex = selectedNotationIndex;
+        this.selectedNotationId = selectedNotationId;
     }
 
 
@@ -191,7 +191,7 @@ public class PdfObject {
      */
     public void deleteSelectedNotation()
     {
-        this.listOfNotations.remove(this.selectedNotationIndex);
+        this.listOfNotations.remove(this.selectedNotationId);
     }
 
 

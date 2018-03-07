@@ -1,7 +1,6 @@
 package listeners;
 
 import model.PdfObject;
-import view.projectView.pdfObjectView.partials.NotationSplitPane;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
@@ -58,7 +57,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
             if(lsm.isSelectionEmpty())
             {
-                this.getPdfObject().setSelectedNotationIndex(
+                this.getPdfObject().setSelectedNotationId(
                     PdfObject.SELECTED_NOTATION_NULL_VALUE
                 );
             }
@@ -71,7 +70,7 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
 
                     int selectedRow = notationList.getSelectedRow();
-                    this.getPdfObject().setSelectedNotationIndex(
+                    this.getPdfObject().setSelectedNotationId(
                         (int) notationList.getValueAt(selectedRow, 0)
                     );
                 }

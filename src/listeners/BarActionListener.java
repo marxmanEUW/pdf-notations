@@ -308,7 +308,7 @@ public class BarActionListener implements ActionListener {
      */
     private void deleteNotation()
     {
-        int selectedNotationId = this.getPdfObject().getSelectedNotationIndex();
+        int selectedNotationId = this.getPdfObject().getSelectedNotationId();
         if (selectedNotationId == PdfObject.SELECTED_NOTATION_NULL_VALUE)
         {
             return;
