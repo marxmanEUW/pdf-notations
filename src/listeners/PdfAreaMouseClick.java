@@ -67,7 +67,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
 
         if(this.getPdfArea().getAddingNotation()
-            && !this.getPdfArea().isNotationInRangeOfOtherNotation(mouseEvent.getPoint()))
+            && !this.getPdfArea().isNotationInRangeOfOtherNotation(
+                mouseEvent.getPoint())
+            )
         {
             this.getPdfObject().addNewNotation(coordinates);
             this.getPdfArea().setCursorTypeToDefault();
@@ -77,10 +79,13 @@ public class PdfAreaMouseClick extends MouseAdapter {
         }
 
 
-        Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
+        Notation notation = this.getPdfArea().getClickedNotation(
+            mouseEvent.getPoint()
+        );
         if (notation != null) {
             int selectedNotationId = notation.getId();
-            this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
+            this.pdfObjectView.getNotationListScrollPane()
+                .setSelectedRow(selectedNotationId);
             this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
             this.getPdfArea().repaint();
         }
@@ -100,7 +105,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse pressed");
     }
 
     /*
@@ -112,7 +116,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse released");
     }
 
     /*
@@ -124,7 +127,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse entered");
     }
 
     /*
@@ -136,7 +138,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseExited(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse exited");
     }
 
 

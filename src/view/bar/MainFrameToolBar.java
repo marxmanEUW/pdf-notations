@@ -142,6 +142,9 @@ public class MainFrameToolBar extends JToolBar {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the save-project-button.
      */
     public void setButtonSaveProjectEnabled(boolean enabled)
     {
@@ -150,6 +153,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the save-project-as-button.
      */
     public void setButtonSaveAsProjectEnabled(boolean enabled)
     {
@@ -158,6 +164,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the close-project-button.
      */
     public void setButtonCloseProjectEnabled(boolean enabled)
     {
@@ -166,6 +175,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the zoom-in-button.
      */
     public void setButtonZoomInEnabled(boolean enabled)
     {
@@ -174,6 +186,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the zoom-out-button.
      */
     public void setButtonZoomOutEnabled(boolean enabled)
     {
@@ -182,6 +197,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the add-notation-button.
      */
     public void setButtonAddNotationEnabled(boolean enabled)
     {
@@ -190,6 +208,9 @@ public class MainFrameToolBar extends JToolBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Alters the label with the current zoom level.
      */
     public void setLabelZoomLevel(double zoomLevel)
     {
@@ -199,4 +220,5 @@ public class MainFrameToolBar extends JToolBar {
 
         this.labelZoomLevel.setText(newZoomString + " %");
     }
+
 }

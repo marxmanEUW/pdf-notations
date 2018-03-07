@@ -1,21 +1,16 @@
 package listeners;
 
 import constants.Environment;
-import model.PdfObject;
-import threads.PdfRenderThread;
 import timer.MouseWheelMovementTimer;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 
 public class PdfAreaMouseWheel extends MouseAdapter {
 
-    private PdfObjectView pdfObjectView;
     private PdfArea pdfArea;
 
     private Timer mouseWheelMovementTimer;
@@ -52,8 +47,7 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-        this.pdfArea = this.pdfObjectView.getPdfArea();
+        this.pdfArea = pdfObjectView.getPdfArea();
     }
 
 
@@ -84,17 +78,6 @@ public class PdfAreaMouseWheel extends MouseAdapter {
         return this.pdfArea;
     }
 
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-02-12 (marxmanEUW)  created
-     * @brief   Returns the PdfObject of the PdfObjectView.
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.pdfObjectView.getPdfObject();
-    }
-
 
     /*
      * #########################################################################
@@ -110,7 +93,7 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-        if (!this.pdfArea.isZoomEnabled()) { return; }
+        if (this.pdfArea.isZoomDisabled()) { return; }
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
         if (this.pdfArea.getPdfObject() == null) { return; }

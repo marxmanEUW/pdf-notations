@@ -336,7 +336,7 @@ public class BarActionListener implements ActionListener {
     {
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
+        if (this.getPdfObjectView().getPdfArea().isZoomDisabled()) { return; }
 
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_IN
@@ -354,7 +354,7 @@ public class BarActionListener implements ActionListener {
     {
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
+        if (this.getPdfObjectView().getPdfArea().isZoomDisabled()) { return; }
 
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_OUT
@@ -375,10 +375,16 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Updates the menu bar and tool bar by disabling the buttons that
+     *          can not be pressed anymore or enabling the buttons that could
+     *          not be pressed before.
      */
     public void updateBars()
     {
-        // disable all project depended buttons if no project is loaded
+        // disable all project related buttons in menu bar if no project is
+        // loaded
         if (this.getPdfObject() == null)
         {
             this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(false);
@@ -404,6 +410,8 @@ public class BarActionListener implements ActionListener {
             this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(true);
         }
 
+        // disable all project related buttons in tool bar if no project is
+        // loaded
         if (this.getPdfObject() == null)
         {
             this.getMainFrameToolBar().setButtonSaveProjectEnabled(false);

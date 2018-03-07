@@ -2,8 +2,6 @@ package view.projectView.pdfObjectView.partials;
 
 import constants.Environment;
 import factories.PdfZoomFactory;
-import listeners.PdfAreaMouseClick;
-import listeners.PdfAreaMouseWheel;
 import model.Notation;
 import model.PdfObject;
 
@@ -12,7 +10,6 @@ import threads.PdfRenderThread;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -22,20 +19,18 @@ public class PdfArea extends JPanel {
     // Pdf object view
     private PdfObjectView pdfObjectView;
 
-    // listeners / adapters
-    private PdfAreaMouseClick pdfAreaMouseClick;
-    private PdfAreaMouseWheel pdfAreaMouseWheel;
-
-    // local variables
+    // PDF image
     private BufferedImage pdfImage;
     private int initialImageWidth;
     private int initialImageHeight;
     private double zoomLevel;
 
-    private boolean addingNotation;
-
+    // pdfRenderThread
     private PdfRenderThread pdfRenderThread;
+
+    // state variables
     private boolean isZoomEnabled;
+    private boolean addingNotation;
 
     /*
      * #########################################################################
@@ -69,11 +64,8 @@ public class PdfArea extends JPanel {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.pdfAreaMouseClick = this.pdfObjectView.getPdfAreaMouseClick();
-        this.pdfAreaMouseWheel = this.pdfObjectView.getPdfAreaMouseWheel();
-
-        this.addMouseListener(this.pdfAreaMouseClick);
-        this.addMouseWheelListener(this.pdfAreaMouseWheel);
+        this.addMouseListener(this.pdfObjectView.getPdfAreaMouseClick());
+        this.addMouseWheelListener(this.pdfObjectView.getPdfAreaMouseWheel());
 
         this.refreshPdfArea();
     }
@@ -84,14 +76,12 @@ public class PdfArea extends JPanel {
      * #                    Getter                                             #
      * #########################################################################
      */
-
     /*
      * @author  yxyxD
      * @changes
      *      2018-02-19 (yxyxD)  created
      * @brief   Returns the pdfImage of the PdfArea.
      */
-
     public BufferedImage getPdfImage()
     {
         return this.pdfImage;
@@ -167,11 +157,11 @@ public class PdfArea extends JPanel {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the current status of the zoom (enabled or disabled).
+     * @brief   Returns whether or not the zoom is disabled.
      */
-    public boolean isZoomEnabled()
+    public boolean isZoomDisabled()
     {
-        return this.isZoomEnabled;
+        return !this.isZoomEnabled;
     }
 
 
