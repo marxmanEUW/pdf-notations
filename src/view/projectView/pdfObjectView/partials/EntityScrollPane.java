@@ -1,14 +1,11 @@
 package view.projectView.pdfObjectView.partials;
 
-import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class EntityScrollPane extends JScrollPane {
-
-    private PdfObjectView pdfObjectView;
 
     private EntityTableModel entityTableModel;
 
@@ -22,11 +19,19 @@ public class EntityScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the EntityScrollPane which shows the information of
+     *          the selected notation.
      */
     public EntityScrollPane()
     {
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setHorizontalScrollBarPolicy(
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+        this.setVerticalScrollBarPolicy(
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+        );
 
         this.notationEntityTable = new JTable();
     }
@@ -34,17 +39,18 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the EntityScrollPane.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-
-        this.entityTableModel = this.pdfObjectView.getEntityTableModel();
+        this.entityTableModel = pdfObjectView.getEntityTableModel();
 
         this.notationEntityTable.setModel(this.entityTableModel);
         this.getViewport().add(notationEntityTable);
@@ -53,15 +59,18 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    öffentliche Methoden                               #
+     * #                    Overrides                                          #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-03-01 (marxmanEUW)  created
+     * @brief   Returns the NotationEntityTable of the EntityScrollPane.
      */
-    public void updateTable()
+    public JTable getNotationEntityTable()
     {
-        this.entityTableModel.fireTableDataChanged();
+        return this.notationEntityTable;
     }
 
 
@@ -70,7 +79,12 @@ public class EntityScrollPane extends JScrollPane {
      * #                    Overrides                                          #
      * #########################################################################
      */
-
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Repaints the EntityScrollPane.
+     */
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -80,14 +94,17 @@ public class EntityScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Updates the content of the NotationEntityTable
      */
-    private PdfObject getPdfObject()
+    public void updateTable()
     {
-        return this.pdfObjectView.getPdfObject();
+        this.entityTableModel.fireTableDataChanged();
     }
 }

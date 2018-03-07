@@ -1,5 +1,8 @@
 package model;
 
+import constants.Environment;
+
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Notation {
@@ -14,10 +17,19 @@ public class Notation {
      * #                    Constructor                                        #
      * #########################################################################
      */
+
+/*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs a Notation which contains information about a point
+     *          on the PdfArea
+     */
     public Notation(ArrayList<Entity> listOfEntities)
     {
         this.listOfEntities = listOfEntities;
     }
+
 
     /*
      * #########################################################################
@@ -39,17 +51,35 @@ public class Notation {
         return this.listOfEntities.get(index).getValueType();
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ID of the notation.
+     */
     // @todo maybe set 0, 1 and 2 to global constants
     public int getId()
     {
         return (int) this.listOfEntities.get(0).getValue();
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the x-coordinate of the notation.
+     */
     public int getX()
     {
         return (int) this.listOfEntities.get(1).getValue();
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the y-coordinate of the notation.
+     */
     public int getY()
     {
         return (int) this.listOfEntities.get(2).getValue();
@@ -61,16 +91,35 @@ public class Notation {
      * #                    Setter                                             #
      * #########################################################################
      */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the value at entityIndex of the notation.
+     */
     public void setValue(int entityIndex, Object value)
     {
         this.listOfEntities.get(entityIndex).setValue(value);
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the x-coordinate of the notation.
+     */
     public void setX(int xValue)
     {
         this.listOfEntities.get(1).setValue(xValue);
     }
 
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the y-coordinate of the notation.
+     */
     public void setY(int yValue)
     {
         this.listOfEntities.get(2).setValue(yValue);

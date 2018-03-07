@@ -102,33 +102,14 @@ public class PdfRenderThread implements Runnable {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Method called every time a thread gets started.
+     *      2018-03-06 (yxyxD)  removed the error output when the rendering
+     *                          fails
+     * @brief   Method called every time a thread gets started. Renders the
+     *          reRenderedPdfImage on the zoom level, that was required when
+     *          the thread has been started.
      */
     @Override
     public void run()
-    {
-        this.renderPdfImage();
-
-        if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
-        {
-            this.pdfArea.appointReRenderedPdf();
-        }
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
-    /*
-     * @author  yxyxD
-     * @changes
-     *      2018-02-12 (yxyxD)  created
-     * @brief   Renders the reRenderedPdfImage on the zoom level, that was required when
-     *          the thread has been started.
-     */
-    private void renderPdfImage()
     {
         try
         {
@@ -141,11 +122,16 @@ public class PdfRenderThread implements Runnable {
                 0,
                 requiredZoom);
             pdfDocument.close();
+
+            if (this.requiredZoom == (float) this.pdfArea.getZoomLevel())
+            {
+                this.pdfArea.appointReRenderedPdf();
+            }
         }
         catch (IOException ioException)
         {
-            this.reRenderedPdfImage = null;
-            ioException.printStackTrace();
+            // if the re-rendering fails => do nothing
         }
     }
+
 }

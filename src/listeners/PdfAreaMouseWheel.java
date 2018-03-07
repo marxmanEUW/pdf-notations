@@ -1,8 +1,6 @@
 package listeners;
 
 import constants.Environment;
-import model.PdfObject;
-import threads.PdfRenderThread;
 import timer.MouseWheelMovementTimer;
 import view.projectView.pdfObjectView.PdfObjectView;
 import view.projectView.pdfObjectView.partials.PdfArea;
@@ -13,7 +11,6 @@ import java.awt.event.MouseWheelEvent;
 
 public class PdfAreaMouseWheel extends MouseAdapter {
 
-    private PdfObjectView pdfObjectView;
     private PdfArea pdfArea;
 
     private Timer mouseWheelMovementTimer;
@@ -50,8 +47,7 @@ public class PdfAreaMouseWheel extends MouseAdapter {
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-        this.pdfArea = this.pdfObjectView.getPdfArea();
+        this.pdfArea = pdfObjectView.getPdfArea();
     }
 
 
@@ -82,14 +78,6 @@ public class PdfAreaMouseWheel extends MouseAdapter {
         return this.pdfArea;
     }
 
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.pdfObjectView.getPdfObject();
-    }
-
 
     /*
      * #########################################################################
@@ -105,14 +93,25 @@ public class PdfAreaMouseWheel extends MouseAdapter {
     @Override
     public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent)
     {
-        if (!this.pdfArea.isZoomEnabled()) { return; }
+        if (this.pdfArea.isZoomDisabled()) { return; }
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
+        if (this.pdfArea.getPdfObject() == null) { return; }
 
-        int wheelRotation = mouseWheelEvent.getWheelRotation();
+        if (mouseWheelEvent.isControlDown())
+        {
+            int wheelRotation = mouseWheelEvent.getWheelRotation();
 
-        this.stopExistingTimerAndIncreaseCounter(wheelRotation);
-        this.createNewTimer();
+            this.stopExistingTimerAndIncreaseCounter(wheelRotation);
+            this.createNewTimer();
+        }
+        else
+        {
+            this.pdfArea
+                .getPdfObjectView()
+                    .getPdfScrollPane()
+                        .dispatchEvent(mouseWheelEvent);
+        }
     }
 
 

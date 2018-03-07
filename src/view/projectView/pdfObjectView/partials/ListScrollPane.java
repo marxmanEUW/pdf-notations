@@ -1,6 +1,5 @@
 package view.projectView.pdfObjectView.partials;
 
-import listeners.NotationListSelectionListener;
 import model.PdfObject;
 import view.projectView.pdfObjectView.PdfObjectView;
 
@@ -13,7 +12,6 @@ public class ListScrollPane extends JScrollPane {
 
     private ListTableModel listTableModel;
     private ListSelectionModel listSelectionModel;
-    private NotationListSelectionListener notationListSelectionListener;
 
     private JTable notationListTable;
 
@@ -25,11 +23,19 @@ public class ListScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Constructs the ListScrollPane which lists every notation of the
+     *          PdfObject.
      */
     public ListScrollPane()
     {
-        this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.setHorizontalScrollBarPolicy(
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+        this.setVerticalScrollBarPolicy(
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+        );
 
         this.notationListTable = new JTable();
 
@@ -39,29 +45,30 @@ public class ListScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the ListScrollPane.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
 
         this.listTableModel = this.pdfObjectView.getListTableModel();
-        this.notationListSelectionListener =
-            this.pdfObjectView.getNotationListSelectionListener();
-
-
 
         this.notationListTable.setModel(this.listTableModel);
 
         this.listSelectionModel.addListSelectionListener(
-            this.notationListSelectionListener
+            this.pdfObjectView.getNotationListSelectionListener()
         );
         this.notationListTable.setSelectionModel(this.listSelectionModel);
-        this.notationListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.notationListTable.setSelectionMode(
+            ListSelectionModel.SINGLE_SELECTION
+        );
 
         this.getViewport().add(notationListTable);
     }
@@ -71,52 +78,17 @@ public class ListScrollPane extends JScrollPane {
      * #                    Getter                                             #
      * #########################################################################
      */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the NotationListTable of the ListScrollPane.
+     */
     public JTable getNotationListTable()
     {
-        return notationListTable;
+        return this.notationListTable;
     }
 
-    /*
-     * #########################################################################
-     * #                    public methods                                     #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
-     */
-    public void updateTable()
-    {
-        this.listTableModel.fireTableDataChanged();
-    }
-
-
-    /*
-     * @author  marxmanEUW
-     */
-    public void setSelectedRow(int notationId)
-    {
-        int rowId = notationId;
-
-        for (int i = 0; i < this.getPdfObject().getListOfNotations().size(); i++)
-        {
-            if (notationId == (int) this.listTableModel.getValueAt(i, 0))
-            {
-                rowId = i;
-                break;
-            }
-        }
-
-        this.notationListTable.setRowSelectionInterval(rowId, rowId);
-    }
-
-
-    /*
-     * @author  marxmanEUW
-     */
-    public void unselectRow()
-    {
-        this.notationListTable.clearSelection();
-    }
 
     /*
      * #########################################################################
@@ -125,6 +97,9 @@ public class ListScrollPane extends JScrollPane {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Repaints the ListScrollPane.
      */
     @Override
     protected void paintComponent(Graphics g)
@@ -135,11 +110,65 @@ public class ListScrollPane extends JScrollPane {
 
     /*
      * #########################################################################
-     * #                    private methods                                    #
+     * #                    Public Methods                                     #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Updates the content of the NotationListTable.
+     */
+    public void updateTable()
+    {
+        this.listTableModel.fireTableDataChanged();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the selected fow of the NotationListTable.
+     */
+    public void setSelectedRow(int notationId)
+    {
+        int rowId = notationId;
+
+        for (int i = 0; i < this.getPdfObject().getListOfNotations().size(); i++)
+        {
+            if (notationId ==
+                (int) this.listTableModel.getValueAt(i, 0))
+            {
+                rowId = i;
+                break;
+            }
+        }
+
+        this.notationListTable.setRowSelectionInterval(rowId, rowId);
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Deselects every row of the NotationListTable.
+     */
+    public void deselectRow()
+    {
+        this.notationListTable.clearSelection();
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

@@ -1,7 +1,7 @@
 package listeners;
 
+import constants.Environment;
 import model.PdfObject;
-import view.projectView.pdfObjectView.partials.NotationSplitPane;
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
@@ -15,11 +15,14 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initialising                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the NotationSelectionListener.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -34,35 +37,44 @@ public class NotationListSelectionListener implements ListSelectionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets called if the selected row of a table was changed.
+     *          Updates SelectedNotationIndex and NotationEntityTable.
      */
     @Override
     public void valueChanged(ListSelectionEvent e)
     {
         if(this.getPdfObject() != null)
         {
+            JTable entityTable = this.pdfObjectView.
+                getEntityScrollPane().getNotationEntityTable();
+
+            if (entityTable.isEditing())
+            {
+                entityTable.getCellEditor().cancelCellEditing();
+            }
+
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if(lsm.isSelectionEmpty())
             {
-                this.getPdfObject().setSelectedNotationIndex(
-                    PdfObject.SELECTED_NOTATION_NULL_VALUE
+                this.getPdfObject().setSelectedNotationId(
+                    Environment.SELECTED_NOTATION_NULL_VALUE
                 );
             }
             else
             {
                 if(!lsm.getValueIsAdjusting())
                 {
-                    JTable notationList = this.pdfObjectView.getNotationListScrollPane().
-                        getNotationListTable();
+                    JTable listTable = this.pdfObjectView.
+                        getNotationListScrollPane().getNotationListTable();
 
-
-                    int selectedRow = notationList.getSelectedRow();
-                    this.getPdfObject().setSelectedNotationIndex(
-                        (int) notationList.getValueAt(selectedRow, 0)
+                    int selectedRow = listTable.getSelectedRow();
+                    this.getPdfObject().setSelectedNotationId(
+                        (int) listTable.getValueAt(selectedRow, 0)
                     );
                 }
-
-
             }
 
             this.pdfObjectView.getEntityScrollPane().updateTable();
@@ -73,11 +85,14 @@ public class NotationListSelectionListener implements ListSelectionListener {
 
     /*
      * #########################################################################
-     * #                    private Hilfsmethode                               #
+     * #                    Private Methods                                    #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {

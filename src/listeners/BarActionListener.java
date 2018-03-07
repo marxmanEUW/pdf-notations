@@ -11,7 +11,6 @@ import factories.DialogFactory;
 import factories.PdfObjectFactory;
 import constants.Labels;
 import model.PdfObject;
-import threads.PdfRenderThread;
 import view.MainFrame;
 import view.bar.MainFrameMenuBar;
 import view.bar.MainFrameToolBar;
@@ -34,10 +33,74 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   initializes the Bar Action Listener.
      */
     public void initialize(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+    }
+
+
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObjectView.
+     */
+    private PdfObjectView getPdfObjectView()
+    {
+        return this.mainFrame.getPdfObjectView();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
+     */
+    private PdfObject getPdfObject()
+    {
+        return this.getPdfObjectView().getPdfObject();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfArea of the PdfObjectView.
+     */
+    private PdfArea getPdfArea()
+    {
+        return this.getPdfObjectView().getPdfArea();
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the MenuBar of the MainFrame.
+     */
+    private MainFrameMenuBar getMainFrameMenuBar()
+    {
+        return this.mainFrame.getJMenuBar();
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the ToolBar of the MainFrame.
+     */
+    private MainFrameToolBar getMainFrameToolBar()
+    {
+        return this.mainFrame.getToolBar();
     }
 
 
@@ -48,6 +111,9 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Distinguishes which button was pressed.
      */
     @Override
     public void actionPerformed(ActionEvent e)
@@ -63,7 +129,7 @@ public class BarActionListener implements ActionListener {
                 this.saveProject();
                 break;
             case Labels.BAR_ITEM_SAVE_AS_PROJECT_NAME:
-                this.saveAsProject();;
+                this.saveAsProject();
                 break;
             case Labels.BAR_ITEM_CLOSE_PROJECT_NAME:
                 this.closeProject();
@@ -84,51 +150,11 @@ public class BarActionListener implements ActionListener {
                 this.zoomOut();
                 break;
             case Labels.BAR_ITEM_ABOUT_NAME:
-                // not implemented yet
                 showAbout();
                 break;
         }
 
         this.updateBars();
-    }
-
-    /*
-     * #########################################################################
-     * #                    Getter                                             #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfObjectView getPdfObjectView()
-    {
-        return this.mainFrame.getPdfObjectView();
-    }
-
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.getPdfObjectView().getPdfObject();
-    }
-
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfArea getPdfArea()
-    {
-        return this.getPdfObjectView().getPdfArea();
-    }
-
-    private MainFrameMenuBar getMainFrameMenuBar()
-    {
-        return this.mainFrame.getJMenuBar();
-    }
-
-    private MainFrameToolBar getMainFrameToolBar()
-    {
-        return this.mainFrame.getToolBar();
     }
 
 
@@ -139,6 +165,10 @@ public class BarActionListener implements ActionListener {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets selected PDF-file from an OpenFileDialog and sends it to
+     *          the PdfObjectView to create a new project.
      */
     private void newProject()
     {
@@ -149,18 +179,16 @@ public class BarActionListener implements ActionListener {
         if (newProjectFile != null)
         {
             this.getPdfObjectView().openProject(newProjectFile);
-            System.out.println(
-                "Neues Projekt mit gegebener PDF: "
-                    + newProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-
         }
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets selected pdfnot-file from an OpenFileDialog and sends it to
+     *          the PdfObjectView to open a project.
      */
     private void openProject()
     {
@@ -171,18 +199,16 @@ public class BarActionListener implements ActionListener {
         if (openProjectFile != null)
         {
             this.getPdfObjectView().openProject(openProjectFile);
-            System.out.println(
-                "Vorhandenes Projekt mit gegebener PDF "
-                    + openProjectFile.getAbsolutePath()
-                    + " erstellt"
-            );
-            this.getPdfObjectView().openProject(openProjectFile);
         }
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Saves the project. If JsonAbsolutePath is not set, it prompts
+     *          the user to set it.
      */
     private void saveProject()
     {
@@ -209,12 +235,16 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets new pdfnot-FileLocation and saves Project to this file.
      */
     private void saveAsProject()
     {
         File saveAsFile = DialogFactory.getFileFromSaveDialog(
             Environment.FILE_TYPE_PDFNOT
         );
+
         if (saveAsFile != null)
         {
             this.getPdfObject().setJsonAbsolutePath(
@@ -227,6 +257,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Closes the project.
      */
     private void closeProject()
     {
@@ -240,6 +273,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Closes the program.
      */
     private void closeProgram()
     {
@@ -254,21 +290,35 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets some variables. The next click into the PdfArea creates a
+     *          new Notation.
      */
     private void addNotation()
     {
         this.getPdfArea().setAddingNotation(true);
-        this.getPdfArea().setCursorTypeToCrosshair();
+        this.getPdfArea().setCursorTypeToCrossHair();
     }
 
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Asks the user if he wants to delete the selected notation.
+     *          Deletes the selected Notation if answer was "yes".
      */
     private void deleteNotation()
     {
+        int selectedNotationId = this.getPdfObject().getSelectedNotationId();
+        if (selectedNotationId == Environment.SELECTED_NOTATION_NULL_VALUE)
+        {
+            return;
+        }
+
         int userChoice = DialogFactory.showWarningDeleteNotation(
-            this.getPdfObject().getSelectedNotationIndex()
+            selectedNotationId
         );
         if (userChoice == JOptionPane.YES_OPTION)
         {
@@ -289,7 +339,7 @@ public class BarActionListener implements ActionListener {
     {
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
+        if (this.getPdfObjectView().getPdfArea().isZoomDisabled()) { return; }
 
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_IN
@@ -307,7 +357,7 @@ public class BarActionListener implements ActionListener {
     {
         if (Environment.PDF_RENDER_GROUP.activeCount() >=
             Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
+        if (this.getPdfObjectView().getPdfArea().isZoomDisabled()) { return; }
 
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_OUT
@@ -316,6 +366,9 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shw AboutDialog.
      */
     private void showAbout()
     {
@@ -325,10 +378,16 @@ public class BarActionListener implements ActionListener {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Updates the menu bar and tool bar by disabling the buttons that
+     *          can not be pressed anymore or enabling the buttons that could
+     *          not be pressed before.
      */
     public void updateBars()
     {
-        // disable all project depended buttons if no project is loaded
+        // disable all project related buttons in menu bar if no project is
+        // loaded
         if (this.getPdfObject() == null)
         {
             this.getMainFrameMenuBar().setMenuItemSaveProjectEnabled(false);
@@ -354,6 +413,8 @@ public class BarActionListener implements ActionListener {
             this.getMainFrameMenuBar().setMenuItemZoomOutEnabled(true);
         }
 
+        // disable all project related buttons in tool bar if no project is
+        // loaded
         if (this.getPdfObject() == null)
         {
             this.getMainFrameToolBar().setButtonSaveProjectEnabled(false);

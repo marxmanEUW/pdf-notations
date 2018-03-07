@@ -1,18 +1,12 @@
 package view.projectView.pdfObjectView.partials;
 
-
-import model.PdfObject;
+import constants.Environment;
 
 import view.projectView.pdfObjectView.PdfObjectView;
 
 import javax.swing.*;
 
-
 public class PdfScrollPane extends JScrollPane {
-
-    private PdfObjectView pdfObjectView;
-
-    private PdfArea pdfArea;
 
 
     /*
@@ -30,6 +24,13 @@ public class PdfScrollPane extends JScrollPane {
     {
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.getVerticalScrollBar().setUnitIncrement(
+            Environment.JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT
+        );
+        this.getHorizontalScrollBar().setUnitIncrement(
+            Environment.JSCROLLPANE_SCROLLBAR_UNIT_INCREMENT
+        );
     }
 
 
@@ -46,25 +47,7 @@ public class PdfScrollPane extends JScrollPane {
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
-        this.pdfObjectView = pdfObjectView;
-
-        this.pdfArea = this.pdfObjectView.getPdfArea();
-
-        this.getViewport().add(this.pdfArea);
-    }
-
-
-    /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
-     */
-    /*
-     * @author  marxmanEUW
-     */
-    private PdfObject getPdfObject()
-    {
-        return this.pdfObjectView.getPdfObject();
+        this.getViewport().add(pdfObjectView.getPdfArea());
     }
 }
 

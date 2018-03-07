@@ -3,6 +3,7 @@ package view.bar;
 import constants.KeyStrokes;
 import constants.Labels;
 import listeners.BarActionListener;
+import view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -43,6 +44,9 @@ public class MainFrameMenuBar extends JMenuBar {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Constructs the menu bar for the main frame.
      */
     public MainFrameMenuBar()
     {
@@ -74,10 +78,13 @@ public class MainFrameMenuBar extends JMenuBar {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Initialises the menu bar.
      */
-    public void initialize(BarActionListener barActionListener)
+    public void initialize(MainFrame mainFrame)
     {
-        this.barActionListener = barActionListener;
+        this.barActionListener = mainFrame.getBarActionListener();
 
         this.setupMenuFile();
         this.setupMenuNotation();
@@ -95,22 +102,9 @@ public class MainFrameMenuBar extends JMenuBar {
      */
     /*
      * @author  yxyxD
-     */
-    public void setMenuItemNewProjectEnabled(boolean enabled)
-    {
-        this.menuItemNewProject.setEnabled(enabled);
-    }
-
-    /*
-     * @author  yxyxD
-     */
-    public void setMenuItemOpenProjectEnabled(boolean enabled)
-    {
-        this.menuItemOpenProject.setEnabled(enabled);
-    }
-
-    /*
-     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the save-project-button.
      */
     public void setMenuItemSaveProjectEnabled(boolean enabled)
     {
@@ -119,6 +113,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the save-project-as-button.
      */
     public void setMenuItemSaveAsProjectEnabled(boolean enabled)
     {
@@ -127,6 +124,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the close-project-button.
      */
     public void setMenuItemCloseProjectEnabled(boolean enabled)
     {
@@ -135,14 +135,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
-     */
-    public void setMenuItemCloseEnabled(boolean enabled)
-    {
-        this.menuItemClose.setEnabled(enabled);
-    }
-
-    /*
-     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the add-notation-button.
      */
     public void setMenuItemAddNotationEnabled(boolean enabled)
     {
@@ -151,6 +146,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the delete-notation-button.
      */
     public void setMenuItemDeleteNotationEnabled(boolean enabled)
     {
@@ -159,6 +157,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the zoom-in-button.
      */
     public void setMenuItemZoomInEnabled(boolean enabled)
     {
@@ -167,6 +168,9 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Enables or disables the zoom-out-button.
      */
     public void setMenuItemZoomOutEnabled(boolean enabled)
     {
@@ -181,10 +185,13 @@ public class MainFrameMenuBar extends JMenuBar {
      */
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Sets up the file-menu in the menu bar.
      */
     private void setupMenuFile()
     {
-        // Text des Menues und der Menuepunkte
+        // text of menu and menu items
         this.menuFile.setText(Labels.MENU_FILE_NAME);
         this.menuItemNewProject.setText(Labels.BAR_ITEM_NEW_PROJECT_NAME);
         this.menuItemOpenProject.setText(Labels.BAR_ITEM_OPEN_PROJECT_NAME);
@@ -228,7 +235,7 @@ public class MainFrameMenuBar extends JMenuBar {
         ));
 
 
-        // Menuepunkte zum Menue hinzufuegen
+        // add menu items to menu
         this.menuFile.add(this.menuItemNewProject);
         this.menuFile.add(this.menuItemOpenProject);
         this.menuFile.add(this.menuItemSaveProject);
@@ -240,16 +247,20 @@ public class MainFrameMenuBar extends JMenuBar {
         this.add(this.menuFile);
     }
 
-
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Sets up the notation-menu in the menu bar.
      */
     private void setupMenuNotation()
     {
-        // Text des Menues und der Menuepunkte
+        // text of menu and menu items
         this.menuNotation.setText(Labels.MENU_NOTATION_NAME);
         this.menuItemAddNotation.setText(Labels.BAR_ITEM_ADD_NOTATION_NAME);
-        this.menuItemDeleteNotation.setText(Labels.BAR_ITEM_DELETE_NOTATION_NAME);
+        this.menuItemDeleteNotation.setText(
+            Labels.BAR_ITEM_DELETE_NOTATION_NAME
+        );
 
         // ActionListener
         this.menuItemAddNotation.addActionListener(this.barActionListener);
@@ -265,20 +276,22 @@ public class MainFrameMenuBar extends JMenuBar {
             KeyEvent.CTRL_DOWN_MASK
         ));
 
-        // Menuepunkte zum Menue hinzufuegen
+        // add menu items to menu
         this.menuNotation.add(this.menuItemAddNotation);
         this.menuNotation.add(this.menuItemDeleteNotation);
 
         this.add(this.menuNotation);
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets up the view-menu in the menu bar.
      */
     private void setupMenuView()
     {
-        // Text des Menues und der Menuepunkte
+        // text of menu and menu items
         this.menuView.setText(Labels.MENU_VIEW_NAME);
         this.menuItemZoomIn.setText(Labels.BAR_ITEM_ZOOM_IN_NAME);
         this.menuItemZoomOut.setText(Labels.BAR_ITEM_ZOOM_OUT_NAME);
@@ -297,7 +310,7 @@ public class MainFrameMenuBar extends JMenuBar {
             KeyEvent.CTRL_DOWN_MASK
         ));
 
-        // Menuepunkte zum Menue hinzufuegen
+        // add menu items to menu
         this.menuView.add(this.menuItemZoomIn);
         this.menuView.add(this.menuItemZoomOut);
 
@@ -307,19 +320,23 @@ public class MainFrameMenuBar extends JMenuBar {
 
     /*
      * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Sets up the help-menu in the menu bar.
      */
     private void setupMenuHelp()
     {
-        // Text des Menues und der Menuepunkte
+        // text of menu and menu items
         this.menuHelp.setText(Labels.MENU_HELP_NAME);
         this.menuItemAbout.setText(Labels.BAR_ITEM_ABOUT_NAME);
 
         // ActionListener
         this.menuItemAbout.addActionListener(this.barActionListener);
 
-        // Menuepunkte zum Menue hinzufuegen
+        // add menu items to menu
         this.menuHelp.add(this.menuItemAbout);
 
         this.add(this.menuHelp);
     }
+
 }

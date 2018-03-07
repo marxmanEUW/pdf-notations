@@ -16,11 +16,14 @@ public class EntityTableModel extends AbstractTableModel {
 
     /*
      * #########################################################################
-     * #                    Initialisierung                                    #
+     * #                    Initializing                                       #
      * #########################################################################
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Initializes the EntityTableModel.
      */
     public void initialize(PdfObjectView pdfObjectView)
     {
@@ -35,6 +38,9 @@ public class EntityTableModel extends AbstractTableModel {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the number of rows.
      */
     @Override
     public int getRowCount()
@@ -49,9 +55,11 @@ public class EntityTableModel extends AbstractTableModel {
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the number of columns.
      */
     @Override
     public int getColumnCount()
@@ -59,9 +67,11 @@ public class EntityTableModel extends AbstractTableModel {
         return 2;
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the value for a specific cell.
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)
@@ -71,8 +81,8 @@ public class EntityTableModel extends AbstractTableModel {
             return null;
         }
 
-        if (this.getPdfObject().getSelectedNotationIndex() ==
-                PdfObject.SELECTED_NOTATION_NULL_VALUE)
+        if (this.getPdfObject().getSelectedNotationId() ==
+                Environment.SELECTED_NOTATION_NULL_VALUE)
         {
             return null;
         }
@@ -87,9 +97,11 @@ public class EntityTableModel extends AbstractTableModel {
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the name of a column (for the table header).
      */
     public String getColumnName(int column)
     {
@@ -101,35 +113,41 @@ public class EntityTableModel extends AbstractTableModel {
         }
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the class of a column.
      */
     public Class getColumnClass(int columnIndex)
     {
         return String.class;
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns if a specific cell should be editable.
+     *          Make full first column and ID cell not editable.
      */
     public boolean isCellEditable(int rowIndex, int columnIndex)
     {
-        // make full first column and ID cell not editable
-        if(rowIndex == 0 || columnIndex == 0)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+        boolean returnValue = true;
 
+        if (rowIndex == 0 || columnIndex == 0)
+        {
+            returnValue = false;
+        }
+
+        return returnValue;
+    }
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the value for a specific cell.
      * @todo check if editedValue has the right value type
      */
     public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
@@ -139,6 +157,7 @@ public class EntityTableModel extends AbstractTableModel {
         this.pdfObjectView.getPdfArea().repaint();
     }
 
+
     /*
      * #########################################################################
      * #                    Private Methods                                    #
@@ -146,15 +165,20 @@ public class EntityTableModel extends AbstractTableModel {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {
         return this.pdfObjectView.getPdfObject();
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns true if the value is an integer.
      */
     private boolean isInteger(String value)
     {
@@ -176,9 +200,11 @@ public class EntityTableModel extends AbstractTableModel {
         return status;
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets one coordinate of the selected notation.
      */
     private void setOneCoordinate(char coordinateIdentifier, String value)
     {

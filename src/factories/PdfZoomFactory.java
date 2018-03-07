@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-public class PdfZoomFactory {
+public abstract class PdfZoomFactory {
 
     /*
      * #########################################################################
@@ -105,7 +105,8 @@ public class PdfZoomFactory {
         double zoomLevel;
 
         int residualValue = mouseScrollCount % Environment.ZOOM_STEP_PERCENTAGE;
-        if (Math.abs(residualValue) <= Environment.RESIDUAL_VALUE_ROUNDING_BORDER)
+        if (Math.abs(residualValue) <=
+            Environment.RESIDUAL_VALUE_ROUNDING_BORDER)
         {
             // round down
             zoomLevel =

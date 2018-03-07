@@ -3,12 +3,13 @@ package constants;
 public abstract class Labels {
 
     /*
-     * Titel des Fensters
+     * Window Title
      */
     public static final String FRAME_TITLE = "PDF-NOTATIONS";
 
+
     /*
-     * Menuereiter "Datei"
+     * Menu "File"
      */
     public static final String MENU_FILE_NAME = "Datei";
 
@@ -25,8 +26,9 @@ public abstract class Labels {
         public static final String
             BAR_ITEM_CLOSE_NAME = "Beenden";
 
+
     /*
-     * Menuereiter "Notation"
+     * Menu "Notation"
      */
     public static final String MENU_NOTATION_NAME = "Notation";
 
@@ -35,8 +37,9 @@ public abstract class Labels {
         public static final String
             BAR_ITEM_DELETE_NOTATION_NAME = "Löschen";
 
+
     /*
-     * Menuereiter "Ansicht"
+     * Menu "View"
      */
     public static final String MENU_VIEW_NAME = "Ansicht";
 
@@ -45,36 +48,39 @@ public abstract class Labels {
         public static final String
             BAR_ITEM_ZOOM_OUT_NAME = "Ansicht verkleinern";
 
+
     /*
-     * Menuereiter "Hilfe"
+     * Menu "Help"
      */
     public static final String MENU_HELP_NAME = "Hilfe";
 
         public static final String
             BAR_ITEM_ABOUT_NAME = "Über";
 
+
     /*
      * ToolBar
      * Icon Path
      */
     public static final String
-        TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH = "icons/16px/037-file-empty.png";
+        TOOLBAR_BUTTON_NEW_PROJECT_ICON_PATH = "/icons/file-empty-16px.png";
     public static final String
-        TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH = "icons/16px/049-folder-open.png";
+        TOOLBAR_BUTTON_OPEN_PROJECT_ICON_PATH = "/icons/folder-open-16px.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_PROJECT_ICON_PATH = "/icons/floppy-disk-16px.png";
     public static final String
-        TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH = "icons/16px/099-floppy-disk.png";
+        TOOLBAR_BUTTON_SAVE_AS_PROJECT_ICON_PATH = "/icons/floppy-disk-16px.png";
     public static final String
-        TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH = "icons/16px/277-exit.png";
+        TOOLBAR_BUTTON_CLOSE_PROJECT_ICON_PATH = "/icons/exit-16px.png";
 
     public static final String
-        TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH = "icons/16px/136-zoom-in.png";
+        TOOLBAR_BUTTON_ZOOM_IN_ICON_PATH = "/icons/zoom-in-16px.png";
     public static final String
-        TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH = "icons/16px/137-zoom-out.png";
+        TOOLBAR_BUTTON_ZOOM_OUT_ICON_PATH = "/icons/zoom-out-16px.png";
 
     public static final String
-        TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "icons/16px/054-price-tag.png";
+        TOOLBAR_BUTTON_ADD_NOTATION_ICON_PATH = "/icons/price-tag-16px.png";
+
 
     /*
      * NotationSplitPane
@@ -84,9 +90,21 @@ public abstract class Labels {
     public static final String
         LIST_TABLE_MODEL_COLUMN_2_NAME = "Name";
     public static final String
-        ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Name";
+        ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Eigenschaft";
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
+
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_ID =  "Id";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_NAME = "Name";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_X = "X";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_Y = "Y";
+    public static final String
+        ENTITY_TABLE_MODEL_PROPERTY_DESCRIPTION = "Beschreibung";
+
 
     /*
      * Waring-At-Close-Dialog
@@ -96,15 +114,15 @@ public abstract class Labels {
         "Beim Schließen gehen alle nicht gespeicherten Änderungen verloren. \n"
         + "Möchten Sie fortfahren?";
 
+
     /*
      * About-Dialog
      */
-
-    public static final String GITHUB_URL =
+    private static final String GITHUB_URL =
         "https://github.com/marxmanEUW/pdf-notations";
-    public static final String LICENSE_URL =
+    private static final String LICENSE_URL =
         "https://www.gnu.org/licenses/gpl.html";
-    public static final String ICON_URL =
+    private static final String ICON_URL =
         "https://icomoon.io/#icons-icomoon";
 
     public static final String ABOUT_TITLE = "PDF Notations";
@@ -125,6 +143,13 @@ public abstract class Labels {
         + "</body></html>"
         ;
 
+
+    /*
+     *  ErrorDialog
+     */
+    public static final String ERROR_TITLE = "Error";
+
+
     /*
      * Waring-That-Value-Is-No-Int
      */
@@ -133,11 +158,13 @@ public abstract class Labels {
         "Der einegebene Wert ist keine Ganzzahl! \n"
         +  "Eingebener Wert: ";
 
+
     /*
-     * Waring-Delte-Notation
+     * Warning-Delete-Notation
      */
     public static final String DELETE_NOTATION_TITLE = "PDF Notations";
     public static final String DELETE_NOTATION_TEXT =
         "Soll die Notation wirklich gelöscht werden? \n"
             +  "Notations-ID: ";
+
 }

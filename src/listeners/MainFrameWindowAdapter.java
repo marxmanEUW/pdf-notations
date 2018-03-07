@@ -8,6 +8,17 @@ import java.awt.event.WindowEvent;
 
 public class MainFrameWindowAdapter extends WindowAdapter {
 
+    /*
+     * #########################################################################
+     * #                    Overrides                                          #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Gets called if the program tries to closed.
+     */
     @Override
     public void windowClosing(WindowEvent evt)
     {

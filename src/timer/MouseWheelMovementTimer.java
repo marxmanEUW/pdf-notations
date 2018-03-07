@@ -54,4 +54,5 @@ public class MouseWheelMovementTimer implements ActionListener {
 
         this.pdfAreaMouseWheel.resetMouseRollCount();
     }
+
 }

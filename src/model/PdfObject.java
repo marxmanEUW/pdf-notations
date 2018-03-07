@@ -1,18 +1,18 @@
 package model;
 
+import constants.Environment;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PdfObject {
 
-    public static final int SELECTED_NOTATION_NULL_VALUE = -1;
-
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
 
     private HashMap<Integer, Notation> listOfNotations;
-    private int selectedNotationIndex;
+    private int selectedNotationId;
     private ArrayList<String[]> listOfEntityNamesAndTypes;
 
     /*
@@ -29,10 +29,9 @@ public class PdfObject {
     public PdfObject(String pdfAbsolutePath)
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
-        //this.jsonAbsolutePath = PdfObjectFactory.getAbsolutePathToJsonFile(pdfAbsolutePath);
 
         this.listOfNotations = new HashMap<>();
-        this.selectedNotationIndex = PdfObject.SELECTED_NOTATION_NULL_VALUE;
+        this.selectedNotationId = Environment.SELECTED_NOTATION_NULL_VALUE;
 
         this.listOfEntityNamesAndTypes = new ArrayList<>();
         String[] entity1 = {"Id der Notation", Entity.TYPE_INTEGER};
@@ -65,7 +64,6 @@ public class PdfObject {
         return this.pdfAbsolutePath;
     }
 
-
     /*
      * @author  yxyxD
      * @changes
@@ -77,26 +75,45 @@ public class PdfObject {
         return this.jsonAbsolutePath;
     }
 
-
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfNotations of the PdfObject.
      */
     public HashMap<Integer, Notation> getListOfNotations()
     {
         return this.listOfNotations;
     }
 
-
-    public int getListOfNotationsSize()
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfPoints of the PdfObject.
+     */
+    public ArrayList<Point> getListOfPoints()
     {
-        return this.listOfNotations.size();
+        ArrayList<Point> listOfPoints = new ArrayList<>();
+        this.listOfNotations.forEach(
+            (key, value) -> listOfPoints.add(value.getCoordinates())
+        );
+        return listOfPoints;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the selected notation of the PdfObject.
+     *          Returns null if no notation was selected.
+     */
     public Notation getSelectedNotation()
     {
-        if (this.selectedNotationIndex != SELECTED_NOTATION_NULL_VALUE)
+        if (this.selectedNotationId !=
+            Environment.SELECTED_NOTATION_NULL_VALUE)
         {
-            return this.listOfNotations.get(selectedNotationIndex);
+            return this.listOfNotations.get(selectedNotationId);
         }
         else
         {
@@ -104,10 +121,14 @@ public class PdfObject {
         }
     }
 
-
-    public int getSelectedNotationIndex()
+/*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ID/index of the selected notation of the PdfObject.
+     */    public int getSelectedNotationId()
     {
-        return this.selectedNotationIndex;
+        return selectedNotationId;
     }
 
 
@@ -116,13 +137,23 @@ public class PdfObject {
         return this.listOfEntityNamesAndTypes.size();
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the ListOfNotations of the PdfObject as ArrayList.
+     */
     public ArrayList<Notation> getListOfNotationsAsList()
     {
-        ArrayList<Notation> listOfNotationsAsList = new ArrayList<>();
-        listOfNotationsAsList.addAll(this.listOfNotations.values());
-        return listOfNotationsAsList;
+        return new ArrayList<>(this.listOfNotations.values());
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-07 (yxyxD)  marxmanEUW
+     * @brief   Returns EntityNameAndTypeList of the PdfObject.
+     */
     public ArrayList<String[]> getListOfEntityNamesAndTypes()
     {
         return listOfEntityNamesAndTypes;
@@ -143,9 +174,15 @@ public class PdfObject {
         this.jsonAbsolutePath = jsonAbsolutePath;
     }
 
-    public void setSelectedNotationIndex(int selectedNotationIndex)
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the SelectedNotationIndex of the PdfObject.
+     */
+    public void setSelectedNotationId(int selectedNotationId)
     {
-        this.selectedNotationIndex = selectedNotationIndex;
+        this.selectedNotationId = selectedNotationId;
     }
 
 
@@ -168,12 +205,21 @@ public class PdfObject {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Deletes the selected notation.
      */
     public void deleteSelectedNotation()
     {
-        this.listOfNotations.remove(this.selectedNotationIndex);
+        this.listOfNotations.remove(this.selectedNotationId);
     }
 
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
     /*
      * @author  yxyxD
      * @changes
@@ -195,14 +241,13 @@ public class PdfObject {
 
         return nextId;
     }
+
     /*
-     * #########################################################################
-     * #                    Private Methods                                    #
-     * #########################################################################
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-07 (yxyxD)  marxmanEUW
+     * @brief   Adds an EntityNameAndType Object to the PdfObject.
      */
-
-
-
     private void addEntityNameAndType(String[] entity)
     {
         this.listOfEntityNamesAndTypes.add(entity);

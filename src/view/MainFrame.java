@@ -1,6 +1,7 @@
 package view;
 
 import constants.Labels;
+import factories.DialogFactory;
 import listeners.MainFrameKeyListener;
 import listeners.BarActionListener;
 import listeners.MainFrameWindowAdapter;
@@ -38,7 +39,7 @@ public class MainFrame extends JFrame {
      */
     public MainFrame()
     {
-        this.setLookAndFell();
+        this.setLookAndFeel();
 
         this.setLayout(new BorderLayout());
         this.setTitle(Labels.FRAME_TITLE);
@@ -84,8 +85,8 @@ public class MainFrame extends JFrame {
 
         this.barActionListener.initialize(this);
 
-        this.menuBar.initialize(this.barActionListener);
-        this.toolBar.initialize(this.barActionListener);
+        this.menuBar.initialize(this);
+        this.toolBar.initialize(this);
 
         this.pdfObjectView.initialize(this);
 
@@ -101,7 +102,7 @@ public class MainFrame extends JFrame {
         );
 
 
-        this.setLookAndFell();
+        this.setLookAndFeel();
 
         this.setVisible(true);
     }
@@ -127,7 +128,7 @@ public class MainFrame extends JFrame {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the Toolbar of the MainFrame
+     * @brief   Returns the Toolbar of the MainFrame.
      */
     public MainFrameToolBar getToolBar()
     {
@@ -138,31 +139,47 @@ public class MainFrame extends JFrame {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the PdfObjectView of the MainFrame
+     * @brief   Returns the PdfObjectView of the MainFrame.
      */
     public PdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
     }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-07 (marxmanEUW)  created
+     * @brief   Returns the BarActionListener of the MainFrame.
+     */
+    public BarActionListener getBarActionListener()
+    {
+        return barActionListener;
+    }
 
     /*
      * #########################################################################
      * #                    Private Methods                                    #
      * #########################################################################
      */
-    private void setLookAndFell()
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW) created
+     *      2018-03-02 (AbellaMort) Changed error-handling to display errors in
+     *                              error-dialog
+     *      2018-03-07  (yxyxD)     handling all exception on one catch-statement
+     * @brief   Sets the look and feel of the program.
+     */
+    private void setLookAndFeel()
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
+        }
+        catch (Exception exception)
+        {
+            DialogFactory.showErrorDialog(exception.getMessage());
         }
     }
+
 }

@@ -5,7 +5,6 @@ import constants.Labels;
 import listeners.EditorPaneListener;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
@@ -13,21 +12,27 @@ import java.io.File;
 public abstract class DialogFactory {
 
     /*
-     * @author marxmanEUW
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shows a OpenFileDialog and returns the selected file
+     *          or returns null if no file was selected.
      */
     public static File getFileFromOpenDialog(int fileType)
     {
         File openFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], Environment.FILE_TYPE_ARRAY[fileType][1]));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(
+            Environment.FILE_TYPE_ARRAY[fileType][0],
+            Environment.FILE_TYPE_ARRAY[fileType][1])
+        );
 
         int state = fileChooser.showOpenDialog(null);
 
         if (state == JFileChooser.APPROVE_OPTION)
         {
             openFile = fileChooser.getSelectedFile();
-            System.out.println( openFile.getAbsolutePath() );
         }
 
         return openFile;
@@ -35,7 +40,11 @@ public abstract class DialogFactory {
 
 
     /*
-     * @author marxmanEUW
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Shows a SaveFileDialog and returns the selected file
+     *          or returns null if no file was selected.
      */
     public static File getFileFromSaveDialog(int fileType)
     {
@@ -44,8 +53,13 @@ public abstract class DialogFactory {
         File saveFile = null;
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter( new FileNameExtensionFilter(Environment.FILE_TYPE_ARRAY[fileType][0], fileExtension));
-        fileChooser.setSelectedFile(new File("newFile." + fileExtension));
+        fileChooser.setFileFilter( new FileNameExtensionFilter(
+            Environment.FILE_TYPE_ARRAY[fileType][0],
+            fileExtension)
+        );
+        fileChooser.setSelectedFile(
+            new File("newFile." + fileExtension)
+        );
 
         int state = fileChooser.showSaveDialog(null);
 
@@ -55,10 +69,10 @@ public abstract class DialogFactory {
 
             if (!saveFile.getAbsolutePath().endsWith("." + fileExtension))
             {
-                saveFile = new File(saveFile.getAbsolutePath() + "." + fileExtension);
+                saveFile = new File(
+                    saveFile.getAbsolutePath() + "." + fileExtension
+                );
             }
-
-            System.out.println( saveFile.getAbsolutePath() );
         }
 
         return saveFile;
@@ -100,7 +114,6 @@ public abstract class DialogFactory {
         htmlPane.setEditable(false);
 
         htmlPane.addHyperlinkListener(new EditorPaneListener());
-        // @todo set background according to JOptionPane default
         htmlPane.setBackground(Color.WHITE);
 
         JOptionPane.showMessageDialog(
@@ -146,8 +159,21 @@ public abstract class DialogFactory {
     }
 
     /*
-     *
-     * @todo ErrorDialog
+     * @author AbellaMort
+     * @changes
+     *      2018-03-02 (AbellaMort) created
+     * @brief Shows the ErrorDialog
      *
      */
+
+    public static void showErrorDialog(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(
+            null,
+            errorMessage,
+            Labels.ERROR_TITLE,
+            JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
 }

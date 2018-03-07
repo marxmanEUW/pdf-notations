@@ -62,13 +62,16 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent mouseEvent)
     {
+        if (this.getPdfObject() == null) { return; }
+
         Point coordinates = this.getPdfArea().getActualCoordinatesOfPoint(
             mouseEvent.getPoint()
         );
 
-
         if(this.getPdfArea().getAddingNotation()
-            && !this.getPdfArea().isNotationInRangeOfOtherNotation(mouseEvent.getPoint()))
+            && !this.getPdfArea().isNotationInRangeOfOtherNotation(
+                mouseEvent.getPoint())
+            )
         {
             // @ todo move to external dialog
             Notation emptyNotation = NotationFactory.getEmptyNotation(this.getPdfObject().getListOfEntityNamesAndTypes());
@@ -85,17 +88,19 @@ public class PdfAreaMouseClick extends MouseAdapter {
             this.pdfObjectView.getNotationListScrollPane().updateTable();
         }
 
-
-        Notation notation = this.getPdfArea().getClickedNotation(mouseEvent.getPoint());
+        Notation notation = this.getPdfArea().getClickedNotation(
+            mouseEvent.getPoint()
+        );
         if (notation != null) {
             int selectedNotationId = notation.getId();
-            this.pdfObjectView.getNotationListScrollPane().setSelectedRow(selectedNotationId);
-            this.getPdfObject().setSelectedNotationIndex(selectedNotationId);
+            this.pdfObjectView.getNotationListScrollPane()
+                .setSelectedRow(selectedNotationId);
+            this.getPdfObject().setSelectedNotationId(selectedNotationId);
             this.getPdfArea().repaint();
         }
         else
         {
-            this.pdfObjectView.getNotationListScrollPane().unselectRow();
+            this.pdfObjectView.getNotationListScrollPane().deselectRow();
         }
     }
 
@@ -109,7 +114,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse pressed");
     }
 
     /*
@@ -121,7 +125,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse released");
     }
 
     /*
@@ -133,7 +136,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseEntered(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse entered");
     }
 
     /*
@@ -145,7 +147,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseExited(MouseEvent mouseEvent)
     {
-        //System.out.println("Mouse exited");
     }
 
 
@@ -156,6 +157,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
      */
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfObject of the PdfObjectView.
      */
     private PdfObject getPdfObject()
     {
@@ -164,6 +168,9 @@ public class PdfAreaMouseClick extends MouseAdapter {
 
     /*
      * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Returns the PdfArea.
      */
     private PdfArea getPdfArea()
     {
