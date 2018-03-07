@@ -235,6 +235,7 @@ public class PdfArea extends JPanel {
         this.repaintNotationPoints(graphics);
 
         this.pdfObjectView.getPdfScrollPane().getViewport().revalidate();
+        this.pdfObjectView.getPdfScrollPane().repaint();
         this.getPdfObjectView().getMainFrame().getToolBar().setLabelZoomLevel(
             this.zoomLevel
         );
@@ -369,8 +370,6 @@ public class PdfArea extends JPanel {
      */
     public Notation getClickedNotation(Point point)
     {
-        //if (this.getPdfObject() == null) { return null; }
-
         Point actualPoint = this.getActualCoordinatesOfPoint(point);
 
         Notation clickedNotation = null;

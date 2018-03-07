@@ -61,10 +61,11 @@ public class PdfAreaMouseClick extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent mouseEvent)
     {
+        if (this.getPdfObject() == null) { return; }
+
         Point coordinates = this.getPdfArea().getActualCoordinatesOfPoint(
             mouseEvent.getPoint()
         );
-
 
         if(this.getPdfArea().getAddingNotation()
             && !this.getPdfArea().isNotationInRangeOfOtherNotation(
@@ -77,7 +78,6 @@ public class PdfAreaMouseClick extends MouseAdapter {
             this.getPdfArea().repaint();
             this.pdfObjectView.getNotationListScrollPane().updateTable();
         }
-
 
         Notation notation = this.getPdfArea().getClickedNotation(
             mouseEvent.getPoint()
