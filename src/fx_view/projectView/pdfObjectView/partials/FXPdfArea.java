@@ -54,9 +54,6 @@ public class FXPdfArea extends ScrollPane {
         this.pdfObjectView = pdfObjectView;
         this.scrollHandler = this.pdfObjectView.getScrollHandler();
 
-        //File file = new File(PATH_TO_IMAGE);
-        //this.pdfImage = new ImageView(file.toURI().toString());
-
         this.refreshPdfArea();
     }
 
@@ -134,7 +131,7 @@ public class FXPdfArea extends ScrollPane {
     /*
      * @author  marxmanEUW
      */
-    public void appointRenderedPdf()
+    private void appointRenderedPdf()
     {
         this.pdfImage = new ImageView();
         this.pdfImage.setImage(this.pdfRenderTask.getRenderedPdfImage());

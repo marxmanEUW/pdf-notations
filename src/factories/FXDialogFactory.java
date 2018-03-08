@@ -2,8 +2,11 @@ package factories;
 
 import constants.Environment;
 import constants.Labels;
+import fx_handler.FXHyperlinkChangeListener;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -27,9 +30,7 @@ public abstract class FXDialogFactory {
             Environment.FILE_TYPE_ARRAY[fileType][1])
         );
 
-        File openFile = fileChooser.showOpenDialog(null);
-
-        return openFile;
+        return fileChooser.showOpenDialog(null);
     }
 
     /*
@@ -75,10 +76,36 @@ public abstract class FXDialogFactory {
      */
     public static Optional<ButtonType> showWarningAtCloseDialog()
     {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(Labels.WARNING_TITLE);
-        alert.setHeaderText(Labels.WARNING_TITLE);
-        alert.setContentText(Labels.WARNING_TEXT);
-        return alert.showAndWait();
+        Alert warningAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        warningAlert.setTitle(Labels.WARNING_TITLE);
+        warningAlert.setHeaderText(Labels.WARNING_TITLE);
+        warningAlert.setContentText(Labels.WARNING_TEXT);
+        return warningAlert.showAndWait();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-08 (marxmanEUW)  created
+     * @brief   Shows the About-Dialog.
+     */
+    public static void showAboutDialog(FXHyperlinkChangeListener hyperlinkChangeListener)
+    {
+        Alert aboutAlert = new Alert(Alert.AlertType.INFORMATION);
+        aboutAlert.setTitle(Labels.ABOUT_TITLE);
+        aboutAlert.setHeaderText(Labels.ABOUT_TITLE);
+
+        WebView aboutWebView = new WebView();
+        WebEngine aboutWebEngine = aboutWebView.getEngine();
+
+        aboutWebEngine.loadContent(Labels.ABOUT_TEXT);
+
+        hyperlinkChangeListener.setWebEngine(aboutWebEngine);
+        aboutWebEngine.getLoadWorker().stateProperty().addListener(hyperlinkChangeListener);
+
+        aboutWebView.setPrefSize(400, 300);
+
+        aboutAlert.getDialogPane().setContent(aboutWebView);
+        aboutAlert.showAndWait();
     }
 }

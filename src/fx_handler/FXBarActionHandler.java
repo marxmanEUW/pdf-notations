@@ -4,7 +4,6 @@ import constants.Environment;
 import constants.Labels;
 import factories.FXDialogFactory;
 import factories.PdfObjectFactory;
-import fx_threads.FXPdfRenderTask;
 import fx_view.*;
 import fx_view.bar.*;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
@@ -23,7 +22,7 @@ import java.util.Optional;
 public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     private FXMainFrame mainFrame;
-
+    private FXHyperlinkChangeListener hyperlinkChangeListener;
 
     /*
      * #########################################################################
@@ -36,6 +35,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
     public void initialize(FXMainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+        this.hyperlinkChangeListener = this.mainFrame.getHyperlinkChangeListener();
     }
 
 
@@ -80,8 +80,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
                 this.closeProject();
                 break;
             case Labels.BAR_ITEM_CLOSE_NAME:
-                System.out.println("Schließen Programm");
-                //this.closeProgram();
+                this.closeProgram();
                 break;
             case Labels.BAR_ITEM_ADD_NOTATION_NAME:
                 System.out.println("Hinzufügen Notation");
@@ -92,16 +91,13 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
                 //this.deleteNotation();
                 break;
             case Labels.BAR_ITEM_ZOOM_IN_NAME:
-                System.out.println("Zoom In");
-                //this.zoomIn();
+                this.zoomIn();
                 break;
             case Labels.BAR_ITEM_ZOOM_OUT_NAME:
-                System.out.println("Zoom Out");
-                //this.zoomOut();
+                this.zoomOut();
                 break;
             case Labels.BAR_ITEM_ABOUT_NAME:
-                System.out.println("About");
-                //showAbout();
+                showAbout();
                 break;
         }
 
@@ -138,11 +134,17 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
         return this.getPdfObjectView().getPdfArea();
     }
 
+    /*
+     * @author  yxyxD
+     */
     private FXMainFrameMenuBar getMainFrameMenuBar()
     {
         return this.mainFrame.getJMenuBar();
     }
 
+    /*
+     * @author  yxyxD
+     */
     private FXMainFrameToolBar getMainFrameToolBar()
     {
         return this.mainFrame.getToolBar();
@@ -239,22 +241,20 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
         if ((userChoice.isPresent()) && (userChoice.get() == ButtonType.OK))
         {
             this.getPdfObjectView().closeProject();
-            System.out.println("asdasd");
         }
     }
 
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void closeProgram()
     {
-        this.mainFrame.dispatchEvent(
-            new WindowEvent(
-                this.mainFrame,
-                WindowEvent.WINDOW_CLOSING
-            )
-        );
+        Optional<ButtonType> userChoice = FXDialogFactory.showWarningAtCloseDialog();
+        if ((userChoice.isPresent()) && (userChoice.get() == ButtonType.OK))
+        {
+            this.mainFrame.getWindow().close();
+        }
     }
 
 
@@ -290,13 +290,9 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
      * @changes
      *      2018-02-19 (yxyxD)  created
      * @brief   Increases the zoom of the pdfImage.
-     *
+     */
     private void zoomIn()
     {
-        if (Environment.PDF_RENDER_GROUP.activeCount() >=
-            Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
-
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_IN
         );
@@ -308,13 +304,9 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
      * @changes
      *      2018-02-19 (yxyxD)  created
      * @brief   Decreases the zoom of the pdfImage.
-     *
+     */
     private void zoomOut()
     {
-        if (Environment.PDF_RENDER_GROUP.activeCount() >=
-            Environment.MAX_RENDER_THREADS) { return; }
-        if (!this.getPdfObjectView().getPdfArea().isZoomEnabled()) { return; }
-
         this.getPdfObjectView().getPdfArea().zoomPdf(
             Environment.ZOOM_OUT
         );
@@ -322,10 +314,10 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void showAbout()
     {
-        DialogFactory.showAboutDialog();
+        FXDialogFactory.showAboutDialog(this.hyperlinkChangeListener);
     }
 
 

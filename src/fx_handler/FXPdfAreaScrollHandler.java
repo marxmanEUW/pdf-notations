@@ -1,5 +1,6 @@
 package fx_handler;
 
+import constants.Environment;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import fx_view.projectView.pdfObjectView.partials.FXPdfArea;
 import javafx.event.EventHandler;
@@ -52,11 +53,11 @@ public class FXPdfAreaScrollHandler implements EventHandler<ScrollEvent> {
             double zoomChange = 0;
             if (event.getDeltaY() > 0)
             {
-                zoomChange = 0.1;
+                zoomChange = Environment.ZOOM_IN;
             }
             else if (event.getDeltaY() < 0)
             {
-                zoomChange = -0.1;
+                zoomChange = Environment.ZOOM_OUT;
             }
 
             this.getPdfArea().zoomPdf(zoomChange);

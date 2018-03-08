@@ -2,6 +2,8 @@ package fx_view;
 
 import constants.Labels;
 import fx_handler.FXBarActionHandler;
+import fx_handler.FXHyperlinkChangeListener;
+import fx_handler.FXWindowHandler;
 import fx_view.bar.FXMainFrameMenuBar;
 import fx_view.bar.FXMainFrameToolBar;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
@@ -28,6 +30,8 @@ public class FXMainFrame extends Application {
 
     // Listeners
     private FXBarActionHandler barActionHandler;
+    private FXWindowHandler windowHandler;
+    private FXHyperlinkChangeListener hyperlinkChangeListener;
 
 
     /*
@@ -83,6 +87,11 @@ public class FXMainFrame extends Application {
         this.window.setTitle(Labels.FRAME_TITLE);
 
         // initialize GUI components and add them
+
+        // Hyperlink Action Listener
+        this.hyperlinkChangeListener = new FXHyperlinkChangeListener();
+        this.hyperlinkChangeListener.initialize(this);
+
         // Bar Action Listener
         this.barActionHandler = new FXBarActionHandler();
         this.barActionHandler.initialize(this);
@@ -107,10 +116,14 @@ public class FXMainFrame extends Application {
 
         this.layout.setCenter(this.pdfObjectView);
 
+        // close handling
+        this.windowHandler = new FXWindowHandler();
+        this.windowHandler.initialize(this);
+
+        this.window.setOnCloseRequest(this.windowHandler);
 
         //set scene and display
         this.window.setScene(this.scene);
-
         this.window.setMaximized(true);
 
         this.window.show();
@@ -136,7 +149,7 @@ public class FXMainFrame extends Application {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the Toolbar of the MainFrame
+     * @brief   Returns the Toolbar of the MainFrame.
      */
     public FXMainFrameToolBar getToolBar()
     {
@@ -147,10 +160,26 @@ public class FXMainFrame extends Application {
      * @author  yxyxD
      * @changes
      *      2018-02-12 (yxyxD)  created
-     * @brief   Returns the PdfObjectView of the MainFrame
+     * @brief   Returns the PdfObjectView of the MainFrame.
      */
     public FXPdfObjectView getPdfObjectView()
     {
         return this.pdfObjectView;
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-08 (marxmanEUW)  created
+     * @brief   Returns the Windows of the MainFrame.
+     */
+    public Stage getWindow()
+    {
+        return window;
+    }
+
+    public FXHyperlinkChangeListener getHyperlinkChangeListener()
+    {
+        return hyperlinkChangeListener;
     }
 }

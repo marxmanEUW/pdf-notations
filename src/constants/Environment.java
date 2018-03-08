@@ -45,8 +45,8 @@ public abstract class Environment {
     public static final int FILE_TYPE_PDFNOT = 1;
 
     public static final String FILE_TYPE_ARRAY[][] = {
-        {"PDF (.*pdf)", "pdf"},
-        {"PDF Notations (.*pdfnot)", "pdfnot"}
+        {"PDF (*.pdf)", "*.pdf"},
+        {"PDF Notations (*.pdfnot)", "*.pdfnot"}
     };
 
 
