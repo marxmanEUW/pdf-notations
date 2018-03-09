@@ -38,6 +38,8 @@ public class FXWindowHandler implements EventHandler<WindowEvent> {
     @Override
     public void handle(WindowEvent event)
     {
+        event.consume();
+
         Optional<ButtonType> userChoice = FXDialogFactory.showWarningAtCloseDialog();
         if ((userChoice.isPresent()) && (userChoice.get() == ButtonType.OK))
         {

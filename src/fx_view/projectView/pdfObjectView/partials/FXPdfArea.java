@@ -1,29 +1,34 @@
 package fx_view.projectView.pdfObjectView.partials;
 
-import fx_handler.FXPdfAreaScrollHandler;
+import constants.Environment;
 import fx_threads.FXPdfRenderTask;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
+import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import model.Notation;
 import model.PdfObject;
 
-public class FXPdfArea extends ScrollPane {
 
-    private final static String PATH_TO_IMAGE = "C:\\Users\\Conrad\\Pictures\\rtbvbls2fojz.jpg";
-    private final static String PATH_TO_PDF = "files\\file1.pdf";
+public class FXPdfArea extends ScrollPane {
 
     // Pdf object view
     private FXPdfObjectView pdfObjectView;
 
-    // event handler
-    private FXPdfAreaScrollHandler scrollHandler;
-
     // local variables
+    private Pane contentPane;
     private ImageView pdfImage;
     private double zoomLevel;
 
+    // pdfRenderTask
     private FXPdfRenderTask pdfRenderTask;
 
+    // state variables
+    private boolean addingNotation;
 
     /*
      * #########################################################################
@@ -52,8 +57,12 @@ public class FXPdfArea extends ScrollPane {
     public void initialize(FXPdfObjectView pdfObjectView)
     {
         this.pdfObjectView = pdfObjectView;
-        this.scrollHandler = this.pdfObjectView.getScrollHandler();
 
+        this.contentPane = new Pane();
+        this.contentPane.setOnMouseClicked(this.pdfObjectView.getPdfAreaMouseHandler());
+        this.contentPane.setOnScroll(this.pdfObjectView.getPdfAreaScrollHandler());
+
+        this.setContent(this.contentPane);
         this.refreshPdfArea();
     }
 
@@ -79,6 +88,48 @@ public class FXPdfArea extends ScrollPane {
         return this.pdfObjectView.getPdfObject();
     }
 
+    /*
+     * @author  marxmanEUW
+     */
+    public boolean isAddingNotation()
+    {
+        return addingNotation;
+    }
+
+    /*
+     * #########################################################################
+     * #                    Setter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public void setAddingNotation(boolean addingNotation)
+    {
+        this.addingNotation = addingNotation;
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the cursor to CrossHair.
+     */
+    public void setCursorTypeToCrosshair()
+    {
+        this.contentPane.setCursor(Cursor.CROSSHAIR);
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-02-12 (marxmanEUW)  created
+     * @brief   Sets the cursor to default.
+     */
+    public void setCursorTypeToDefault()
+    {
+        this.contentPane.setCursor(Cursor.DEFAULT);
+    }
 
     /*
      * #########################################################################
@@ -102,6 +153,7 @@ public class FXPdfArea extends ScrollPane {
             // no need to set height, because the aspect ratio can not change
             // -> height gets calculated automatically
             pdfImage.setFitWidth(newWidth);
+            this.repaintNotations();
         }
     }
 
@@ -110,15 +162,16 @@ public class FXPdfArea extends ScrollPane {
      */
     public void refreshPdfArea()
     {
+        this.contentPane.getChildren().clear();
+
         this.zoomLevel = 1.0;
-        //this.addingNotation = false;
+        this.addingNotation = false;
         //this.setZoomEnabled(false);
 
         if (this.getPdfObject() == null)
         {
             // no pdf to import => load empty pdf
             this.pdfImage = null;
-            //this.setContent(this.pdfImage);
         }
         else
         {
@@ -131,15 +184,117 @@ public class FXPdfArea extends ScrollPane {
     /*
      * @author  marxmanEUW
      */
-    private void appointRenderedPdf()
+    public void repaintNotations()
     {
-        this.pdfImage = new ImageView();
-        this.pdfImage.setImage(this.pdfRenderTask.getRenderedPdfImage());
-        this.pdfImage.setPreserveRatio(true);
+        if (this.getPdfObject() == null) { return; }
+        if (this.getPdfObject().getListOfNotations() == null) { return; }
 
-        this.pdfImage.setOnScroll(this.scrollHandler);
+        this.contentPane.getChildren().clear();
+        this.contentPane.getChildren().add(this.pdfImage);
 
-        this.setContent(this.pdfImage);
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+            )
+        {
+            Color circleColor;
+
+            if (notation.getId() == this.getPdfObject().getSelectedNotationId())
+            {
+                circleColor = Environment.FX_NOTATION_SELECTED_COLOR;
+            }
+            else
+            {
+                circleColor = Environment.FX_NOTATION_STANDARD_COLOR;
+            }
+
+            int circleX = (int) (notation.getX() * this.zoomLevel);
+            int circleY = (int) (notation.getY() * this.zoomLevel);
+            int circleRadius = (int)
+                (((double) Environment.NOTATION_RADIUS)
+                    * this.zoomLevel
+                );
+            Circle circle = new Circle(circleX, circleY, circleRadius );
+            circle.setFill(circleColor);
+            this.contentPane.getChildren().add(circle);
+        }
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (marxmanEUW)  created
+     * @brief   Returns the actual coordinates of the location clicked on,
+     *          because they differ based on the zoom level.
+     */
+    public Point2D getActualCoordinatesOfPoint(Point2D point)
+    {
+        return new Point2D(
+            (point.getX() / this.zoomLevel),
+            (point.getY() / this.zoomLevel)
+        );
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Checks if a Notation can be painted at the clicked location.
+     *          That is not allowed if an other Notation would get painted over.
+     *          No need to calculate "actualPoint", because the right point was
+     *          handed over.
+     */
+    public boolean isNotationInRangeOfOtherNotation(Point2D point)
+    {
+        boolean isPointInRange = false;
+
+        // minimal required distance for no overlapping is two time the radius
+        double minimalRange = (double) Environment.NOTATION_RADIUS * 2.0;
+
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+            )
+        {
+            Point2D notationPoint = notation.getCoordinates();
+
+            double distance = point.distance(notationPoint);
+            if (distance <= minimalRange)
+            {
+                isPointInRange = true;
+                break;
+            }
+        }
+
+        return isPointInRange;
+    }
+
+    /*
+     * @author  yxyxD
+     * @changes
+     *      2018-02-12 (yxyxD)  created
+     * @brief   Returns the Notation located in the area that has been clicked
+     *          on (if there is any Notation).
+     */
+    public Notation getClickedNotation(Point2D point)
+    {
+        Point2D actualPoint = this.getActualCoordinatesOfPoint(point);
+
+        Notation clickedNotation = null;
+
+        for (Notation notation :
+            this.getPdfObject().getListOfNotations().values()
+            )
+        {
+            Point2D notationPoint = notation.getCoordinates();
+            double distance = actualPoint.distance(notationPoint);
+
+            if (distance <= (double) Environment.NOTATION_RADIUS)
+            {
+                clickedNotation = notation;
+                break;
+            }
+        }
+
+        return clickedNotation;
     }
 
     /*
@@ -153,6 +308,25 @@ public class FXPdfArea extends ScrollPane {
      */
     private boolean isPdfZoomable(double zoomChange)
     {
-        return true;
+        boolean returnValue = true;
+        if(this.pdfImage == null)
+        {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    private void appointRenderedPdf()
+    {
+        this.pdfImage = new ImageView();
+        this.pdfImage.setImage(this.pdfRenderTask.getRenderedPdfImage());
+        this.pdfImage.setPreserveRatio(true);
+
+        //this.pdfImage.setOnScroll(this.scrollHandler);
+
+        this.contentPane.getChildren().add(this.pdfImage);
     }
 }

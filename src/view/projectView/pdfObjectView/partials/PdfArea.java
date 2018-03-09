@@ -348,7 +348,7 @@ public class PdfArea extends JPanel {
             this.getPdfObject().getListOfNotations().values()
         )
         {
-            Point notationPoint = notation.getCoordinates();
+            Point notationPoint = notation.getCoordinatesAsOldPoint();
 
             double distance = actualPoint.distance(notationPoint);
             if (distance <= minimalRange)
@@ -378,7 +378,7 @@ public class PdfArea extends JPanel {
             this.getPdfObject().getListOfNotations().values()
         )
         {
-            Point notationPoint = notation.getCoordinates();
+            Point notationPoint = notation.getCoordinatesAsOldPoint();
             double distance = actualPoint.distance(notationPoint);
 
             if (distance <= (double) Environment.NOTATION_RADIUS)

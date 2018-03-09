@@ -83,12 +83,10 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
                 this.closeProgram();
                 break;
             case Labels.BAR_ITEM_ADD_NOTATION_NAME:
-                System.out.println("Hinzufügen Notation");
-                //this.addNotation();
+                this.addNotation();
                 break;
             case Labels.BAR_ITEM_DELETE_NOTATION_NAME:
-                System.out.println("Löschen Notation");
-                //this.deleteNotation();
+                this.deleteNotation();
                 break;
             case Labels.BAR_ITEM_ZOOM_IN_NAME:
                 this.zoomIn();
@@ -260,7 +258,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void addNotation()
     {
         this.getPdfArea().setAddingNotation(true);
@@ -270,17 +268,23 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  marxmanEUW
-     *
+     */
     private void deleteNotation()
     {
-        int userChoice = DialogFactory.showWarningDeleteNotation(
-            this.getPdfObject().getSelectedNotationIndex()
+        int selectedNotationId = this.getPdfObject().getSelectedNotationId();
+        if (selectedNotationId == Environment.SELECTED_NOTATION_NULL_VALUE)
+        {
+            return;
+        }
+
+        Optional<ButtonType> userChoice = FXDialogFactory.showWarningDeleteNotation(
+            selectedNotationId
         );
-        if (userChoice == JOptionPane.YES_OPTION)
+        if ((userChoice.isPresent()) && (userChoice.get() == ButtonType.OK))
         {
             this.getPdfObject().deleteSelectedNotation();
-            this.getPdfArea().repaint();
-            this.getPdfObjectView().getNotationListScrollPane().updateTable();
+            this.getPdfArea().repaintNotations();
+            //this.getPdfObjectView().getNotationListScrollPane().updateTable();
         }
     }
 

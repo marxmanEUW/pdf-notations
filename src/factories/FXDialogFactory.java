@@ -70,22 +70,6 @@ public abstract class FXDialogFactory {
     /*
      * @author  marxmanEUW
      * @changes
-     *      2018-03-07 (marxmanEUW)  created
-     * @brief   Shows the Waring-At-Close-Dialog whenever a project or
-     *          the entire window is closed.
-     */
-    public static Optional<ButtonType> showWarningAtCloseDialog()
-    {
-        Alert warningAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        warningAlert.setTitle(Labels.WARNING_TITLE);
-        warningAlert.setHeaderText(Labels.WARNING_TITLE);
-        warningAlert.setContentText(Labels.WARNING_TEXT);
-        return warningAlert.showAndWait();
-    }
-
-    /*
-     * @author  marxmanEUW
-     * @changes
      *      2018-03-08 (marxmanEUW)  created
      * @brief   Shows the About-Dialog.
      */
@@ -107,5 +91,36 @@ public abstract class FXDialogFactory {
 
         aboutAlert.getDialogPane().setContent(aboutWebView);
         aboutAlert.showAndWait();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-07 (marxmanEUW)  created
+     * @brief   Shows the Waring-At-Close-Dialog whenever a project or
+     *          the entire window is closed.
+     */
+    public static Optional<ButtonType> showWarningAtCloseDialog()
+    {
+        Alert warningAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        warningAlert.setTitle(Labels.WARNING_TITLE);
+        warningAlert.setHeaderText(Labels.WARNING_TITLE);
+        warningAlert.setContentText(Labels.WARNING_TEXT);
+        return warningAlert.showAndWait();
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (marxmanEUW)  created
+     * @brief   Shows the Waring-Delete-Notation dialog.
+     */
+    public static Optional<ButtonType> showWarningDeleteNotation(int value)
+    {
+        Alert warningAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        warningAlert.setTitle(Labels.DELETE_NOTATION_TITLE);
+        warningAlert.setHeaderText(Labels.DELETE_NOTATION_TITLE);
+        warningAlert.setContentText(Labels.DELETE_NOTATION_TEXT + value);
+        return warningAlert.showAndWait();
     }
 }

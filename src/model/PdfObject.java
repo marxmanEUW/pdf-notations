@@ -1,8 +1,8 @@
 package model;
 
 import constants.Environment;
+import javafx.geometry.Point2D;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -92,9 +92,9 @@ public class PdfObject {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns the ListOfPoints of the PdfObject.
      */
-    public ArrayList<Point> getListOfPoints()
+    public ArrayList<Point2D> getListOfPoints()
     {
-        ArrayList<Point> listOfPoints = new ArrayList<>();
+        ArrayList<Point2D> listOfPoints = new ArrayList<>();
         this.listOfNotations.forEach(
             (key, value) -> listOfPoints.add(value.getCoordinates())
         );

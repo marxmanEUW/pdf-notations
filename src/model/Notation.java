@@ -1,6 +1,6 @@
 package model;
 
-import constants.Environment;
+import javafx.geometry.Point2D;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -91,7 +91,12 @@ public class Notation {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns the y-coordinate of the notation.
      */
-    public Point getCoordinates()
+    public Point2D getCoordinates()
+    {
+        return new Point2D(this.getX(), this.getY());
+    }
+
+    public Point getCoordinatesAsOldPoint()
     {
         return new Point(this.getX(), this.getY());
     }

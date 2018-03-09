@@ -31,6 +31,9 @@ public abstract class Environment {
     public static final Color NOTATION_STANDARD_COLOR = Color.blue;
     public static final Color NOTATION_SELECTED_COLOR = Color.red;
 
+    public static final javafx.scene.paint.Color FX_NOTATION_STANDARD_COLOR = javafx.scene.paint.Color.BLUE;
+    public static final javafx.scene.paint.Color FX_NOTATION_SELECTED_COLOR = javafx.scene.paint.Color.RED;
+
     public static final double MINIMUM_ZOOM_FACTOR = 0.5;
     public static final double MAXIMUM_ZOOM_FACTOR = 1.5;
 

@@ -1,6 +1,7 @@
 package fx_view.projectView.pdfObjectView;
 
 import factories.PdfObjectFactory;
+import fx_handler.FXPdfAreaMouseHandler;
 import fx_handler.FXPdfAreaScrollHandler;
 import fx_view.projectView.pdfObjectView.partials.FXPdfArea;
 import javafx.geometry.Orientation;
@@ -15,7 +16,8 @@ public class FXPdfObjectView extends SplitPane {
     private PdfObject pdfObject;
 
     // event handler
-    private FXPdfAreaScrollHandler scrollHandler;
+    private FXPdfAreaScrollHandler pdfAreaScrollHandler;
+    private FXPdfAreaMouseHandler pdfAreaMouseHandler;
 
     // Left part of the center component
     private FXPdfArea pdfArea;
@@ -35,7 +37,7 @@ public class FXPdfObjectView extends SplitPane {
     public FXPdfObjectView()
     {
         this.setOrientation(Orientation.HORIZONTAL);
-        this.scrollHandler = new FXPdfAreaScrollHandler();
+        this.pdfAreaScrollHandler = new FXPdfAreaScrollHandler();
     }
 
 
@@ -49,12 +51,19 @@ public class FXPdfObjectView extends SplitPane {
      */
     public void initialize()
     {
-        this.scrollHandler.initialize(this);
+        this.pdfAreaScrollHandler.initialize(this);
 
         this.label2 = new Label("Label 2");
 
+        this.pdfAreaMouseHandler = new FXPdfAreaMouseHandler();
+        this.pdfAreaMouseHandler.initialize(this);
+
+        this.pdfAreaScrollHandler = new FXPdfAreaScrollHandler();
+        this.pdfAreaScrollHandler.initialize(this);
+
         this.pdfArea = new FXPdfArea();
         this.pdfArea.initialize(this);
+
 
         this.getItems().add(this.pdfArea);
         this.getItems().add(label2);
@@ -85,9 +94,17 @@ public class FXPdfObjectView extends SplitPane {
     /*
      * @author  marxmanEUW
      */
-    public FXPdfAreaScrollHandler getScrollHandler()
+    public FXPdfAreaScrollHandler getPdfAreaScrollHandler()
     {
-        return scrollHandler;
+        return pdfAreaScrollHandler;
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    public FXPdfAreaMouseHandler getPdfAreaMouseHandler()
+    {
+        return pdfAreaMouseHandler;
     }
 
     public Label getLabel2()
