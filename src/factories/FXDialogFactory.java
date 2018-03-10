@@ -3,6 +3,7 @@ package factories;
 import constants.Environment;
 import constants.Labels;
 import fx_handler.FXHyperlinkChangeListener;
+import fx_view.FXMainFrame;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.web.WebEngine;
@@ -21,7 +22,7 @@ public abstract class FXDialogFactory {
      * @brief   Shows a OpenFileDialog and returns the selected file
      *          or returns null if no file was selected.
      */
-    public static File getFileFromOpenDialog(int fileType)
+    public static File getFileFromOpenDialog(int fileType, FXMainFrame mainFrame)
     {
         FileChooser fileChooser = new FileChooser();
 
@@ -30,7 +31,7 @@ public abstract class FXDialogFactory {
             Environment.FILE_TYPE_ARRAY[fileType][1])
         );
 
-        return fileChooser.showOpenDialog(null);
+        return fileChooser.showOpenDialog(mainFrame.getWindow());
     }
 
     /*
@@ -40,7 +41,7 @@ public abstract class FXDialogFactory {
      * @brief   Shows a SaveFileDialog and returns the selected file
      *          or returns null if no file was selected.
      */
-    public static File getFileFromSaveDialog(int fileType)
+    public static File getFileFromSaveDialog(int fileType, FXMainFrame mainFrame)
     {
         String fileExtension = Environment.FILE_TYPE_ARRAY[fileType][1];
 
@@ -52,7 +53,7 @@ public abstract class FXDialogFactory {
 
         fileChooser.setInitialFileName("newFile." + fileExtension);
 
-        File saveFile = fileChooser.showSaveDialog(null);
+        File saveFile = fileChooser.showSaveDialog(mainFrame.getWindow());
 
         if (saveFile != null)
         {

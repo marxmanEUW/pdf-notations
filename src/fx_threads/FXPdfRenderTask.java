@@ -56,7 +56,7 @@ public class FXPdfRenderTask extends Task<String> {
      * @author  marxmanEUW
      */
     @Override
-    protected String call() throws Exception
+    protected String call()
     {
         this.renderPdfImage();
         return null;
@@ -73,22 +73,35 @@ public class FXPdfRenderTask extends Task<String> {
     private void renderPdfImage()
     {
         BufferedImage tempImage;
+        PDDocument pdfDocument = null;
         try
         {
             File pdfFile = new File(
                 this.pdfArea.getPdfObject().getPdfAbsolutePath()
             );
-            PDDocument pdfDocument = PDDocument.load(pdfFile);
+            pdfDocument = PDDocument.load(pdfFile);
             PDFRenderer renderer = new PDFRenderer(pdfDocument);
             tempImage = renderer.renderImageWithDPI(
                 0,
                 Environment.PDF_IMAGE_DPI);
             pdfDocument.close();
         }
-        catch (IOException ioException)
+        catch (Exception exception)
         {
             tempImage = null;
-            ioException.printStackTrace();
+            exception.printStackTrace();
+            // @todo mabe to much output
+            System.out.println(exception);
+        }
+        finally {
+            if (pdfDocument != null)
+            {
+                try {
+                    pdfDocument.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         this.renderedPdfImage = SwingFXUtils.toFXImage(tempImage, null);

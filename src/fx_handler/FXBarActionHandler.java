@@ -159,7 +159,8 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
     private void newProject()
     {
         File newProjectFile = FXDialogFactory.getFileFromOpenDialog(
-            Environment.FILE_TYPE_PDF
+            Environment.FILE_TYPE_PDF,
+            this.mainFrame
         );
 
         if (newProjectFile != null)
@@ -175,7 +176,8 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
     private void openProject()
     {
         File openProjectFile = FXDialogFactory.getFileFromOpenDialog(
-            Environment.FILE_TYPE_PDFNOT
+            Environment.FILE_TYPE_PDFNOT,
+            this.mainFrame
         );
 
         if (openProjectFile != null)
@@ -197,7 +199,8 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
         else
         {
             File saveFile = FXDialogFactory.getFileFromSaveDialog(
-                Environment.FILE_TYPE_PDFNOT
+                Environment.FILE_TYPE_PDFNOT,
+                this.mainFrame
             );
 
             if (saveFile != null)
@@ -217,7 +220,8 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
     private void saveAsProject()
     {
         File saveAsFile = FXDialogFactory.getFileFromSaveDialog(
-            Environment.FILE_TYPE_PDFNOT
+            Environment.FILE_TYPE_PDFNOT,
+            this.mainFrame
         );
         if (saveAsFile != null)
         {
