@@ -3,6 +3,8 @@ package fx_view.projectView.pdfObjectView.partials;
 import constants.Environment;
 import constants.Labels;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +38,18 @@ public class FXNotationListScrollPane extends ScrollPane {
         this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
     }
 
+    /*
+     * #########################################################################
+     * #                    Getter                                             #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     */
+    public TableView<Notation> getNotationListTable()
+    {
+        return notationListTable;
+    }
 
     /*
      * #########################################################################
@@ -63,6 +77,10 @@ public class FXNotationListScrollPane extends ScrollPane {
                     .subtract(Labels.NOTATION_SPLIT_PANE_HEIGHT_CORRECTION)
             )
         );
+
+        this.notationListTable.getSelectionModel().selectedItemProperty().
+            addListener(this.pdfObjectView.getNotationListTableChangeListener()
+            );
 
         TableColumn idColumn = new TableColumn(
             Labels.LIST_TABLE_MODEL_COLUMN_1_NAME
@@ -99,7 +117,6 @@ public class FXNotationListScrollPane extends ScrollPane {
         this.setContent(notationListTable);
     }
 
-
     /*
      * #########################################################################
      * #                    Public  Methods                                    #
@@ -111,18 +128,43 @@ public class FXNotationListScrollPane extends ScrollPane {
     public void updateTable()
     {
         if(this.getPdfObject() == null) { return; }
-        if(this.getPdfObject().getSelectedNotationId() == Environment.SELECTED_NOTATION_NULL_VALUE)
+
+        this.notationListTable.setItems(
+            FXCollections.observableArrayList(
+                this.getPdfObject().getListOfNotationsAsList()));
+    }
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (marxmanEUW)  created
+     * @brief   Sets the selected fow of the NotationListTable.
+     */
+    public void setSelectedRow(int notationId)
+    {
+        int rowId = notationId;
+
+        for (int i = 0; i < this.notationListTable.getItems().size(); i++)
         {
-            this.notationListTable.getItems().clear();
-        }
-        else
-        {
-            this.notationListTable.setItems(
-                FXCollections.observableArrayList(
-                    this.getPdfObject().getListOfNotationsAsList()));
+            if (notationId == this.notationListTable.getItems().get(i).getId())
+            {
+                rowId = i;
+                break;
+            }
         }
 
+        this.notationListTable.getSelectionModel().select(rowId);
+    }
 
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (marxmanEUW)  created
+     * @brief   Deselects every row of the NotationListTable.
+     */
+    public void deselectRow()
+    {
+        this.notationListTable.getSelectionModel().clearSelection();
     }
 
     /*

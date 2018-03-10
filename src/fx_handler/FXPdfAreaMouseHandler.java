@@ -72,8 +72,12 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
             )
         {
             // @ todo move to external dialog
-            Notation emptyNotation = NotationFactory.getEmptyNotation(this.getPdfObject().getListOfEntityNamesAndTypes());
-            emptyNotation.setValue(0, this.getPdfObject().getIdForNextNotation());
+            Notation emptyNotation = NotationFactory.getEmptyNotation(
+                this.getPdfObject().getListOfEntityNamesAndTypes()
+            );
+            emptyNotation.setValue(
+                0, this.getPdfObject().getIdForNextNotation()
+            );
             emptyNotation.setValue(1, (int) actualPoint.getX());
             emptyNotation.setValue(2, (int) actualPoint.getY());
             emptyNotation.setValue(3, Notation.STANDARD_NAME);
@@ -82,19 +86,34 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
 
             this.getPdfArea().setCursorTypeToDefault();
             this.getPdfArea().setAddingNotation(false);
-            //this.getPdfArea().repaintNotations();
-        }
 
-        Notation notation = this.getPdfArea().getClickedNotation(
-            actualPoint
-        );
-        if (notation != null) {
-            int selectedNotationId = notation.getId();
-            this.getPdfObject().setSelectedNotationId(selectedNotationId);
+            // update table so the last row can be selected
+            this.pdfObjectView.getNotationListScrollPane().updateTable();
+
+            this.getPdfObject().setSelectedNotationId(emptyNotation.getId());
+            this.pdfObjectView.getNotationListScrollPane()
+                .setSelectedRow(emptyNotation.getId());
         }
+        // no need to get clicked notation, because a notation was added,
+        // which is the clicked Notation
         else
         {
-            this.getPdfObject().setSelectedNotationId(Environment.SELECTED_NOTATION_NULL_VALUE);
+            Notation notation = this.getPdfArea().getClickedNotation(
+                actualPoint
+            );
+            if (notation != null) {
+                int selectedNotationId = notation.getId();
+                this.getPdfObject().setSelectedNotationId(selectedNotationId);
+                this.pdfObjectView.getNotationListScrollPane()
+                    .setSelectedRow(selectedNotationId);
+            }
+            else
+            {
+                this.getPdfObject().setSelectedNotationId(
+                    Environment.SELECTED_NOTATION_NULL_VALUE
+                );
+                this.pdfObjectView.getNotationListScrollPane().deselectRow();
+            }
         }
 
         this.getPdfArea().repaintNotations();

@@ -112,8 +112,6 @@ public class FXNotationEntityScrollPane extends ScrollPane {
                 FXCollections.observableArrayList(
                     this.getPdfObject().getSelectedNotationAsObservableList()));
         }
-
-
     }
 
     /*

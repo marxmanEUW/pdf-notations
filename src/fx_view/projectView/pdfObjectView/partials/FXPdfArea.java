@@ -243,7 +243,7 @@ public class FXPdfArea extends ScrollPane {
      *          No need to calculate "actualPoint", because the right point was
      *          handed over.
      */
-    public boolean isNotationInRangeOfOtherNotation(Point2D point)
+    public boolean isNotationInRangeOfOtherNotation(Point2D actualPoint)
     {
         boolean isPointInRange = false;
 
@@ -256,7 +256,7 @@ public class FXPdfArea extends ScrollPane {
         {
             Point2D notationPoint = notation.getCoordinates();
 
-            double distance = point.distance(notationPoint);
+            double distance = actualPoint.distance(notationPoint);
             if (distance <= minimalRange)
             {
                 isPointInRange = true;
@@ -274,10 +274,8 @@ public class FXPdfArea extends ScrollPane {
      * @brief   Returns the Notation located in the area that has been clicked
      *          on (if there is any Notation).
      */
-    public Notation getClickedNotation(Point2D point)
+    public Notation getClickedNotation(Point2D actualPoint)
     {
-        Point2D actualPoint = this.getActualCoordinatesOfPoint(point);
-
         Notation clickedNotation = null;
 
         for (Notation notation :

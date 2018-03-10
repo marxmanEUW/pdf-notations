@@ -2,6 +2,7 @@ package fx_view.projectView.pdfObjectView;
 
 import constants.Environment;
 import factories.PdfObjectFactory;
+import fx_handler.FXNotationListTableChangeListener;
 import fx_handler.FXPdfAreaMouseHandler;
 import fx_handler.FXPdfAreaScrollHandler;
 import fx_view.projectView.pdfObjectView.partials.FXNotationEntityScrollPane;
@@ -22,6 +23,7 @@ public class FXPdfObjectView extends SplitPane {
     // event handler
     private FXPdfAreaScrollHandler pdfAreaScrollHandler;
     private FXPdfAreaMouseHandler pdfAreaMouseHandler;
+    private FXNotationListTableChangeListener notationListTableChangeListener;
 
     // Left part of the center component
     private FXPdfArea pdfArea;
@@ -60,6 +62,7 @@ public class FXPdfObjectView extends SplitPane {
         // create
         this.pdfAreaScrollHandler = new FXPdfAreaScrollHandler();
         this.pdfAreaMouseHandler = new FXPdfAreaMouseHandler();
+        this.notationListTableChangeListener = new FXNotationListTableChangeListener();
 
         this.pdfArea = new FXPdfArea();
         this.notationSplitPane = new FXNotationSplitPane();
@@ -70,6 +73,7 @@ public class FXPdfObjectView extends SplitPane {
         // initialize
         this.pdfAreaMouseHandler.initialize(this);
         this.pdfAreaScrollHandler.initialize(this);
+        this.notationListTableChangeListener.initialize(this);
 
         this.pdfArea.initialize(this);
 
@@ -141,6 +145,14 @@ public class FXPdfObjectView extends SplitPane {
     public FXNotationListScrollPane getNotationListScrollPane()
     {
         return notationListScrollPane;
+    }
+
+    /*
+     * @author  marxmanEUW
+     */
+    public FXNotationListTableChangeListener getNotationListTableChangeListener()
+    {
+        return notationListTableChangeListener;
     }
 
     /*
