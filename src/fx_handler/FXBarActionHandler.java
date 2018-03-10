@@ -99,8 +99,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
                 break;
         }
 
-        //this.updateBars();
-
+        this.updateBars();
     }
 
     /*
@@ -327,7 +326,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
 
     /*
      * @author  yxyxD
-     *
+     */
     public void updateBars()
     {
         // disable all project depended buttons if no project is loaded
@@ -379,5 +378,4 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
             this.getMainFrameToolBar().setButtonAddNotationEnabled(true);
         }
     }
-    */
 }

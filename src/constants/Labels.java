@@ -88,11 +88,23 @@ public abstract class Labels {
     public static final String
         LIST_TABLE_MODEL_COLUMN_1_NAME = "Id";
     public static final String
-        LIST_TABLE_MODEL_COLUMN_2_NAME = "Name";
+        LIST_TABLE_MODEL_COLUMN_2_NAME = "X";
+    public static final String
+        LIST_TABLE_MODEL_COLUMN_3_NAME = "Y";
+
+
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_1_NAME = "Eigenschaft";
     public static final String
         ENTITY_TABLE_MODEL_COLUMN_2_NAME = "Wert";
+
+    public static final String
+        NOTATION_LIST_TABLE_PLACE_HOLDER_TEXT = "Keine Notationen vorhanden.";
+    public static final String
+        NOTATION_ENTITY_TABLE_PLACE_HOLDER_TEXT = "Keine Notation ausgewählt.";
+
+    public static final Double
+        NOTATION_SPLIT_PANE_HEIGHT_CORRECTION = 0.004;
 
     public static final String
         ENTITY_TABLE_MODEL_PROPERTY_ID =  "Id";

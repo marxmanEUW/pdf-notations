@@ -101,6 +101,11 @@ public class Notation {
         return new Point(this.getX(), this.getY());
     }
 
+    public ArrayList<Entity> getListOfEntities()
+    {
+        return listOfEntities;
+    }
+
     /*
      * #########################################################################
      * #                    Setter                                             #

@@ -91,7 +91,6 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
         if (notation != null) {
             int selectedNotationId = notation.getId();
             this.getPdfObject().setSelectedNotationId(selectedNotationId);
-
         }
         else
         {
@@ -99,6 +98,8 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
         }
 
         this.getPdfArea().repaintNotations();
+        this.pdfObjectView.getNotationListScrollPane().updateTable();
+        this.pdfObjectView.getNotationEntityScrollPane().updateTable();
     }
 
     /*

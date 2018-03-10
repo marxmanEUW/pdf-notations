@@ -1,6 +1,8 @@
 package model;
 
 import constants.Environment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -121,7 +123,7 @@ public class PdfObject {
         }
     }
 
-/*
+    /*
      * @author  marxmanEUW
      * @changes
      *      2018-02-12 (marxmanEUW)  created
@@ -151,13 +153,40 @@ public class PdfObject {
     /*
      * @author  marxmanEUW
      * @changes
-     *      2018-03-07 (yxyxD)  marxmanEUW
+     *      2018-03-07 (marxmanEUW)  created
      * @brief   Returns EntityNameAndTypeList of the PdfObject.
      */
     public ArrayList<String[]> getListOfEntityNamesAndTypes()
     {
         return listOfEntityNamesAndTypes;
     }
+
+
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (yxyxD)  marxmanEUW
+     * @brief
+     * @todo testing
+     */
+    public ObservableList<Entity> getSelectedNotationAsObservableList()
+    {
+        ObservableList<Entity> list;
+
+        Notation selectedNotation = this.getSelectedNotation();
+
+        if(selectedNotation == null)
+        {
+            list = null;
+        }
+        else
+        {
+            list = FXCollections.observableArrayList(selectedNotation.getListOfEntities());
+        }
+
+        return list;
+    }
+
     /*
      * #########################################################################
      * #                    Setter                                             #

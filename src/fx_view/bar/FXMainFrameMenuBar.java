@@ -85,7 +85,7 @@ public class FXMainFrameMenuBar extends MenuBar {
         this.setupMenuHelp();
 
         // @todo implement
-        //this.barActionHandler.updateBars();
+        this.barActionHandler.updateBars();
     }
 
 

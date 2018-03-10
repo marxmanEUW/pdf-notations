@@ -1,5 +1,6 @@
 package fx_view;
 
+import constants.Environment;
 import constants.Labels;
 import fx_handler.FXBarActionHandler;
 import fx_handler.FXHyperlinkChangeListener;
@@ -8,6 +9,8 @@ import fx_view.bar.FXMainFrameMenuBar;
 import fx_view.bar.FXMainFrameToolBar;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.application.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
@@ -47,7 +50,6 @@ public class FXMainFrame extends Application {
      */
     public FXMainFrame()
     {
-
     }
 
 
@@ -86,41 +88,47 @@ public class FXMainFrame extends Application {
 
         this.window.setTitle(Labels.FRAME_TITLE);
 
-        // initialize GUI components and add them
+        // create GUI components (can´t to this in constructor)
+        this.hyperlinkChangeListener = new FXHyperlinkChangeListener();
+        this.barActionHandler = new FXBarActionHandler();
+        this.windowHandler = new FXWindowHandler();
+
+        this.menuBar = new FXMainFrameMenuBar();
+        this.toolBar = new FXMainFrameToolBar();
+
+        this.pdfObjectView = new FXPdfObjectView();
+
+
+        // initialize GUI components
 
         // Hyperlink Action Listener
-        this.hyperlinkChangeListener = new FXHyperlinkChangeListener();
         this.hyperlinkChangeListener.initialize(this);
 
         // Bar Action Listener
-        this.barActionHandler = new FXBarActionHandler();
         this.barActionHandler.initialize(this);
 
+        // close handling
+        this.windowHandler.initialize(this);
+        this.window.setOnCloseRequest(this.windowHandler);
+
         // Menu Bar
-        this.menuBar = new FXMainFrameMenuBar();
         this.menuBar.initialize(this.barActionHandler);
 
         // Tool Bar
-        this.toolBar = new FXMainFrameToolBar();
         this.toolBar.initialize(this.barActionHandler);
 
-        // set Menu Bar and Tool BAr at Top
+        // Pdf Object View
+        this.pdfObjectView.initialize();
+
+        this.setDividerLocationsOfSplitPanes();
+
+        // add GUI components
         this.topComponent = new VBox();
         this.topComponent.getChildren().add(this.menuBar);
         this.topComponent.getChildren().add(this.toolBar);
         this.layout.setTop(this.topComponent);
 
-        // Pdf Object View
-        this.pdfObjectView = new FXPdfObjectView();
-        this.pdfObjectView.initialize();
-
         this.layout.setCenter(this.pdfObjectView);
-
-        // close handling
-        this.windowHandler = new FXWindowHandler();
-        this.windowHandler.initialize(this);
-
-        this.window.setOnCloseRequest(this.windowHandler);
 
         //set scene and display
         this.window.setScene(this.scene);
@@ -181,5 +189,40 @@ public class FXMainFrame extends Application {
     public FXHyperlinkChangeListener getHyperlinkChangeListener()
     {
         return hyperlinkChangeListener;
+    }
+
+    /*
+     * #########################################################################
+     * #                    Private Methods                                    #
+     * #########################################################################
+     */
+    /*
+     * @author  marxmanEUW
+     * @changes
+     *      2018-03-09 (marxmanEUW)  created
+     * @brief   Sets the Split Pane Divider Locations.
+     * @todo refactor
+     */
+    private void setDividerLocationsOfSplitPanes()
+    {
+        this.window.showingProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(
+                ObservableValue<? extends Boolean> observable,
+                Boolean oldValue,
+                Boolean newValue)
+            {
+                if (newValue) {
+                    pdfObjectView.setDividerPositions(
+                        Environment.PDF_OBJECT_VIEW_DIVIDER_LOCATION
+                    );
+                    pdfObjectView.getNotationSplitPane().setDividerPositions(
+                        Environment.NOTATION_SPLIT_PANE_DIVIDER_LOCATION
+                    );
+                    observable.removeListener(this);
+                }
+            }
+        });
     }
 }
