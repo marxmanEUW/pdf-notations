@@ -57,13 +57,12 @@ public class FXNotationListTableChangeListener implements ChangeListener<Notatio
             else
             {
                 this.getPdfObject().setSelectedNotationId(
-                    this.pdfObjectView.getNotationListScrollPane()
-                        .getNotationListTable().getSelectionModel()
-                        .getSelectedItem().getId()
+                    this.pdfObjectView.getNotationListTableView()
+                        .getSelectionModel().getSelectedItem().getId()
                 );
             }
 
-            this.pdfObjectView.getNotationEntityScrollPane().updateTable();
+            this.pdfObjectView.getNotationEntityTableView().updateTable();
             this.pdfObjectView.getPdfArea().repaintNotations();
         }
     }

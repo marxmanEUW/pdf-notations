@@ -5,18 +5,15 @@ import constants.Labels;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Entity;
 import model.PdfObject;
 
-public class FXNotationEntityScrollPane extends ScrollPane {
+public class FXNotationEntityTableView extends TableView<Entity> {
 
     private FXPdfObjectView pdfObjectView;
-
-    private TableView<Entity> notationEntityTable;
 
     /*
      * #########################################################################
@@ -30,10 +27,8 @@ public class FXNotationEntityScrollPane extends ScrollPane {
      * @brief   Constructs the NotationEntityScrollPane which shows the information of
      *          the selected notation.
      */
-    public FXNotationEntityScrollPane()
+    public FXNotationEntityTableView()
     {
-        this.setHbarPolicy(ScrollBarPolicy.NEVER);
-        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
     }
 
 
@@ -52,11 +47,10 @@ public class FXNotationEntityScrollPane extends ScrollPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.notationEntityTable = new TableView<>();
-        this.notationEntityTable.setPlaceholder(
+        this.setPlaceholder(
             new Label(Labels.NOTATION_ENTITY_TABLE_PLACE_HOLDER_TEXT)
         );
-        this.notationEntityTable.prefHeightProperty().bind(
+        this.prefHeightProperty().bind(
             this.pdfObjectView.heightProperty().multiply(
                 this.pdfObjectView.getNotationSplitPane().getDividers()
                     .get(0).positionProperty()
@@ -85,9 +79,7 @@ public class FXNotationEntityScrollPane extends ScrollPane {
             new PropertyValueFactory<>("value")
         );
 
-        this.notationEntityTable.getColumns().addAll(propertyColumn, valueColumn);
-
-        this.setContent(notationEntityTable);
+        this.getColumns().addAll(propertyColumn, valueColumn);
     }
 
 
@@ -104,11 +96,11 @@ public class FXNotationEntityScrollPane extends ScrollPane {
         if(this.getPdfObject() == null) { return; }
         if(this.getPdfObject().getSelectedNotationId() == Environment.SELECTED_NOTATION_NULL_VALUE)
         {
-            this.notationEntityTable.getItems().clear();
+            this.getItems().clear();
         }
         else
         {
-            this.notationEntityTable.setItems(
+            this.setItems(
                 FXCollections.observableArrayList(
                     this.getPdfObject().getSelectedNotationAsObservableList()));
         }

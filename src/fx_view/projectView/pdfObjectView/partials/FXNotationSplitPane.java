@@ -39,7 +39,8 @@ public class FXNotationSplitPane extends SplitPane {
      */
     public void initialize(FXPdfObjectView pdfObjectView)
     {
-        this.getItems().add(pdfObjectView.getNotationListScrollPane());
-        this.getItems().add(pdfObjectView.getNotationEntityScrollPane());
+        this.getItems().add(pdfObjectView.getNotationListTableView());
+        //this.getItems().add(pdfObjectView.getNotationEntityScrollPane());
+        this.getItems().add(pdfObjectView.getNotationEntityTableView());
     }
 }

@@ -88,10 +88,10 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
             this.getPdfArea().setAddingNotation(false);
 
             // update table so the last row can be selected
-            this.pdfObjectView.getNotationListScrollPane().updateTable();
+            this.pdfObjectView.getNotationListTableView().updateTable();
 
             this.getPdfObject().setSelectedNotationId(emptyNotation.getId());
-            this.pdfObjectView.getNotationListScrollPane()
+            this.pdfObjectView.getNotationListTableView()
                 .setSelectedRow(emptyNotation.getId());
         }
         // no need to get clicked notation, because a notation was added,
@@ -104,7 +104,7 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
             if (notation != null) {
                 int selectedNotationId = notation.getId();
                 this.getPdfObject().setSelectedNotationId(selectedNotationId);
-                this.pdfObjectView.getNotationListScrollPane()
+                this.pdfObjectView.getNotationListTableView()
                     .setSelectedRow(selectedNotationId);
             }
             else
@@ -112,13 +112,13 @@ public class FXPdfAreaMouseHandler implements EventHandler<MouseEvent> {
                 this.getPdfObject().setSelectedNotationId(
                     Environment.SELECTED_NOTATION_NULL_VALUE
                 );
-                this.pdfObjectView.getNotationListScrollPane().deselectRow();
+                this.pdfObjectView.getNotationListTableView().deselectRow();
             }
         }
 
         this.getPdfArea().repaintNotations();
-        this.pdfObjectView.getNotationListScrollPane().updateTable();
-        this.pdfObjectView.getNotationEntityScrollPane().updateTable();
+        this.pdfObjectView.getNotationListTableView().updateTable();
+        this.pdfObjectView.getNotationEntityTableView().updateTable();
     }
 
     /*

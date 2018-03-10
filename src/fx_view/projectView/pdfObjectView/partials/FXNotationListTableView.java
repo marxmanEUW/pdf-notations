@@ -1,24 +1,18 @@
 package fx_view.projectView.pdfObjectView.partials;
 
-import constants.Environment;
 import constants.Labels;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Notation;
 import model.PdfObject;
 
-public class FXNotationListScrollPane extends ScrollPane {
+public class FXNotationListTableView extends TableView<Notation> {
 
     private FXPdfObjectView pdfObjectView;
-
-    private TableView<Notation> notationListTable;
 
     /*
      * #########################################################################
@@ -32,10 +26,10 @@ public class FXNotationListScrollPane extends ScrollPane {
      * @brief   Constructs the NotationListScrollPane which lists every notation of the
      *          PdfObject.
      */
-    public FXNotationListScrollPane()
+    public FXNotationListTableView()
     {
-        this.setHbarPolicy(ScrollBarPolicy.NEVER);
-        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        //this.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        //this.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
     /*
@@ -43,13 +37,6 @@ public class FXNotationListScrollPane extends ScrollPane {
      * #                    Getter                                             #
      * #########################################################################
      */
-    /*
-     * @author  marxmanEUW
-     */
-    public TableView<Notation> getNotationListTable()
-    {
-        return notationListTable;
-    }
 
     /*
      * #########################################################################
@@ -66,11 +53,10 @@ public class FXNotationListScrollPane extends ScrollPane {
     {
         this.pdfObjectView = pdfObjectView;
 
-        this.notationListTable = new TableView<>();
-        this.notationListTable.setPlaceholder(
+        this.setPlaceholder(
             new Label(Labels.NOTATION_LIST_TABLE_PLACE_HOLDER_TEXT)
         );
-        this.notationListTable.prefHeightProperty().bind(
+        this.prefHeightProperty().bind(
             this.pdfObjectView.heightProperty().multiply(
                 this.pdfObjectView.getNotationSplitPane().getDividers()
                     .get(0).positionProperty()
@@ -78,7 +64,7 @@ public class FXNotationListScrollPane extends ScrollPane {
             )
         );
 
-        this.notationListTable.getSelectionModel().selectedItemProperty().
+        this.getSelectionModel().selectedItemProperty().
             addListener(this.pdfObjectView.getNotationListTableChangeListener()
             );
 
@@ -112,9 +98,7 @@ public class FXNotationListScrollPane extends ScrollPane {
             new PropertyValueFactory<>("y")
         );
 
-        this.notationListTable.getColumns().addAll(idColumn, xColumn, yColumn);
-
-        this.setContent(notationListTable);
+        this.getColumns().addAll(idColumn, xColumn, yColumn);
     }
 
     /*
@@ -129,7 +113,7 @@ public class FXNotationListScrollPane extends ScrollPane {
     {
         if(this.getPdfObject() == null) { return; }
 
-        this.notationListTable.setItems(
+        this.setItems(
             FXCollections.observableArrayList(
                 this.getPdfObject().getListOfNotationsAsList()));
     }
@@ -144,16 +128,16 @@ public class FXNotationListScrollPane extends ScrollPane {
     {
         int rowId = notationId;
 
-        for (int i = 0; i < this.notationListTable.getItems().size(); i++)
+        for (int i = 0; i < this.getItems().size(); i++)
         {
-            if (notationId == this.notationListTable.getItems().get(i).getId())
+            if (notationId == this.getItems().get(i).getId())
             {
                 rowId = i;
                 break;
             }
         }
 
-        this.notationListTable.getSelectionModel().select(rowId);
+        this.getSelectionModel().select(rowId);
     }
 
     /*
@@ -164,7 +148,7 @@ public class FXNotationListScrollPane extends ScrollPane {
      */
     public void deselectRow()
     {
-        this.notationListTable.getSelectionModel().clearSelection();
+        this.getSelectionModel().clearSelection();
     }
 
     /*

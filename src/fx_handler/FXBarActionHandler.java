@@ -283,7 +283,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
         {
             this.getPdfObject().deleteSelectedNotation();
             this.getPdfArea().repaintNotations();
-            //this.getPdfObjectView().getNotationListScrollPane().updateTable();
+            //this.getPdfObjectView().getNotationListTableView().updateTable();
         }
     }
 

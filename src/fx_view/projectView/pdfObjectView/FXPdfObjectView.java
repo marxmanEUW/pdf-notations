@@ -1,14 +1,10 @@
 package fx_view.projectView.pdfObjectView;
 
-import constants.Environment;
 import factories.PdfObjectFactory;
 import fx_handler.FXNotationListTableChangeListener;
 import fx_handler.FXPdfAreaMouseHandler;
 import fx_handler.FXPdfAreaScrollHandler;
-import fx_view.projectView.pdfObjectView.partials.FXNotationEntityScrollPane;
-import fx_view.projectView.pdfObjectView.partials.FXNotationListScrollPane;
-import fx_view.projectView.pdfObjectView.partials.FXNotationSplitPane;
-import fx_view.projectView.pdfObjectView.partials.FXPdfArea;
+import fx_view.projectView.pdfObjectView.partials.*;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import model.PdfObject;
@@ -30,8 +26,8 @@ public class FXPdfObjectView extends SplitPane {
 
     // Right part
     private FXNotationSplitPane notationSplitPane;
-    private FXNotationListScrollPane notationListScrollPane;
-    private FXNotationEntityScrollPane notationEntityScrollPane;
+    private FXNotationListTableView notationListTableView;
+    private FXNotationEntityTableView notationEntityTableView;
 
 
     /*
@@ -67,8 +63,8 @@ public class FXPdfObjectView extends SplitPane {
         this.pdfArea = new FXPdfArea();
         this.notationSplitPane = new FXNotationSplitPane();
 
-        this.notationListScrollPane = new FXNotationListScrollPane();
-        this.notationEntityScrollPane = new FXNotationEntityScrollPane();
+        this.notationListTableView = new FXNotationListTableView();
+        this.notationEntityTableView = new FXNotationEntityTableView();
 
         // initialize
         this.pdfAreaMouseHandler.initialize(this);
@@ -78,8 +74,8 @@ public class FXPdfObjectView extends SplitPane {
         this.pdfArea.initialize(this);
 
         this.notationSplitPane.initialize(this);
-        this.notationListScrollPane.initialize(this);
-        this.notationEntityScrollPane.initialize(this);
+        this.notationListTableView.initialize(this);
+        this.notationEntityTableView.initialize(this);
 
         this.getItems().add(this.pdfArea);
         this.getItems().add(this.notationSplitPane);
@@ -134,17 +130,17 @@ public class FXPdfObjectView extends SplitPane {
     /*
      * @author  marxmanEUW
      */
-    public FXNotationEntityScrollPane getNotationEntityScrollPane()
+    public FXNotationListTableView getNotationListTableView()
     {
-        return notationEntityScrollPane;
+        return notationListTableView;
     }
 
     /*
      * @author  marxmanEUW
      */
-    public FXNotationListScrollPane getNotationListScrollPane()
+    public FXNotationEntityTableView getNotationEntityTableView()
     {
-        return notationListScrollPane;
+        return notationEntityTableView;
     }
 
     /*
@@ -201,7 +197,7 @@ public class FXPdfObjectView extends SplitPane {
     private void updateViews()
     {
         this.pdfArea.refreshPdfArea();
-        this.notationListScrollPane.updateTable();
-        this.notationEntityScrollPane.updateTable();
+        this.notationListTableView.updateTable();
+        this.notationEntityTableView.updateTable();
     }
 }
