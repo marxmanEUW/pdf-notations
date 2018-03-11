@@ -93,8 +93,11 @@ public class FXNotationEntityTableView extends TableView<Entity> {
      */
     public void updateTable()
     {
-        if(this.getPdfObject() == null) { return; }
-        if(this.getPdfObject().getSelectedNotationId() == Environment.SELECTED_NOTATION_NULL_VALUE)
+
+        if(this.getPdfObject() == null ||
+            this.getPdfObject().getSelectedNotationId()
+                == Environment.SELECTED_NOTATION_NULL_VALUE
+            )
         {
             this.getItems().clear();
         }

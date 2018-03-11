@@ -111,11 +111,16 @@ public class FXNotationListTableView extends TableView<Notation> {
      */
     public void updateTable()
     {
-        if(this.getPdfObject() == null) { return; }
-
-        this.setItems(
-            FXCollections.observableArrayList(
-                this.getPdfObject().getListOfNotationsAsList()));
+        if(this.getPdfObject() == null)
+        {
+            this.getItems().clear();
+        }
+        else
+        {
+            this.setItems(
+                FXCollections.observableArrayList(
+                    this.getPdfObject().getListOfNotationsAsList()));
+        }
     }
 
     /*

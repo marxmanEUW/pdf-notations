@@ -2,6 +2,7 @@ package factories;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import constants.Environment;
 import model.PdfObject;
 
 import java.io.*;
@@ -55,6 +56,8 @@ public abstract class PdfObjectFactory {
      */
     public static void savePdfObjectForPdfFile(PdfObject pdfObject)
     {
+        pdfObject.setSelectedNotationId(Environment.SELECTED_NOTATION_NULL_VALUE);
+
         try
         {
             File jsonFile = new File(pdfObject.getJsonAbsolutePath());

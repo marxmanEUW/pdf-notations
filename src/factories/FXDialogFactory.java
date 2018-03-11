@@ -24,11 +24,13 @@ public abstract class FXDialogFactory {
      */
     public static File getFileFromOpenDialog(int fileType, FXMainFrame mainFrame)
     {
+        String fileExtension = Environment.FILE_TYPE_ARRAY[fileType][1];
+
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter(
             Environment.FILE_TYPE_ARRAY[fileType][0],
-            Environment.FILE_TYPE_ARRAY[fileType][1])
+            "*" + fileExtension)
         );
 
         return fileChooser.showOpenDialog(mainFrame.getWindow());
@@ -48,10 +50,10 @@ public abstract class FXDialogFactory {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter(
             Environment.FILE_TYPE_ARRAY[fileType][0],
-            fileExtension)
+            "*" + fileExtension)
         );
 
-        fileChooser.setInitialFileName("newFile." + fileExtension);
+        fileChooser.setInitialFileName(Environment.DEFAULT_FILE_NAME + fileExtension);
 
         File saveFile = fileChooser.showSaveDialog(mainFrame.getWindow());
 
