@@ -155,6 +155,7 @@ public class FXBarActionHandler implements EventHandler<ActionEvent> {
      */
     /*
      * @author  marxmanEUW
+     * @todo check if a Project is already open -> close it with asking that all changes get lost
      */
     private void newProject()
     {

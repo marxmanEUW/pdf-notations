@@ -323,7 +323,6 @@ public class FXPdfArea extends ScrollPane {
         this.pdfImage.setImage(this.pdfRenderTask.getRenderedPdfImage());
         this.pdfImage.setPreserveRatio(true);
 
-        //this.contentPane.getChildren().add(this.pdfImage);
         this.repaintNotations();
     }
 }

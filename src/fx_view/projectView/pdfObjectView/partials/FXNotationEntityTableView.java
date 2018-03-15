@@ -2,12 +2,16 @@ package fx_view.projectView.pdfObjectView.partials;
 
 import constants.Environment;
 import constants.Labels;
+import fx_handler.FXNotationEntityCellHandler;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 import model.Entity;
 import model.PdfObject;
 
@@ -59,6 +63,8 @@ public class FXNotationEntityTableView extends TableView<Entity> {
             )
         );
 
+        this.setEditable(true);
+
         TableColumn propertyColumn = new TableColumn(
             Labels.ENTITY_TABLE_MODEL_COLUMN_1_NAME
         );
@@ -69,7 +75,7 @@ public class FXNotationEntityTableView extends TableView<Entity> {
             new PropertyValueFactory<>("valueName")
         );
 
-        TableColumn valueColumn = new TableColumn(
+        TableColumn<Entity, Object> valueColumn = new TableColumn(
             Labels.ENTITY_TABLE_MODEL_COLUMN_2_NAME
         );
         valueColumn.prefWidthProperty().bind(
@@ -78,6 +84,29 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         valueColumn.setCellValueFactory(
             new PropertyValueFactory<>("value")
         );
+        //valueColumn.setCellFactory(TextFieldTableCell.<Object>forTableColumn());
+        valueColumn.setCellFactory(new Callback<TableColumn<Entity, Object>, TableCell<Entity, Object>>()
+        {
+            @Override
+            public TableCell<Entity, Object> call(TableColumn<Entity, Object> param)
+            {
+                return new TableCell<Entity, Object>()
+                {
+                    @Override
+                    protected void updateItem(Object object, boolean empty) {
+                        super.updateItem(object, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText(object.toString());
+                        }
+                    }
+                };
+            }
+        });
+
+
+        valueColumn.setOnEditCommit(new FXNotationEntityCellHandler());
 
         this.getColumns().addAll(propertyColumn, valueColumn);
     }
