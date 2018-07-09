@@ -4,8 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TableColumn;
 import model.Entity;
 
-public class FXNotationEntityCellHandler implements EventHandler<TableColumn.CellEditEvent<Entity, Object>> {
-
+public class FXNotationEntityCellHandler implements EventHandler<TableColumn.CellEditEvent<Entity, String>> {
 
     @Override
     public void handle(TableColumn.CellEditEvent event)

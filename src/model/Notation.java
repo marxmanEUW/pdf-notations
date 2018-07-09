@@ -1,5 +1,6 @@
 package model;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ public class Notation {
     public static final String STANDARD_NAME = "Punkt";
     public static final Double STANDARD_DESCRIPTION = 42.0;
 
-    private ArrayList<Entity> listOfEntities;
+    private ObservableList<Entity> listOfEntities;
 
     /*
      * #########################################################################
@@ -25,7 +26,7 @@ public class Notation {
      * @brief   Constructs a Notation which contains information about a point
      *          on the PdfArea
      */
-    public Notation(ArrayList<Entity> listOfEntities)
+    public Notation(ObservableList<Entity> listOfEntities)
     {
         this.listOfEntities = listOfEntities;
     }
@@ -101,7 +102,7 @@ public class Notation {
         return new Point(this.getX(), this.getY());
     }
 
-    public ArrayList<Entity> getListOfEntities()
+    public ObservableList<Entity> getListOfEntities()
     {
         return listOfEntities;
     }

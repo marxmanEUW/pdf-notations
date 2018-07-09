@@ -1,14 +1,14 @@
 package factories;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.*;
-
-import java.util.ArrayList;
 
 public abstract class NotationFactory {
 
-    public static Notation getEmptyNotation(ArrayList<String[]> listOfEntityNamesAndTypes)
+    public static Notation getEmptyNotation(java.util.ArrayList<String[]> listOfEntityNamesAndTypes)
     {
-        ArrayList<Entity> listOfEntities = new ArrayList<>();
+        ObservableList<Entity> listOfEntities = FXCollections.observableArrayList();
 
         for (String[] entityNameAndType : listOfEntityNamesAndTypes)
         {

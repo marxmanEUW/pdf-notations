@@ -4,7 +4,10 @@ import constants.Environment;
 import constants.Labels;
 import fx_handler.FXNotationEntityCellHandler;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
-import javafx.collections.FXCollections;
+import model.Entity;
+import model.PdfObject;
+
+/*import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -12,8 +15,32 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
-import model.Entity;
-import model.PdfObject;
+*/
+
+import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class FXNotationEntityTableView extends TableView<Entity> {
 
@@ -64,6 +91,12 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         );
 
         this.setEditable(true);
+        Callback<TableColumn, TableCell> cellFactory =
+            new Callback<TableColumn, TableCell>() {
+                public TableCell call(TableColumn p) {
+                    return new EditableCell();
+                }
+            };
 
         TableColumn propertyColumn = new TableColumn(
             Labels.ENTITY_TABLE_MODEL_COLUMN_1_NAME
@@ -75,10 +108,9 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         propertyColumn.setCellValueFactory(
             new PropertyValueFactory<>("valueName")
         );
-        propertyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        propertyColumn.setOnEditCommit(new FXNotationEntityCellHandler());
 
-        TableColumn<Entity, Object> valueColumn = new TableColumn(
+
+        TableColumn valueColumn = new TableColumn(
             Labels.ENTITY_TABLE_MODEL_COLUMN_2_NAME
         );
         valueColumn.prefWidthProperty().bind(
@@ -86,32 +118,19 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         );
         valueColumn.setSortable(false);
         valueColumn.setCellValueFactory(
-            new PropertyValueFactory<>("value")
-        );
-        //valueColumn.setCellFactory(TextFieldTableCell.<Object>forTableColumn());
-        /*valueColumn.setCellFactory(new Callback<TableColumn<Entity, Object>, TableCell<Entity, Object>>()
-        {
-            @Override
-            public TableCell<Entity, Object> call(TableColumn<Entity, Object> param)
-            {
-                return new TableCell<Entity, Object>()
-                {
-                    @Override
-                    protected void updateItem(Object object, boolean empty) {
-                        super.updateItem(object, empty);
-                        if (empty) {
-                            setText(null);
-                        } else {
-                            setText(object.toString());
-                        }
-                    }
-                };
+            new PropertyValueFactory<Entity, String>("value"));
+        valueColumn.setCellFactory(cellFactory);
+        valueColumn.setOnEditCommit(
+            new EventHandler<TableColumn.CellEditEvent<Entity, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Entity, String> t) {
+                    ((Entity) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                    ).setValue(t.getNewValue());
+                    System.out.println(t.getNewValue());
+                }
             }
-        });
-
-
-
-        */
+        );
 
 
         this.getColumns().addAll(propertyColumn, valueColumn);
@@ -138,9 +157,8 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         }
         else
         {
-            this.setItems(
-                //FXCollections.observableArrayList(
-                    this.getPdfObject().getSelectedNotationAsObservableList());//);
+            //this.setItems(this.getPdfObject().getSelectedNotationAsObservableList());
+            this.setItems(this.getPdfObject().getSelectedNotation().getListOfEntities());
         }
     }
 
