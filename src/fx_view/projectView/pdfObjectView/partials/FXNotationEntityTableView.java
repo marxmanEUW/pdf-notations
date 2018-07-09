@@ -71,9 +71,12 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         propertyColumn.prefWidthProperty().bind(
             this.widthProperty().divide(2)
         );
+        propertyColumn.setSortable(false);
         propertyColumn.setCellValueFactory(
             new PropertyValueFactory<>("valueName")
         );
+        propertyColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        propertyColumn.setOnEditCommit(new FXNotationEntityCellHandler());
 
         TableColumn<Entity, Object> valueColumn = new TableColumn(
             Labels.ENTITY_TABLE_MODEL_COLUMN_2_NAME
@@ -81,11 +84,12 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         valueColumn.prefWidthProperty().bind(
             this.widthProperty().divide(2)
         );
+        valueColumn.setSortable(false);
         valueColumn.setCellValueFactory(
             new PropertyValueFactory<>("value")
         );
         //valueColumn.setCellFactory(TextFieldTableCell.<Object>forTableColumn());
-        valueColumn.setCellFactory(new Callback<TableColumn<Entity, Object>, TableCell<Entity, Object>>()
+        /*valueColumn.setCellFactory(new Callback<TableColumn<Entity, Object>, TableCell<Entity, Object>>()
         {
             @Override
             public TableCell<Entity, Object> call(TableColumn<Entity, Object> param)
@@ -106,7 +110,9 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         });
 
 
-        valueColumn.setOnEditCommit(new FXNotationEntityCellHandler());
+
+        */
+
 
         this.getColumns().addAll(propertyColumn, valueColumn);
     }
@@ -133,8 +139,8 @@ public class FXNotationEntityTableView extends TableView<Entity> {
         else
         {
             this.setItems(
-                FXCollections.observableArrayList(
-                    this.getPdfObject().getSelectedNotationAsObservableList()));
+                //FXCollections.observableArrayList(
+                    this.getPdfObject().getSelectedNotationAsObservableList());//);
         }
     }
 

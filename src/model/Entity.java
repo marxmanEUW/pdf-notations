@@ -8,10 +8,7 @@ public class Entity {
 
     private String valueName;
     private String valueType;
-    private String stringValue;
-    private Integer intValue;
-    private Double doubleValue;
-
+    private String value;
 
     /*
      * #########################################################################
@@ -30,19 +27,9 @@ public class Entity {
      * #                    Getter                                             #
      * #########################################################################
      */
-    public Object getValue()
+    public String getValue()
     {
-        switch (this.valueType)
-        {
-            case TYPE_STRING:
-                return this.stringValue;
-            case TYPE_INTEGER:
-                return this.intValue;
-            case TYPE_DOUBLE:
-                return this.doubleValue;
-            default:
-                return null;
-        }
+        return this.value;
     }
 
     public String getValueName()
@@ -60,21 +47,8 @@ public class Entity {
      * #                    Setter                                             #
      * #########################################################################
      */
-    public void setValue(Object value)
+    public void setValue(String value)
     {
-        String tempStringValue = String.valueOf(value);
-
-        switch (this.valueType)
-        {
-            case TYPE_STRING:
-                this.stringValue = tempStringValue;
-                break;
-            case TYPE_INTEGER:
-                this.intValue = Integer.parseInt(tempStringValue);
-                break;
-            case TYPE_DOUBLE:
-                this.doubleValue = Double.parseDouble(tempStringValue);
-                break;
-        }
+        this.value = value;
     }
 }

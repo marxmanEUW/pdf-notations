@@ -152,7 +152,7 @@ public class EntityTableModel extends AbstractTableModel {
      */
     public void setValueAt(Object editedValue, int rowIndex, int columnIndex)
     {
-        this.getPdfObject().getSelectedNotation().setValue(rowIndex, editedValue);
+        this.getPdfObject().getSelectedNotation().setValue(rowIndex, String.valueOf(editedValue));
 
         this.pdfObjectView.getPdfArea().repaint();
     }

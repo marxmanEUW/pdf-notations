@@ -165,7 +165,7 @@ public class PdfObject {
     /*
      * @author  marxmanEUW
      * @changes
-     *      2018-03-09 (yxyxD)  marxmanEUW
+     *      2018-03-09 (marxmanEUW) created
      * @brief
      * @todo testing
      */

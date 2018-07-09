@@ -60,7 +60,7 @@ public class Notation {
     // @todo maybe set 0, 1 and 2 to global constants
     public int getId()
     {
-        return (int) this.listOfEntities.get(0).getValue();
+        return Integer.valueOf(this.listOfEntities.get(0).getValue());
     }
 
     /*
@@ -71,7 +71,7 @@ public class Notation {
      */
     public int getX()
     {
-        return (int) this.listOfEntities.get(1).getValue();
+        return Integer.valueOf(this.listOfEntities.get(1).getValue());
     }
 
     /*
@@ -82,7 +82,7 @@ public class Notation {
      */
     public int getY()
     {
-        return (int) this.listOfEntities.get(2).getValue();
+        return Integer.valueOf(this.listOfEntities.get(2).getValue());
     }
 
     /*
@@ -117,9 +117,19 @@ public class Notation {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Sets the value at entityIndex of the notation.
      */
-    public void setValue(int entityIndex, Object value)
+    public void setValue(int entityIndex, String value)
     {
         this.listOfEntities.get(entityIndex).setValue(value);
+    }
+
+    public void setValue(int entityIndex, Integer value)
+    {
+        this.setValue(entityIndex, String.valueOf(value));
+    }
+
+    public void setValue(int entityIndex, Double value)
+    {
+        this.setValue(entityIndex, String.valueOf(value));
     }
 
     /*
@@ -130,7 +140,7 @@ public class Notation {
      */
     public void setX(int xValue)
     {
-        this.listOfEntities.get(1).setValue(xValue);
+        this.listOfEntities.get(1).setValue(String.valueOf(xValue));
     }
 
 
@@ -142,6 +152,6 @@ public class Notation {
      */
     public void setY(int yValue)
     {
-        this.listOfEntities.get(2).setValue(yValue);
+        this.listOfEntities.get(2).setValue(String.valueOf(yValue));
     }
 }
