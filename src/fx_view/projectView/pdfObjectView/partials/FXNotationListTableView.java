@@ -3,6 +3,7 @@ package fx_view.projectView.pdfObjectView.partials;
 import constants.Labels;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -99,6 +100,7 @@ public class FXNotationListTableView extends TableView<Notation> {
         );
 
         this.getColumns().addAll(idColumn, xColumn, yColumn);
+        this.initializeData();
     }
 
     /*
@@ -117,9 +119,36 @@ public class FXNotationListTableView extends TableView<Notation> {
         }
         else
         {
-            this.setItems(
-                FXCollections.observableArrayList(
-                    this.getPdfObject().getListOfNotationsAsList()));
+            // @todo real error, items get deleted when imported again ??
+            ObservableList<Notation> oldItems = this.getItems();
+            ObservableList<Notation> newItems = FXCollections.observableArrayList(this.getPdfObject().getListOfNotationsAsList());
+
+            boolean same = oldItems.equals(newItems);
+            System.out.println("FXNotationListTableView oldItems (" + oldItems.size() + ") = newItems(" + newItems.size() + "): " + same);
+
+            this.refresh();
+
+            if (oldItems.size() == 0 && newItems.size() > 0)
+            //if (oldItems.size() < newItems.size())
+            {
+                this.setItems(FXCollections.observableArrayList(this.getPdfObject().getListOfNotations().values()));
+            }
+
+        }
+    }
+
+    // @todo testing
+    public void initializeData()
+    {
+        if(this.getPdfObject() == null)
+        {
+            this.getItems().clear();
+        }
+        else
+        {
+            // @todo real error, items get deleted when imported again ??
+            ObservableList<Notation> newItems = FXCollections.observableArrayList(this.getPdfObject().getListOfNotationsAsList());
+            this.setItems(newItems);
         }
     }
 

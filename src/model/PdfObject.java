@@ -14,6 +14,7 @@ public class PdfObject {
     private String jsonAbsolutePath;
 
     private HashMap<Integer, Notation> listOfNotations;
+    private ObservableList<Notation> observableListOfNotations;
     private int selectedNotationId;
     private ArrayList<String[]> listOfEntityNamesAndTypes;
 
@@ -33,6 +34,7 @@ public class PdfObject {
         this.pdfAbsolutePath = pdfAbsolutePath;
 
         this.listOfNotations = new HashMap<>();
+        this.observableListOfNotations = FXCollections.observableArrayList();
         this.selectedNotationId = Environment.SELECTED_NOTATION_NULL_VALUE;
 
         this.listOfEntityNamesAndTypes = new ArrayList<>();
@@ -128,7 +130,8 @@ public class PdfObject {
      * @changes
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns the ID/index of the selected notation of the PdfObject.
-     */    public int getSelectedNotationId()
+     */
+    public int getSelectedNotationId()
     {
         return selectedNotationId;
     }
@@ -147,6 +150,7 @@ public class PdfObject {
      */
     public ArrayList<Notation> getListOfNotationsAsList()
     {
+        System.out.println("getListOfNotationsAsList Size: " + this.listOfNotations.size());
         return new ArrayList<>(this.listOfNotations.values());
     }
 
