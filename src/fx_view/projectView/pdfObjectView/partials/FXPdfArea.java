@@ -192,8 +192,6 @@ public class FXPdfArea extends ScrollPane {
         this.contentPane.getChildren().clear();
         this.contentPane.getChildren().add(this.pdfImage);
 
-        // @todo testing
-        System.out.println("List of Notations Size " + this.getPdfObject().getListOfNotations().values().size());
         for (Notation notation :
             this.getPdfObject().getListOfNotations().values()
             )

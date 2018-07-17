@@ -37,7 +37,7 @@ public class Notation {
      * #                    Getter                                             #
      * #########################################################################
      */
-    public Object getValue(int index)
+    public String getValue(int index)
     {
         return this.listOfEntities.get(index).getValue();
     }

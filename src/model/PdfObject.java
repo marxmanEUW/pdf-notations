@@ -1,8 +1,10 @@
 package model;
 
 import constants.Environment;
+import fx_handler.ListOfNotationMapChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -13,10 +15,12 @@ public class PdfObject {
     private String pdfAbsolutePath;
     private String jsonAbsolutePath;
 
-    private HashMap<Integer, Notation> listOfNotations;
-    private ObservableList<Notation> observableListOfNotations;
+    private ObservableMap<Integer, Notation> listOfNotations;
+    private ObservableList<MapEntry<Integer, Notation>> listOfNotationsReadOnly;
     private int selectedNotationId;
     private ArrayList<String[]> listOfEntityNamesAndTypes;
+
+    private ListOfNotationMapChangeListener listOfNotationMapChangeListener;
 
     /*
      * #########################################################################
@@ -33,10 +37,17 @@ public class PdfObject {
     {
         this.pdfAbsolutePath = pdfAbsolutePath;
 
-        this.listOfNotations = new HashMap<>();
-        this.observableListOfNotations = FXCollections.observableArrayList();
+        this.listOfNotations = FXCollections.observableHashMap();
+        this.listOfNotationsReadOnly = FXCollections.observableArrayList();
         this.selectedNotationId = Environment.SELECTED_NOTATION_NULL_VALUE;
 
+        // @todo hier Listener erstellen
+        this.listOfNotationMapChangeListener = new ListOfNotationMapChangeListener();
+        this.listOfNotationMapChangeListener.initialize(this);
+
+        this.listOfNotations.addListener(this.listOfNotationMapChangeListener);
+
+        // @todo testing
         this.listOfEntityNamesAndTypes = new ArrayList<>();
         String[] entity1 = {"Id der Notation", Entity.TYPE_INTEGER};
         String[] entity2 = {"X Kooridnate der Notation", Entity.TYPE_INTEGER};
@@ -85,7 +96,7 @@ public class PdfObject {
      *      2018-02-12 (marxmanEUW)  created
      * @brief   Returns the ListOfNotations of the PdfObject.
      */
-    public HashMap<Integer, Notation> getListOfNotations()
+    public ObservableMap<Integer, Notation> getListOfNotations()
     {
         return this.listOfNotations;
     }
@@ -150,8 +161,13 @@ public class PdfObject {
      */
     public ArrayList<Notation> getListOfNotationsAsList()
     {
-        System.out.println("getListOfNotationsAsList Size: " + this.listOfNotations.size());
         return new ArrayList<>(this.listOfNotations.values());
+    }
+
+
+    public ObservableList<MapEntry<Integer, Notation>> getListOfNotationsReadOnly()
+    {
+        return listOfNotationsReadOnly;
     }
 
     /*
@@ -163,32 +179,6 @@ public class PdfObject {
     public ArrayList<String[]> getListOfEntityNamesAndTypes()
     {
         return listOfEntityNamesAndTypes;
-    }
-
-
-    /*
-     * @author  marxmanEUW
-     * @changes
-     *      2018-03-09 (marxmanEUW) created
-     * @brief
-     * @todo testing
-     */
-    public ObservableList<Entity> getSelectedNotationAsObservableList()
-    {
-        ObservableList<Entity> list;
-
-        Notation selectedNotation = this.getSelectedNotation();
-
-        if(selectedNotation == null)
-        {
-            list = null;
-        }
-        else
-        {
-            list = FXCollections.observableArrayList(selectedNotation.getListOfEntities());
-        }
-
-        return list;
     }
 
     /*
@@ -215,6 +205,8 @@ public class PdfObject {
      */
     public void setSelectedNotationId(int selectedNotationId)
     {
+        // @todo testing output
+        System.out.println("changed Selected Notation ID to: " + selectedNotationId);
         this.selectedNotationId = selectedNotationId;
     }
 

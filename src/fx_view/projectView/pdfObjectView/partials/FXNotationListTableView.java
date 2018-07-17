@@ -2,16 +2,18 @@ package fx_view.projectView.pdfObjectView.partials;
 
 import constants.Labels;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.MapEntry;
 import model.Notation;
 import model.PdfObject;
 
-public class FXNotationListTableView extends TableView<Notation> {
+public class FXNotationListTableView extends TableView<MapEntry<Integer, Notation>> {
 
     private FXPdfObjectView pdfObjectView;
 
@@ -69,35 +71,30 @@ public class FXNotationListTableView extends TableView<Notation> {
             addListener(this.pdfObjectView.getNotationListTableChangeListener()
             );
 
-        TableColumn idColumn = new TableColumn(
+        TableColumn<MapEntry<Integer, Notation>, String> idColumn = new TableColumn<>(
             Labels.LIST_TABLE_MODEL_COLUMN_1_NAME
         );
         idColumn.prefWidthProperty().bind(
             this.widthProperty().divide(3)
         );
-        idColumn.setCellValueFactory(
-            new PropertyValueFactory<>("id")
-        );
+        // @todo hold values maybe in Observeables
+        idColumn.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().getValue(0)));
 
-        TableColumn xColumn = new TableColumn(
+        TableColumn<MapEntry<Integer, Notation>, String> xColumn = new TableColumn<>(
             Labels.LIST_TABLE_MODEL_COLUMN_2_NAME
         );
         xColumn.prefWidthProperty().bind(
             this.widthProperty().divide(3)
         );
-        xColumn.setCellValueFactory(
-            new PropertyValueFactory<>("x")
-        );
+        xColumn.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().getValue(1)));
 
-        TableColumn yColumn = new TableColumn(
+        TableColumn<MapEntry<Integer, Notation>, String> yColumn = new TableColumn<>(
             Labels.LIST_TABLE_MODEL_COLUMN_3_NAME
         );
         yColumn.prefWidthProperty().bind(
             this.widthProperty().divide(3)
         );
-        yColumn.setCellValueFactory(
-            new PropertyValueFactory<>("y")
-        );
+        yColumn.setCellValueFactory(cd -> Bindings.createStringBinding(() -> cd.getValue().getValue().getValue(2)));
 
         this.getColumns().addAll(idColumn, xColumn, yColumn);
         this.initializeData();
@@ -119,26 +116,20 @@ public class FXNotationListTableView extends TableView<Notation> {
         }
         else
         {
-            // @todo real error, items get deleted when imported again ??
-            ObservableList<Notation> oldItems = this.getItems();
-            ObservableList<Notation> newItems = FXCollections.observableArrayList(this.getPdfObject().getListOfNotationsAsList());
-
-            boolean same = oldItems.equals(newItems);
-            System.out.println("FXNotationListTableView oldItems (" + oldItems.size() + ") = newItems(" + newItems.size() + "): " + same);
-
             this.refresh();
 
-            if (oldItems.size() == 0 && newItems.size() > 0)
-            //if (oldItems.size() < newItems.size())
+            if (this.getItems().size() == 0 && this.getPdfObject().getListOfNotationsReadOnly().size() > 0)
             {
-                this.setItems(FXCollections.observableArrayList(this.getPdfObject().getListOfNotations().values()));
+                this.setItems(FXCollections.observableList(this.getPdfObject().getListOfNotationsReadOnly()));
             }
 
         }
     }
 
-    // @todo testing
-    public void initializeData()
+    /*
+     * @author  marxmanEUW
+     */
+    private void initializeData()
     {
         if(this.getPdfObject() == null)
         {
@@ -146,9 +137,7 @@ public class FXNotationListTableView extends TableView<Notation> {
         }
         else
         {
-            // @todo real error, items get deleted when imported again ??
-            ObservableList<Notation> newItems = FXCollections.observableArrayList(this.getPdfObject().getListOfNotationsAsList());
-            this.setItems(newItems);
+            this.setItems(this.getPdfObject().getListOfNotationsReadOnly());
         }
     }
 
@@ -161,15 +150,20 @@ public class FXNotationListTableView extends TableView<Notation> {
     public void setSelectedRow(int notationId)
     {
         int rowId = notationId;
+        MapEntry<Integer, Notation> notationToSelect = null;
 
         for (int i = 0; i < this.getItems().size(); i++)
         {
-            if (notationId == this.getItems().get(i).getId())
+            if (this.getItems().get(i).getValue().getId() == notationId)
             {
+                notationToSelect = this.getItems().get(i);
                 rowId = i;
                 break;
             }
         }
+
+        // @todo testing output
+        System.out.println("NotationListTableView Selected Row Id: " + rowId);
 
         this.getSelectionModel().select(rowId);
     }

@@ -90,7 +90,7 @@ public class FXPdfRenderTask extends Task<String> {
         {
             tempImage = null;
             exception.printStackTrace();
-            // @todo mabe to much output
+            // @todo maybe to much output
             System.out.println(exception);
         }
         finally {

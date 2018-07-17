@@ -4,10 +4,11 @@ import constants.Environment;
 import fx_view.projectView.pdfObjectView.FXPdfObjectView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import model.MapEntry;
 import model.Notation;
 import model.PdfObject;
 
-public class FXNotationListTableChangeListener implements ChangeListener<Notation> {
+public class FXNotationListTableChangeListener implements ChangeListener<MapEntry<Integer, Notation>> {
 
     private FXPdfObjectView pdfObjectView;
 
@@ -41,12 +42,12 @@ public class FXNotationListTableChangeListener implements ChangeListener<Notatio
      * @brief   Gets called if the selected row of a table was changed.
      *          Updates SelectedNotationIndex and NotationEntityTable.
      */
-    @Override
+    /*@Override
     public void changed(ObservableValue<? extends Notation> observable, Notation oldValue, Notation newValue)
     {
         if(this.getPdfObject() != null)
         {
-            // @todo cancel cell editing of NotationEntityTabel
+            // @todo cancel cell editing of NotationEntityTable
 
             if(newValue == null)
             {
@@ -59,6 +60,32 @@ public class FXNotationListTableChangeListener implements ChangeListener<Notatio
                 this.getPdfObject().setSelectedNotationId(
                     this.pdfObjectView.getNotationListTableView()
                         .getSelectionModel().getSelectedItem().getId()
+                );
+            }
+
+            this.pdfObjectView.getNotationEntityTableView().updateTable();
+            this.pdfObjectView.getPdfArea().repaintNotations();
+        }
+    }*/
+
+    @Override
+    public void changed(ObservableValue<? extends MapEntry<Integer, Notation>> observable, MapEntry<Integer, Notation> oldValue, MapEntry<Integer, Notation> newValue)
+    {
+        if(this.getPdfObject() != null)
+        {
+            // @todo cancel cell editing of NotationEntityTable
+
+            if(newValue == null)
+            {
+                this.getPdfObject().setSelectedNotationId(
+                    Environment.SELECTED_NOTATION_NULL_VALUE
+                );
+            }
+            else
+            {
+                this.getPdfObject().setSelectedNotationId(
+                    this.pdfObjectView.getNotationListTableView()
+                        .getSelectionModel().getSelectedItem().getValue().getId()
                 );
             }
 
